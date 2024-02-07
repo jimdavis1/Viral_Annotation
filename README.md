@@ -1,2 +1,2 @@
-# Viral_Annotation
+# Viral Annotation
 Repo for improving viral annotation
