@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the members of the Paramyxoviridae and the Arenaviridae. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families, rather than only offering species specific annotation.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the members of the Paramyxoviridae and the Arenaviridae. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families, rather than only offering species-specific annotation.<br>
 
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
 
@@ -18,7 +18,7 @@ The program(s) run the blast suite of tools from NCBI.  The current version runs
 `tblastn: 2.13.0+`<br>
 
 Although it should not matter, this has been developed using Bob's internal environment by sourcing:<br>
-`/vol/patric3/cli/user-env.sh`<br>
+`/vol/patric3/cli/ubuntu-cli/user-env.sh`<br>
 
 ## How it works
 
