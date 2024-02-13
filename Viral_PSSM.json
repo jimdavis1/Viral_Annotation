@@ -1,0 +1,780 @@
+{
+  "Aquaparamyxovirus": {
+    "C": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2"]
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    }
+  },
+  "Arenaviridae": {
+    "GP1": {
+      "anno": "Mature glycoprotein 1, GP1",
+      "translate": 1,
+      "min_len": 450,
+      "max_len": 900,
+      "begin": {
+        "begin_pssm": "SSP",
+        "begin_pssm_loc": "STOP",
+        "begin_offset": 1
+      },
+      "end": {
+        "end_pssm": "GP2",
+        "end_pssm_loc": "START",
+        "end_offset": 1
+      }
+    },    
+    "Large Segment Stemloop": {
+      "anno": "Large Segment Intergenic Stem Loop Region",
+      "translate": 0,
+      "min_len": 50,
+      "max_len": 200,
+      "begin": {
+        "begin_pssm": "Z",
+        "begin_pssm_loc": "STOP",
+        "begin_offset": 1
+      },
+      "end": {
+        "end_pssm": "L",
+        "end_pssm_loc": "STOP",
+        "end_offset": 1
+      }
+    },
+    "Small Segment Stemloop": {
+      "anno": "Small Segment Intergenic Stem Loop Region",
+      "translate": 0,
+      "min_len": 50,
+      "max_len": 200,
+      "begin": {
+        "begin_pssm": "GPC",
+        "begin_pssm_loc": "STOP",
+        "begin_offset": 1
+      },
+      "end": {
+        "end_pssm": "N",
+        "end_pssm_loc": "STOP",
+        "end_offset": 1
+      }
+    },    
+    "GP2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "non_pssm_partner": ["GP1"]
+    },
+    "GPC": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "non_pssm_partner": ["Small Segment Stemloop"]
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "non_pssm_partner": ["Large Segment Stemloop"]
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "non_pssm_partner": ["Small Segment Stemloop"]
+
+    },
+    "SSP": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 0,
+      "non_pssm_partner": ["GP1"]
+    },
+    "Z": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "non_pssm_partner": ["Large Segment Stemloop"]
+
+    }
+  },
+  "Ferlavirus": {
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "I": {
+      "bit_cutoff": 20,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["P-ORF2", "V-ORF2"]
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "G",
+      "new_anno": "Phosphoprotein, P Protein"
+    },
+    "U": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "GG",
+      "new_anno": "V Protein"
+    }
+  },
+  "Henipavirus": {
+    "C": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "G": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2", "W-ORF2"]
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    },
+    "W-ORF2": {
+      "bit_cutoff": 50,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "W Protein"
+    }
+  },
+  "Jeilongvirus": {
+    "C": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "G": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2", "W-ORF2"]
+    },
+    "SH": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "TM": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    },
+    "W-ORF2": {
+      "bit_cutoff": 50,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "G",
+      "new_anno": "W Protein"
+    }
+  },
+  "Metaavulavirus": {
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2", "W-ORF2"]
+    },
+    "SH": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    },
+    "W-ORF2": {
+      "bit_cutoff": 20,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "W Protein"
+    }
+  },
+  "Morbillivirus": {
+    "C": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "H": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2"]
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    }
+  },
+  "Orthoavulavirus": {
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2", "W-ORF2"]
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    },
+    "W-ORF2": {
+      "bit_cutoff": 50,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "W Protein"
+    }
+  },
+  "Orthorubulavirus": {
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "I-ORF2": {
+      "bit_cutoff": 20,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "GGG",
+      "new_anno": "I Protein"
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "G",
+      "new_anno": "Phosphoprotein, P Protein"
+    },
+    "SH": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "V": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["I-ORF2", "P-ORF2"]
+    }
+  },
+  "Paraavulavirus": {
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["V-ORF2"]
+    },
+    "V-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "V Protein"
+    }
+  },
+  "Pararubulavirus": {
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P-ORF2": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "G",
+      "new_anno": "Phosphoprotein, P Protein"
+    },
+    "V": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["P-ORF2", "W-ORF2"]
+    },
+    "W-ORF2": {
+      "bit_cutoff": 50,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "new_anno": "W Protein"
+    }
+  },
+  "Respirovirus": {
+    "C": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "C-Prime": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "start_to_met": 1
+    },
+    "D-ORF2": {
+      "bit_cutoff": 50,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "paramyxo_join": 2,
+      "paramyxo_insert": "G",
+      "new_anno": "D Protein"
+    },
+    "F": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "HN": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "M": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "P": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1,
+      "paramyxo_join": 1,
+      "join_partner": ["D-ORF2"]
+    },
+    "V": {
+      "bit_cutoff": 175,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "W-ORF1": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "Y1": {
+      "bit_cutoff": 225,
+      "coverage_cutoff": 0.9,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "Y2": {
+      "bit_cutoff": 225,
+      "coverage_cutoff": 0.9,
+      "upstream_ext": 0,
+      "downstream_ext": 1,
+      "start_to_met": 1
+    }
+  }
+}
