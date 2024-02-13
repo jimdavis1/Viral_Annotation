@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the members of the Paramyxoviridae and the Arenaviridae. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families, rather than only offering species-specific annotation.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the members of the Paramyxoviridae and the Arenaviridae. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families, to cover cases where we do not have bespoke species-specific annotation.<br>
 
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
 
