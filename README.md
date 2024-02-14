@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Arenaviridae*. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Arenaviridae*. The overall goal is to create a very low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations.<br>
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  I will explain more about how it works below.
 
