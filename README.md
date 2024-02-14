@@ -123,6 +123,123 @@ The next and final set of rules relate to calling features that are not based on
       }
 ```
 
+## Pseudocode for annotate_by_viral_pssm.pl
+The following pseudocode offeres an explanation of how the program works:<br><br>
+```
+BEGIN
+    Import required modules
+    Define usage instructions
+    Define command line options and their default values
+    Parse command line options
+
+    If help option is provided
+        Display usage instructions and exit
+
+    If input subject file is not provided
+        Display error message and exit
+
+    Generate random temp file name if not provided
+    Set default values for optional parameters if not provided
+    Read options from JSON file and store in options variable
+
+    Open input subject file
+    Read sequences from file using gjoseqlib::read_fasta function
+    Close input file
+
+    Calculate total length of sequences
+    If total length is not within min_len and max_len
+        Display error message and exit
+
+    Create hash of contigs and track order
+    For each sequence in sequences
+        Add sequence to contigH with ID as key and sequence as value
+        Increment length by length of sequence
+        Add ID to contig_order array
+    End loop
+
+    Get current working directory
+    Create temporary directory
+    Copy subject file to temporary directory
+    Change working directory to temporary directory
+    Create blast database using makeblastdb command
+
+    Open directory of representative contigs
+    Get list of representative contigs
+    Close directory
+
+    Initialize variables for best_contig_bit and best_virus_match
+    For each representative contig
+        Perform blastn against subject file
+        Decode blastn output
+        If match bit is greater than or equal to best_contig_bit
+            Update best_contig_bit and best_virus_match
+    End loop
+
+    Print best_contig_bit and best_virus_match to STDERR
+
+    Open directory of PSSM directories
+    Get list of PSSM directories
+    Close directory
+
+    For each PSSM directory
+        Open directory of PSSM files
+        Get list of PSSM files
+        Close directory
+        For each PSSM file
+            Perform tblastn against subject file using PSSM file
+            Decode tblastn output
+            Calculate best matching result based on bit score
+        End loop
+        Print best_pssm and best_bit to STDERR
+
+        For each result in best_results
+            Process matching sequence and coordinates
+            Generate protein sequence
+            If required, set up Paramyxo Join
+            If required, set up calling non-pssm features anchored to PSSM coordinates
+            Add matching sequence as a tuple to all_seqs array
+        End loop
+    End loop
+
+    If join information exists
+        Generate tuples for joining ORFs
+        Add tuples to all_seqs array
+    End loop
+
+    If non-pssm features exist
+        Generate tuples for non-pssm features anchored to PSSM coordinates
+        Add tuples to all_seqs array
+    End loop
+
+    Sort all_seqs array by contig and then start position
+
+    Initialize variables for prot_seqs, gene_seqs, and count
+    For each contig in contig_order
+        Filter features for current contig
+        Sort features by start position
+        For each feature in sorted features
+            Generate unique protein ID
+            Add protein sequence and gene sequence to respective arrays
+            Print feature information to TBL file
+        End loop
+    End loop
+
+    If output files are not suppressed
+        Print gene sequences and protein sequences to respective output files
+    End loop
+
+    If only DNA output is requested
+        Print gene sequences to output
+    End loop
+
+    If only amino acid output is requested
+        Print protein sequences to output
+    End loop
+
+    Change working directory back to base directory
+    If keep_temp option is not specified
+        Remove temporary directory
+```
 
 
 
