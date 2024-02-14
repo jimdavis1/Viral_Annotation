@@ -26,6 +26,14 @@ I have not tried it on other versions of BLAST<br>
 Although it should not matter, this has been developed using Bob's internal environment by sourcing:<br>
 `/vol/patric3/cli/ubuntu-cli/user-env.sh`<br>
 
+## Repo Contents
+`annotate_by_viral_pssm.pl` the perl script that runs the blasts and calls the proteins. <br>
+`Viral_PSSM.json`  the file containing BLAST and ORF calling parameters per protein.<br>
+`Viral-Rep-Contigs` the directory of representative contigs that guides the program to the correct set of PSSMs.<br>
+`Viral-PSSMs` the directory of hand curated PSSMS per family or genus. There may be more than one PSSM per protein.<br>
+`Viral-Alignments`  the directory of alignments that corresponds to each PSSM.  This is not used by the program, but it is useful for keeping track of the source data used to build each PSSM.<br><br>
+
+
 ## How it works
 
 The code is currently designed to work on *Paramyxoviridae* and *Arenaviridae* viruses, although I plan to add more.  As depicted in the image below, it first performs a blastn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
@@ -118,7 +126,7 @@ The next and final set of rules relate to calling features that are not based on
 
 
 
-## Repo Contents
+
 
 
 
