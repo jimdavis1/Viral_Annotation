@@ -33,6 +33,41 @@ Although it should not matter, this has been developed using Bob's internal envi
 `Viral-PSSMs` the directory of hand curated PSSMS per family or genus. There may be more than one PSSM per protein.<br>
 `Viral-Alignments`  the directory of alignments that corresponds to each PSSM.  This is not used by the program, but it is useful for keeping track of the source data used to build each PSSM.<br><br>
 
+## How to run annotate_by_viral_pssm.pl
+`annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta`<br><br>
+
+Options include:
+```
+
+		-h help
+		-i input subject contigs in fasta format
+		-t declare a temp file (d = random)
+		-tax declare a taxonomy id (D = 11158 )
+		-g Genome name (D = Paramyxoviridae);
+		-k Keep internal stop codons (D = off) if you think that your genome will have stops
+		   within the PSSM, but still want to make a call over that region creating a pseudo gene.
+
+		-min minimum contig	length (d = 1000) # otherwise the genome is rejected
+		-max maximum contig length (d = 25000) # for reference Measles is 15894 and beilong is 19,212
+
+        -opt Options file in JSON format which carries data for match (D = /home/jjdavis/Viral_PSSM.json)
+		-l Representative contigs directory (D = /home/jjdavis/bin/Viral-Rep-Contigs)
+		-p Base directory of PSSMs   (D = /home/jjdavis/bin/Viral-PSSMs)
+	      Note that this is set up as a directory of pssms
+	      right now this is hardcoded as: "virus".pssms within this directory.
+```
+*For -t, -g and the default locations of the Viral-PSSM and JSON file, I will eventually change those to be either requried or something more intelligent.*<br><br>
+
+There is also a set of debugging parameters that i use frequently:
+```
+ -tmp keep temp dir
+ -no no output files generated, to be used in conjunction with one of the following:
+  -dna print only genes to STDOUT 
+  -aa print proteins to STDOUT
+  -tbl print only feature table to STDOUT
+  -ctbl [file name] concatenate table results to a file (for use with many genomes)
+```
+
 
 ## How it works
 
@@ -122,7 +157,6 @@ The next and final set of rules relate to calling features that are not based on
         "end_offset": 1
       }
 ```
-
 ## Pseudocode for annotate_by_viral_pssm.pl
 The following pseudocode offeres an explanation of how the program works:<br><br>
 ```
