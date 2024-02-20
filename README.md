@@ -15,7 +15,7 @@ External CPAN perl modules:
 `JSON::XS`<br>
 `File::Slurp`<br>
 
-It also uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  It is used for sequence manipulation.  You can get the latest version of this module by downloading the BV-BRC command line interface application. I have added a copy to this repo for convenience fromthe PATRIC Command Line Interface version 1.039 (the manipulation scripts are very stable, so I don't think anything I'm using has changed in a long time).  <br>
+It also uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  It is used for sequence manipulation.  You can get the latest version of this module by downloading the BV-BRC command line interface application. I have added a copy to this repo for convenience fromthe PATRIC Command Line Interface version 1.039.  Gary's repo can be found here: https://github.com/TheSEED/seed_gjo/  <br>
 
 The program(s) run the blast suite of tools from NCBI.  The current version requires:<br>
 `blastn: 2.13.0+`
