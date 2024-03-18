@@ -3,6 +3,10 @@ This repo contains code and data for improving viral annotation.  It currently c
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  I will explain more about how it works below.
 
+## Covered viral families and genera
+
+
+
 
 
 ## Dependencies
