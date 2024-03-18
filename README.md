@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Arenaviridae*. The overall goal is to create a very low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Bunyavirales*. The overall goal is to create a very low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations.<br>
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  I will explain more about how it works below.
 
@@ -71,7 +71,7 @@ There is also a set of debugging parameters that i use frequently:
 
 ## How it works
 
-The code is currently designed to work on *Paramyxoviridae* and *Arenaviridae* viruses, although I plan to add more.  As depicted in the image below, it first performs a blastn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
+The code is currently designed to work on *Paramyxoviridae* and some *Bunyavirales* viruses, although I plan to add more.  As depicted in the image below, it first performs a blastn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
 For each genus, there is a directory of PSSMs corresponding to each known protein for that genus. The PSSMs are derived from a set of hand curated alignments. In the next step, it cycles through each directory of PSSMs (there may be more than one PSSM per protein), choosing the best tblastn match per pssm. <br>
 
 Note that it assumes your genome will have the same set of proteins as the nearest match. This is why it is not intended to be used as a discovery tool.  In the even that a new protein is found, a new PSSM must be added to the PSSM directory.  <br><br>
