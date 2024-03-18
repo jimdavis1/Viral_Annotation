@@ -4,20 +4,20 @@ This repo contains code and data for improving viral annotation.  It currently c
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  I will explain more about how it works below.
 
 ## Covered viral families and genera
-Aquaparamyxovirus
-Arenaviridae
-Ferlavirus
-Hantaviridae
-Henipavirus
-Jeilongvirus
-Metaavulavirus
-Morbillivirus
-Orthoavulavirus
-Orthorubulavirus
-Paraavulavirus
-Pararubulavirus
-Phenuiviridae
-Respirovirus
+Aquaparamyxovirus<br>
+Arenaviridae<br>
+Ferlavirus<br>
+Hantaviridae<br>
+Henipavirus<br>
+Jeilongvirus<br>
+Metaavulavirus<br>
+Morbillivirus<br>
+Orthoavulavirus<br>
+Orthorubulavirus<br>
+Paraavulavirus<br>
+Pararubulavirus<br>
+Phenuiviridae<br>
+Respirovirus<br>
 
 
 ## Dependencies
