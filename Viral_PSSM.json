@@ -728,15 +728,41 @@
       "new_anno": "W Protein"
     }
   },
+  "Peribunyaviridae": {
+    "GPC": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "L": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "N": {
+      "bit_cutoff": 100,
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    },
+    "NSs": {
+      "bit_cutoff": 150,
+      "coverage_cutoff": 0.8,
+      "upstream_ext": 1,
+      "downstream_ext": 1
+    }
+  },
   "Phenuiviridae": {
     "Gc": {
-      "bit_cutoff": 175,
+      "bit_cutoff": 100,
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "Gn": {
-      "bit_cutoff": 175,
+      "bit_cutoff": 100,
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 0
