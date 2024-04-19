@@ -15,11 +15,9 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		-t declare a temp file (d = random)
 		-tax declare a taxonomy id (D = 11158 )
 		-g Genome name (D = Paramyxoviridae);
-		-k Keep internal stop codons (D = off) if you think that your genome will have stops
-		   within the PSSM, but still want to make a call over that region creating a pseudo gene.
-
+		
 		-min minimum contig	length (d = 1000) # otherwise the genome is rejected
-		-max maximum contig length (d = 25000) # for reference Measles is 15894 and beilong is 19,212
+		-max maximum contig length (d = 30000) # for reference Measles is 15894 and beilong is 19,212
 
         -opt Options file in JSON format which carries data for match (D = /home/jjdavis/Viral_PSSM.json)
 		-l Representative contigs directory (D = /home/jjdavis/bin/Viral-Rep-Contigs)
@@ -27,6 +25,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 	      Note that this is set up as a directory of pssms
 	      right now this is hardcoded as: "virus".pssms within this directory.
 
+	    -ks if a pssm match extends beyond a stop codon it will keep the entire region of the match including the stop. 
 	      
 	   Debug parms (turns off output file generation)
 	   	-tmp keep temp dir
@@ -38,7 +37,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 
 ';
 
-my ($help, $opt_file, $s_file, $tmp, $tax, $keep_stop, $name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl);
+my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl);
 
 my $opts = GetOptions( 'h'         => \$help,
                        'tmp'       => \$keep_temp,
@@ -47,26 +46,27 @@ my $opts = GetOptions( 'h'         => \$help,
                        'dna'       => \$dna_only,
                        'tbl'       => \$tbl_only,
                        'ctbl=s'    => \$ctbl,
-                       'i=s'       => \$s_file,
+                       'i=s'       => \$contig_file,
                        'tax=s'     => \$tax,
                        't=s'       => \$tmp,
-                       'g=s'       => \$name,
+                       'g=s'       => \$genome_name,
                        'l=s'       => \$cdir,
                        'p=s'       => \$pdir,
                        'min=s'     => \$min_len,
                        'max=s'     => \$max_len,
-                       'opt=s'     => \$opt_file,); 
+                       'opt=s'     => \$opt_file,
+                       'ks'        => \$keep_stop); 
 
 if ($help){die "$usage\n";}
-unless ($s_file ){die "must declare an input subject file with -i \n\n$usage\n";}
+unless ($contig_file ){die "must declare an input subject file with -i \n\n$usage\n";}
 
 # Name the Temp file:
 # generates a random 20 digit string of 0-9a-f
 unless ($tmp){$tmp .= sprintf("%x", rand 16) for 1..20;}
 unless ($min_len){$min_len = 1000; }
-unless ($max_len){$max_len = 25000; }
+unless ($max_len){$max_len = 30000; }
 unless ($tax){$tax = "11158"; }
-unless ($name){$name = "Paramyxoviridae"; }
+#unless ($name){$name = "Paramyxoviridae"; }
 unless ($cdir){$cdir = "/home/jjdavis/bin/Viral-Rep-Contigs"; }
 unless ($pdir){$pdir = "/home/jjdavis/bin/Viral-PSSMs"; }
 unless ($opt_file){$opt_file = "/home/jjdavis/bin/Viral_PSSM.json"; }
@@ -87,9 +87,18 @@ my $version;
 
 unless($no_out)
 {
-	open (AA, ">$tax.$version.faa");
-	open (DNA, ">$tax.$version.ffn");
-	open (TBL, ">$tax.$version.feature.tbl");
+	if ($genome_name)
+	{
+		open (AA,  ">$genome_name.faa");
+		open (DNA, ">$genome_name.ffn");
+		open (TBL, ">$genome_name.feature.tbl");
+	}
+	else
+	{
+		open (AA, ">$tax.$version.faa");
+		open (DNA, ">$tax.$version.ffn");
+		open (TBL, ">$tax.$version.feature.tbl");
+	}
 }
 
 if ($ctbl)
@@ -98,7 +107,7 @@ if ($ctbl)
 }
 
 # Make a hash out of the subject contigs
-open (IN, "<$s_file");
+open (IN, "<$contig_file");
 my @seqs = &gjoseqlib::read_fasta(\*IN);
 close IN;
 
@@ -121,7 +130,10 @@ if (($len < $min_len) || ($len > $max_len))
 # Make the temp dir.
 my $base = getcwd;
 mkdir ($tmp); 
-system "cp $s_file $tmp";
+system "cp $contig_file $tmp";
+my $s_file = $contig_file;
+$s_file =~ s/.+\///g; 
+
 chdir ($tmp);
 system "makeblastdb -dbtype nucl -in $s_file >/dev/null";
 
@@ -155,10 +167,9 @@ foreach (@reps)
 	}
 }	
 
-print STDERR "$best_contig_bit\t$best_virus_match\n";		
 
 my $virus = $best_virus_match;	
-print STDERR "Matching $virus PSSM\n"; 
+print STDERR "-----------------------\nMatching $virus\tBit = $best_contig_bit\n-----------------------\n"; 
 opendir (DIR, "$pdir/$virus.pssms");
 my @pssm_dirs = grep{$_ !~ /^\./}readdir(DIR);  # reads the directory of PSSM dirs
 close DIR;
@@ -188,7 +199,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	my $cov_cutoff     = $options->{$virus}->{$pssmdir}->{coverage_cutoff};
 	my $start_to_met   = $options->{$virus}->{$pssmdir}->{start_to_met};
 		
-	print "\t$virus\t$pssmdir\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
+	print STDERR "\t$virus\t$pssmdir\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
 
 	#   Select the best pssm per protein
 	#   If this begins to break down, new reference pssms can be added to the 
@@ -207,7 +218,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		close IN; 	
 		
 		my  ($results, $hsp_best_bit) = matching_tblastn_hsps_json($pssm_blast, $bit_cutoff, $cov_cutoff);
-		print STDERR "$name\t$hsp_best_bit\n"; 
+		print STDERR "\t$name\t$hsp_best_bit\n"; 
 
 		unless ($hsp_best_bit < $best_bit)   #evaulate each pssm blast based on the bit score, and pick the best one
 		{
@@ -246,7 +257,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			$from = $best_results->[$i]->{hit_from};
 			$to   = $best_results->[$i]->{hit_to};
 		}
-		print STDERR "## Original Coords: $from\tto\t$to\n"; 	
+		#print STDERR "Original Coords: $from\tto\t$to\n"; 	
 
 		###  $from and $to are the coordinates of the protein from the blast without the stop codon.
 		###  The end extension loop below, scans in the 3' direction for the next stop codon.
@@ -262,7 +273,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		else
 		{
 			($gene_begin, $gene_end)= scan_to_stop_codon ($to, $from, $contigH{$contig});
-			print STDERR "Scanning to stop codon New Coords: $gene_begin\tto\t$gene_end\n"; 	
+			print STDERR "\tScanning to stop codon Original Coords: $from\tto\t$to\tNew Coords: $gene_begin\tto\t$gene_end\n"; 	
 
 		}
 		#print STDERR "COV = $best_results->[$i]->{cov}\n";
@@ -272,7 +283,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my $new_end;
 		if (($hseq =~ /\*/) && (! $keep_stop))
 		{
-			print STDERR "Match contains a stop codon, cropping\n";
+			print STDERR "\tMatch contains a stop codon, cropping\n";
 			$new_end = crop_to_stop_codon($gene_begin, $gene_end, $hseq);
 		
 			#check the coverage.
@@ -280,10 +291,10 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 
 			if ($cov2 < $cov_cutoff)
 			{
-				print STDERR "Coverage prior to stop codon \($cov2\) is lower than cutoff: $cov_cutoff\n";
+				print STDERR "\tCoverage prior to stop codon \($cov2\) is lower than cutoff: $cov_cutoff\n";
 				next;
 			}
-			print STDERR "Cropping to coordinates: $gene_begin\tto\t$new_end\n"; 			
+			print STDERR "\tCropping to coordinates: $gene_begin\tto\t$new_end\n"; 			
 		}	
 		if ($new_end){$gene_end = $new_end};	
 		
@@ -367,6 +378,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $best_results->[$i]->{anno}, $strand, $best_pssm, $gene, $protein]); 
 		}	
 	}
+	print STDERR "-----------------------\n"; 
 }
 
 
@@ -436,15 +448,15 @@ foreach (@contig_order)
 		my $na_len = length $_->[6];
 		unless($no_out)
 		{
-			print TBL "$tax\.$version\t$name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
 		}
 		if($tbl_only)
 		{
-			print "$tax\.$version\t$name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
 		}
 		if($ctbl)
 		{
-			print CTBL "$tax\.$version\t$name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
 		}
 	}
 }
@@ -615,7 +627,7 @@ sub join_orfs
 							
 								my $transcript = $ntA.$ntB; 
 							
-								print STDERR "$ntA\n$insert\n$ntB\n"; 
+								#print STDERR "$ntA\n$insert\n$ntB\n"; 
 								if ($insert)
 								{
 									print STDERR "ADDING INSERT\t$insert\n";
@@ -623,7 +635,7 @@ sub join_orfs
 								}
 							
 								my $protein = &gjoseqlib::translate_seq( $transcript );
-								print STDERR "####PROT: $protein\n"; 
+								#print STDERR "####PROT: $protein\n"; 
 								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "+", $pssms, $gene, $protein]);
 							}
 							else
@@ -644,7 +656,7 @@ sub join_orfs
 														
 								my $transcript = $ntA.$ntB; 
 							
-								print STDERR "$ntA\n$insert\n$ntB\n"; 
+								#print STDERR "$ntA\n$insert\n$ntB\n"; 
 								if ($insert)
 								{
 									print STDERR "ADDING INSERT\t$insert\n";
@@ -704,10 +716,10 @@ sub scan_to_met_start
 	
 		my $codon = &gjoseqlib::DNA_subseq($contig, $begin_c, $end_c );	
 		my $aa = lc(&gjoseqlib::translate_codon( $codon ));
-		print STDERR "N-term Extended:\tori_start:$begin\tnew_start:$begin_c\t$codon\t$aa\n";
+		
 		last if ($aa =~ /M/i);
 		
-		if ($aa =~ /\*/)#have to revert to the prior codon if you hit a stop
+		if (($aa =~ /\*/)|| ($aa =~ /x/i))#have to revert to the prior codon if you hit a stop or ambiguous codon.
 		{
 			if ($begin < $end){$begin_c += 3};
 			if ($begin > $end){$begin_c -= 3};
@@ -715,6 +727,8 @@ sub scan_to_met_start
 		}
 		if ($begin < $end){$end_c = ($begin_c - 1 )};
 		if ($begin > $end){$end_c = ($begin_c + 1 )};
+		print STDERR "\tN-term Extended:\tori_start:$begin\tnew_start:$begin_c\t$codon\t$aa\n";
+
 	}							
 	return ($begin_c, $end);
 }
@@ -758,8 +772,8 @@ sub crop_to_stop_codon
 sub scan_to_stop_codon
 {
 	my ($to, $from, $contig) = @_;
-	my $end;
 
+	my $end;
 	if ($from < $to) {$end = ($to + 1);}
 	elsif ($from > $to) {$end = ($to - 1);}
 
@@ -775,12 +789,19 @@ sub scan_to_stop_codon
 		
 		my $codon = &gjoseqlib::DNA_subseq($contig, $end, $next_c );	
 		my $aa = lc(&gjoseqlib::translate_codon( $codon ));
-
-		#print STDERR "C-term Extended:\tto:$to\tend:$end\t$next_c\t$codon\t$aa\n";
+		
+		if ($aa =~ /x/i) #revert to the previous codon if the current codon is ambiguous.
+		{
+			if ($from < $to){ $end -= 3;}
+			if ($from > $to){ $end += 3;}
+			last;
+		}
 		
 		$end = $next_c;
+		print STDERR "\tC-term Extended:was:$to\tnow:$next_c\t$codon\t$aa\n";
 		
-		last if ($aa =~ /\*/);    #if its not a stop codon, increment the end position.
+		last if ($aa =~ /\*/);    #if its not a stop codon or ambiguous, increment the end position.
+		
 		if ($from < $to){ $end = ($next_c + 1)}
 		elsif ($from > $to){ $end = ($next_c - 1)}
 	}
