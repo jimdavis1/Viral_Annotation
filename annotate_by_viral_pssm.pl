@@ -305,7 +305,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my ($new_gene_begin, $new_gene_end); 
 		if (($hseq !~ /^M/i) && ($upstream_ext))
 		{
-			print STDERR "Scanning for Met start\n";
+			print STDERR "\tScanning for Met start\n";
 			($new_gene_begin, $new_gene_end) = scan_to_met_start($gene_begin, $gene_end, $contigH{$contig});
 		}
 		if ($new_gene_begin){$gene_begin = $new_gene_begin};	
@@ -504,7 +504,7 @@ sub call_non_pssm_features
 		my $start_offset = $featH->{$feat}->{START_OFFSET};
 		my $stop_offset  = $featH->{$feat}->{STOP_OFFSET};
 
-		print "####STARTOFFSET = $start_offset\n###STOP_OFFSET = $stop_offset\n\n";
+		#print "####STARTOFFSET = $start_offset\n###STOP_OFFSET = $stop_offset\n\n";
 		
 		foreach (keys %{$featH->{$feat}->{COORD}})
 		{
@@ -535,7 +535,7 @@ sub call_non_pssm_features
 							$end   = ($stop  += $stop_offset);						
 						}
 					
-						print "######STRAND = $strand\n Begin = $begin\n END = $end\n\n"; 
+						print "\tCalling non-PSSM feature\t$anno\tbegin: $begin\tend: $end\n"; 
 					
 						if ((abs($begin - $end) <= $max) && (abs($begin - $end) >= $min))
 						{
