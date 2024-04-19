@@ -273,7 +273,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		else
 		{
 			($gene_begin, $gene_end)= scan_to_stop_codon ($to, $from, $contigH{$contig});
-			print STDERR "\tScanning to stop codon Original Coords: $from\tto\t$to\tNew Coords: $gene_begin\tto\t$gene_end\n"; 	
+			print STDERR "\tScanning to Stop codon, Original Coords: $from to $to\tNew Coords: $gene_begin to $gene_end\n"; 	
 
 		}
 		#print STDERR "COV = $best_results->[$i]->{cov}\n";
@@ -305,8 +305,9 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my ($new_gene_begin, $new_gene_end); 
 		if (($hseq !~ /^M/i) && ($upstream_ext))
 		{
-			print STDERR "\tScanning for Met start\n";
 			($new_gene_begin, $new_gene_end) = scan_to_met_start($gene_begin, $gene_end, $contigH{$contig});
+			print STDERR "\tScanning for Met start, Original Coords: $gene_begin to $gene_end\tNew Coords: $new_gene_begin to $new_gene_end\n";
+
 		}
 		if ($new_gene_begin){$gene_begin = $new_gene_begin};	
 
@@ -704,12 +705,24 @@ sub scan_to_met_start
 {
 	my ($begin, $end, $contig) = @_;
 	my ($end_c, $begin_c);
-
-	if ($begin < $end){$end_c = ($begin - 1)}
-	elsif ($begin > $end){$end_c = ($begin + 1)}
 	
 	my $len = length($contig);
-	while (($end_c > 0) && ($end_c <= $len)) 
+
+	if (($begin < $end) && ($begin >= 3))
+	{
+		$end_c = ($begin - 1)
+	}
+	elsif (($begin > $end) && ($begin >= $len -3))
+	{
+		$end_c = ($begin + 1)
+	}
+	else
+	{
+		$begin_c = $begin;
+	}
+	
+	
+	while (($end_c >= 2) && ($end_c <= $len -2)) 
 	{
 		if ($begin < $end){ $begin_c = ($end_c - 2);} 
 		elsif ($begin > $end){ $begin_c = ($end_c + 2);} 
@@ -728,7 +741,6 @@ sub scan_to_met_start
 		if ($begin < $end){$end_c = ($begin_c - 1 )};
 		if ($begin > $end){$end_c = ($begin_c + 1 )};
 		print STDERR "\tN-term Extended:\tori_start:$begin\tnew_start:$begin_c\t$codon\t$aa\n";
-
 	}							
 	return ($begin_c, $end);
 }
@@ -774,14 +786,23 @@ sub scan_to_stop_codon
 	my ($to, $from, $contig) = @_;
 
 	my $end;
-	if ($from < $to) {$end = ($to + 1);}
-	elsif ($from > $to) {$end = ($to - 1);}
-
 	my $contiglen = length($contig);
 	
+	if (($from < $to) && ($to <= ($contiglen - 3)))
+	{
+		$end = ($to + 1);
+	}
+	elsif (($from > $to) && ($to >= 3))
+	{
+		$end = ($to - 1);
+	}
+	else
+	{
+		$end = $to;
+	}
+	
 	#print STDERR "END=$end\t$contiglen\n";
-
-	while (($end <= $contiglen) && ($end > 0))
+	while (($end <= ($contiglen - 2)) && ($end > 0))
 	{
 		my $next_c;
 		if ($from < $to){$next_c = ($end + 2)}
@@ -796,7 +817,6 @@ sub scan_to_stop_codon
 			if ($from > $to){ $end += 3;}
 			last;
 		}
-		
 		$end = $next_c;
 		print STDERR "\tC-term Extended:was:$to\tnow:$next_c\t$codon\t$aa\n";
 		
