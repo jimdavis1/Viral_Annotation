@@ -536,7 +536,7 @@ sub call_non_pssm_features
 							$end   = ($stop  += $stop_offset);						
 						}
 					
-						print "\tCalling non-PSSM feature\t$anno\tbegin: $begin\tend: $end\n"; 
+						print STDERR "\tCalling non-PSSM feature\t$anno\tbegin: $begin\tend: $end\n"; 
 					
 						if ((abs($begin - $end) <= $max) && (abs($begin - $end) >= $min))
 						{
@@ -802,10 +802,11 @@ sub scan_to_stop_codon
 	}
 	
 	#print STDERR "END=$end\t$contiglen\n";
-	while (($end <= ($contiglen - 2)) && ($end > 0))
+	while (($end <= ($contiglen - 2)) && ($end > 2))
 	{
 		my $next_c;
 		if ($from < $to){$next_c = ($end + 2)}
+		
 		if ($from > $to){$next_c = ($end - 2)}
 		
 		my $codon = &gjoseqlib::DNA_subseq($contig, $end, $next_c );	
