@@ -228,7 +228,6 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		}
 	}
 	print STDERR "\tChoosing $best_pssm\t$best_bit\n"; 
-
 	my $nhsps = scalar @$best_results;
 	for my $i (0..($nhsps -1))
 	{		
@@ -239,7 +238,6 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			
 		print STDERR "\t$contig\t$best_results->[$i]->{anno}\t$best_results->[$i]->{hit_from}\t$best_results->[$i]->{hit_to}\t$best_results->[$i]->{frame}\t$best_results->[$i]->{bit}\n";
 	
-		
 		## Okay, Now we need to find our features.
 	
 	
@@ -257,7 +255,6 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			$from = $best_results->[$i]->{hit_from};
 			$to   = $best_results->[$i]->{hit_to};
 		}
-		#print STDERR "Original Coords: $from\tto\t$to\n"; 	
 
 		###  $from and $to are the coordinates of the protein from the blast without the stop codon.
 		###  The end extension loop below, scans in the 3' direction for the next stop codon.
@@ -272,7 +269,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		}
 		else
 		{
-			($gene_begin, $gene_end)= scan_to_stop_codon ($to, $from, $contigH{$contig});
+			($gene_begin, $gene_end)= scan_to_stop_codon ($from, $to, $contigH{$contig});
 			print STDERR "\tScanning to Stop codon, Original Coords: $from to $to\tNew Coords: $gene_begin to $gene_end\n"; 	
 
 		}
@@ -305,7 +302,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my ($new_gene_begin, $new_gene_end); 
 		if (($hseq !~ /^M/i) && ($upstream_ext))
 		{
-			($new_gene_begin, $new_gene_end) = scan_to_met_start($gene_begin, $gene_end, $contigH{$contig});
+			($new_gene_begin, $new_gene_end) = scan_to_met_start( $gene_begin, $gene_end, $contigH{$contig});
 			print STDERR "\tScanning for Met start, Original Coords: $gene_begin to $gene_end\tNew Coords: $new_gene_begin to $new_gene_end\n";
 
 		}
@@ -335,11 +332,11 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		if (exists $options->{$virus}->{$pssmdir}->{non_pssm_partner})
 		{
 			my @non_pssms = @{$options->{$virus}->{$pssmdir}->{non_pssm_partner}};
+			
 			for my $i (0..$#non_pssms)
 			{
 				my $start_coord;
 				my $stop_coord;
-				my $contig = $best_results->[$i]->{contig};
 				my $feat = $non_pssms[$i];
 				#if the current pssm match feature corresponds with the non-pssm start site
 				if ($options->{$virus}->{$feat}->{begin}->{begin_pssm} eq $pssmdir) 
@@ -494,7 +491,6 @@ sub call_non_pssm_features
 {
 	my ($featH, $contigH) = @_;
 	my @seq_data;
-	
 	foreach (keys %$featH)
 	{
 		my $feat         = $_;
@@ -504,15 +500,14 @@ sub call_non_pssm_features
 		my $aa           = $featH->{$feat}->{AA};
 		my $start_offset = $featH->{$feat}->{START_OFFSET};
 		my $stop_offset  = $featH->{$feat}->{STOP_OFFSET};
-
-		#print "####STARTOFFSET = $start_offset\n###STOP_OFFSET = $stop_offset\n\n";
 		
 		foreach (keys %{$featH->{$feat}->{COORD}})
 		{
 			my $contig = $_;
 			
 			my @starts = @{$featH->{$feat}->{COORD}->{$contig}->{START}};
-			my @stops  = @{$featH->{$feat}->{COORD}->{$contig}->{STOP}};
+			my @stops  = @{$featH->{$feat}->{COORD}->{$contig}->{STOP}};			
+			
 			
 			for my $i (0..$#starts)
 			{			
@@ -522,12 +517,12 @@ sub call_non_pssm_features
 					my $stop = $stops[$j];
 					if ($stop)
 					{
-						my ($strand, $begin, $end);
+						my ($strand, $begin, $end) = 0;
 						if ($start < $stop)
 						{
 							$strand = "+";
 							$begin = ($start += $start_offset);
-							$end   = ($stop  -= $stop_offset);						
+							$end   = ($stop  -= $stop_offset);													
 						}
 						elsif ($start > $stop)
 						{
@@ -543,7 +538,14 @@ sub call_non_pssm_features
 							my $nt = &gjoseqlib::DNA_subseq($contigH{$contig}, $begin, $end); 
 							my $prot;
 							if ($aa){ $prot = &gjoseqlib::translate_seq( $nt );}
-							push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot]);
+							if ($prot =~ /\*(?!$)/)# It will not record a position-called protein with stops
+							{
+								print STDERR "\tInternal stop(s) found in non-pssm feature. No assignment made for $anno\n";
+							}
+							else
+							{
+								push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot]);
+							}
 						}
 					}
 				}
@@ -691,63 +693,6 @@ sub join_orfs
 
 
 
-
-
-##########################sub scan_to_met_start#############
-#
-# Looks upstream for a new Met start codon.
-# Returns the start position for the new Met codon.
-# Does not consider alternative start codons.
-#  ($new_gene_begin, $new_gene_end) = scan_to_met_start($gene_start, $gene_end, $contig)
-# 
-#-----------------------------------------------------------
-sub scan_to_met_start
-{
-	my ($begin, $end, $contig) = @_;
-	my ($end_c, $begin_c);
-	
-	my $len = length($contig);
-
-	if (($begin < $end) && ($begin >= 3))
-	{
-		$end_c = ($begin - 1)
-	}
-	elsif (($begin > $end) && ($begin >= $len -3))
-	{
-		$end_c = ($begin + 1)
-	}
-	else
-	{
-		$begin_c = $begin;
-	}
-	
-	
-	while (($end_c >= 2) && ($end_c <= $len -2)) 
-	{
-		if ($begin < $end){ $begin_c = ($end_c - 2);} 
-		elsif ($begin > $end){ $begin_c = ($end_c + 2);} 
-	
-		my $codon = &gjoseqlib::DNA_subseq($contig, $begin_c, $end_c );	
-		my $aa = lc(&gjoseqlib::translate_codon( $codon ));
-		
-		last if ($aa =~ /M/i);
-		
-		if (($aa =~ /\*/)|| ($aa =~ /x/i))#have to revert to the prior codon if you hit a stop or ambiguous codon.
-		{
-			if ($begin < $end){$begin_c += 3};
-			if ($begin > $end){$begin_c -= 3};
-			last;
-		}
-		if ($begin < $end){$end_c = ($begin_c - 1 )};
-		if ($begin > $end){$end_c = ($begin_c + 1 )};
-		print STDERR "\tN-term Extended:\tori_start:$begin\tnew_start:$begin_c\t$codon\t$aa\n";
-	}							
-	return ($begin_c, $end);
-}
-###########################################################
-
-
-
 ##########################sub crop_to_stop_codon###########
 #
 # Returns new gene boundaries, ignoring everything after the stop codon.
@@ -783,50 +728,137 @@ sub crop_to_stop_codon
 
 sub scan_to_stop_codon
 {
-	my ($to, $from, $contig) = @_;
-
-	my $end;
-	my $contiglen = length($contig);
-	
-	if (($from < $to) && ($to <= ($contiglen - 3)))
-	{
-		$end = ($to + 1);
-	}
-	elsif (($from > $to) && ($to >= 3))
-	{
-		$end = ($to - 1);
-	}
-	else
-	{
-		$end = $to;
-	}
-	
-	#print STDERR "END=$end\t$contiglen\n";
-	while (($end <= ($contiglen - 2)) && ($end > 2))
-	{
-		my $next_c;
-		if ($from < $to){$next_c = ($end + 2)}
+	my ($from, $to, $contig) = @_;
+	my $len = length $contig; 
+	my $end = $to;
 		
-		if ($from > $to){$next_c = ($end - 2)}
-		
-		my $codon = &gjoseqlib::DNA_subseq($contig, $end, $next_c );	
-		my $aa = lc(&gjoseqlib::translate_codon( $codon ));
-		
-		if ($aa =~ /x/i) #revert to the previous codon if the current codon is ambiguous.
+	if ($from < $to)
+	{		
+		for (my $i = $end; $i <= ($len - 3); $i += 3) # This is zero indexed
 		{
-			if ($from < $to){ $end -= 3;}
-			if ($from > $to){ $end += 3;}
-			last;
+			my $codon = &gjoseqlib::DNA_subseq($contig, ($i +1), ($i + 3) ); #<--- these are equivalent.
+			my $aa = &gjoseqlib::translate_codon( $codon ); 
+			
+			if ($aa =~ /\*/) 
+			{
+				$end = ($i + 3);  #move the end position to the end of the stop codon and quit.
+				print STDERR "\tC-term Extended\twas: $to\tnow: $end\t$codon\t$aa\n";
+				last;	
+			}		
+			elsif ($aa =~ /x/i) 
+			{
+				print STDERR "\tC-term Extension X found was: $to\tnow: $end\t$codon\t$aa\n";
+				last;	
+			}		
+			else
+			{
+				$end = ($i + 3);
+				print STDERR "\tC-term Extended\twas: $to\tnow: $end\t$codon\t$aa\n";
+			}		
 		}
-		$end = $next_c;
-		print STDERR "\tC-term Extended:was:$to\tnow:$next_c\t$codon\t$aa\n";
-		
-		last if ($aa =~ /\*/);    #if its not a stop codon or ambiguous, increment the end position.
-		
-		if ($from < $to){ $end = ($next_c + 1)}
-		elsif ($from > $to){ $end = ($next_c - 1)}
 	}
+
+	## Reverse:
+
+	elsif ($from > $to)
+	{		
+		for (my $i = $end; $i >= 3; $i -= 3) # This is zero indexed
+		{
+			my $codon = &gjoseqlib::DNA_subseq($contig, ($i -1), $i - 3); #<--- these are equivalent.
+			my $aa = &gjoseqlib::translate_codon( $codon ); 
+
+			if ($aa =~ /\*/) 
+			{
+				$end = ($i - 3);  #move the end position to the end of the stop codon and quit.
+				print STDERR "\tC-term Extended\twas: $to\tnow: $end\t$aa\t$codon\n";
+
+				last;	
+			}		
+			elsif ($aa =~ /x/i) 
+			{
+				print STDERR "\tC-term Extension X found was: $to\tnow: $end\t$codon\t$aa\n";
+				last;	
+			}		
+			else
+			{
+				$end = ($i - 3);
+				print STDERR "\tC-term Extended\twas: $to\tnow: $end\t$codon\t$aa\n";
+			}		
+		}
+	}	
 	return ($from, $end);
+}
+###########################################################
+
+
+##########################sub scan_to_met_start#############
+#
+# Looks upstream for a new Met start codon.
+# Returns the start position for the new Met codon.
+# Does not consider alternative start codons.
+#  ($new_gene_begin, $new_gene_end) = scan_to_met_start($gene_start, $gene_end, $contig)
+# 
+#-----------------------------------------------------------
+sub scan_to_met_start
+{
+	my ($from, $to, $contig) = @_;
+	my $len = length $contig; 
+	my $start = $from;
+
+	if ($from < $to)
+	{		
+		for (my $i = ($start - 3); $i >= 0; $i -= 3) # This is zero indexed
+		{
+			my $codon = &gjoseqlib::DNA_subseq($contig, $i, ($i + 2)); 
+			my $aa = &gjoseqlib::translate_codon( $codon ); 
+
+			if ($aa =~ /m/i) 
+			{
+				$start = $i;  #move the end position to the end of the stop codon and quit.
+				print STDERR "\tN-term Extension Met found: was: $from\tnow: $start\t$aa\t$codon\n";
+				last;	
+			}		
+			elsif ($aa =~ /x|\*/i) 
+			{
+				print STDERR "\tN-term Extension stopping was: $from\tnow: $start\t$codon\t$aa\n";
+				last;	
+			}		
+			else
+			{
+				$start = $i;
+				print STDERR "\tN-term Extended\twas: $from\tnow: $start\t$codon\t$aa\n";
+			}		
+		}
+	}
+	
+	### Reverse:
+	if ($from > $to)
+	{		
+		
+		for (my $i = ($start + 1); $i <= ($len - 2); $i += 3) # This is zero indexed
+		{
+			my $codon = &gjoseqlib::DNA_subseq($contig, ($i + 2), $i); 
+			my $aa = &gjoseqlib::translate_codon( $codon ); 
+
+			if ($aa =~ /m/i) 
+			{
+				$start = ($i + 2);  #move the end position to the end of the stop codon and quit.
+				print STDERR "\tN-term Extension Met found: was: $from\tnow: $start\t$aa\t$codon\n";
+				last;	
+			}		
+			elsif ($aa =~ /x|\*/i) 
+			{
+				print STDERR "\tN-term Extension stopping was: $from\tnow: $start\t$codon\t$aa\n";
+				last;	
+			}		
+			else
+			{
+				$start = ($i + 2);
+				print STDERR "\tN-term Extended\twas: $from\tnow: $start\t$codon\t$aa\n";
+			}		
+		}
+	}	
+	return ($start, $to);
 }
 ###########################################################
 
