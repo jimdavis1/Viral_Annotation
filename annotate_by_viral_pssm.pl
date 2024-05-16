@@ -491,6 +491,7 @@ sub call_non_pssm_features
 {
 	my ($featH, $contigH) = @_;
 	my @seq_data;
+		
 	foreach (keys %$featH)
 	{
 		my $feat         = $_;
@@ -505,46 +506,48 @@ sub call_non_pssm_features
 		{
 			my $contig = $_;
 			
-			my @starts = @{$featH->{$feat}->{COORD}->{$contig}->{START}};
-			my @stops  = @{$featH->{$feat}->{COORD}->{$contig}->{STOP}};			
+			if (($featH->{$feat}->{COORD}->{$contig}->{START}) && ($featH->{$feat}->{COORD}->{$contig}->{STOP}))
+			{	
+				my @starts = @{$featH->{$feat}->{COORD}->{$contig}->{START}};
+				my @stops  = @{$featH->{$feat}->{COORD}->{$contig}->{STOP}};			
 			
-			
-			for my $i (0..$#starts)
-			{			
-				my $start = $starts[$i]; 
-				for my $j (0..$#stops)
-				{
-					my $stop = $stops[$j];
-					if ($stop)
+				for my $i (0..$#starts)
+				{			
+					my $start = $starts[$i]; 
+					for my $j (0..$#stops)
 					{
-						my ($strand, $begin, $end) = 0;
-						if ($start < $stop)
+						my $stop = $stops[$j];
+						if ($stop)
 						{
-							$strand = "+";
-							$begin = ($start += $start_offset);
-							$end   = ($stop  -= $stop_offset);													
-						}
-						elsif ($start > $stop)
-						{
-							$strand = "-";
-							$begin = ($start -= $start_offset);
-							$end   = ($stop  += $stop_offset);						
-						}
-					
-						print STDERR "\tCalling non-PSSM feature\t$anno\tbegin: $begin\tend: $end\n"; 
-					
-						if ((abs($begin - $end) <= $max) && (abs($begin - $end) >= $min))
-						{
-							my $nt = &gjoseqlib::DNA_subseq($contigH{$contig}, $begin, $end); 
-							my $prot;
-							if ($aa){ $prot = &gjoseqlib::translate_seq( $nt );}
-							if ($prot =~ /\*(?!$)/)# It will not record a position-called protein with stops
+							my ($strand, $begin, $end) = 0;
+							if ($start < $stop)
 							{
-								print STDERR "\tInternal stop(s) found in non-pssm feature. No assignment made for $anno\n";
+								$strand = "+";
+								$begin = ($start += $start_offset);
+								$end   = ($stop  -= $stop_offset);													
 							}
-							else
+							elsif ($start > $stop)
 							{
-								push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot]);
+								$strand = "-";
+								$begin = ($start -= $start_offset);
+								$end   = ($stop  += $stop_offset);						
+							}
+					
+					
+							if ((abs($begin - $end) <= $max) && (abs($begin - $end) >= $min))
+							{
+								print STDERR "\tCalling non-PSSM feature\t$anno\tbegin: $begin\tend: $end\n"; 
+								my $nt = &gjoseqlib::DNA_subseq($contigH{$contig}, $begin, $end); 
+								my $prot;
+								if ($aa){ $prot = &gjoseqlib::translate_seq( $nt );}
+								if ($prot =~ /\*(?!$)/)# It will not record a position-called protein with stops
+								{
+									print STDERR "\tInternal stop(s) found in non-pssm feature. No assignment made for $anno\n";
+								}
+								else
+								{
+									push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot]);
+								}
 							}
 						}
 					}
@@ -762,7 +765,7 @@ sub scan_to_stop_codon
 
 	elsif ($from > $to)
 	{		
-		for (my $i = $end; $i >= 3; $i -= 3) # This is zero indexed
+		for (my $i = $end; $i > 3; $i -= 3) # This is zero indexed
 		{
 			my $codon = &gjoseqlib::DNA_subseq($contig, ($i -1), $i - 3); #<--- these are equivalent.
 			my $aa = &gjoseqlib::translate_codon( $codon ); 
