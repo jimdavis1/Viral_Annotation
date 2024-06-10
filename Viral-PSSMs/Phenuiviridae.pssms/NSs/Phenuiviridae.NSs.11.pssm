@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "11"
       },
       descr {
-        title "Small nonstructural protein NSs, NSs Protein"
+        title "Small Nonstructural Protein NSs, NSs Protein"
       },
       inst {
         repr raw,

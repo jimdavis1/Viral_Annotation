@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "P Protein, ORF2"
+        title "Phosphoprotein, P Protein, ORF2"
       },
       inst {
         repr raw,

@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "RING finger protein, Z protein"
+        title "RING Finger Protein Z, Z Protein"
       },
       inst {
         repr raw,

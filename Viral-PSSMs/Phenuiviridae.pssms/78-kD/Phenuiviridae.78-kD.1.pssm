@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Mature nonstructural 78-kD protein, 78-kD Protein"
+        title "Mature Nonstructural 78-kD Protein, 78-kD Protein"
       },
       inst {
         repr raw,

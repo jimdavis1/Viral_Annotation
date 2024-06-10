@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "8"
       },
       descr {
-        title "Movement protein"
+        title "Movement Protein"
       },
       inst {
         repr raw,

@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "7"
       },
       descr {
-        title "Pre-glycoprotein polyprotein GP complex, GPC"
+        title "Pre-glycoprotein Polyprotein GP Complex, GPC Protein"
       },
       inst {
         repr raw,

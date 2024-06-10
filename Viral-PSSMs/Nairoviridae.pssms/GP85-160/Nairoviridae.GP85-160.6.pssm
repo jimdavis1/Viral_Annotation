@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Mature secreted nonstructural protein, GP160/85 Protein"
+        title "Mature Secreted Nonstructural Protein, GP160/85 Protein"
       },
       inst {
         repr raw,

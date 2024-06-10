@@ -9,8 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Small segment nonstructural apoptosis disruption protein, NSs
- protein"
+        title "Small Segment Nonstructural Protein Involved In Apoptosis Disruption, NSs Protein"
       },
       inst {
         repr raw,

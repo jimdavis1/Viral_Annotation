@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Mature envelope glycoprotein Gc, Gc Protein"
+        title "Mature Envelope Glycoprotein Gc, Gc Protein"
       },
       inst {
         repr raw,

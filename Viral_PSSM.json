@@ -55,7 +55,7 @@
   },
   "Arenaviridae": {
     "GP1": {
-      "anno": "Mature glycoprotein 1, GP1",
+      "anno": "Mature Envelope Glycoprotein Gn, Gn (GP1) Protein",
       "translate": 1,
       "min_len": 450,
       "max_len": 900,

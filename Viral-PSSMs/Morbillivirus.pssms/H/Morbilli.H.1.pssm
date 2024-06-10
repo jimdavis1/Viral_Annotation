@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Hemagglutinin, H Protein"
+        title "Hemagglutinin Protein, H Protein"
       },
       inst {
         repr raw,

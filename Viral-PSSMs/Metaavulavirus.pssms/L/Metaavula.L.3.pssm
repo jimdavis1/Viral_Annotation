@@ -6,10 +6,10 @@ PssmWithParameters ::= {
     byRow FALSE,
     query seq {
       id {
-        local str "RNA Dependent RNA Polymerase, L Protein"
+        local str "1"
       },
       descr {
-        title "RNA"
+        title "RNA Dependent RNA Polymerase, L Protein"
       },
       inst {
         repr raw,

@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "27"
       },
       descr {
-        title "RNA dependent RNA polymerase, L Protein"
+        title "RNA Dependent RNA Polymerase, L Protein"
       },
       inst {
         repr raw,

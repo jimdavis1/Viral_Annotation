@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Viral Pc3 protein"
+        title "Pc3 Protein"
       },
       inst {
         repr raw,

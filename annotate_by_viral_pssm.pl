@@ -67,9 +67,9 @@ unless ($min_len){$min_len = 1000; }
 unless ($max_len){$max_len = 30000; }
 unless ($tax){$tax = "11158"; }
 #unless ($name){$name = "Paramyxoviridae"; }
-unless ($cdir){$cdir = "/home/jjdavis/bin/Viral-Rep-Contigs"; }
-unless ($pdir){$pdir = "/home/jjdavis/bin/Viral-PSSMs"; }
-unless ($opt_file){$opt_file = "/home/jjdavis/bin/Viral_PSSM.json"; }
+unless ($cdir){$cdir = "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"; }
+unless ($pdir){$pdir = "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"; }
+unless ($opt_file){$opt_file = "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"; }
 
 
 ## This is the json file with all of the protein-specific information for 

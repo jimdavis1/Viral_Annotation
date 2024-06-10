@@ -9,7 +9,7 @@ PssmWithParameters ::= {
         local str "1"
       },
       descr {
-        title "Mature secreted nonstructural mucin-like protein, MLD Protein"
+        title "Mature Secreted Nonstructural Mucin-like Protein, MLD Protein"
       },
       inst {
         repr raw,
