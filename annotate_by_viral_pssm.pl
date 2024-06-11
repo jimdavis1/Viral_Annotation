@@ -198,6 +198,8 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	my $bit_cutoff     = $options->{$virus}->{$pssmdir}->{bit_cutoff};
 	my $cov_cutoff     = $options->{$virus}->{$pssmdir}->{coverage_cutoff};
 	my $start_to_met   = $options->{$virus}->{$pssmdir}->{start_to_met};
+	my $feature_type   = $options->{$virus}->{$pssmdir}->{feature_type};
+
 		
 	print STDERR "\t$virus\t$pssmdir\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
 
@@ -324,6 +326,8 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			$join->{$contig}->{$pssmdir}->{ANNO}     = $options->{$virus}->{$pssmdir}->{new_anno};	
 			$join->{$contig}->{$pssmdir}->{INSERT}   = $options->{$virus}->{$pssmdir}->{paramyxo_insert};	
 			$join->{$contig}->{$pssmdir}->{PSSM}     = $best_pssm;
+			$join->{$contig}->{$pssmdir}->{TYPE}     = $feature_type;
+
 		}
 		
 	
@@ -363,17 +367,19 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 						push @{$non_pssm_feat->{$feat}->{COORD}->{$contig}->{STOP}}, $gene_end;
 					}
 				}			
-				$non_pssm_feat->{$feat}->{ANNO} = $options->{$virus}->{$feat}->{anno};
-				$non_pssm_feat->{$feat}->{MIN}  = $options->{$virus}->{$feat}->{min_len};
-				$non_pssm_feat->{$feat}->{MAX}  = $options->{$virus}->{$feat}->{max_len};			
-				$non_pssm_feat->{$feat}->{AA}   = $options->{$virus}->{$feat}->{translate};
+				$non_pssm_feat->{$feat}->{ANNO}   = $options->{$virus}->{$feat}->{anno};
+				$non_pssm_feat->{$feat}->{MIN}    = $options->{$virus}->{$feat}->{min_len};
+				$non_pssm_feat->{$feat}->{MAX}    = $options->{$virus}->{$feat}->{max_len};			
+				$non_pssm_feat->{$feat}->{AA}     = $options->{$virus}->{$feat}->{translate};
+				$non_pssm_feat->{$feat}->{TYPE}   = $options->{$virus}->{$feat}->{feature_type};
+
 			}
 		}
 		
 		#return matching sequence as a tuple.
 		unless ($options->{$virus}->{$pssmdir}->{paramyxo_join} == 2)# the ORF2 sequence isn't complete and has to be merged after all of the other proteins have been found.
 		{
-			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $best_results->[$i]->{anno}, $strand, $best_pssm, $gene, $protein]); 
+			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $best_results->[$i]->{anno}, $strand, $best_pssm, $gene, $protein, $feature_type]); 
 		}	
 	}
 	print STDERR "-----------------------\n"; 
@@ -405,7 +411,8 @@ if ($non_pssm_feat)
 # 4 strand
 # 5 pssm  (this is the full pssmfile name)
 # 6 gene
-# 7 protein	
+# 7 protein
+# 8 feature_type	
 
 # Sort the output in order of contig and then start position. 
 
@@ -428,7 +435,7 @@ foreach (@contig_order)
 		$count ++; 
 		# this is just a silly place holder unitl bob can help me get set up with official
 		# ID generation
-		my $prot_id = "jim\|$tax\.$version\.CDS\.$count"; 
+		my $prot_id = "jim\|$tax\.$version\.$_->[8]\.$count"; 
 		
 		#Trimming the star from the end of the protein sequence. 
 		#This could be removed if its unwanted.
@@ -446,15 +453,15 @@ foreach (@contig_order)
 		my $na_len = length $_->[6];
 		unless($no_out)
 		{
-			print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
 		}
 		if($tbl_only)
 		{
-			print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
 		}
 		if($ctbl)
 		{
-			print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\tCDS\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
 		}
 	}
 }
@@ -494,14 +501,16 @@ sub call_non_pssm_features
 		
 	foreach (keys %$featH)
 	{
-		my $feat         = $_;
-		my $anno         = $featH->{$feat}->{ANNO};
-		my $min          = $featH->{$feat}->{MIN};
-		my $max          = $featH->{$feat}->{MAX};
-		my $aa           = $featH->{$feat}->{AA};
-		my $start_offset = $featH->{$feat}->{START_OFFSET};
-		my $stop_offset  = $featH->{$feat}->{STOP_OFFSET};
-		
+		my $feat          = $_;
+		my $anno          = $featH->{$feat}->{ANNO};
+		my $min           = $featH->{$feat}->{MIN};
+		my $max           = $featH->{$feat}->{MAX};
+		my $aa            = $featH->{$feat}->{AA};
+		my $start_offset  = $featH->{$feat}->{START_OFFSET};
+		my $stop_offset   = $featH->{$feat}->{STOP_OFFSET};
+		my $stop_offset   = $featH->{$feat}->{STOP_OFFSET};
+		my $feature_type  = $featH->{$feat}->{TYPE};
+
 		foreach (keys %{$featH->{$feat}->{COORD}})
 		{
 			my $contig = $_;
@@ -546,7 +555,7 @@ sub call_non_pssm_features
 								}
 								else
 								{
-									push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot]);
+									push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot, $feature_type]);
 								}
 							}
 						}
@@ -606,16 +615,14 @@ sub join_orfs
 				my @partners = @{$join->{$contig}->{$name}->{PARTNER}};
 				for my $i (0..$#partners)
 				{
-					my $orf2       = $join->{$contig}->{$name}->{PARTNER}->[$i];
-					my $orf2_start = $join->{$contig}->{$orf2}->{START}; 
-					my $orf2_end   = $join->{$contig}->{$orf2}->{STOP}; 
-					my $orf1_start = $join->{$contig}->{$name}->{START}; 
-					my $orf1_end   = $join->{$contig}->{$name}->{STOP}; 
-					my $insert     = $join->{$contig}->{$orf2}->{INSERT}; 
-					my $pssms      = "$join->{$contig}->{$name}->{PSSM}"."_JOIN_"."$join->{$contig}->{$orf2}->{PSSM}";
-					
-					#print Dumper $join;
-					
+					my $orf2         = $join->{$contig}->{$name}->{PARTNER}->[$i];
+					my $orf2_start   = $join->{$contig}->{$orf2}->{START}; 
+					my $orf2_end     = $join->{$contig}->{$orf2}->{STOP}; 
+					my $orf1_start   = $join->{$contig}->{$name}->{START}; 
+					my $orf1_end     = $join->{$contig}->{$name}->{STOP}; 
+					my $insert       = $join->{$contig}->{$orf2}->{INSERT}; 
+					my $feature_type = $join->{$contig}->{$orf2}->{TYPE}; 
+					my $pssms        = "$join->{$contig}->{$name}->{PSSM}"."_JOIN_"."$join->{$contig}->{$orf2}->{PSSM}";
 					
 					if (($orf1_start) && ($orf2_start) && ($orf1_end) && ($orf2_end))
 					{	
@@ -642,7 +649,7 @@ sub join_orfs
 							
 								my $protein = &gjoseqlib::translate_seq( $transcript );
 								#print STDERR "####PROT: $protein\n"; 
-								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "+", $pssms, $gene, $protein]);
+								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "+", $pssms, $gene, $protein, $feature_type]);
 							}
 							else
 							{
@@ -675,7 +682,7 @@ sub join_orfs
 								my $protB = &gjoseqlib::translate_seq( $ntB );
 								my $protein = "$protA.$protB";
 				
-								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "-", $pssms, $gene, $protein]);
+								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "-", $pssms, $gene, $protein, $feature_type]);
 
 							}
 							else

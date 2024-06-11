@@ -2,42 +2,49 @@
   "Aquaparamyxovirus": {
     "C": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -46,6 +53,7 @@
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -56,6 +64,7 @@
   "Arenaviridae": {
     "GP1": {
       "anno": "Mature Envelope Glycoprotein Gn, Gn (GP1) Protein",
+      "feature_type": "mat_peptide",
       "translate": 1,
       "min_len": 450,
       "max_len": 900,
@@ -73,6 +82,7 @@
     "Large Segment Stemloop": {
       "anno": "Large Segment Intergenic Stem Loop Region",
       "translate": 0,
+      "feature_type": "RNA",
       "min_len": 50,
       "max_len": 200,
       "begin": {
@@ -89,6 +99,7 @@
     "Small Segment Stemloop": {
       "anno": "Small Segment Intergenic Stem Loop Region",
       "translate": 0,
+      "feature_type": "RNA",
       "min_len": 50,
       "max_len": 200,
       "begin": {
@@ -104,6 +115,7 @@
     },    
     "GP2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -111,6 +123,7 @@
     },
     "GPC": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -118,6 +131,7 @@
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -125,14 +139,15 @@
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
       "non_pssm_partner": ["Small Segment Stemloop"]
-
     },
     "SSP": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 0,
@@ -140,28 +155,31 @@
     },
     "Z": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
       "non_pssm_partner": ["Large Segment Stemloop"]
-
     }
   },
   "Ferlavirus": {
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "I": {
       "bit_cutoff": 20,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -170,24 +188,28 @@
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -197,12 +219,14 @@
     },
     "U": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -214,36 +238,42 @@
   "Hantaviridae": {
     "Gc": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "Gn": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "GPC": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "NSs": {
       "bit_cutoff": 150,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.8,
       "upstream_ext": 1,
       "downstream_ext": 1
@@ -252,42 +282,49 @@
   "Henipavirus": {
     "C": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "G": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -296,6 +333,7 @@
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -304,6 +342,7 @@
     },
     "W-ORF2": {
       "bit_cutoff": 50,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -314,42 +353,49 @@
   "Jeilongvirus": {
     "C": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "G": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -358,18 +404,21 @@
     },
     "SH": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "TM": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -378,6 +427,7 @@
     },
     "W-ORF2": {
       "bit_cutoff": 50,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -389,36 +439,42 @@
   "Metaavulavirus": {
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -427,6 +483,7 @@
     },
     "SH": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -434,6 +491,7 @@
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -442,6 +500,7 @@
     },
     "W-ORF2": {
       "bit_cutoff": 20,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -452,42 +511,49 @@
   "Morbillivirus": {
     "C": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "H": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -496,6 +562,7 @@
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -506,60 +573,70 @@
   "Nairoviridae": {
     "Gc": {
       "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.8,
       "upstream_ext": 0,
       "downstream_ext": 1
     },
     "Gn": {
       "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.8,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "GP38": {
       "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.8,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "GP85-160": {
       "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.8,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "GPC": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.80,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "MLD": {
       "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.8,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "NSm": {
       "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.8,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "NSs": {
       "bit_cutoff": 150,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.8,
       "upstream_ext": 1,
       "downstream_ext": 1
@@ -568,36 +645,42 @@
   "Orthoavulavirus": {
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -606,6 +689,7 @@
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -614,6 +698,7 @@
     },
     "W-ORF2": {
       "bit_cutoff": 50,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -624,18 +709,21 @@
   "Orthorubulavirus": {
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "I-ORF2": {
       "bit_cutoff": 20,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -645,24 +733,28 @@
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -672,12 +764,14 @@
     },
     "SH": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "V": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -688,36 +782,42 @@
   "Paraavulavirus": {
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -726,6 +826,7 @@
     },
     "V-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -736,36 +837,42 @@
   "Pararubulavirus": {
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P-ORF2": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -775,6 +882,7 @@
     },
     "V": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -783,6 +891,7 @@
     },
     "W-ORF2": {
       "bit_cutoff": 50,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -793,24 +902,28 @@
   "Peribunyaviridae": {
     "GPC": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "NSs": {
       "bit_cutoff": 150,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.8,
       "upstream_ext": 1,
       "downstream_ext": 1
@@ -819,68 +932,93 @@
   "Phenuiviridae": {
     "Gc": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "Gn": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 0
     },
     "GPC": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "Mov": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "Pc3": {
       "bit_cutoff": 150,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.8,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "NSs": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.8,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
      "NS5": {
       "bit_cutoff": 150,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.8,
       "upstream_ext": 1,
       "downstream_ext": 1
+    },
+     "NSm": {
+      "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
+      "coverage_cutoff": 0.8,
+      "upstream_ext": 0,
+      "downstream_ext": 0
+    },
+    "78-kD": {
+      "bit_cutoff": 150,
+      "feature_type": "mat_peptide",
+      "coverage_cutoff": 0.8,
+      "upstream_ext": 0,
+      "downstream_ext": 0
     }
   },
   "Respirovirus": {
     "C": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "C-Prime": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -888,6 +1026,7 @@
     },
     "D-ORF2": {
       "bit_cutoff": 50,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 0,
       "downstream_ext": 1,
@@ -897,36 +1036,42 @@
     },
     "F": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "HN": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "L": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "M": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "N": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "P": {
       "bit_cutoff": 100,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1,
@@ -935,24 +1080,28 @@
     },
     "V": {
       "bit_cutoff": 175,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "W-ORF1": {
       "bit_cutoff": 100,
+      "feature_type": "mat_peptide",
       "coverage_cutoff": 0.65,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "Y1": {
       "bit_cutoff": 225,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.9,
       "upstream_ext": 1,
       "downstream_ext": 1
     },
     "Y2": {
       "bit_cutoff": 225,
+      "feature_type": "CDS",
       "coverage_cutoff": 0.9,
       "upstream_ext": 0,
       "downstream_ext": 1,
