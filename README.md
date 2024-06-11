@@ -1,9 +1,9 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Bunyavirales*. The overall goal is to create a very low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Bunyavirales*. The overall goal is to create a very low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  I will explain more about how it works below.
 
-## Covered viral families and genera
+## Covered viral taxa
 Aquaparamyxovirus<br>
 Arenaviridae<br>
 Ferlavirus<br>
@@ -32,23 +32,24 @@ External CPAN perl modules:
 `JSON::XS`<br>
 `File::Slurp`<br>
 
-It also uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  It is used for sequence manipulation.  You can get the latest version of this module by downloading the BV-BRC command line interface application. I have added a copy to this repo for convenience fromthe PATRIC Command Line Interface version 1.039.  Gary's repo can be found here: https://github.com/TheSEED/seed_gjo/  <br>
+It also uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  It is used for sequence manipulation.  You can get the latest version of this module by downloading it from Gary's repo here: https://github.com/TheSEED/seed_gjo/  <br>
 
 The program(s) run the blast suite of tools from NCBI.  The current version requires:<br>
 `blastn: 2.13.0+`
 `tblastn: 2.13.0+`<br>
 
-I have not tried it on other versions of BLAST<br>
+I have not tested it on other versions of BLAST<br>
 
-Although it should not matter, this has been developed using Bob's internal environment by sourcing:<br>
+For internal ANL users, source:<br>
 `/vol/patric3/cli/ubuntu-cli/user-env.sh`<br>
 
 ## Repo Contents
 `annotate_by_viral_pssm.pl` the perl script that runs the blasts and calls the proteins. <br>
 `Viral_PSSM.json`  the file containing BLAST and ORF calling parameters per protein.<br>
-`Viral-Rep-Contigs` the directory of representative contigs that guides the program to the correct set of PSSMs.<br>
+`Viral-Rep-Contigs` the directory of representative contigs that guides the program to the closest set of PSSMs.<br>
 `Viral-PSSMs` the directory of hand curated PSSMS per family or genus. There may be more than one PSSM per protein.<br>
-`Viral-Alignments`  the directory of alignments that corresponds to each PSSM.  This is not used by the program, but it is useful for keeping track of the source data used to build each PSSM.<br><br>
+`Viral-Alignments`  the directory of alignments that corresponds to each PSSM.  This is not used by the program, but it is useful for keeping track of the source data used to build each PSSM.<br>
+`Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of this tool.  It currently contains a program called, `list_annos_from_pssms.pl` which will dump the annotation for each pssm.<br><br>
 
 ## How to run annotate_by_viral_pssm.pl
 `annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta`<br><br>
@@ -73,9 +74,14 @@ Options include:
 	      Note that this is set up as a directory of pssms
 	      right now this is hardcoded as: "virus".pssms within this directory.
 ```
-*For -t, -g and the default locations of the Viral-PSSM and JSON file, I will eventually change those to be either requried or something more intelligent.*<br><br>
+*I plan to eventually change -t and -g to be something more intelligent.*<br>  
+Hard-coded locations currently exist as the defaults for -opt, -l, and -p.  since that is annoying, you 
+might want to run something like `perl -i -pe 's/\/home\/jjdavis\/bin/the path to your bin/g' annotate_by_viral_pssm.pl`, or you could edit lines 70-72 by hand (but note that these are the line numbers at the time I wrote this).<br><br>
 
-There is also a set of debugging parameters that i use frequently:
+
+
+
+There is also a set of debugging parameters that I use frequently:
 ```
  -tmp keep temp dir
  -no no output files generated, to be used in conjunction with one of the following:
@@ -88,16 +94,16 @@ There is also a set of debugging parameters that i use frequently:
 
 ## How it works
 
-The code is currently designed to work on *Paramyxoviridae* and some *Bunyavirales* viruses, although I plan to add more.  As depicted in the image below, it first performs a blastn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
-For each genus, there is a directory of PSSMs corresponding to each known protein for that genus. The PSSMs are derived from a set of hand curated alignments. In the next step, it cycles through each directory of PSSMs (there may be more than one PSSM per protein), choosing the best tblastn match per pssm. <br>
+The code is currently designed to work on *Paramyxoviridae* and most *Bunyavirales* viruses, although I plan to add more.  As depicted in the image below, it first performs a BLASTn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
+For each genus, there is a directory of PSSMs corresponding to each known protein for that genus. The PSSMs are derived from a set of hand curated alignments. In the next step, it cycles through each directory of PSSMs (there may be more than one PSSM per protein), choosing the best tBLASTn match per pssm. <br>
 
-Note that it assumes your genome will have the same set of proteins as the nearest match. This is why it is not intended to be used as a discovery tool.  In the even that a new protein is found, a new PSSM must be added to the PSSM directory.  <br><br>
+Note that it assumes your genome will have the same set of proteins as the nearest match. This is why it is not intended to be used as a discovery tool.  In the event that a new protein is found, a new PSSM must be added to the PSSM directory.  <br><br>
 
 ![Anno-Strategy](https://github.com/jimdavis1/Viral_Annotation/assets/7661533/0d6a3a44-47af-40bf-852d-5ddda250ad94)
 
 <br><br>Finally it performs any special rules on the proteins/ORFs.  These rules are currently encoded in a JSON file called `Viral_PSSM.json`. The following is a description fo the current JSON strucutre. <br>
 
-The perl code reads the JSON file into a hashref, which has this general structure: `options->{virus}->{protein}->{option} = value`.  So, for the F protein shown below, the options hash will have a bit score cutoff of 100 (fairly relaxed for a pssm), and a coverage cutoff of 65%. Upstream extension is turned on. This functionality extends the ORF upstream to find the closest Met (assuming it doesn't start with an AUG already). Downstream extension is also turned on.  This searches for a stop codon in-frame after the PSSM match. These can be turned off editing the JSON file and setting their values to zero.<br><br>
+The perl code reads the JSON file into a hashref, which has this general structure: `options->{virus}->{protein}->{option} = value`.  So, for the F protein shown below, the options hash will have a bit score cutoff of 100 (fairly relaxed for a pssm), and a coverage cutoff of 65%. Upstream extension is turned on. This functionality extends the ORF upstream to find the closest Met (assuming it doesn't start with an AUG already). Downstream extension is also turned on.  This searches for a stop codon in-frame after the PSSM match. These can be turned off by editing the JSON file and setting their values to zero.<br><br>
 
 ```
  "Metaavula": {
