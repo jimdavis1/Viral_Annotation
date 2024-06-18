@@ -75,7 +75,7 @@ Options include:
 	      right now this is hardcoded as: "virus".pssms within this directory.
 ```
 *I plan to eventually change -t and -g to be something more intelligent.*<br>  
-Hard-coded locations currently exist as the defaults for -opt, -l, and -p.  since that is annoying, you 
+Hard-coded locations currently exist as the defaults for -opt, -l, and -p.  Since that is annoying, you 
 might want to run something like `perl -i -pe 's/\/home\/jjdavis\/bin/the path to your bin/g' annotate_by_viral_pssm.pl`, or you could edit lines 70-72 by hand (but note that these are the line numbers at the time I wrote this).<br><br>
 
 

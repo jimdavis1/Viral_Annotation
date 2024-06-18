@@ -900,6 +900,27 @@
     }
   },
   "Peribunyaviridae": {
+    "Gc": {
+      "bit_cutoff": 200,
+      "feature_type": "mat_peptide",
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 0
+    },
+    "Gn": {
+      "bit_cutoff": 200,
+      "feature_type": "mat_peptide",
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 0
+    },
+    "NSm": {
+      "bit_cutoff": 200,
+      "feature_type": "mat_peptide",
+      "coverage_cutoff": 0.65,
+      "upstream_ext": 0,
+      "downstream_ext": 0
+    },
     "GPC": {
       "bit_cutoff": 100,
       "feature_type": "CDS",
