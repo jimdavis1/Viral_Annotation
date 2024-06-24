@@ -1,4 +1,4 @@
-#Current Protein Trees
+# Current Protein Trees
 The following trees were generated without curation from reasonably high quality genomes in BVBRC. <br> 
 
 **Rules for making the trees** <br>
