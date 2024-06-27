@@ -1,10 +1,11 @@
 # Current Protein Trees
-The following trees were generated without curation from reasonably high quality genomes in BVBRC. <br> 
+The following trees were generated **without curation** from reasonably high quality genomes in BVBRC. The intention is to work toward having a system that can self-generate and edit the alignments and trees.<br> 
 
 **Rules for making the trees** <br>
-1.  An attempt was made to merge segments for the bunyavirales based on genome name. In order to be annotated, a genome had to have at least 2 segments >= 1KB. For the Paramyxos, the contig length had to be >= 800nts.<br>
-2.  No protein can have an ambiguous residue<br>
-3.  Branch lengths may not exceed 1.25 X the standard deviation of the average branch lengths for the entire tree. <br>
+1.  An attempt was made to merge segments for the Bunyavirales based on genome name. In order to be annotated, a genome had to have at least 2 segments >= 1KB. For the Paramyxos, the contig length had to be >= 800nts.<br>
+2.  No protein with an ambiguous X residue is allowed in the tree.<br>
+3.  Alignments were automatically curated to cull sequences that were A) too short and B) had extremely aberant occupancy patterns. For (B) occupancy is computed by first determining the fraction occupancy for each sequence in the alignment.  This occupancy is summed for each occupied column for each sequence.  Any sequence >4 standard deviations from the occupancy or with an average occupancy >4 standard deviations from the mean were eliminated.  These are listed in the .culled.fa files in this repo.  It is fairly conservative.  
+4.  Finally branch lengths in the tree exceeding  1.25x the standard deviation of the average branch lengths for the entire tree were pruned. <br>
 
 All Alginments, Trees, and HTML files are available in subsequent directories.
 
