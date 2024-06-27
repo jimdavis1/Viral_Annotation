@@ -13,7 +13,8 @@ my $usage = 'prots_to_alis_and_trees.pl -m metadata results_dir
 		-h help
 		-m metadata_file
 		-p prefix (name to append to each output file)
-		-x remove sequences with ambiguous residues 
+		-x remove sequences with ambiguous residues
+		-l min_length for a protein to be considered (D =50). 
 
 		
 		This program requires tab-delimited metadata a file in the following format:
@@ -36,11 +37,12 @@ my $usage = 'prots_to_alis_and_trees.pl -m metadata results_dir
  	     that is currently produced by the annotation script.	 		 		
 
 ';
-
+my $min_len = 50;
 my ($help, $metadata, $prefix, $remove_x);
 my $opts = GetOptions( 'h'         => \$help,
                        'm=s'       => \$metadata,
                        'p=s'       => \$prefix,
+                       'l=i'       => \$min_len,
                        'x'         => \$remove_x); 
 
 if ($help){die "$usage\n";}
@@ -48,7 +50,7 @@ if ((! $metadata) || (! $prefix)){die "must declare -p prefix and -m metadata fi
 my $anno_dir = shift @ARGV;
 
 opendir (DIR, "$anno_dir");
-my @files = grep{$_ =~ /\.faa/}readdir(DIR); 
+my @files = grep{$_ =~ /\.faa$/}readdir(DIR); 
 close DIR;
 
 my %seqsH;
@@ -108,7 +110,8 @@ foreach (keys %hash)
 foreach (@fastas)
 {
 	system "mafft --thread 64 --reorder $prefix.$_.aa >$prefix.$_.fa";
-	system "FastTree -wag <$prefix.$_.fa>$prefix.$_.nwk";
+	system "alignment_density.pl -p $prefix.$_ -m $min_len -t < $prefix.$_.fa  > $prefix.$_.data";
+	system "FastTree -wag <$prefix.$_.keep.fa>$prefix.$_.nwk";
 	system "remove_bad_tree_tips.pl <$prefix.$_.nwk >$prefix.$_.pruned.nwk";
 	system "svr_tree_to_html -raw -a $prefix.names -c $prefix.fam <$prefix.$_.pruned.nwk>$prefix.$_.html";
 }
