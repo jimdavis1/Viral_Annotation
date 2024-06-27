@@ -4,10 +4,10 @@ The following trees were generated **without curation** from reasonably high qua
 **Rules for making the trees** <br>
 1.  An attempt was made to merge segments for the Bunyavirales based on genome name. In order to be annotated, a genome had to have at least 2 segments >= 1KB. For the Paramyxos, the contig length had to be >= 800nts.<br>
 2.  No protein with an ambiguous X residue is allowed in the tree.<br>
-3.  Alignments were automatically curated to cull sequences that were A) too short and B) had extremely aberant occupancy patterns. For (B) occupancy is computed by first determining the fraction occupancy for each sequence in the alignment.  This occupancy is summed for each occupied column for each sequence.  Any sequence >4 standard deviations from the occupancy or with an average occupancy >4 standard deviations from the mean were eliminated.  These are listed in the .culled.fa files in this repo.  It is fairly conservative.  
-4.  Finally branch lengths in the tree exceeding  1.25x the standard deviation of the average branch lengths for the entire tree were pruned. <br>
+3.  Alignments were automatically curated to cull sequences that were A) too short or B) had extremely aberant occupancy patterns. For (B) occupancy is computed by first determining the fraction occupancy for each column in the alignment.  These occupancy fractions are summed for each occupied column, for each sequence.  Any sequence >4 standard deviations away from the occupancy of all sequences or with an average within-sequence occupancy >4 standard deviations from the mean were eliminated.  These are listed in the .culled.fa files in this repo.  It turns out to be a fairly low bar.  
+4.  Finally branch lengths in the tree exceeding 1.25x the standard deviation of the average branch lengths for the entire tree were pruned. <br>
 
-All Alginments, Trees, and HTML files are available in subsequent directories.
+All alginments, trees, and HTML files are available in subsequent directories. HTML files are colored by the family that they have been assigned based on the NCBI taxonomy from GenBank.
 
 
 ## Current Bunyavirales Protein Trees
