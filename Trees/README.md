@@ -81,3 +81,11 @@ All alginments, trees, and HTML files are available in subsequent directories. H
 [Paramyxo.Y1_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.Y1_Protein.html)<br>
 
 [Paramyxo.Y2_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.Y2_Protein.html)<br>
+
+## Current Whole Genome Sequence Trees
+The Paramyxos are whole genome DNA trees, the Bunyavirales are a concatenation of gene trees for L, N, and GPC.  Note that the alignments are not hosted here since they are too big.
+
+[Paramyxo.clean.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/WGS-Trees/Paramyxo.clean.html)<br>
+[Bunya.L-N-GPC.clean.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/WGS-Trees/Bunya.L-N-GPC.clean.html)<br>
+
+
