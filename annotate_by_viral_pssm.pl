@@ -10,26 +10,29 @@ use gjoseqlib;
 
 my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta 
 
-		-h help
-		-i input subject contigs in fasta format
-		-t declare a temp file (d = random)
-		-tax declare a taxonomy id (D = 11158 )
-		-g Genome name (D = Paramyxoviridae);
-		
-		-min minimum contig	length (d = 1000) # otherwise the genome is rejected
-		-max maximum contig length (d = 30000) # for reference Measles is 15894 and beilong is 19,212
+		-h   help
+		-i   Input subject contigs in fasta format
+		-t   Declare a temp file (d = random)
+		-tax Declare a taxonomy id (D = 11158 )
+		-g   Genome name (D = Paramyxoviridae);
+		-p   Prefix for the output files (.ffn, .faa, and .tbl files)
+		-s   Append sequences to the feature table (default is that they are left off)
+		-ks  If a pssm match extends beyond a stop codon it will keep the entire region of the match including the stop. 
+		-threads number of blast threads in the blastn and tblastn
 
-        -opt Options file in JSON format which carries data for match (D = /home/jjdavis/Viral_PSSM.json)
-		-l Representative contigs directory (D = /home/jjdavis/bin/Viral-Rep-Contigs)
-		-p Base directory of PSSMs   (D = /home/jjdavis/bin/Viral-PSSMs)
-	      Note that this is set up as a directory of pssms
-	      right now this is hardcoded as: "virus".pssms within this directory.
+		-min Minimum contig	length (d = 1000) # otherwise the genome is rejected
+		-max Maximum contig length (d = 30000) # for reference Measles is 15,894 and Beilong is 19,212
 
-	    -ks if a pssm match extends beyond a stop codon it will keep the entire region of the match including the stop. 
+        -j   Full path to the options file in JSON format which carries data for a match (D = /home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json)
+		-c   Representative contigs directory (D = /home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs)
+		-p   Base directory of PSSMs   (D = /home/jjdavis/bin/Viral_Annotation/Viral-PSSMs)
+	           Note that this is set up as a directory of pssms
+	           right now this is hardcoded as: "virus".pssms within this directory.
+
 	      
 	   Debug parms (turns off output file generation)
 	   	-tmp keep temp dir
-		-no no output files generated, to be used in conjunction with one of the following:
+		-no  no output files generated, to be used in conjunction with one of the following:
 		    -dna print only genes to STDOUT 
 		    -aa print proteins to STDOUT
 		    -tbl print only feature table to STDOUT
@@ -37,7 +40,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 
 ';
 
-my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl);
+my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl, $prefix, $append_seqs, $threads);
 
 my $opts = GetOptions( 'h'         => \$help,
                        'tmp'       => \$keep_temp,
@@ -48,14 +51,17 @@ my $opts = GetOptions( 'h'         => \$help,
                        'ctbl=s'    => \$ctbl,
                        'i=s'       => \$contig_file,
                        'tax=s'     => \$tax,
+                       'threads=s' => \$threads,
                        't=s'       => \$tmp,
                        'g=s'       => \$genome_name,
-                       'l=s'       => \$cdir,
+                       'c=s'       => \$cdir,
                        'p=s'       => \$pdir,
                        'min=s'     => \$min_len,
                        'max=s'     => \$max_len,
-                       'opt=s'     => \$opt_file,
-                       'ks'        => \$keep_stop); 
+                       'j=s'     => \$opt_file,
+                       'ks'        => \$keep_stop,
+                       'p=s'       => \$prefix,
+                       's'         => \$append_seqs); 
 
 if ($help){die "$usage\n";}
 unless ($contig_file ){die "must declare an input subject file with -i \n\n$usage\n";}
@@ -65,11 +71,13 @@ unless ($contig_file ){die "must declare an input subject file with -i \n\n$usag
 unless ($tmp){$tmp .= sprintf("%x", rand 16) for 1..20;}
 unless ($min_len){$min_len = 1000; }
 unless ($max_len){$max_len = 30000; }
-unless ($tax){$tax = "11158"; }
-#unless ($name){$name = "Paramyxoviridae"; }
+unless ($tax){$tax = "00000"; }
+unless ($genome_name){$genome_name = "Undeclared_Genome_Name"; }
+unless ($prefix){$prefix = "Viral_Annotation";}
 unless ($cdir){$cdir = "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"; }
 unless ($pdir){$pdir = "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"; }
 unless ($opt_file){$opt_file = "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"; }
+unless ($threads){$threads = 8}
 
 
 ## This is the json file with all of the protein-specific information for 
@@ -87,11 +95,11 @@ my $version;
 
 unless($no_out)
 {
-	if ($genome_name)
+	if ($prefix)
 	{
-		open (AA,  ">$genome_name.faa");
-		open (DNA, ">$genome_name.ffn");
-		open (TBL, ">$genome_name.feature.tbl");
+		open (AA,  ">$prefix.faa");
+		open (DNA, ">$prefix.ffn");
+		open (TBL, ">$prefix.feature.tbl");
 	}
 	else
 	{
@@ -155,7 +163,7 @@ foreach (@reps)
 	$virus =~ s/\..+//g; 
 	
 	my $rep_file = "$cdir/$rep";
-	open (IN, "blastn -query $rep_file -subject $s_file -evalue 0.5 -reward 2 -penalty -3 -word_size 11 -outfmt 15 -soft_masking false |"); 
+	open (IN, "blastn -query $rep_file -subject $s_file -evalue 0.5 -reward 2 -penalty -3 -word_size 11 -outfmt 15 -soft_masking false -num_threads $threads |"); 
 	my $blastn = decode_json(scalar read_file(\*IN));	
 	close IN;
 
@@ -215,7 +223,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	{		
 		my $pssm_file = "$pdir/$virus.pssms/$pssmdir/$_";
 		my $name = $_;
-		open (IN, "tblastn -outfmt 15 -db $s_file -in_pssm $pssm_file |");
+		open (IN, "tblastn -outfmt 15 -db $s_file -in_pssm $pssm_file -num_threads $threads |");
 		my $pssm_blast = decode_json(scalar read_file(\*IN));		
 		close IN; 	
 		
@@ -453,18 +461,43 @@ foreach (@contig_order)
 		my $na_len = length $_->[6];
 		unless($no_out)
 		{
-			print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			if ($append_seqs)
+			{
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+			}
+			else
+			{
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			}
 		}
 		if($tbl_only)
 		{
-			print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			if ($append_seqs)
+			{
+				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+			}
+			else
+			{
+				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			}		
 		}
 		if($ctbl)
 		{
-			print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+			if ($append_seqs)
+			{
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+
+			}
+			else
+			{
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+
+			}
 		}
 	}
 }
+
+
 
 
 unless($no_out)
