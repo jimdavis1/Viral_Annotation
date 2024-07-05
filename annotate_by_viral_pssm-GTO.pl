@@ -13,23 +13,21 @@ use P3DataAPI;
 
 use Cwd;
 
-#we could consider adding -min, -max, -l, -p, -ks, -tmp, -no, -dna, -aa, and -tbl from the original script but I'm not doing that right now.
-#I should pass through the number of threads to use for blast.
+#There are other less critical program options that could be added later if we want them.
 
 my($opt, $usage) = describe_options("%c %o",
-				    ["input|i=s"   => "Input file"],
-				    ["output|o=s"  => "Output file"],
-				    ["prefix|x=s"  => "File Prefix", { default => "Viral_Anno" }],
+				    ["input|i=s"       => "Input file"],
+				    ["output|o=s"      => "Output file"],
+				    ["prefix|x=s"      => "File Prefix", { default => "Viral_Anno" }],
 				    ["remove-existing" => "Remove existing CDS, mat_peptide, and RNA features if run is successful"],	
-				    ["threads|t=i" => "Limit to this many threads", { default => 8 }],
-				    ["debug|d"     => "Enable debugging"],
-				    ["cdir|c=s"      => "Full path to reference contigs directory", {default => "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"}],
-				    ["pdir|p=s"      => "Full path to the PSSM directory", {default => "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"}],
-				    ["json|j=s"      => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
-				    #["json|j=s"      => "Full path to the JSON opts file"],
-				    ["max|a=i"       => "Max contig length, default is 30000", { default => 30000 }],
-				    ["min|z=i"       => "Min contig length, default is 1000", { default => 1000 }],
-				    ["help|h"        => "Show this help message"]);
+				    ["threads|t=i"     => "Limit to this many threads", { default => 8 }],
+				    ["debug|d"         => "Enable debugging"],
+				    ["cdir|c=s"        => "Full path to reference contigs directory", {default => "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"}],
+				    ["pdir|p=s"        => "Full path to the PSSM directory", {default => "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"}],
+				    ["json|j=s"        => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
+				    ["max|a=i"         => "Max contig length, default is 30000", { default => 30000 }],
+				    ["min|z=i"         => "Min contig length, default is 1000", { default => 1000 }],
+				    ["help|h"          => "Show this help message"]);
 
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
