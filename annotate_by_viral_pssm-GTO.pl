@@ -112,7 +112,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 							type        => $type,
 							contig      => $contig,
 							aa_sequence => $aa,
-							location    => ([$contig, $start, $strand, $len]),
+							location    => ([[$contig, $start, $strand, $len]]),
 							product     => $anno,
 							};
 			push(@{$features{$type}}, $feature);
@@ -122,7 +122,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 			my $feature = {
 							type        => $type,
 							contig      => $contig,
-							location    => ([$contig, $start, $strand, $len]),
+							location    => ([[$contig, $start, $strand, $len]]),
 							product     => $anno,
 							};
 			push(@{$features{$type}}, $feature);

@@ -45,6 +45,7 @@ For internal ANL users, source:<br>
 
 ## Repo Contents
 `annotate_by_viral_pssm.pl` the perl script that runs the blasts and calls the proteins. <br>
+`annotate_by_viral_pssm-GTO.pl` this perl script runs annotate_by_viral_pssm.pl and creates a GTO as output. Note that its help options are slightly different.<br>
 `Viral_PSSM.json`  the file containing BLAST and ORF calling parameters per protein.<br>
 `Viral-Rep-Contigs` the directory of representative contigs that guides the program to the closest set of PSSMs.<br>
 `Viral-PSSMs` the directory of hand curated PSSMS per family or genus. There may be more than one PSSM per protein.<br>
