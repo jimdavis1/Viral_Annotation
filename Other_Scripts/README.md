@@ -10,20 +10,11 @@ This perl script will create automatic clusters, alignments, and pssms for a set
 `fasta-cluster-pssm.pl -a "Pre-glycoprotein polyprotein GP complex, GPC" -p "Peribunyaviridae.GPC" -tmp "Peribunyaviridae-GPC"  <Peribunyaviridae.GPC.unique.len.aa`<br>
 
 ## viral_genome_quality.pl
-This perl script assesses genome quality based on the presence or absence of key proteins in the genome by checking their copy number and lengths. It also calls the contigs (when possible) based on the presence of these key proteins, and evaluates the contigs based on their copy number, lengths, and fraction of ambiguous nucleotides.  It works by reading in a GTO of an annotated virus.  The genome must first be annotated by `annotate_by_viral_pssm-GTO.pl`, becuase it is specifically designed to only look for our annotatons.  Specifically, in each key taxonomic group it is looking for the following:<br>
-1. Paramyxoviridae:  F, L, M, and N.  (The P protein is obviously essential, but because of the weirdness with polymerase stuttering, it is ignored).
-2. Arenaviridae:  GPC, L, N, and Z (mat peptides are not currently considered for simplicity).
-3. Hantaviridae, Nairoviridae, Peribunyaviridae: GPC, L, N.   In the Nairos, according to ICTV, there are a small number of metagenomically characterized tick-associated viruses that lack a M segment (and a known GPC).  It is unknown if the GPC was lost, or if there is some other protein doing the job of the GPC peptides.  Either way, if a 2-segment Nairovirus is encountered, it will be considered incomplete. 
-4. Phenuiviridae: L and N.  Note: The plant viruses of this group do not have a GPC. According to ICTV they can have 2-8 segments. Becuase of this, the program only calls the "L-encoding RNA Segment" and the "N-encoding RNA Segment".<br>
-<br>
-
-## viral_genome_quality.pl
 This perl script assesses genome quality based on the presence or absence of key proteins in the genome by checking their copy number and lengths. It also calls the contigs (when possible) based on the presence of these key proteins, and evaluates the contigs based on their copy number, lengths, and fraction of ambiguous nucleotides. It works by reading in a GTO of an annotated virus. The genome must first be annotated by `annotate_by_viral_pssm-GTO.pl`, because it is specifically designed to only look for our annotations. Specifically, in each key taxonomic group it is looking for the following:<br>
 1. Paramyxoviridae: F, L, M, and N. (The P protein is obviously essential, but because of the weirdness with polymerase stuttering, it is ignored).
 2. Arenaviridae: GPC, L, N, and Z (mat peptides are not currently considered for simplicity).
 3. Hantaviridae, Nairoviridae, Peribunyaviridae: GPC, L, N. In the Nairos, according to ICTV, there are a small number of metagenomically characterized tick-associated viruses that lack an M segment (and a known GPC). It is unknown if the GPC was lost, or if there is some other protein doing the job of the GPC peptides. Either way, if a 2-segment Nairovirus is encountered, it will be considered incomplete.
-4. Phenuiviridae: L and N. Note: The plant viruses of this group do not have a GPC. According to ICTV they can have 2-8 segments. Because of this, the program only calls the "L-encoding RNA Segment" and the "N-encoding RNA Segment".<br>
+4. Phenuiviridae: L and N. Note: The plant viruses of this group do not have a GPC. According to ICTV they can have 2-8 segments. Because of this, the program only calls the "L-encoding RNA Segment" and the "N-encoding RNA Segment".<br><br>
+Usage:`viral_genome_quality.pl -i Input.gto -o Output.gto -p Prefix`<br>
+The prefix is for the `Prefix.feature_quality` and `Prefix.contig_quality` output files. STDOUT is `GenomeID\t"Good" or "Poor"`
 <br>
-Usage: `viral_genome_quality.pl -i Input.gto -o Output.gto -p Prefix`.<br>
-The prefix is for the `Prefix.feature_quality` and `Prefix.contig_quality` output files. STDOUT is `GenomeID\t"Good" or "Poor"`.
-
