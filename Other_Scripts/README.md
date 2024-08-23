@@ -16,5 +16,5 @@ This perl script assesses genome quality based on the presence or absence of key
 3. Hantaviridae, Nairoviridae, Peribunyaviridae: GPC, L, N.   In the Nairos, according to ICTV, there are a small number of metagenomically characterized tick-associated viruses that lack a M segment (and a known GPC).  It is unknown if the GPC was lost, or if there is some other protein doing the job of the GPC peptides.  Either way, if a 2-segment Nairovirus is encountered, it will be considered incomplete. 
 4. Phenuiviridae: L and N.  Note: The plant viruses of this group do not have a GPC. According to ICTV they can have 2-8 segments. Becuase of this, the program only calls the "L-encoding RNA Segment" and the "N-encoding RNA Segment".<br>
 <br>
-Usage `viral_genome_quality.pl -i Input.gto -o Output.gto -p Prefix`  The prefix is for the `Prefix.feature_quality` and `Prefix.contig_quality` output files.  STDOUT is `GenomeID\t"Good" or "Poor".`
+Usage ```viral_genome_quality.pl -i Input.gto -o Output.gto -p Prefix```  The prefix is for the ```Prefix.feature_quality``` and ```Prefix.contig_quality``` output files.  STDOUT is `GenomeID\t"Good" or "Poor".`
 <br> 
