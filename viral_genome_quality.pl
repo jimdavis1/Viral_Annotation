@@ -147,7 +147,7 @@ foreach (keys %{$essential})
 close OUT1;
 
 open (OUT2, ">$prefix.contig_quality");
-print OUT2 "Contig(s)\tSegment\tCopy_Num\tLen\tMin_Len\tMax_len\tException\n"; 
+print OUT2 "Contig(s)\tSegment\tCopy_Num\tLen\tMin_Len\tMax_len\tAMB_Bases\tException\n"; 
 
 foreach (keys %{$contig_eval})
 {
@@ -166,17 +166,23 @@ foreach (keys %{$contig_eval})
 	}
 	
 	my $len;
+	my $amb_bases;
+	my $frac_amb;
 	for my $i (0 .. $#{$genome_in->{contigs}})
 	{ 
 		if($genome_in->{contigs}->[$i]->{id} eq $contig_string)
 		{
 			$len = length($genome_in->{contigs}->[$i]->{dna});
 			
+			#count the total number of ambiguous bases in the dna string of the contig from the gto.
+			$amb_bases = () = $genome_in->{contigs}->[$i]->{dna} =~ /[^atgc]/gi;
+			$frac_amb = ($amb_bases/$len);
+			
 			#add seg and replicon geometry to GTO
 			$genome_in->{contigs}->[$i]->{replicon_geometry} = $json->{$fam}->{segments}->{$seg}->{replicon_geometry};
 			$genome_in->{contigs}->[$i]->{replicon_type}     = $seg;
 		}
-	}	
+	}	 
 	if ($len < 	$json->{$fam}->{segments}->{$seg}->{min_len})
 	{
 		$exception = "Segment: $seg, Contig: $contig_string is too short";
@@ -185,9 +191,13 @@ foreach (keys %{$contig_eval})
 	{
 		$exception = "Segment: $seg, Contig: $contig_string is too long";
 	}		
+	if ($frac_amb > (0.01))
+	{
+		$exception = "Segment: $seg, Contig: $contig_string has more than 1% ambiguous bases";
+	}
 	
 	if ($exception){$genome_quality = "Poor";}
-	print OUT2 "$contig_string\t$seg\t$n_contigs\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$exception\n";
+	print OUT2 "$contig_string\t$seg\t$n_contigs\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$amb_bases\t$frac_amb\t$exception\n";
 }
 
 print "$genome_in->{id}\t$genome_quality\n";
