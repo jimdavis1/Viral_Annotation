@@ -2,18 +2,14 @@
 use strict;
 use Data::Dumper;
 use Time::HiRes 'gettimeofday';
-use gjogenbank;
-use gjoseqlib;
 use GenomeTypeObject;
 use Getopt::Long::Descriptive;
 use File::Copy;
 use IPC::Run qw(run);
 use File::SearchPath qw(searchpath);
 use P3DataAPI;
-
 use Cwd;
 
-#There are other less critical program options that could be added later if we want them.
 
 my($opt, $usage) = describe_options("%c %o",
 				    ["input|i=s"       => "Input file"],
@@ -28,6 +24,7 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["max|a=i"         => "Max contig length, default is 30000", { default => 30000 }],
 				    ["min|z=i"         => "Min contig length, default is 1000", { default => 1000 }],
 				    ["help|h"          => "Show this help message"]);
+
 
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
@@ -58,6 +55,9 @@ my $sequences_file = $genome_in->extract_contig_sequences_to_temp_file();
 my $taxon_id       = $genome_in->{ncbi_taxonomy_id};   #I should be able to get rid of this if I don't require it in the base-script
 my $name           = $genome_in->{scientific_name};        #I should also be able to get rid of this 
 
+if (! $sequences_file){die "No sequences in the input GTO\n";}
+if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
+if (! $name)          {die "No gebine bane in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
 		      "-t",    $tempdir,
@@ -67,7 +67,7 @@ my @params = ("-i",    $sequences_file,
 		      "-threads", $opt->threads,
 		      "-c",    $opt->cdir,
 		      "-p",    $opt->pdir,
-              "-j",    $opt->json,
+		      "-j",    $opt->json,
 		      "-min",  $opt->min,
 		      "-max",  $opt->max,
 		      "-s",
@@ -84,6 +84,8 @@ if (!$ok)
     print STDERR "Viral Annotation run failed with rc=$?. Stdout:\n";
     copy("$here/Viral_Anno.stderr.txt", \*STDERR);
 }
+
+
     
 my $event = {
     tool_name => "annotate_by_viral_pssm",
@@ -104,7 +106,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 	while (<$tbl>)
 	{
 		chomp;
-		my ($local_genome_id, $name, $contig, $anno_source, $type, $local_peg_id, $start, $stop, $strand, $len, $pssm, $anno, $dna, $aa) = split /\t/; 
+		my ($local_genome_id, $name, $contig, $anno_source, $type, $local_peg_id, $start, $stop, $strand, $len, $virus, $pssm, $anno, $dna, $aa) = split /\t/; 
 		
 		if ($type =~ /(mat_peptide)|(CDS)/)
 		{
@@ -114,6 +116,8 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 							aa_sequence => $aa,
 							location    => ([[$contig, $start, $strand, $len]]),
 							product     => $anno,
+							#typedef tuple <string db, string id, string function, string db_version> protein_family_assignment;
+							pssm        => ([[$virus, $pssm, $anno, "annotate_by_viral_pssm"]]),
 							};
 			push(@{$features{$type}}, $feature);
 		}
@@ -154,6 +158,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 					-annotator           => 'annotate_by_viral_pssm',
 					-protein_translation => $feature->{aa_sequence},
 					-function            => $feature->{product},
+					-family_assignments  => $feature->{pssm},
 			};
 			$genome_in->add_feature($p);
 		}

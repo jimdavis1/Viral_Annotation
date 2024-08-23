@@ -196,17 +196,17 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	close DIR;
 
 	# retrieve the protein specific options for the corresponding PSSM.
-	unless ($options->{$virus}->{$pssmdir})
+	unless ($options->{$virus}->{features}->{$pssmdir})
 	{
 		print STDERR "No data in JSON file for VIRUS: $virus\tPSSM: $pssmdir\n"; 
 		next;
 	}
-	my $upstream_ext   = $options->{$virus}->{$pssmdir}->{upstream_ext};
-	my $downstream_ext = $options->{$virus}->{$pssmdir}->{downstream_ext};
-	my $bit_cutoff     = $options->{$virus}->{$pssmdir}->{bit_cutoff};
-	my $cov_cutoff     = $options->{$virus}->{$pssmdir}->{coverage_cutoff};
-	my $start_to_met   = $options->{$virus}->{$pssmdir}->{start_to_met};
-	my $feature_type   = $options->{$virus}->{$pssmdir}->{feature_type};
+	my $upstream_ext   = $options->{$virus}->{features}->{$pssmdir}->{upstream_ext};
+	my $downstream_ext = $options->{$virus}->{features}->{$pssmdir}->{downstream_ext};
+	my $bit_cutoff     = $options->{$virus}->{features}->{$pssmdir}->{bit_cutoff};
+	my $cov_cutoff     = $options->{$virus}->{features}->{$pssmdir}->{coverage_cutoff};
+	my $start_to_met   = $options->{$virus}->{features}->{$pssmdir}->{start_to_met};
+	my $feature_type   = $options->{$virus}->{features}->{$pssmdir}->{feature_type};
 
 		
 	print STDERR "\t$virus\t$pssmdir\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
@@ -325,14 +325,14 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		if ($start_to_met){$protein =~ s/^[A-Z]/m/i;}
 		
 		# Set up the Paramyxo Join (if necessary)
-		if (exists $options->{$virus}->{$pssmdir}->{paramyxo_join})
+		if (exists $options->{$virus}->{features}->{$pssmdir}->{paramyxo_join})
 		{			
 			$join->{$contig}->{$pssmdir}->{START}    = $gene_begin;
 			$join->{$contig}->{$pssmdir}->{STOP}     = $gene_end;
-			$join->{$contig}->{$pssmdir}->{PARTNER}  = $options->{$virus}->{$pssmdir}->{join_partner};
-			$join->{$contig}->{$pssmdir}->{ORDER}    = $options->{$virus}->{$pssmdir}->{paramyxo_join};
-			$join->{$contig}->{$pssmdir}->{ANNO}     = $options->{$virus}->{$pssmdir}->{new_anno};	
-			$join->{$contig}->{$pssmdir}->{INSERT}   = $options->{$virus}->{$pssmdir}->{paramyxo_insert};	
+			$join->{$contig}->{$pssmdir}->{PARTNER}  = $options->{$virus}->{features}->{$pssmdir}->{join_partner};
+			$join->{$contig}->{$pssmdir}->{ORDER}    = $options->{$virus}->{features}->{$pssmdir}->{paramyxo_join};
+			$join->{$contig}->{$pssmdir}->{ANNO}     = $options->{$virus}->{features}->{$pssmdir}->{new_anno};	
+			$join->{$contig}->{$pssmdir}->{INSERT}   = $options->{$virus}->{features}->{$pssmdir}->{paramyxo_insert};	
 			$join->{$contig}->{$pssmdir}->{PSSM}     = $best_pssm;
 			$join->{$contig}->{$pssmdir}->{TYPE}     = $feature_type;
 
@@ -341,9 +341,9 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	
 	
 		# Set up calling non-pssm features that are anchored to pssm coordinates
-		if (exists $options->{$virus}->{$pssmdir}->{non_pssm_partner})
+		if (exists $options->{$virus}->{features}->{$pssmdir}->{non_pssm_partner})
 		{
-			my @non_pssms = @{$options->{$virus}->{$pssmdir}->{non_pssm_partner}};
+			my @non_pssms = @{$options->{$virus}->{features}->{$pssmdir}->{non_pssm_partner}};
 			
 			for my $i (0..$#non_pssms)
 			{
@@ -351,41 +351,41 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 				my $stop_coord;
 				my $feat = $non_pssms[$i];
 				#if the current pssm match feature corresponds with the non-pssm start site
-				if ($options->{$virus}->{$feat}->{begin}->{begin_pssm} eq $pssmdir) 
+				if ($options->{$virus}->{features}->{$feat}->{begin}->{begin_pssm} eq $pssmdir) 
 				{
-					$non_pssm_feat->{$feat}->{START_OFFSET} = $options->{$virus}->{$feat}->{begin}->{begin_offset};
-					if ($options->{$virus}->{$feat}->{begin}->{begin_pssm_loc} =~ /START/)
+					$non_pssm_feat->{$feat}->{START_OFFSET} = $options->{$virus}->{features}->{$feat}->{begin}->{begin_offset};
+					if ($options->{$virus}->{features}->{$feat}->{begin}->{begin_pssm_loc} =~ /START/)
 					{	
 						push @{$non_pssm_feat->{$feat}->{COORD}->{$contig}->{START}}, $gene_begin;
 					}
-					elsif ($options->{$virus}->{$feat}->{begin}->{begin_pssm_loc} =~ /STOP/)
+					elsif ($options->{$virus}->{features}->{$feat}->{begin}->{begin_pssm_loc} =~ /STOP/)
 					{
 						push @{$non_pssm_feat->{$feat}->{COORD}->{$contig}->{START}}, $gene_end;
 					}
 				}
-				elsif ($options->{$virus}->{$feat}->{end}->{end_pssm} eq $pssmdir) 
+				elsif ($options->{$virus}->{features}->{$feat}->{end}->{end_pssm} eq $pssmdir) 
 				{
-					$non_pssm_feat->{$feat}->{STOP_OFFSET} = $options->{$virus}->{$feat}->{end}->{end_offset};
-					if ($options->{$virus}->{$feat}->{end}->{end_pssm_loc} =~ /START/)
+					$non_pssm_feat->{$feat}->{STOP_OFFSET} = $options->{$virus}->{features}->{$feat}->{end}->{end_offset};
+					if ($options->{$virus}->{features}->{$feat}->{end}->{end_pssm_loc} =~ /START/)
 					{
 						push @{$non_pssm_feat->{$feat}->{COORD}->{$contig}->{STOP}}, $gene_begin;
 					}
-					elsif ($options->{$virus}->{$feat}->{end}->{end_pssm_loc} =~ /STOP/)
+					elsif ($options->{$virus}->{features}->{$feat}->{end}->{end_pssm_loc} =~ /STOP/)
 					{
 						push @{$non_pssm_feat->{$feat}->{COORD}->{$contig}->{STOP}}, $gene_end;
 					}
 				}			
-				$non_pssm_feat->{$feat}->{ANNO}   = $options->{$virus}->{$feat}->{anno};
-				$non_pssm_feat->{$feat}->{MIN}    = $options->{$virus}->{$feat}->{min_len};
-				$non_pssm_feat->{$feat}->{MAX}    = $options->{$virus}->{$feat}->{max_len};			
-				$non_pssm_feat->{$feat}->{AA}     = $options->{$virus}->{$feat}->{translate};
-				$non_pssm_feat->{$feat}->{TYPE}   = $options->{$virus}->{$feat}->{feature_type};
+				$non_pssm_feat->{$feat}->{ANNO}   = $options->{$virus}->{features}->{$feat}->{anno};
+				$non_pssm_feat->{$feat}->{MIN}    = $options->{$virus}->{features}->{$feat}->{min_len};
+				$non_pssm_feat->{$feat}->{MAX}    = $options->{$virus}->{features}->{$feat}->{max_len};			
+				$non_pssm_feat->{$feat}->{AA}     = $options->{$virus}->{features}->{$feat}->{translate};
+				$non_pssm_feat->{$feat}->{TYPE}   = $options->{$virus}->{features}->{$feat}->{feature_type};
 
 			}
 		}
 		
 		#return matching sequence as a tuple.
-		unless ($options->{$virus}->{$pssmdir}->{paramyxo_join} == 2)# the ORF2 sequence isn't complete and has to be merged after all of the other proteins have been found.
+		unless ($options->{$virus}->{features}->{$pssmdir}->{paramyxo_join} == 2)# the ORF2 sequence isn't complete and has to be merged after all of the other proteins have been found.
 		{
 			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $best_results->[$i]->{anno}, $strand, $best_pssm, $gene, $protein, $feature_type]); 
 		}	
@@ -463,34 +463,34 @@ foreach (@contig_order)
 		{
 			if ($append_seqs)
 			{
-				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 			}
 			else
 			{
-				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
 			}
 		}
 		if($tbl_only)
 		{
 			if ($append_seqs)
 			{
-				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 			}
 			else
 			{
-				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
 			}		
 		}
 		if($ctbl)
 		{
 			if ($append_seqs)
 			{
-				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 
 			}
 			else
 			{
-				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$_->[5]\t$_->[3]\n";
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
 
 			}
 		}
