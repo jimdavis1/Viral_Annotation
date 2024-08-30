@@ -13,7 +13,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "C Protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -32,7 +34,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -77,7 +81,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2"]
+        "join_partner": ["V-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"  
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -86,7 +92,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -119,7 +126,8 @@
         "feature_type": "mat_peptide",
         "max_len": 900,
         "min_len": 450,
-        "translate": 1
+        "translate": 1,
+        "segment": "Small RNA Segment"
       },
       "GP2": {
         "anno": "Mature Envelope Glycoprotein Gc, Gc (GP2) Protein",
@@ -128,7 +136,8 @@
         "downstream_ext": 1,
         "feature_type": "mat_peptide",
         "non_pssm_partner": ["GP1"],
-        "upstream_ext": 0
+        "upstream_ext": 0,
+        "segment": "Small RNA Segment"
       },
       "GPC": {
         "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein",
@@ -158,7 +167,8 @@
         "feature_type": "RNA",
         "max_len": 200,
         "min_len": 50,
-        "translate": 0
+        "translate": 0,
+        "segment": "Large RNA Segment"
       },
       "L": {
         "anno": "RNA Dependent RNA Polymerase, L Protein",
@@ -201,7 +211,8 @@
         "feature_type": "RNA",
         "max_len": 200,
         "min_len": 50,
-        "translate": 0
+        "translate": 0,
+        "segment": "Small RNA Segment"
       },
       "SSP": {
         "anno": "Mature Stable Signal Peptide, SSP",
@@ -210,7 +221,8 @@
         "downstream_ext": 0,
         "feature_type": "mat_peptide",
         "non_pssm_partner": ["GP1"],
-        "upstream_ext": 1
+        "upstream_ext": 1,
+        "segment": "Small RNA Segment"
       },
       "Z": {
         "anno": "RING Finger Protein Z, Z Protein",
@@ -253,7 +265,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "I": {
         "bit_cutoff": 20,
@@ -262,7 +276,9 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["P-ORF2", "V-ORF2"]
+        "join_partner": ["P-ORF2", "V-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "I Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -308,14 +324,17 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein, P Protein"
+        "new_anno": "Phosphoprotein, P Protein",
+        "segment": "Single RNA Segment"
       },
       "U": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Uncharacterized Protein, U Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -325,7 +344,8 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "GG",
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -353,14 +373,18 @@
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
       },
       "Gn": {
         "bit_cutoff": 100,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -403,7 +427,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Small RNA Segment",
+        "anno": "Small Nonstructural Protein NSs, NSs Protein"
       }
     }
   },
@@ -421,7 +447,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "C Protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -440,7 +468,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "G Glycoprotein, G Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -485,7 +515,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2", "W-ORF2"]
+        "join_partner": ["V-ORF2", "W-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -494,7 +526,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       },
       "W-ORF2": {
         "bit_cutoff": 50,
@@ -503,7 +536,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein"
+        "new_anno": "W Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -521,7 +555,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "C Protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -540,7 +576,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "G Glycoprotein, G Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -585,21 +623,27 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2", "W-ORF2"]
+        "join_partner": ["V-ORF2", "W-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "SH": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Small Hydrophobic Protein, SH Protein"
       },
       "TM": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Transmembrane Protein, TM Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -608,7 +652,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       },
       "W-ORF2": {
         "bit_cutoff": 50,
@@ -618,7 +663,8 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "W Protein"
+        "new_anno": "W Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -648,7 +694,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -693,7 +741,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2", "W-ORF2"]
+        "join_partner": ["V-ORF2", "W-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "SH": {
         "bit_cutoff": 100,
@@ -701,7 +751,9 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1
+        "paramyxo_join": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Small Hydrophobic Protein, SH Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -710,7 +762,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       },
       "W-ORF2": {
         "bit_cutoff": 20,
@@ -719,7 +772,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein"
+        "new_anno": "W Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -737,7 +791,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "C Protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -756,7 +812,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Protein, H Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -801,7 +859,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2"]
+        "join_partner": ["V-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -810,7 +870,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       }
     }
   }, 
@@ -838,28 +899,36 @@
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
       },
       "Gn": {
         "bit_cutoff": 150,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
       },
       "GP38": {
         "bit_cutoff": 150,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Secreted Nonstructural 38kDa Protein, GP38 Protein"
       },
       "GP85-160": {
         "bit_cutoff": 150,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Secreted Nonstructural Protein, GP160/85 Protein"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -890,7 +959,9 @@
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Secreted Nonstructural Mucin-like Protein, MLD Protein"
       },
       "N": {
         "bit_cutoff": 100,
@@ -909,14 +980,18 @@
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Nonstructural Membrane Protein, NSm Protein"
       },
       "NSs": {
         "bit_cutoff": 150,
         "feature_type": "CDS",
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Small RNA Segment",
+        "anno": "Small Segment Nonstructural Protein Involved In Apoptosis Disruption, NSs Protein"
       }
     }
   },
@@ -946,7 +1021,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -991,7 +1068,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2", "W-ORF2"]
+        "join_partner": ["V-ORF2", "W-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -1000,7 +1079,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       },
       "W-ORF2": {
         "bit_cutoff": 50,
@@ -1009,7 +1089,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein"
+        "new_anno": "W Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -1039,7 +1120,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "I-ORF2": {
         "bit_cutoff": 20,
@@ -1049,7 +1132,8 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "GGG",
-        "new_anno": "I Protein"
+        "new_anno": "I Protein",
+        "segment": "Single RNA Segment"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1095,14 +1179,17 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein, P Protein"
+        "new_anno": "Phosphoprotein, P Protein",
+        "segment": "Single RNA Segment"
       },
       "SH": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Small Hydrophobic Protein, SH Protein"
       },
       "V": {
         "bit_cutoff": 100,
@@ -1111,7 +1198,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["I-ORF2", "P-ORF2"]
+        "join_partner": ["I-ORF2", "P-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "V Protein"
       }
     }
   },
@@ -1141,7 +1230,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1186,7 +1277,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["V-ORF2"]
+        "join_partner": ["V-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -1195,7 +1288,8 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein"
+        "new_anno": "V Protein",
+        "segment": "Single RNA Segment"
       }
     }
   },
@@ -1225,7 +1319,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1271,7 +1367,8 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein, P Protein"
+        "new_anno": "Phosphoprotein, P Protein",
+        "segment": "Single RNA Segment"
       },
       "V": {
         "bit_cutoff": 100,
@@ -1280,7 +1377,9 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["P-ORF2", "W-ORF2"]
+        "join_partner": ["P-ORF2", "W-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "V Protein"
       },
       "W-ORF2": {
         "bit_cutoff": 50,
@@ -1289,8 +1388,9 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein"
-      }
+        "new_anno": "W Protein",
+        "segment": "Single RNA Segment"
+        }
     }
   },
   "Peribunyaviridae": {
@@ -1317,21 +1417,27 @@
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
       },
       "Gn": {
         "bit_cutoff": 200,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
       },
       "NSm": {
         "bit_cutoff": 200,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Nonstructural Membrane Protein, NSm Protein"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -1374,22 +1480,24 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Small RNA Segment",
+        "anno": "Small Nonstructural Protein NSs, NSs Protein"
       }
     }
   },
   "Phenuiviridae": {
     "segments": {
-      "N-encoding RNA Segment": {
+      "Small RNA Segment": {
         "max_len": 3435,
         "min_len": 1521,
         "replicon_geometry": "linear"
       },
-      "L-encoding RNA Segment": {
+      "Large RNA Segment": {
         "max_len": 10736,
         "min_len": 5764,
         "replicon_geometry": "linear"
-      }
+      }    
     },
     "features": {
       "Gc": {
@@ -1397,21 +1505,27 @@
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
       },
       "Gn": {
         "bit_cutoff": 100,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
       },
       "GPC": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Medium RNA Segment",
+        "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1423,7 +1537,7 @@
         "copy_num": 1,
         "max_len": 3211,
         "min_len": 1719,
-        "segment": "L-encoding RNA Segment"
+        "segment": "Large RNA Segment"
       },
       "N": {
         "bit_cutoff": 100,
@@ -1435,49 +1549,57 @@
         "copy_num": 1,
         "max_len": 525,
         "min_len": 219,
-        "segment": "N-encoding RNA Segment"
+        "segment": "Small RNA Segment"
       },
       "Mov": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "anno": "Movement Protein"
       },
       "Pc3": {
         "bit_cutoff": 150,
         "feature_type": "CDS",
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "anno": "Pc3 Protein"
       },
       "NSs": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid Protein, N Protein"
       },
        "NS5": {
         "bit_cutoff": 150,
         "feature_type": "CDS",
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "anno": "Nonstructural Protein 5, NS5 Protein"
       },
        "NSm": {
         "bit_cutoff": 150,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Nonstructural Membrane Protein, NSm Protein"
       },
       "78-kD": {
         "bit_cutoff": 150,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.8,
         "upstream_ext": 0,
-        "downstream_ext": 0
+        "downstream_ext": 0,
+        "segment": "Medium RNA Segment",
+        "anno": "Mature Nonstructural 78-kD Protein, 78-kD Protein"
       }
     }
   },
@@ -1495,7 +1617,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "C Protein"
       },
       "C-Prime": {
         "bit_cutoff": 100,
@@ -1503,7 +1627,9 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
-        "start_to_met": 1
+        "start_to_met": 1,
+        "segment": "Single RNA Segment",
+        "anno": "C-prime Protein"
       },
       "D-ORF2": {
         "bit_cutoff": 50,
@@ -1513,7 +1639,8 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "D Protein"
+        "new_anno": "D Protein",
+        "segment": "Single RNA Segment"
       },
       "F": {
         "bit_cutoff": 100,
@@ -1532,7 +1659,9 @@
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1577,28 +1706,36 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["D-ORF2"]
+        "join_partner": ["D-ORF2"],
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein, P Protein"
       },
       "V": {
         "bit_cutoff": 175,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "V Protein"
       },
       "W-ORF1": {
         "bit_cutoff": 100,
         "feature_type": "mat_peptide",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "W Protein, ORF1"
       },
       "Y1": {
         "bit_cutoff": 225,
         "feature_type": "CDS",
         "coverage_cutoff": 0.9,
         "upstream_ext": 1,
-        "downstream_ext": 1
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Y1 Protein"
       },
       "Y2": {
         "bit_cutoff": 225,
@@ -1606,7 +1743,9 @@
         "coverage_cutoff": 0.9,
         "upstream_ext": 0,
         "downstream_ext": 1,
-        "start_to_met": 1
+        "start_to_met": 1,
+        "segment": "Single RNA Segment",
+        "anno": "Y2 Protein"
       }
     }
   }
