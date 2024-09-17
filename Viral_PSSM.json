@@ -545,7 +545,7 @@
     "segments": {
       "Single RNA Segment": {
         "max_len": 21133,
-        "min_len": 17291,
+        "min_len": 16900,
         "replicon_geometry": "linear"
       }
     },
@@ -613,7 +613,7 @@
         "anno": "Nucleocapsid Protein, N Protein",
         "copy_num": 1,
         "max_len": 681,
-        "min_len": 517,
+        "min_len": 480,
         "segment": "Single RNA Segment"
       },
       "P": {
@@ -998,7 +998,7 @@
   "Orthoavulavirus": {
     "segments": {
       "Single RNA Segment": {
-        "max_len": 16982,
+        "max_len": 17500,
         "min_len": 13673,
         "replicon_geometry": "linear"
       }
@@ -1097,7 +1097,7 @@
   "Orthorubulavirus": {
     "segments": {
       "Single RNA Segment": {
-        "max_len": 16771,
+        "max_len": 18300,
         "min_len": 13721,
         "replicon_geometry": "linear"
       }
@@ -1144,7 +1144,7 @@
         "anno": "RNA Dependent RNA Polymerase, L Protein",
         "copy_num": 1,
         "max_len": 2519,
-        "min_len": 2061,
+        "min_len": 1925,
         "segment": "Single RNA Segment"
       },
       "M": {
@@ -1168,7 +1168,7 @@
         "anno": "Nucleocapsid Protein, N Protein",
         "copy_num": 1,
         "max_len": 631,
-        "min_len": 517,
+        "min_len": 490,
         "segment": "Single RNA Segment"
       },
       "P-ORF2": {
