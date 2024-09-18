@@ -294,6 +294,8 @@ foreach (sort keys %{$seg_count})
 		}	 
 	}
 }
+
+# create an exception for missing segment.
 foreach (keys %segs_needed)
 {
 	if ($segs_needed{$_} == 0)
@@ -302,7 +304,7 @@ foreach (keys %segs_needed)
 		$genome_quality = "Poor";
 	}		
 }
-
+close OUT2;
 
 
 print "$genome_in->{id}\t$genome_quality\n";
