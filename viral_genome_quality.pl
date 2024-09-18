@@ -8,7 +8,7 @@ use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
 
-#
+
 #   Adding in some notes here. The current GTO definition does not allow for an event id
 #   To be tagged to something that isn't a feature.  Since overall genome quality is not a feature
 #   I cannot tag the event id to it.  In its current state, this program generates an event id and 
@@ -51,9 +51,9 @@ my $json      = decode_json(read_file($opt->json));
 $genome_in or die "Error reading json protein feature data";
 
 
-#
+
 # Create the GTO analysis event
-#
+
 my $event = {
     tool_name => "viral_genome_quality",
     execution_time => scalar gettimeofday,
@@ -63,9 +63,9 @@ my $event_id = $genome_in->add_analysis_event($event);
 
 
 
-## We read the GTO to get the family pssm that was used to call the proteins so that
-## we can look up which genes are essential.
-## also make sure that the GTO has our annotations.
+# We read the GTO to get the family pssm that was used to call the proteins so that
+# we can look up which genes are essential.
+# also make sure that the GTO has our annotations.
 my %pssm_fam;
 for my $i (0 .. $#{$genome_in->{features}}) 
 {
@@ -87,6 +87,8 @@ $fam or die "GTO has no annotations from annotate_by_viral_pssm tool\n";
 
 my $essential = {};
 my %nonessential;  
+my %anno_count;
+
 # I am keeping track of CDs where the segment is declared to annotate segements with 
 # and as a double check on segment copy number.
 
@@ -94,144 +96,214 @@ foreach (keys %{$json->{$fam}->{features}})
 {
 	my $prot = $_;
 	my $anno     = $json->{$fam}->{features}->{$prot}->{anno};
-
 	if (($json->{$fam}->{features}->{$prot}->{copy_num}) && ($json->{$fam}->{features}->{$prot}->{feature_type} =~ /CDS/))
 	{
 		$essential->{$anno}->{copy_num} = $json->{$fam}->{features}->{$prot}->{copy_num};
 		$essential->{$anno}->{segment}  = $json->{$fam}->{features}->{$prot}->{segment};
 		$essential->{$anno}->{max_len}  = $json->{$fam}->{features}->{$prot}->{max_len};
 		$essential->{$anno}->{min_len}  = $json->{$fam}->{features}->{$prot}->{min_len};
-		$essential->{$anno}->{found_copy_num} = 0;
+		$anno_count{$anno} = 0;
 	}
+	#also grab nonessential proteins with a known segment.
 	elsif (($json->{$fam}->{features}->{$prot}->{feature_type} =~ /CDS/i) && ($json->{$fam}->{features}->{$prot}->{segment}) && ($json->{$fam}->{features}->{$prot}->{anno}))
 	{
 		$nonessential{$anno} = $json->{$fam}->{features}->{$prot}->{segment};
 	}
 }
+
 unless ($essential){die "No essential data in annotation JSON file\n";}
+my $seg_count = {};
+my $feature_eval = {};
+my $genome_quality = "Good"; 
 
-open (OUT1, ">$prefix.feature_quality");
 
-my $contig_eval = {};
+
 #Next we read the gto and look for the essential proteins
 for my $i (0 .. $#{$genome_in->{features}}) 
 {
-	my $anno = $genome_in->{features}->[$i]->{function};
-	my $prot = $genome_in->{features}->[$i]->{protein_translation};
-	$prot =~ s/\*$//g; 
+	if ($genome_in->{features}->[$i]->{type} =~ /(CDS|mat_peptide)/)
+	{
+		my $anno = $genome_in->{features}->[$i]->{function};
+		my $prot = $genome_in->{features}->[$i]->{protein_translation};
+		$prot =~ s/\*$//g; 
+		my $id = $genome_in->{features}->[$i]->{id};
+		my $len = length($prot);
 
-	if (exists $essential->{$anno})
-	{
-		$essential->{$anno}->{found_len} = length ($prot); 
-		$essential->{$anno}->{found_contig} -> {$genome_in->{features}->[$i]->{location}->[0]->[0]} ++;
-		$essential->{$anno}->{found_copy_num} ++;
-		@{$essential->{$anno}->{found_ids}} = $genome_in->{features}->[$i]->{id};
-	}
-	elsif (exists $nonessential{$anno})  #grab the contig ids for non-essential genes
-	{
-		$contig_eval->{$nonessential{$anno}}->{$genome_in->{features}->[$i]->{location}->[0]->[0]} ++; 		
+		$feature_eval->{$id}->{ANNO}       = $anno;
+		$feature_eval->{$id}->{LEN}        = $len;
+		$feature_eval->{$id}->{CONTIG}     = $genome_in->{features}->[$i]->{location}->[0]->[0]; 
+		## need to loop through his a second time.
+	
+	
+		#search for exceptions;
+		if ($essential->{$anno})
+		{
+			$feature_eval->{$id}->{MAX_LEN} = $essential->{$anno}->{max_len};
+			$feature_eval->{$id}->{MIN_LEN} = $essential->{$anno}->{min_len};
+			$feature_eval->{$id}->{EXP_CN}  = $essential->{$anno}->{copy_num};
+			$feature_eval->{$id}->{EVALUATED}  = 1;
+			$anno_count{$anno} ++;
+		
+			if ($len > $essential->{$anno}->{max_len}) 
+			{
+				push @{$feature_eval->{$id}->{EXCEPTION}},   "Protein is longer than expected";
+			}
+			elsif ($len < $essential->{$anno}->{min_len}) 
+			{
+				push @{$feature_eval->{$id}->{EXCEPTION}},   "Protein is shorter than expected";
+			}
+		
+			#contigs per segment (essential features)
+			$seg_count->{$essential->{$anno}->{segment}}->{$genome_in->{features}->[$i]->{location}->[0]->[0]} ++; 
+		}
+		#contigs per segment (nonessential features)
+		elsif (exists $nonessential{$anno})  #grab the contig ids for non-essential genes
+		{
+			$seg_count->{$nonessential{$anno}}->{$genome_in->{features}->[$i]->{location}->[0]->[0]} ++; 		
+		}
 	}
 }
 
-my $genome_quality = "Good"; 
-print OUT1 "ID(s)\tFunction\tProt_Len\tMin_Len\tMax_Len\tExp_Copy_Num\tFound_Copy_Num\tException\n";
 
-foreach (keys %{$essential})
+# Find Copy number exceptions:
+
+open (OUT1, ">$prefix.feature_quality");
+print OUT1 "ID\tFunction\tEvaluated\tProt_Len\tMin_Len\tMax_Len\tCopy_Num\tExp_Copy_Num\tExceptions\n";
+
+foreach (sort keys %{$feature_eval})
 {
-	my $exception;
-	my $anno = $_; 
-	if ($essential->{$anno}->{found_len} > $essential->{$anno}->{max_len}) 
+	my $id     = $_;
+	my $anno   = $feature_eval->{$id}->{ANNO};
+	my $exp_cn = $feature_eval->{$id}->{EXP_CN};
+	my $cn = $anno_count{$anno}; 
+	$feature_eval->{$id}->{CN} = $cn;  
+	if (($cn > $exp_cn) && ($feature_eval->{$id}->{EVALUATED}))
 	{
-		$exception = "Protein is longer than expected";
+		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too many copies of protein";
 	}
-	elsif ($essential->{$anno}->{found_len} < $essential->{$anno}->{min_len}) 
+	elsif (($cn < $exp_cn) && ($feature_eval->{$id}->{EVALUATED}))
 	{
-		$exception = "Protein is shorter than expected";
-	}
-	elsif ($essential->{$anno}->{found_copy_num} > $essential->{$anno}->{copy_num}) 
-	{
-		$exception = "Too many copies of protein";
-	}
-	elsif ($essential->{$anno}->{found_copy_num} < $essential->{$anno}->{copy_num}) 
-	{
-		$exception = "Too few copies of protein";
+		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too few copies of protein";
 	}
 	
-	if ($exception){$genome_quality = "Poor";}
+	my $exs;
+	if (exists $feature_eval->{$id}->{EXCEPTION})
+	{
+		$exs = join (";", @{$feature_eval->{$id}->{EXCEPTION}});
+		$genome_quality = "Poor";
+	}
+	print OUT1 "$id\t$anno\t$feature_eval->{$id}->{EVALUATED}\t$feature_eval->{$id}->{LEN}\t$feature_eval->{$id}->{MIN_LEN}\t$feature_eval->{$id}->{MAX_LEN}\t$cn\t$exp_cn\t$exs\n";
+}
 
-	#here, since i am cycling through each essential, 
-	#I will populate a hash of the Segment => Contig ID.
-	
-	foreach (keys %{$essential->{$anno}->{found_contig}})
+#go back an look for annotations that were missed.
+foreach (keys %anno_count)
+{	
+	if ($anno_count{$_} == 0)
 	{
-		my $contig = $_;
-		$contig_eval->{$essential->{$anno}->{segment}}->{$contig} ++; 
+		print OUT1 "\n##\nMissing\t$_\n";
+		$genome_quality = "Poor";
 	}
-	
-	my $id_string = join (";", @{$essential->{$anno}->{found_ids}});
-	print OUT1 "$id_string\t$anno\t$essential->{$anno}->{found_len}\t$essential->{$anno}->{min_len}\t$essential->{$anno}->{max_len}\t$essential->{$anno}->{copy_num}\t$essential->{$anno}->{found_copy_num}\t$exception\n"; 
 }
 close OUT1;
 
 
+#go grap the name of each segement that should be there.
+my %segs_needed;
+foreach (keys %{$json->{$fam}->{segments}})
+{
+	$segs_needed{$_} = 0;
+}
+
+
+###Evaluate the Contig Quality
+
 open (OUT2, ">$prefix.contig_quality");
-print OUT2 "Contig(s)\tSegment\tCopy_Num\tLen\tMin_Len\tMax_len\tAMB_Bases\tException\n"; 
+print OUT2 "Contig\tSegment\tCopy_Num\tLen\tMin_Len\tMax_len\tAMB_Bases\tFrac_AMB\tExceptions\n"; 
+my $contig_eval = {};
+
+
 
 #first work through the contigs containing on essential proteins
-foreach (keys %{$contig_eval})
+foreach (sort keys %{$seg_count})
 {
-	my $contig_exception;
 	my $seg = $_; 
-	my @contigs = keys %{$contig_eval->{$seg}}; 
+	$segs_needed{$seg}++;
+	my @contigs = keys %{$seg_count->{$seg}}; 
 	my $n_contigs = scalar @contigs;
-	my $contig_string = join (";", @contigs); 
-	if ($n_contigs > 1)
-	{
-		$contig_exception = "Too many contigs for $seg";
-	}
-	if ($n_contigs < 1)# only the essentials are placed into the contig eval hash unpopulated 
-	{
-		$contig_exception = "Too few contigs for $seg";
-	}
-	
-	my $len;
-	my $amb_bases;
-	my $frac_amb;
-	for my $i (0 .. $#{$genome_in->{contigs}})
-	{ 
-		if($genome_in->{contigs}->[$i]->{id} eq $contig_string) ### so it will not add the segment if it is broken.
-		{
-			$len = length($genome_in->{contigs}->[$i]->{dna});
-			
-			#count the total number of ambiguous bases in the dna string of the contig from the gto.
-			$amb_bases = () = $genome_in->{contigs}->[$i]->{dna} =~ /[^atgc]/gi;
-			$frac_amb = ($amb_bases/$len);
-			
-			#add seg and replicon geometry to GTO
-			$genome_in->{contigs}->[$i]->{replicon_type} = $seg;
 
-			if ($json->{$fam}->{segments}->{$seg})
-			{
-				$genome_in->{contigs}->[$i]->{replicon_geometry} = $json->{$fam}->{segments}->{$seg}->{replicon_geometry};
-			}
-			if (($json->{$fam}->{segments}->{$seg}) && ($len < $json->{$fam}->{segments}->{$seg}->{min_len}))
-			{
-				$contig_exception = "Segment: $seg, Contig: $contig_string is too short";
-			}
-			if (($json->{$fam}->{segments}->{$seg}) &&  ($len > $json->{$fam}->{segments}->{$seg}->{max_len}))
-			{
-				$contig_exception = "Segment: $seg, Contig: $contig_string is too long";
-			}		
-			if ($frac_amb > ($opt->ambiguous))
-			{
-				$contig_exception = "Segment: $seg, Contig: $contig_string has more than 1% ambiguous bases";
-			}
+	foreach (@contigs)
+	{
+		my $contig = $_;
+		$contig_eval->{$contig}->{SEG} = $seg;
+			
+		#add an exception if count is too high count;
+		if ($n_contigs > 1)
+		{
+			push @{$contig_eval->{$contig}->{EXCEPTION}}, "Too many contigs for $seg";
 		}
-	}	 
 	
-	if ($contig_exception){$genome_quality = "Poor";}
-	print OUT2 "$contig_string\t$seg\t$n_contigs\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$amb_bases\t$frac_amb\t$contig_exception\n";
+		for my $i (0 .. $#{$genome_in->{contigs}})
+		{ 
+			if($genome_in->{contigs}->[$i]->{id} eq $contig) 
+			{
+				
+				my $len = length($genome_in->{contigs}->[$i]->{dna});
+				$contig_eval->{$contig}->{LEN} = $len; 
+			
+				#count the total number of ambiguous bases in the dna string of the contig from the gto.
+				my $amb_bases = () = $genome_in->{contigs}->[$i]->{dna} =~ /[^atgc]/gi;
+				$contig_eval->{$contig}->{NUM_AMB} = ($amb_bases);
+				$contig_eval->{$contig}->{FRAC_AMB} = ($amb_bases/$len);
+			
+				#add seg and replicon geometry to GTO
+				$genome_in->{contigs}->[$i]->{replicon_type} = $seg;
+
+				
+				if ($json->{$fam}->{segments}->{$seg})
+				{
+					$genome_in->{contigs}->[$i]->{replicon_geometry} = $json->{$fam}->{segments}->{$seg}->{replicon_geometry};
+					$contig_eval->{$contig}->{MIN_LEN} = $json->{$fam}->{segments}->{$seg}->{min_len};
+					$contig_eval->{$contig}->{MAX_LEN} = $json->{$fam}->{segments}->{$seg}->{max_len};
+				}
+				
+				## Look for length and quality exceptions:
+				if (($json->{$fam}->{segments}->{$seg}) && ($len < $json->{$fam}->{segments}->{$seg}->{min_len}))
+				{
+					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig is too short";				
+				}
+				if (($json->{$fam}->{segments}->{$seg}) &&  ($len > $json->{$fam}->{segments}->{$seg}->{max_len}))
+				{
+					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig is too long";				
+				}		
+				if ($contig_eval->{$contig}->{FRAC_AMB} > ($opt->ambiguous))
+				{
+					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig has more than 1% ambiguous bases";
+				}
+
+		
+			my $exs;
+			if (exists $contig_eval->{$contig}->{EXCEPTION})
+			{
+				$exs = join (";", @{$contig_eval->{$contig}->{EXCEPTION}});
+				$genome_quality = "Poor";
+			}
+
+			print OUT2 "$contig\t$seg\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$amb_bases\t$contig_eval->{$contig}->{FRAC_AMB}\t$exs\n";
+
+			}
+		}	 
+	}
 }
+foreach (keys %segs_needed)
+{
+	if ($segs_needed{$_} == 0)
+	{
+		print OUT2 "\n##\nMissing\t$_\n";
+		$genome_quality = "Poor";
+	}		
+}
+
+
 
 print "$genome_in->{id}\t$genome_quality\n";
 
