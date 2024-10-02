@@ -198,7 +198,7 @@ foreach (sort keys %{$feature_eval})
 #go back an look for annotations that were missed.
 foreach (keys %anno_count)
 {	
-	if ($anno_count{$_} == 0)
+	if ($anno_count{$_} < 1)
 	{
 		print OUT1 "\n##\nMissing\t$_\n";
 		$genome_quality = "Poor";
@@ -288,7 +288,7 @@ foreach (sort keys %{$seg_count})
 				$genome_quality = "Poor";
 			}
 
-			print OUT2 "$contig\t$seg\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$amb_bases\t$contig_eval->{$contig}->{FRAC_AMB}\t$exs\n";
+			print OUT2 "$contig\t$seg\t$n_contigs\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$amb_bases\t$contig_eval->{$contig}->{FRAC_AMB}\t$exs\n";
 
 			}
 		}	 
@@ -298,7 +298,7 @@ foreach (sort keys %{$seg_count})
 # create an exception for missing segment.
 foreach (keys %segs_needed)
 {
-	if ($segs_needed{$_} == 0)
+	if ($segs_needed{$_} < 1)
 	{
 		print OUT2 "\n##\nMissing\t$_\n";
 		$genome_quality = "Poor";

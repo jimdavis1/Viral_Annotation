@@ -1396,7 +1396,7 @@
   "Peribunyaviridae": {
     "segments": {
       "Small RNA Segment": {
-        "max_len": 1074,
+        "max_len": 1124,
         "min_len": 868,
         "replicon_geometry": "linear"
       },
