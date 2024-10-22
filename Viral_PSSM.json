@@ -126,7 +126,8 @@
         "max_len": 900,
         "min_len": 450,
         "translate": 1,
-        "segment": "Small RNA Segment"
+        "segment": "Small RNA Segment",
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)"
       },
       "GP2": {
         "anno": "Mature envelope glycoprotein Gc (Gc protein)",
@@ -166,7 +167,8 @@
         "max_len": 200,
         "min_len": 50,
         "translate": 0,
-        "segment": "Large RNA Segment"
+        "segment": "Large RNA Segment",
+        "anno": "Large segment stemloop region"
       },
       "L": {
         "anno": "RNA-dependent RNA polymerase (L protein)",
@@ -209,7 +211,8 @@
         "max_len": 200,
         "min_len": 50,
         "translate": 0,
-        "segment": "Small RNA Segment"
+        "segment": "Small RNA Segment",
+        "anno": "Small segment stemloop region"
       },
       "SSP": {
         "anno": "Mature stable signal peptide (SSP)",
@@ -1718,11 +1721,12 @@
       },
       "W-ORF1": {
         "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
-        "downstream_ext": 1,
-        "segment": "Single RNA Segment"
+        "downstream_ext": 0,
+        "segment": "Single RNA Segment",
+        "anno": "Paramyxoviridae W protein ## likely truncation, ORF precedes the polymerase stuttering site"
       },
       "Y1": {
         "bit_cutoff": 225,

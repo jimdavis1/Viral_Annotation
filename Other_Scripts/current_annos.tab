@@ -6,14 +6,14 @@ Aquaparamyxovirus	M	CDS	Matrix protein (M protein)
 Aquaparamyxovirus	N	CDS	Nucleocapsid protein (N protein)
 Aquaparamyxovirus	P	CDS	Phosphoprotein (P protein)
 Aquaparamyxovirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
-Arenaviridae	GP1	mat_peptide	
+Arenaviridae	GP1	mat_peptide	Mature envelope glycoprotein Gn (Gn protein)
 Arenaviridae	GP2	mat_peptide	Mature envelope glycoprotein Gc (Gc protein)
 Arenaviridae	GPC	CDS	Pre-glycoprotein polyprotein GP complex (GPC protein)
 Arenaviridae	L	CDS	RNA-dependent RNA polymerase (L protein)
-Arenaviridae	Large Segment Stemloop	RNA	
+Arenaviridae	Large Segment Stemloop	RNA	Large segment stemloop region
 Arenaviridae	N	CDS	Nucleocapsid protein (N protein)
 Arenaviridae	SSP	mat_peptide	Mature stable signal peptide (SSP)
-Arenaviridae	Small Segment Stemloop	RNA	
+Arenaviridae	Small Segment Stemloop	RNA	Small segment stemloop region
 Arenaviridae	Z	CDS	Arenaviridae RING finger protein (Z protein)
 Ferlavirus	F	CDS	Fusion glycoprotein (F protein)
 Ferlavirus	HN	CDS	Receptor binding protein (RBP)
@@ -137,6 +137,6 @@ Respirovirus	M	CDS	Matrix protein (M protein)
 Respirovirus	N	CDS	Nucleocapsid protein (N protein)
 Respirovirus	P	CDS	Phosphoprotein (P protein)
 Respirovirus	V	CDS	Paramyxoviridae V protein
-Respirovirus	W-ORF1	mat_peptide	
+Respirovirus	W-ORF1	CDS	Paramyxoviridae W protein ## likely truncation, ORF precedes the polymerase stuttering site
 Respirovirus	Y1	CDS	Paramyxoviridae Y1 protein
 Respirovirus	Y2	CDS	Paramyxoviridae Y2 protein
