@@ -15,7 +15,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "C Protein"
+        "anno": "Paramyxoviridae C protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -23,7 +23,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 608,
         "min_len": 497,
@@ -36,7 +36,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -44,7 +44,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2439,
         "min_len": 1995,
@@ -56,7 +56,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 391,
         "min_len": 320,
@@ -68,7 +68,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 596,
         "min_len": 488,
@@ -83,7 +83,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"  
+        "anno": "Phosphoprotein (P protein)"  
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -92,7 +92,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -112,7 +112,6 @@
     },
     "features": {
       "GP1": {
-        "anno": "Mature Envelope Glycoprotein Gn, Gn (GP1) Protein",
         "begin": {
           "begin_offset": 1,
           "begin_pssm": "SSP",
@@ -130,7 +129,7 @@
         "segment": "Small RNA Segment"
       },
       "GP2": {
-        "anno": "Mature Envelope Glycoprotein Gc, Gc (GP2) Protein",
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)",
         "bit_cutoff": 100,
         "coverage_cutoff": 0.65,
         "downstream_ext": 1,
@@ -140,7 +139,7 @@
         "segment": "Small RNA Segment"
       },
       "GPC": {
-        "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein",
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
         "bit_cutoff": 100,
         "copy_num": 1,
         "coverage_cutoff": 0.65,
@@ -153,7 +152,6 @@
         "upstream_ext": 1
       },
       "Large Segment Stemloop": {
-        "anno": "Large Segment Intergenic Stem Loop Region",
         "begin": {
           "begin_offset": 1,
           "begin_pssm": "Z",
@@ -171,7 +169,7 @@
         "segment": "Large RNA Segment"
       },
       "L": {
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "bit_cutoff": 100,
         "copy_num": 1,
         "coverage_cutoff": 0.65,
@@ -184,7 +182,7 @@
         "upstream_ext": 1
       },
       "N": {
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "bit_cutoff": 100,
         "copy_num": 1,
         "coverage_cutoff": 0.65,
@@ -197,7 +195,6 @@
         "upstream_ext": 1
       },
       "Small Segment Stemloop": {
-        "anno": "Small Segment Intergenic Stem Loop Region",
         "begin": {
           "begin_offset": 1,
           "begin_pssm": "GPC",
@@ -215,7 +212,7 @@
         "segment": "Small RNA Segment"
       },
       "SSP": {
-        "anno": "Mature Stable Signal Peptide, SSP",
+        "anno": "Mature stable signal peptide (SSP)",
         "bit_cutoff": 100,
         "coverage_cutoff": 0.65,
         "downstream_ext": 0,
@@ -225,7 +222,7 @@
         "segment": "Small RNA Segment"
       },
       "Z": {
-        "anno": "RING Finger Protein Z, Z Protein",
+        "anno": "Arenaviridae RING finger protein (Z protein)",
         "bit_cutoff": 100,
         "copy_num": 1,
         "coverage_cutoff": 0.65,
@@ -254,7 +251,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 600,
         "min_len": 491,
@@ -267,7 +264,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "I": {
         "bit_cutoff": 20,
@@ -278,7 +275,7 @@
         "paramyxo_join": 1,
         "join_partner": ["P-ORF2", "V-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "I Protein"
+        "anno": "Paramyxoviridae I protein"
       },
       "L": {
         "bit_cutoff": 100,
@@ -286,7 +283,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2399,
         "min_len": 1963,
@@ -298,7 +295,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 386,
         "min_len": 316,
@@ -310,7 +307,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 518,
         "min_len": 424,
@@ -324,7 +321,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein, P Protein",
+        "new_anno": "Phosphoprotein (P protein)",
         "segment": "Single RNA Segment"
       },
       "U": {
@@ -334,7 +331,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Uncharacterized Protein, U Protein"
+        "anno": "Paramyxoviridae uncharacterized protein (U protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -344,7 +341,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "GG",
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -375,7 +372,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)"
       },
       "Gn": {
         "bit_cutoff": 100,
@@ -384,7 +381,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -392,7 +389,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein",
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
         "copy_num": 1,
         "max_len": 1256,
         "min_len": 1008,
@@ -404,7 +401,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2373,
         "min_len": 1931,
@@ -416,7 +413,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 480,
         "min_len": 427,
@@ -429,7 +426,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Small RNA Segment",
-        "anno": "Small Nonstructural Protein NSs, NSs Protein"
+        "anno": "Bunyavirales small nonstructural protein (NSs protein)"
       }
     }
   },
@@ -449,7 +446,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "C Protein"
+        "anno": "Paramyxoviridae C protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -457,7 +454,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 622,
         "min_len": 490,
@@ -470,7 +467,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "G Glycoprotein, G Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -478,7 +475,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2569,
         "min_len": 2102,
@@ -490,7 +487,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 402,
         "min_len": 311,
@@ -502,7 +499,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 622,
         "min_len": 478,
@@ -517,7 +514,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2", "W-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -526,7 +523,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       },
       "W-ORF2": {
@@ -536,7 +533,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein",
+        "new_anno": "Paramyxoviridae W protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -557,7 +554,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "C Protein"
+        "anno": "Paramyxoviridae C protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -565,7 +562,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 604,
         "min_len": 491,
@@ -578,7 +575,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "G Glycoprotein, G Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -586,7 +583,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2476,
         "min_len": 2022,
@@ -598,7 +595,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 394,
         "min_len": 306,
@@ -610,7 +607,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 681,
         "min_len": 480,
@@ -625,7 +622,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2", "W-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "SH": {
         "bit_cutoff": 100,
@@ -634,7 +631,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Small Hydrophobic Protein, SH Protein"
+        "anno": "Paramyxoviridae small hydorophobic protein (SH protein)"
       },
       "TM": {
         "bit_cutoff": 100,
@@ -643,7 +640,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Transmembrane Protein, TM Protein"
+        "anno": "Paramyxoviridae transmembrane protein (TM protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -652,7 +649,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       },
       "W-ORF2": {
@@ -663,7 +660,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "W Protein",
+        "new_anno": "Paramyxoviridae W protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -683,7 +680,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 611,
         "min_len": 485,
@@ -696,7 +693,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -704,7 +701,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2522,
         "min_len": 2003,
@@ -716,7 +713,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 418,
         "min_len": 342,
@@ -728,7 +725,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 525,
         "min_len": 429,
@@ -743,7 +740,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2", "W-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "SH": {
         "bit_cutoff": 100,
@@ -753,7 +750,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 1,
         "segment": "Single RNA Segment",
-        "anno": "Small Hydrophobic Protein, SH Protein"
+        "anno": "Paramyxoviridae small hydorophobic protein (SH protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -762,7 +759,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       },
       "W-ORF2": {
@@ -772,7 +769,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein",
+        "new_anno": "Paramyxoviridae W protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -793,7 +790,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "C Protein"
+        "anno": "Paramyxoviridae C protein"
       },
       "F": {
         "bit_cutoff": 100,
@@ -801,7 +798,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 728,
         "min_len": 489,
@@ -814,7 +811,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Protein, H Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -822,7 +819,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2441,
         "min_len": 1997,
@@ -834,7 +831,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 372,
         "min_len": 304,
@@ -846,7 +843,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 605,
         "min_len": 495,
@@ -861,7 +858,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -870,7 +867,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -901,7 +898,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)"
       },
       "Gn": {
         "bit_cutoff": 150,
@@ -910,7 +907,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)"
       },
       "GP38": {
         "bit_cutoff": 150,
@@ -919,7 +916,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Secreted Nonstructural 38kDa Protein, GP38 Protein"
+        "anno": "Nairoviridae mature secreted nonstructural 38-kD protein"
       },
       "GP85-160": {
         "bit_cutoff": 150,
@@ -928,7 +925,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Secreted Nonstructural Protein, GP160/85 Protein"
+        "anno": "Nairoviridae mature secreted nonstructural GP160/85 protein"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -936,7 +933,7 @@
         "coverage_cutoff": 0.80,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein",
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
         "copy_num": 1,
         "max_len": 1854,
         "min_len": 1145,
@@ -948,7 +945,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 5293,
         "min_len": 3474,
@@ -961,7 +958,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Secreted Nonstructural Mucin-like Protein, MLD Protein"
+        "anno": "Mature secreted nonstructural mucin-like protein (MLD protein)"
       },
       "N": {
         "bit_cutoff": 100,
@@ -969,7 +966,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 738,
         "min_len": 434,
@@ -982,7 +979,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Nonstructural Membrane Protein, NSm Protein"
+        "anno": "Bunyavirales mature nonstructural membrane protein (NSm protein)"
       },
       "NSs": {
         "bit_cutoff": 150,
@@ -991,7 +988,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Small RNA Segment",
-        "anno": "Small Segment Nonstructural Protein Involved In Apoptosis Disruption, NSs Protein"
+        "anno": "Bunyavirales small nonstructural protein (NSs protein)"
       }
     }
   },
@@ -1010,7 +1007,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 612,
         "min_len": 500,
@@ -1023,7 +1020,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1031,7 +1028,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2438,
         "min_len": 1994,
@@ -1043,7 +1040,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 402,
         "min_len": 329,
@@ -1055,7 +1052,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 560,
         "min_len": 458,
@@ -1070,7 +1067,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2", "W-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -1079,7 +1076,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       },
       "W-ORF2": {
@@ -1089,7 +1086,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein",
+        "new_anno": "Paramyxoviridae W protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -1109,7 +1106,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 622,
         "min_len": 509,
@@ -1122,7 +1119,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "I-ORF2": {
         "bit_cutoff": 20,
@@ -1132,7 +1129,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "GGG",
-        "new_anno": "I Protein",
+        "new_anno": "Paramyxoviridae I protein",
         "segment": "Single RNA Segment"
       },
       "L": {
@@ -1141,7 +1138,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2519,
         "min_len": 1925,
@@ -1153,7 +1150,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 420,
         "min_len": 338,
@@ -1165,7 +1162,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 631,
         "min_len": 490,
@@ -1179,7 +1176,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein, P Protein",
+        "new_anno": "Phosphoprotein (P protein)",
         "segment": "Single RNA Segment"
       },
       "SH": {
@@ -1189,7 +1186,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Small Hydrophobic Protein, SH Protein"
+        "anno": "Paramyxoviridae small hydorophobic protein (SH protein)"
       },
       "V": {
         "bit_cutoff": 100,
@@ -1200,7 +1197,7 @@
         "paramyxo_join": 1,
         "join_partner": ["I-ORF2", "P-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "V Protein"
+        "anno": "Paramyxoviridae V protein"
       }
     }
   },
@@ -1219,7 +1216,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 623,
         "min_len": 509,
@@ -1232,7 +1229,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1240,7 +1237,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2432,
         "min_len": 1990,
@@ -1252,7 +1249,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 407,
         "min_len": 333,
@@ -1264,7 +1261,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 503,
         "min_len": 411,
@@ -1279,7 +1276,7 @@
         "paramyxo_join": 1,
         "join_partner": ["V-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "V-ORF2": {
         "bit_cutoff": 100,
@@ -1288,7 +1285,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "V Protein",
+        "new_anno": "Paramyxoviridae V protein",
         "segment": "Single RNA Segment"
       }
     }
@@ -1308,7 +1305,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 592,
         "min_len": 484,
@@ -1321,7 +1318,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1329,7 +1326,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2556,
         "min_len": 2092,
@@ -1341,7 +1338,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 416,
         "min_len": 340,
@@ -1353,7 +1350,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 606,
         "min_len": 496,
@@ -1367,7 +1364,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein, P Protein",
+        "new_anno": "Phosphoprotein (P protein)",
         "segment": "Single RNA Segment"
       },
       "V": {
@@ -1379,7 +1376,7 @@
         "paramyxo_join": 1,
         "join_partner": ["P-ORF2", "W-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "V Protein"
+        "anno": "Paramyxoviridae V protein"
       },
       "W-ORF2": {
         "bit_cutoff": 50,
@@ -1388,7 +1385,7 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 2,
-        "new_anno": "W Protein",
+        "new_anno": "Paramyxoviridae W protein",
         "segment": "Single RNA Segment"
         }
     }
@@ -1419,7 +1416,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)"
       },
       "Gn": {
         "bit_cutoff": 200,
@@ -1428,7 +1425,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)"
       },
       "NSm": {
         "bit_cutoff": 200,
@@ -1437,7 +1434,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Nonstructural Membrane Protein, NSm Protein"
+        "anno": "Bunyavirales mature nonstructural membrane protein (NSm protein)"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -1445,7 +1442,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein",
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
         "copy_num": 1,
         "max_len": 1752,
         "min_len": 1234,
@@ -1457,7 +1454,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 4365,
         "min_len": 1947,
@@ -1469,7 +1466,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 539,
         "min_len": 208,
@@ -1482,7 +1479,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Small RNA Segment",
-        "anno": "Small Nonstructural Protein NSs, NSs Protein"
+        "anno": "Bunyavirales small nonstructural protein (NSs protein)"
       }
     }
   },
@@ -1507,7 +1504,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gc, Gc Protein"
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)"
       },
       "Gn": {
         "bit_cutoff": 100,
@@ -1516,7 +1513,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Envelope Glycoprotein Gn, Gn Protein"
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)"
       },
       "GPC": {
         "bit_cutoff": 100,
@@ -1525,7 +1522,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Medium RNA Segment",
-        "anno": "Pre-glycoprotein Polyprotein GP Complex, GPC Protein"
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1533,7 +1530,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 3211,
         "min_len": 1719,
@@ -1545,7 +1542,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 525,
         "min_len": 219,
@@ -1557,7 +1554,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Movement Protein"
+        "anno": "Movement protein"
       },
       "Pc3": {
         "bit_cutoff": 150,
@@ -1565,7 +1562,7 @@
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Pc3 Protein"
+        "anno": "Phenuiviridae Pc3 protein"
       },
       "NSs": {
         "bit_cutoff": 100,
@@ -1573,7 +1570,7 @@
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein"
+        "anno": "Nucleocapsid protein (N protein)"
       },
        "NS5": {
         "bit_cutoff": 150,
@@ -1581,7 +1578,7 @@
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nonstructural Protein 5, NS5 Protein"
+        "anno": "Phenuiviridae nonstructural protein 5 (NS5 protein)"
       },
        "NSm": {
         "bit_cutoff": 150,
@@ -1590,7 +1587,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Nonstructural Membrane Protein, NSm Protein"
+        "anno": "Bunyavirales mature nonstructural membrane protein (NSm protein)"
       },
       "78-kD": {
         "bit_cutoff": 150,
@@ -1599,7 +1596,7 @@
         "upstream_ext": 0,
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
-        "anno": "Mature Nonstructural 78-kD Protein, 78-kD Protein"
+        "anno": "Phenuiviridae mature nonstructural 78-kD protein"
       }
     }
   },
@@ -1619,7 +1616,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "C Protein"
+        "anno": "Paramyxoviridae C protein"
       },
       "C-Prime": {
         "bit_cutoff": 100,
@@ -1629,7 +1626,7 @@
         "downstream_ext": 1,
         "start_to_met": 1,
         "segment": "Single RNA Segment",
-        "anno": "C-prime Protein"
+        "anno": "Paramyxoviridae C-prime protein"
       },
       "D-ORF2": {
         "bit_cutoff": 50,
@@ -1639,7 +1636,7 @@
         "downstream_ext": 1,
         "paramyxo_join": 2,
         "paramyxo_insert": "G",
-        "new_anno": "D Protein",
+        "new_anno": "Paramyxoviridae D protein",
         "segment": "Single RNA Segment"
       },
       "F": {
@@ -1648,7 +1645,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Fusion Glycoprotein, F Protein",
+        "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 638,
         "min_len": 485,
@@ -1661,7 +1658,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Hemagglutinin Neuraminidase Protein, HN Protein"
+        "anno": "Receptor binding protein (RBP)"
       },
       "L": {
         "bit_cutoff": 100,
@@ -1669,7 +1666,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "RNA Dependent RNA Polymerase, L Protein",
+        "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2464,
         "min_len": 2016,
@@ -1681,7 +1678,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Matrix Protein, M Protein",
+        "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 389,
         "min_len": 313,
@@ -1693,7 +1690,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid Protein, N Protein",
+        "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 598,
         "min_len": 464,
@@ -1708,7 +1705,7 @@
         "paramyxo_join": 1,
         "join_partner": ["D-ORF2"],
         "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein, P Protein"
+        "anno": "Phosphoprotein (P protein)"
       },
       "V": {
         "bit_cutoff": 175,
@@ -1717,7 +1714,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "V Protein"
+        "anno": "Paramyxoviridae V protein"
       },
       "W-ORF1": {
         "bit_cutoff": 100,
@@ -1725,8 +1722,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "segment": "Single RNA Segment",
-        "anno": "W Protein, ORF1"
+        "segment": "Single RNA Segment"
       },
       "Y1": {
         "bit_cutoff": 225,
@@ -1735,7 +1731,7 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Y1 Protein"
+        "anno": "Paramyxoviridae Y1 protein"
       },
       "Y2": {
         "bit_cutoff": 225,
@@ -1745,7 +1741,7 @@
         "downstream_ext": 1,
         "start_to_met": 1,
         "segment": "Single RNA Segment",
-        "anno": "Y2 Protein"
+        "anno": "Paramyxoviridae Y2 protein"
       }
     }
   }

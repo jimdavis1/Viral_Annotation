@@ -1,5 +1,8 @@
-## list_annos_from_pssms.pl 
-This is a simple perl script that passes over the pssm directory and dumps the title fields. `Current.PSSM.annos.tab` is just the output.<br>
+## list_annos.pl 
+This is a simple perl script that passes over the json options file and returns every annotation for every family. `current.annos.tab` is the output.<br>
+
+## list_pssms.pl 
+This is a simple perl script that passes over the pssm directory and dumps the title fields so that you can see every PSSM for every family.  Note that the annotation filed is deprecated.  I used to use this for the annotation but this has been moved ot the json file.<br>
 
 ## ali_to_pssm.pl
 This is a janky script that will build a pssm from an alignment.  It has an option -t to add a title to the top of the file.  Note that the system is currently reading the title field to assign the annotation.  It requires by-hand editing of the title field to  sure you don't end up with 2 titles and it wants to append a "1" to the beginning of the title field.   I may eventually go back and clean this up.  It requires `BlastInterface.pm`<br>

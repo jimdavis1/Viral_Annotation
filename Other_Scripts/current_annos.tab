@@ -1,0 +1,142 @@
+Aquaparamyxovirus	C	CDS	Paramyxoviridae C protein
+Aquaparamyxovirus	F	CDS	Fusion glycoprotein (F protein)
+Aquaparamyxovirus	HN	CDS	Receptor binding protein (RBP)
+Aquaparamyxovirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Aquaparamyxovirus	M	CDS	Matrix protein (M protein)
+Aquaparamyxovirus	N	CDS	Nucleocapsid protein (N protein)
+Aquaparamyxovirus	P	CDS	Phosphoprotein (P protein)
+Aquaparamyxovirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Arenaviridae	GP1	mat_peptide	
+Arenaviridae	GP2	mat_peptide	Mature envelope glycoprotein Gc (Gc protein)
+Arenaviridae	GPC	CDS	Pre-glycoprotein polyprotein GP complex (GPC protein)
+Arenaviridae	L	CDS	RNA-dependent RNA polymerase (L protein)
+Arenaviridae	Large Segment Stemloop	RNA	
+Arenaviridae	N	CDS	Nucleocapsid protein (N protein)
+Arenaviridae	SSP	mat_peptide	Mature stable signal peptide (SSP)
+Arenaviridae	Small Segment Stemloop	RNA	
+Arenaviridae	Z	CDS	Arenaviridae RING finger protein (Z protein)
+Ferlavirus	F	CDS	Fusion glycoprotein (F protein)
+Ferlavirus	HN	CDS	Receptor binding protein (RBP)
+Ferlavirus	I	CDS	Paramyxoviridae I protein
+Ferlavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Ferlavirus	M	CDS	Matrix protein (M protein)
+Ferlavirus	N	CDS	Nucleocapsid protein (N protein)
+Ferlavirus	P-ORF2	mat_peptide	Phosphoprotein (P protein)
+Ferlavirus	U	CDS	Paramyxoviridae uncharacterized protein (U protein)
+Ferlavirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Hantaviridae	GPC	CDS	Pre-glycoprotein polyprotein GP complex (GPC protein)
+Hantaviridae	Gc	mat_peptide	Mature envelope glycoprotein Gc (Gc protein)
+Hantaviridae	Gn	mat_peptide	Mature envelope glycoprotein Gn (Gn protein)
+Hantaviridae	L	CDS	RNA-dependent RNA polymerase (L protein)
+Hantaviridae	N	CDS	Nucleocapsid protein (N protein)
+Hantaviridae	NSs	CDS	Bunyavirales small nonstructural protein (NSs protein)
+Henipavirus	C	CDS	Paramyxoviridae C protein
+Henipavirus	F	CDS	Fusion glycoprotein (F protein)
+Henipavirus	G	CDS	Receptor binding protein (RBP)
+Henipavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Henipavirus	M	CDS	Matrix protein (M protein)
+Henipavirus	N	CDS	Nucleocapsid protein (N protein)
+Henipavirus	P	CDS	Phosphoprotein (P protein)
+Henipavirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Henipavirus	W-ORF2	mat_peptide	Paramyxoviridae W protein
+Jeilongvirus	C	CDS	Paramyxoviridae C protein
+Jeilongvirus	F	CDS	Fusion glycoprotein (F protein)
+Jeilongvirus	G	CDS	Receptor binding protein (RBP)
+Jeilongvirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Jeilongvirus	M	CDS	Matrix protein (M protein)
+Jeilongvirus	N	CDS	Nucleocapsid protein (N protein)
+Jeilongvirus	P	CDS	Phosphoprotein (P protein)
+Jeilongvirus	SH	CDS	Paramyxoviridae small hydorophobic protein (SH protein)
+Jeilongvirus	TM	CDS	Paramyxoviridae transmembrane protein (TM protein)
+Jeilongvirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Jeilongvirus	W-ORF2	mat_peptide	Paramyxoviridae W protein
+Metaavulavirus	F	CDS	Fusion glycoprotein (F protein)
+Metaavulavirus	HN	CDS	Receptor binding protein (RBP)
+Metaavulavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Metaavulavirus	M	CDS	Matrix protein (M protein)
+Metaavulavirus	N	CDS	Nucleocapsid protein (N protein)
+Metaavulavirus	P	CDS	Phosphoprotein (P protein)
+Metaavulavirus	SH	CDS	Paramyxoviridae small hydorophobic protein (SH protein)
+Metaavulavirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Metaavulavirus	W-ORF2	mat_peptide	Paramyxoviridae W protein
+Morbillivirus	C	CDS	Paramyxoviridae C protein
+Morbillivirus	F	CDS	Fusion glycoprotein (F protein)
+Morbillivirus	H	CDS	Receptor binding protein (RBP)
+Morbillivirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Morbillivirus	M	CDS	Matrix protein (M protein)
+Morbillivirus	N	CDS	Nucleocapsid protein (N protein)
+Morbillivirus	P	CDS	Phosphoprotein (P protein)
+Morbillivirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Nairoviridae	GP38	mat_peptide	Nairoviridae mature secreted nonstructural 38-kD protein
+Nairoviridae	GP85-160	mat_peptide	Nairoviridae mature secreted nonstructural GP160/85 protein
+Nairoviridae	GPC	CDS	Pre-glycoprotein polyprotein GP complex (GPC protein)
+Nairoviridae	Gc	mat_peptide	Mature envelope glycoprotein Gc (Gc protein)
+Nairoviridae	Gn	mat_peptide	Mature envelope glycoprotein Gn (Gn protein)
+Nairoviridae	L	CDS	RNA-dependent RNA polymerase (L protein)
+Nairoviridae	MLD	mat_peptide	Mature secreted nonstructural mucin-like protein (MLD protein)
+Nairoviridae	N	CDS	Nucleocapsid protein (N protein)
+Nairoviridae	NSm	mat_peptide	Bunyavirales mature nonstructural membrane protein (NSm protein)
+Nairoviridae	NSs	CDS	Bunyavirales small nonstructural protein (NSs protein)
+Orthoavulavirus	F	CDS	Fusion glycoprotein (F protein)
+Orthoavulavirus	HN	CDS	Receptor binding protein (RBP)
+Orthoavulavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Orthoavulavirus	M	CDS	Matrix protein (M protein)
+Orthoavulavirus	N	CDS	Nucleocapsid protein (N protein)
+Orthoavulavirus	P	CDS	Phosphoprotein (P protein)
+Orthoavulavirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Orthoavulavirus	W-ORF2	mat_peptide	Paramyxoviridae W protein
+Orthorubulavirus	F	CDS	Fusion glycoprotein (F protein)
+Orthorubulavirus	HN	CDS	Receptor binding protein (RBP)
+Orthorubulavirus	I-ORF2	mat_peptide	Paramyxoviridae I protein
+Orthorubulavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Orthorubulavirus	M	CDS	Matrix protein (M protein)
+Orthorubulavirus	N	CDS	Nucleocapsid protein (N protein)
+Orthorubulavirus	P-ORF2	mat_peptide	Phosphoprotein (P protein)
+Orthorubulavirus	SH	CDS	Paramyxoviridae small hydorophobic protein (SH protein)
+Orthorubulavirus	V	CDS	Paramyxoviridae V protein
+Paraavulavirus	F	CDS	Fusion glycoprotein (F protein)
+Paraavulavirus	HN	CDS	Receptor binding protein (RBP)
+Paraavulavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Paraavulavirus	M	CDS	Matrix protein (M protein)
+Paraavulavirus	N	CDS	Nucleocapsid protein (N protein)
+Paraavulavirus	P	CDS	Phosphoprotein (P protein)
+Paraavulavirus	V-ORF2	mat_peptide	Paramyxoviridae V protein
+Pararubulavirus	F	CDS	Fusion glycoprotein (F protein)
+Pararubulavirus	HN	CDS	Receptor binding protein (RBP)
+Pararubulavirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Pararubulavirus	M	CDS	Matrix protein (M protein)
+Pararubulavirus	N	CDS	Nucleocapsid protein (N protein)
+Pararubulavirus	P-ORF2	mat_peptide	Phosphoprotein (P protein)
+Pararubulavirus	V	CDS	Paramyxoviridae V protein
+Pararubulavirus	W-ORF2	mat_peptide	Paramyxoviridae W protein
+Peribunyaviridae	GPC	CDS	Pre-glycoprotein polyprotein GP complex (GPC protein)
+Peribunyaviridae	Gc	mat_peptide	Mature envelope glycoprotein Gc (Gc protein)
+Peribunyaviridae	Gn	mat_peptide	Mature envelope glycoprotein Gn (Gn protein)
+Peribunyaviridae	L	CDS	RNA-dependent RNA polymerase (L protein)
+Peribunyaviridae	N	CDS	Nucleocapsid protein (N protein)
+Peribunyaviridae	NSm	mat_peptide	Bunyavirales mature nonstructural membrane protein (NSm protein)
+Peribunyaviridae	NSs	CDS	Bunyavirales small nonstructural protein (NSs protein)
+Phenuiviridae	78-kD	mat_peptide	Phenuiviridae mature nonstructural 78-kD protein
+Phenuiviridae	GPC	CDS	Pre-glycoprotein polyprotein GP complex (GPC protein)
+Phenuiviridae	Gc	mat_peptide	Mature envelope glycoprotein Gc (Gc protein)
+Phenuiviridae	Gn	mat_peptide	Mature envelope glycoprotein Gn (Gn protein)
+Phenuiviridae	L	CDS	RNA-dependent RNA polymerase (L protein)
+Phenuiviridae	Mov	CDS	Movement protein
+Phenuiviridae	N	CDS	Nucleocapsid protein (N protein)
+Phenuiviridae	NS5	CDS	Phenuiviridae nonstructural protein 5 (NS5 protein)
+Phenuiviridae	NSm	mat_peptide	Bunyavirales mature nonstructural membrane protein (NSm protein)
+Phenuiviridae	NSs	CDS	Nucleocapsid protein (N protein)
+Phenuiviridae	Pc3	CDS	Phenuiviridae Pc3 protein
+Respirovirus	C	CDS	Paramyxoviridae C protein
+Respirovirus	C-Prime	CDS	Paramyxoviridae C-prime protein
+Respirovirus	D-ORF2	mat_peptide	Paramyxoviridae D protein
+Respirovirus	F	CDS	Fusion glycoprotein (F protein)
+Respirovirus	HN	CDS	Receptor binding protein (RBP)
+Respirovirus	L	CDS	RNA-dependent RNA polymerase (L protein)
+Respirovirus	M	CDS	Matrix protein (M protein)
+Respirovirus	N	CDS	Nucleocapsid protein (N protein)
+Respirovirus	P	CDS	Phosphoprotein (P protein)
+Respirovirus	V	CDS	Paramyxoviridae V protein
+Respirovirus	W-ORF1	mat_peptide	
+Respirovirus	Y1	CDS	Paramyxoviridae Y1 protein
+Respirovirus	Y2	CDS	Paramyxoviridae Y2 protein

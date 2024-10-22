@@ -7,7 +7,7 @@ use Getopt::Long;
 my $usage = 'uniprot_download.pl -q [query] >Output.fasta
         -h   help
         -q   uniprot query eg "Arenaviridae"
-        -r   "eviewed entries only (this downloads only SwissProt)
+        -r   "reviewed entries only (this downloads only SwissProt)
         -j   return json (default = fasta)
 ';
 

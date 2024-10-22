@@ -2,8 +2,17 @@
 use strict;
 use Getopt::Long;
 
-my $usage = 'list_annos_from_pssms.pl -b base_directory
+my $usage = 'list_pssms.pl -b base_directory
 		
+        This program reads the directory of pssms and provides the complete
+        list of pssms for every taxonomic unit.  Note that the annotation field  
+        that is displayed from the pssm is deprecated (but still generally informative). 
+        
+        In earlier versions of the annotation script, the annotation was read directly
+        from the pssm. I have changed this to be read directly from the json file to 
+        simplify the  management of the annotations. 
+
+        Usage:
 		-b base directory (path preceeding /Viral_Annotation)
 		   in my case its -b "/home/jjdavis/bin"
 		-h help';

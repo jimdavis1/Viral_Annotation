@@ -6,7 +6,7 @@ use gjoseqlib;
 my $usage = 'parse_uniprot_fasta_header.pl <UniProt.fasta >Output.fasta
         -h   help
         -t   table output (default = fasta)
-        	 [Table format returns SwissPRotID\tUniProtID\tANNO\tORG\tTAX\tGeneName\SeqVariant]
+        	 [Table format returns FullID\tSwissPRotID\tUniProtID\tANNO\tORG\tTAX\tGeneName\SeqVariant]
              
         
         -sp  give the swissprot or trembl id instead of uniprot (default) in Fasta header 
@@ -25,9 +25,10 @@ my @seqs = &gjoseqlib::read_fasta();
 
 for my $i (0..$#seqs)
 {
-	my ($swiss, $uni);
+	my ($swiss, $uni, $full);
 	if ($seqs[$i][0] =~ /^(\w+)\|(\w+)\|(\w+)/) 
 	{
+		$full = $seqs[$i][0];
 		($swiss, $uni) = ($2, $3);
 	} 
 	else 
@@ -66,7 +67,7 @@ for my $i (0..$#seqs)
 
 	if ($table)
 	{
-		print "$swiss\t$uni\t$ann\t$os\t$ox\t$gn\t$sv\n"; 
+		print "$full\t$swiss\t$uni\t$ann\t$os\t$ox\t$gn\t$sv\n"; 
 
 	}
 	elsif (! $table)

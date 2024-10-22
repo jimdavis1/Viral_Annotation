@@ -37,6 +37,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		    -aa print proteins to STDOUT
 		    -tbl print only feature table to STDOUT
 		    -ctbl [file name] concatenate table results to a file (for use with many genomes)
+
 ';
 
 my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl, $prefix, $append_seqs, $threads);
@@ -57,7 +58,7 @@ my $opts = GetOptions( 'h'         => \$help,
                        'p=s'       => \$pdir,
                        'min=s'     => \$min_len,
                        'max=s'     => \$max_len,
-                       'j=s'       => \$opt_file,
+                       'j=s'     => \$opt_file,
                        'ks'        => \$keep_stop,
                        'p=s'       => \$prefix,
                        's'         => \$append_seqs); 
@@ -162,7 +163,7 @@ foreach (@reps)
 	$virus =~ s/\..+//g; 
 	
 	my $rep_file = "$cdir/$rep";
-	open (IN, "blastn -query $rep_file -subject $s_file -evalue 0.5 -reward 2 -penalty -3 -word_size 11 -outfmt 15 -soft_masking false -num_threads $threads 2>/dev/null |") or die "Could not run blastn: $!"; 
+	open (IN, "blastn -query $rep_file -subject $s_file -evalue 0.5 -reward 2 -penalty -3 -word_size 11 -outfmt 15 -soft_masking false -num_threads $threads |"); 
 	my $blastn = decode_json(scalar read_file(\*IN));	
 	close IN;
 
@@ -206,9 +207,9 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	my $cov_cutoff     = $options->{$virus}->{features}->{$pssmdir}->{coverage_cutoff};
 	my $start_to_met   = $options->{$virus}->{features}->{$pssmdir}->{start_to_met};
 	my $feature_type   = $options->{$virus}->{features}->{$pssmdir}->{feature_type};
-	my $anno           = $options->{$virus}->{features}->{$pssmdir}->{anno};
+
 		
-	print STDERR "\t$virus\t$pssmdir\t$anno\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
+	print STDERR "\t$virus\t$pssmdir\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
 
 	#   Select the best pssm per protein
 	#   If this begins to break down, new reference pssms can be added to the 
@@ -222,7 +223,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	{		
 		my $pssm_file = "$pdir/$virus.pssms/$pssmdir/$_";
 		my $name = $_;
-		open (IN, "tblastn -outfmt 15 -db $s_file -in_pssm $pssm_file -num_threads $threads |") or die "Could not run tblastn: $!";
+		open (IN, "tblastn -outfmt 15 -db $s_file -in_pssm $pssm_file -num_threads $threads |");
 		my $pssm_blast = decode_json(scalar read_file(\*IN));		
 		close IN; 	
 		
@@ -236,7 +237,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			$best_results = $results;
 		}
 	}
-	print STDERR "\n\tChoosing $best_pssm\t$best_bit\n\n"; 
+	print STDERR "\tChoosing $best_pssm\t$best_bit\n"; 
 	my $nhsps = scalar @$best_results;
 	for my $i (0..($nhsps -1))
 	{		
@@ -245,8 +246,8 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my $hseq = $best_results->[$i]->{hseq};
 		$hseq =~ s/\-//g; # eliminate alignment gaps in hit seq
 			
-		print STDERR "\t$contig\t$anno\t$best_results->[$i]->{hit_from}\t$best_results->[$i]->{hit_to}\t$best_results->[$i]->{frame}\t$best_results->[$i]->{bit}\n";
-
+		print STDERR "\t$contig\t$best_results->[$i]->{anno}\t$best_results->[$i]->{hit_from}\t$best_results->[$i]->{hit_to}\t$best_results->[$i]->{frame}\t$best_results->[$i]->{bit}\n";
+	
 		## Okay, Now we need to find our features.
 	
 	
@@ -334,8 +335,10 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			$join->{$contig}->{$pssmdir}->{INSERT}   = $options->{$virus}->{features}->{$pssmdir}->{paramyxo_insert};	
 			$join->{$contig}->{$pssmdir}->{PSSM}     = $best_pssm;
 			$join->{$contig}->{$pssmdir}->{TYPE}     = $feature_type;
-		}
 
+		}
+		
+	
 	
 		# Set up calling non-pssm features that are anchored to pssm coordinates
 		if (exists $options->{$virus}->{features}->{$pssmdir}->{non_pssm_partner})
@@ -377,13 +380,14 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 				$non_pssm_feat->{$feat}->{MAX}    = $options->{$virus}->{features}->{$feat}->{max_len};			
 				$non_pssm_feat->{$feat}->{AA}     = $options->{$virus}->{features}->{$feat}->{translate};
 				$non_pssm_feat->{$feat}->{TYPE}   = $options->{$virus}->{features}->{$feat}->{feature_type};
+
 			}
 		}
 		
 		#return matching sequence as a tuple.
 		unless ($options->{$virus}->{features}->{$pssmdir}->{paramyxo_join} == 2)# the ORF2 sequence isn't complete and has to be merged after all of the other proteins have been found.
 		{
-			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $anno, $strand, $best_pssm, $gene, $protein, $feature_type]); 
+			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $best_results->[$i]->{anno}, $strand, $best_pssm, $gene, $protein, $feature_type]); 
 		}	
 	}
 	print STDERR "-----------------------\n"; 
@@ -944,6 +948,8 @@ sub matching_tblastn_hsps_json
 					# get the contig ID.  If i understand this correctly, the title has to be the same per HSP, so the hardcoded zero should be ok.
 					my $contig = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{description}->[0]->{title};
 					$contig =~ s/\s.+//g;								
+					#right now, I'm using the PSSM title as the annotation.
+					my $anno = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{query_title};  
 
 					my $hsps = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps};
 					my $nhsps = scalar @$hsps;
@@ -951,6 +957,7 @@ sub matching_tblastn_hsps_json
 					for my $l (0..($nhsps -1))
 					{
 						$results->{contig}    = $contig;
+						$results->{anno}      = $anno;
 						$results->{bit}       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{bit_score};						
 						$results->{hseq}      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{hseq};
 						$results->{hit_from}  = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{hit_from};
