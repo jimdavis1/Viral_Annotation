@@ -21,6 +21,11 @@ my $usage = 'fasta-cluster-pssm.pl [parms] <Protein-Sequences.fasta
 			   entire sequence if it has ambiguous (B|J|X|Z) characters.
 			-i include identical sequences [d = keep only unique]
 			-d keep sequences beginning with a dash [d = throw away]
+			-e cutoff for the number of dashes at the end of a sequence to be seen 
+			   before order to throw away a sequence with a gap at the end [d = 3]
+			-efo end fraction occupancy, this goes with -e.  This dictates the fraction of dashes in the -e 
+			     end columns in order to allow cutting [d = 0.15] (if the fraction is too high, you might 
+			     be cutting something that is conserved)
 			-fd maximum fraction of dashes allowable for keeping a sequence (d = 0.20)
 			-mi mmseqs identity [d = 0.8]
 			-mc mmseqs coverage [d = 0.8]
@@ -31,6 +36,8 @@ my $usage = 'fasta-cluster-pssm.pl [parms] <Protein-Sequences.fasta
 
 my ($help, $tmp, $keep_x, $keep_i, $keep_tmp, $tmp, $start_dash, $annotation, $pssm_prefix);
 
+my $end_frac_occ = 0.15;
+my $end_dash = 3;
 my $min_seqs = 5;
 my $f_insert = 0.33;
 my $frac_n_term = 0.75;
@@ -44,6 +51,8 @@ my $opts = GetOptions('h'     => \$help,
                       'a=s'   => \$annotation,
                       'm=s'   => \$min_seqs,
                       'f=f'   => \$f_insert,
+                      'e=i'   => \$end_dash,
+                      'efo=f' => \$end_frac_occ,
                       'n=f'   => \$frac_n_term,
                       'c=f'   => \$frac_c_term,
                       'fd=f'  => \$frac_dash,
@@ -194,7 +203,7 @@ my @clusterF = grep{$_ !~ /^\./}readdir(DIR);
 close DIR;
 
 open (REP, ">Curation_Report");
-print REP "Alignment\tAli_Len\tFirst_AA\tOriginal Seqs\tFinal Seqs\tLow_Occ_Cols_Cut\tN_Term_Cut\tC_Term_Cut\tDash_Starts_Removed\tCut_Cols\n";
+print REP "Alignment\tAli_Len\tFirst_AA\tOriginal Seqs\tFinal Seqs\tLow_Occ_Cols_Cut\tN_Term_Cut\tC_Term_Cut\tDash_Starts_Removed\tCut_Cols\tSeq_w_End_Dashes_Removed\n";
 
 foreach (@clusterF)
 {
@@ -212,15 +221,13 @@ foreach (@clusterF)
 	&gjoseqlib::print_alignment_as_fasta(\*OUT, @ali);
 	close OUT;
 	
-	
+		
 	# get rid of any sequences containing too many dashes.
-	# 
 	my @ali2;
 	for my $i (0..$#ali)
 	{
 		my $len = length ($ali[$i][2]);
 		my $dashes = $ali[$i][2] =~ tr/-//;
-
 		if (($dashes/$len) <= $frac_dash) 
 		{
 			push @ali2, ($ali[$i]);
@@ -232,10 +239,10 @@ foreach (@clusterF)
 	
 #	print STDERR "Dash removal Before = $n_seqs_orig\tAfter = $n_seqs_internal_dash\n"; 
 	
+
 	# Now I need to pack the alignment, this removes empty columns.
 	my @ali3 = &gjoseqlib::pack_alignment(@ali2);
 	
-
 	
 	## Identify alignment inserts < $f_insert
 
@@ -361,31 +368,87 @@ foreach (@clusterF)
 		$unique->{$seq}->{ID}   = $ali5[$i][0];
 		$unique->{$seq}->{ANNO} = $ali5[$i][1];
 	}
+
 	my @ali6;
-	#my @ali7;  # I need internally hide the vertical bar to make a psiblast-compatible id.
 	foreach (keys %$unique)
 	{
 		push @ali6, ([$unique->{$_}->{ID}, $unique->{$_}->{ANNO}, $_]); 
 		my $id = $unique->{$_}->{ID};
-		
-		#$id =~ s/\|/##/g; 
-		#push @ali7, ([$id, $unique->{$_}->{ANNO}, $_]); 
-
 	}
 
-	my $n_seqs_final = scalar @ali6;
-	my $start_char =  substr($ali6[0][2], 0, 1);
-	my $ali_len = length $ali6[0][2];
+###################
+
+	
+	
+	
+	# Get rid of spurious sequences that are not full length at C-terminus
+	
+	my %occ_cnt;
+	my $len = length ($ali6[0][2]);
+	my $start_from = ($len - $end_dash);
+	my $continue_cut = 1;
+
+	#first pass populate %occ_cnt for the relevant columns at the end. 	
+	for my $i (0..$#ali6)  
+	{
+		my @bases = split ("", $ali6[$i][2]);
+		for my $j ($start_from..$#bases)
+		{
+			if ($bases[$j] =~ /\w/)
+			{
+				$occ_cnt{$j} ++;
+			}
+		}
+	}
+	
+	#stop the cutting if any of the end columns have too many
+	#dashes (this might indicate conservation of a shorter sequence 
+	#instead of a spurious truncation
+	my $nseqs = scalar @ali6;
+	foreach (sort { $a <=> $b } keys %occ_cnt)
+	{
+		if (($occ_cnt{$_}/$nseqs) < (1 - $end_frac_occ))
+		{
+			$continue_cut = 0;
+		}	
+	}
+	
+	my @ali7;
+	if ($continue_cut) # keep sequences that do not end in a dash
+	{
+		for my $i (0..$#ali6)  
+		{
+			my $end = substr($ali6[$i][2], -$end_dash);
+			if ($end =~ /\w/)
+			{
+				push @ali7, ($ali6[$i]);
+			}
+		}
+	}
+	else
+	{
+		@ali7 = @ali6;
+	}
+
+	my @ali8 = &gjoseqlib::pack_alignment(@ali7);
+	my $end_dash_removed = ( (scalar @ali6) - (scalar @ali7));
+		
+	
+#########
+
+	my $n_seqs_final = scalar @ali8;
+	my $start_char =  substr($ali8[0][2], 0, 1);
+	my $ali_len = length $ali8[0][2];
 
 	print STDERR  "Original_Seqs = $n_seqs_orig,  Final_Seqs = $n_seqs_final\n";
-	print STDERR "Low Occ Cols Cut = $low_occ, N-term Cut = $n_term_trimmed, C-term Cut = $c_term_trimmed\tDash Starts Removed = $dash_starts_removed\n\n";
+	print STDERR "Low Occ Cols Cut = $low_occ, N-term Cut = $n_term_trimmed, C-term Cut = $c_term_trimmed\tDash Starts Removed = $dash_starts_removed, Dash End Seqs Removed = $end_dash_removed\n\n";
 
-	print REP "$ali_file\t$ali_len\t$start_char\t$n_seqs_orig\t$n_seqs_final\t$low_occ\t$n_term_trimmed\t$c_term_trimmed\t$dash_starts_removed\t";
+	print REP "$ali_file\t$ali_len\t$start_char\t$n_seqs_orig\t$n_seqs_final\t$low_occ\t$n_term_trimmed\t$c_term_trimmed\t$dash_starts_removed\t$end_dash_removed\t";
 	my @sorted_exclude = sort { $a <=> $b } keys %exclude;
 	print REP join (",", @sorted_exclude), "\n"; 
 	
 	open (OUT, ">corrected_alis/$ali_file.fa"); 
-	&gjoseqlib::print_alignment_as_fasta(\*OUT, @ali6);
+	&gjoseqlib::print_alignment_as_fasta(\*OUT, @ali8);
 	close OUT;
 	
 	if ($n_seqs_final >= $min_seqs)
@@ -395,7 +458,7 @@ foreach (@clusterF)
 		if ($pssm_prefix){$pssm_file = "$pssm_prefix.$ali_file";}
 	
 		my %pssm_opts = (outPSSM  => "pssms/$tmp.pssm");
-		my $pssm = BlastInterface::alignment_to_pssm(\@ali6, \%pssm_opts);
+		my $pssm = BlastInterface::alignment_to_pssm(\@ali8, \%pssm_opts);
 	
 		open (IN, "<pssms/$tmp.pssm");
 		open (OUT, ">pssms/$pssm_file.pssm");

@@ -66,7 +66,7 @@ my @params = ("-i",    $sequences_file,
 		      "-g",    $name,
 		      "-threads", $opt->threads,
 		      "-c",    $opt->cdir,
-		      "-p",    $opt->pdir,
+		      "-pssm", $opt->pdir,
 		      "-j",    $opt->json,
 		      "-min",  $opt->min,
 		      "-max",  $opt->max,
@@ -159,7 +159,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 					-protein_translation => $feature->{aa_sequence},
 					-function            => $feature->{product},
 					-family_assignments  => $feature->{pssm},
-			};
+					};
 			$genome_in->add_feature($p);
 		}
     }

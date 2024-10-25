@@ -25,7 +25,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 
         -j   Full path to the options file in JSON format which carries data for a match (D = /home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json)
 		-c   Representative contigs directory (D = /home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs)
-		-p   Base directory of PSSMs   (D = /home/jjdavis/bin/Viral_Annotation/Viral-PSSMs)
+		-pssm   Base directory of PSSMs   (D = /home/jjdavis/bin/Viral_Annotation/Viral-PSSMs)
 	           Note that this is set up as a directory of pssms
 	           right now this is hardcoded as: "virus".pssms within this directory.
 
@@ -54,7 +54,7 @@ my $opts = GetOptions( 'h'         => \$help,
                        't=s'       => \$tmp,
                        'g=s'       => \$genome_name,
                        'c=s'       => \$cdir,
-                       'p=s'       => \$pdir,
+                       'pssm=s'    => \$pdir,
                        'min=s'     => \$min_len,
                        'max=s'     => \$max_len,
                        'j=s'       => \$opt_file,

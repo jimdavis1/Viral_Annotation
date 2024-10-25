@@ -1748,5 +1748,86 @@
         "anno": "Paramyxoviridae Y2 protein"
       }
     }
+  },
+  "Tospoviridae": {
+    "segments": {
+      "Small RNA Segment": {
+        "max_len": 3300,
+        "min_len": 2600,
+        "replicon_geometry": "linear"
+      },
+      "Medium RNA Segment": {
+        "max_len": 5060,
+        "min_len": 4550,
+        "replicon_geometry": "linear"
+      },
+      "Large RNA Segment": {
+        "max_len": 9000,
+        "min_len": 8500,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 3225,
+        "min_len": 2583,
+        "segment": "Large RNA Segment"
+      },
+      "MOV": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Medium RNA Segment",
+        "copy_num": 1,
+        "max_len": 342,
+        "min_len": 272,
+        "anno": "Movement protein"
+      },
+      "GPC": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
+        "copy_num": 1,
+        "max_len": 1313,
+        "min_len": 999,
+        "segment": "Medium RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 309,
+        "min_len": 232,
+        "segment": "Small RNA Segment"
+      },
+      "NSs": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Small RNA Segment",
+        "copy_num": 1,
+        "max_len": 514,
+        "min_len": 395,
+        "anno": "RNA silencing suppressor protein"
+      }
+    }
   }
 }
