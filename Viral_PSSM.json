@@ -239,6 +239,216 @@
       }
     }
   },
+  "Fimoviridae": {
+    "segments": {
+      "Segment One": {
+        "max_len": 8996,
+        "min_len": 2249,
+        "replicon_geometry": "linear"
+      },
+      "Segment Two": {
+        "max_len": 2204,
+        "min_len": 551,
+        "replicon_geometry": "linear"
+      },
+      "Segment Three": {
+        "max_len": 1040,
+        "min_len": 260,
+        "replicon_geometry": "linear"
+      },
+      "Segment Four": {
+        "max_len": 1256,
+        "min_len": 314,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2320,
+        "min_len": 2249,
+        "segment": "Segment One"
+      },
+      "MOV": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Segment Four",
+        "copy_num": 1,
+        "max_len": 414,
+        "min_len": 314,
+        "anno": "Movement protein"
+      },
+      "GPC": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
+        "copy_num": 1,
+        "max_len": 723,
+        "min_len": 551,
+        "segment": "Segment Two"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 348,
+        "min_len": 260,
+        "segment": "Segment Three"
+      },
+      "P7": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae RNA silencing suppressor protein P7"
+      },
+      "P8": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae RNA silencing suppressor protein P8"
+      },
+      "UNC1": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC2": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC3": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC4": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC5": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC6": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC7": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC8": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC9": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC10": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC11": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC12": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC13": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC14": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      },
+      "UNC15": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fimoviridae uncharacterized protein"
+      }
+    }
+  },
   "Ferlavirus": {
     "segments": {
       "Single RNA Segment": {

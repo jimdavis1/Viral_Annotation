@@ -299,6 +299,21 @@ BEGIN
     If keep_temp option is not specified
         Remove temporary directory
 ```
+## General notes on the curation and development of PSSMs
+### Paramyxoviridae
+
+There is tooling to add the correct number of guanines to correct for RDRP stuttering, some of these are still incorrect though. I don't like the idea of having to add to a template, as we will inevitably get this wrong in some cases. I consider this an open issue <br><br>
+
+
+### Tospoviridae:
+I was unable to find any acceptable publications that unambiguously define the coordinates of Gn and Gc.
+
+### Fimoviridae:
+I also could not find any publications clearly showing Gc and Gn.<br><br>
+
+The Fimoviridae are the most poorly characterized family that I have encountered so far.  They are  multi-segmented and variable in their smaller segments. Proteins from these segments including P5, 6, 6a, 6b, 7, and 27 are all essentially uncharacterized.  They are numbered based on appearance in the genome in which they are described, but this may or may not hold up as more are sequenced.  Furthermore, the proteins that have been called P5 and P6 have little to no similarity amongst themselves (usually < 35% identity) and could all be different proteins in their own right.  I chose to split these into individual sets of pssms wiht the annotation "Fimoviridae ncharacterized protein."  We can hang an annotation on each when we know what it does.  It is worth noting that due to the infrequency of these proteins, there are many low-occurrence uncharacterized proteins that are not getting called.   The "P5" protein of Raspberry leaf blotch emaravirus is a good example here (fig|1980431.35.CDS.1).<br><br> 
+
+
 
 
 
