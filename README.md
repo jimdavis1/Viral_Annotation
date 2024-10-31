@@ -7,6 +7,7 @@ This program is not intended to be used as a *de novo* protein or ORF discovery 
 Aquaparamyxovirus<br>
 Arenaviridae<br>
 Ferlavirus<br>
+Fimoviridae<br>
 Hantaviridae<br>
 Henipavirus<br>
 Jeilongvirus<br>
@@ -18,11 +19,10 @@ Orthorubulavirus<br>
 Peribunyaviridae<br>
 Paraavulavirus<br>
 Pararubulavirus<br>
+Phasmaviridae<br>
 Phenuiviridae<br>
 Respirovirus<br>
 Tospoviridae<br>
-Fimoviridae<br>
-Phasmaviridae<br>
 ## Dependencies
 
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
