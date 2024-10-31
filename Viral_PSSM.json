@@ -242,22 +242,22 @@
   "Fimoviridae": {
     "segments": {
       "Segment One": {
-        "max_len": 8996,
+        "max_len": 10440,
         "min_len": 2249,
         "replicon_geometry": "linear"
       },
       "Segment Two": {
-        "max_len": 2204,
+        "max_len": 3254,
         "min_len": 551,
         "replicon_geometry": "linear"
       },
       "Segment Three": {
-        "max_len": 1040,
+        "max_len": 1566,
         "min_len": 260,
         "replicon_geometry": "linear"
       },
       "Segment Four": {
-        "max_len": 1256,
+        "max_len": 1863,
         "min_len": 314,
         "replicon_geometry": "linear"
       }
@@ -1693,6 +1693,80 @@
         "downstream_ext": 1,
         "segment": "Small RNA Segment",
         "anno": "Bunyavirales small nonstructural protein (NSs protein)"
+      }
+    }
+  },
+  "Phasmaviridae": {
+    "segments": {
+      "Small RNA Segment": {
+        "max_len": 2021,
+        "min_len": 855,
+        "replicon_geometry": "linear"
+      },
+      "Medium RNA Segment": {
+        "max_len": 8550,
+        "min_len": 1737,
+        "replicon_geometry": "linear"
+      },
+      "Large RNA Segment": {
+        "max_len": 11241,
+        "min_len": 5301,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "GPC": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
+        "copy_num": 1,
+        "max_len": 1900,
+        "min_len": 579,
+        "segment": "Medium RNA Segment"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2498,
+        "min_len": 1767,
+        "segment": "Large RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 449,
+        "min_len": 285,
+        "segment": "Small RNA Segment"
+      },
+      "NSs": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.8,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Small RNA Segment",
+        "anno": "Bunyavirales small nonstructural protein (NSs protein)"
+      },
+      "UNC1": {
+        "bit_cutoff": 150,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.8,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Phasmaviridae uncharacterized protein"
       }
     }
   },

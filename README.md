@@ -21,7 +21,8 @@ Pararubulavirus<br>
 Phenuiviridae<br>
 Respirovirus<br>
 Tospoviridae<br>
-
+Fimoviridae<br>
+Phasmaviridae<br>
 ## Dependencies
 
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
@@ -313,7 +314,10 @@ I also could not find any publications clearly showing Gc and Gn.<br>
 
 The Fimoviridae are the most poorly characterized family that I have encountered so far.  They are  multi-segmented and variable in their smaller segments. Proteins from these segments including P5, 6, 6a, 6b, 7, and 27 are all essentially uncharacterized.  They are numbered based on appearance in the genome in which they are described, but their ordering may or may not hold up as more are sequenced.  Furthermore, the proteins that have been called P5 and P6 have little to no similarity amongst themselves (usually < 35% identity) and could all have different functions in their own right.  I chose to split these into individual sets of pssms with the annotation "Fimoviridae uncharacterized protein."  We can hang an annotation on each when we know what it does.  It is worth noting that due to the infrequency of these proteins, there are many low-occurrence uncharacterized proteins that did not get PSSMs and are not getting called.   The "P5" protein of Raspberry leaf blotch emaravirus is a good example here (fig|1980431.35.CDS.1).<br> 
 
+In this family the quality checker will look for Segments 1-4 only, which correspond to the individual proteins L, GPC, N, and MOV, respectively.  Their segment lenghts are highly variable, so the lenght cutoffs for segments 1-4 are based on the the lower length limit of the corresponding protein, and (the longest allowable gene + 0.5 X longest allowable gene) (this is arbitrary and could  be tuned).<br>
 
+## Phasmaviridae
+These are mostly insect virueses.  The set of genomes is highly diverse,with few representatives in each genus, so the pssms only represent a fraction of the true diversity.  There were a considerable number of proteins that I could not get to cluster at 50% identity. I am currently dissatisfied with this family, so as more exemplars come in, this set should eventually get recomputed. 
 
 
 
