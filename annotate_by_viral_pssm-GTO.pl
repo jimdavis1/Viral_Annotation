@@ -57,7 +57,7 @@ my $name           = $genome_in->{scientific_name};        #I should also be abl
 
 if (! $sequences_file){die "No sequences in the input GTO\n";}
 if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
-if (! $name)          {die "No gebine bane in the input GTO\n";}
+if (! $name)          {die "No genome name in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
 		      "-t",    $tempdir,

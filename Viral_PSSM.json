@@ -1304,6 +1304,309 @@
       }
     }
   },
+  "Orthoebolavirus": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 19079,
+        "min_len": 18608,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 813,
+        "min_len": 625,
+        "segment": "Single RNA Segment"
+      },
+      "VP35": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae RNA-dependent RNA polymerase cofactor protein (VP35)",
+        "copy_num": 1,
+        "max_len": 374,
+        "min_len": 296,
+        "segment": "Single RNA Segment"
+      },
+      "VP40": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae matrix protein protein (VP40)",
+        "copy_num": 1,
+        "max_len": 374,
+        "min_len": 273,
+        "segment": "Single RNA Segment"
+      },
+       "SP": {
+        "bit_cutoff": 25,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 0,
+        "anno": "Mature stable signal peptide (SSP)",
+        "segment": "Single RNA Segment",
+        "PMID": ["9658086"],
+        "copy_num": 1,
+        "max_len": 35,
+        "min_len": 29
+      },     
+       "Delta": {
+        "bit_cutoff": 25,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 1,
+        "anno": "Mature delta peptide viroporin and enterotoxin",
+        "segment": "Single RNA Segment",
+        "PMID": ["10603327", "28539454", "34986351"],
+        "copy_num": 1,
+        "max_len": 46,
+        "min_len": 36
+      },
+       "sGP": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 0,
+        "anno": "Mature soluble secreted glycoprotein (sGP)",
+        "segment": "Single RNA Segment",
+        "PMID": ["10603327", "28539454"],
+        "copy_num": 1,
+        "max_len": 321,
+        "min_len": 263
+      },
+      "sGP_Precursor": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Soluble secreted glycoprotein (sGP) precursor",
+        "copy_num": 1,
+        "max_len": 404,
+        "min_len": 328,
+        "segment": "Single RNA Segment",
+        "PMID": ["10603327", "28539454"]
+      },
+       "Gc": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 1,
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)",
+        "PMID": ["10683320"],
+        "segment": "Single RNA Segment",
+        "copy_num": 1,
+        "max_len": 193,
+        "min_len": 157
+      },
+      "VP30": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae transcription activator protein (VP30)",
+        "copy_num": 1,
+        "max_len": 317,
+        "min_len": 253,
+        "segment": "Single RNA Segment"
+      },
+      "VP24": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae nucleocapsid maturation factor (VP24)",
+        "copy_num": 1,
+        "max_len": 278,
+        "min_len": 226,
+        "segment": "Single RNA Segment"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2564,
+        "min_len": 1989,
+        "segment": "Single RNA Segment"
+      },
+        "Gn": {
+        "feature_type": "mat_peptide",
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)",
+        "PMID": ["21411529", "26051281"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 516,
+        "min_len": 422,
+        "segment": "Single RNA Segment"
+      },
+        "ssGP": {
+        "feature_type": "mat_peptide",
+        "anno": "Small soluble glycoprotein (ssGP protein)",
+        "PMID": ["21411529", "26051281"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 330,
+        "min_len": 240,
+        "segment": "Single RNA Segment"
+      },
+        "GPC": {
+        "feature_type": "CDS",
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
+        "PMID": ["21411529", "26051281"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 746,
+        "min_len": 609,
+        "segment": "Single RNA Segment"
+      }
+    }
+  },
+  "Orthomarburgvirus": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 20074,
+        "min_len": 18505,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 813,
+        "min_len": 625,
+        "segment": "Single RNA Segment"
+      },
+      "VP35": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae RNA-dependent RNA polymerase cofactor protein (VP35)",
+        "copy_num": 1,
+        "max_len": 374,
+        "min_len": 296,
+        "segment": "Single RNA Segment"
+      },
+      "VP40": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae matrix protein protein (VP40)",
+        "copy_num": 1,
+        "max_len": 374,
+        "min_len": 273,
+        "segment": "Single RNA Segment"
+      },
+       "GPC": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
+        "copy_num": 1,
+        "max_len": 749,
+        "min_len": 608,
+        "segment": "Single RNA Segment"
+      },
+       "Gn": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 0,
+        "anno": "Mature envelope glycoprotein Gn (Gn protein)",
+        "PMID": ["25786917", "25723165", "10683320"],
+        "segment": "Single RNA Segment"
+      },
+       "Gc": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 1,
+        "anno": "Mature envelope glycoprotein Gc (Gc protein)",
+        "PMID": ["25786917", "25723165", "10683320"],
+        "segment": "Single RNA Segment"
+      },
+       "SP": {
+        "bit_cutoff": 25,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 0,
+        "anno": "Mature stable signal peptide (SSP)",
+        "segment": "Single RNA Segment",
+        "PMID": ["8437211"]
+      },
+      "VP30": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae transcription activator protein (VP30)",
+        "copy_num": 1,
+        "max_len": 317,
+        "min_len": 253,
+        "segment": "Single RNA Segment"
+      },
+      "VP24": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Filoviridae nucleocapsid maturation factor (VP24)",
+        "copy_num": 1,
+        "max_len": 278,
+        "min_len": 226,
+        "segment": "Single RNA Segment"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2564,
+        "min_len": 1989,
+        "segment": "Single RNA Segment"
+      }
+    }
+  },
   "Orthorubulavirus": {
     "segments": {
       "Single RNA Segment": {
