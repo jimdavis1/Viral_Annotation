@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the members of the *Paramyxoviridae* and the *Bunyavirales*. The overall goal is to create a very low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the  *Paramyxoviridae*, *Bunyavirales*, and *Filoviridae*. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families, and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  I will explain more about how it works below.
 
@@ -15,6 +15,8 @@ Metaavulavirus<br>
 Morbillivirus<br>
 Nairoviridae<br>
 Orthoavulavirus<br>
+Orthoebolavirus<br>
+Orthomarburgvirus<br>
 Orthorubulavirus<br>
 Peribunyaviridae<br>
 Paraavulavirus<br>
@@ -23,35 +25,52 @@ Phasmaviridae<br>
 Phenuiviridae<br>
 Respirovirus<br>
 Tospoviridae<br>
+
 ## Dependencies
 
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
 
 The script(s) have the following dependencies:<br>
-External CPAN perl modules:
+External CPAN perl modules:<br>
 
-`JSON::XS`<br>
-`File::Slurp`<br>
+Data::Dumper<br>
+File::Copy<br>
+File::Path<br>
+File::SearchPath<br>
+File::Slurp<br>
+Getopt::Long<br>
+IPC::Run<br>
+JSON::XS<br>
+Time::HiRes<br>
+<br>
 
-It also uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  It is used for sequence manipulation.  You can get the latest version of this module by downloading it from Gary's repo here: https://github.com/TheSEED/seed_gjo/  <br>
+It uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  This is used for basic sequence manipulation.  You can get the latest version of this module by downloading it from Gary's repo here: https://github.com/TheSEED/seed_gjo/  <br>
+
+There are 2 BV-BRC supported modules as well:<br>
+GenomeTypeObject.pm (https://github.com/BV-BRC/p3_core/blob/master/lib/GenomeTypeObject.pm).  This perl module contains all the necessary tooling to read and write to and from a Genome Type Object, which is a JSON representation of a genome and all analysis events.<br>
+
+The P3DataAPI "https://www.bv-brc.org/docs/cli\_tutorial/command\_list/P3DataAPI.html) is used to generate unique ids for features in the BVBRC annotation system.<br>
+
 
 The program(s) run the blast suite of tools from NCBI.  The current version requires:<br>
 `blastn: 2.13.0+`
 `tblastn: 2.13.0+`<br>
 
-I have not tested it on other versions of BLAST<br>
+It has not been tested on other versions of BLAST.  Note that it uses the JSON output of BLAST and other versions of BLAST have slightly different JSON formatting.  <br>
 
-For internal ANL users, source:<br>
+For internal users, source:<br>
 `/vol/patric3/cli/ubuntu-cli/user-env.sh`<br>
 
 ## Repo Contents
-`annotate_by_viral_pssm.pl` the perl script that runs the blasts and calls the proteins. <br>
+`annotate_by_viral_pssm.pl` the perl script that runs the BLASTs and calls the ordinary proteins (CDSs), mature peptides, and location-based features such as RNAs. <br>
 `annotate_by_viral_pssm-GTO.pl` this perl script runs annotate_by_viral_pssm.pl and creates a GTO as output. Note that its help options are slightly different.<br>
 It is run in the following way: `annotate_by_viral_pssm-GTO.pl  -x [file_prefix] -i Input.gto -o Output.gto` with other options in the help menu.<br>
-`Viral_PSSM.json`  the file containing BLAST and ORF calling parameters per protein.<br>
-`Viral-Rep-Contigs` the directory of representative contigs that guides the program to the closest set of PSSMs.<br>
+`get_transcript_edited_features.pl` This script reads a GTO and finds sequences that have undergone transcript editing, updating the resulting CDS or mat_peptide.<br>
+`viral_genome_quality.pl`  This script reads the GTO and evaluates the genome quality based on CDSs and mat_peptide features present, and their copy number.  It also evaluates the contigs based on copy number and the proteins they encode.<br>
+`Viral_PSSM.json`  This file contains BLAST and ORF parameters per feature.<br>
+`Viral-Rep-Contigs` This is the directory of representative contigs that guides the program to the closest set of PSSMs.<br>
 `Viral-PSSMs` the directory of hand curated PSSMS per family or genus. There may be more than one PSSM per protein.<br>
-`Viral-Alignments`  the directory of alignments that corresponds to each PSSM.  This is not used by the program, but it is useful for keeping track of the source data used to build each PSSM.<br>
+`Viral-Alignments`  This directory contains the alignments that correspond to each PSSM.  This is not used by the program, but it is useful for keeping track of the source data used to build each PSSMs.<br>
 `Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of this tool.  It currently contains a program called, `list_annos_from_pssms.pl` which will dump the annotation for each pssm.<br><br>
 
 ## How to run annotate_by_viral_pssm.pl
@@ -77,9 +96,9 @@ Options include:
 	      Note that this is set up as a directory of pssms
 	      right now this is hardcoded as: "virus".pssms within this directory.
 ```
-*I plan to eventually change -t and -g to be something more intelligent.*<br>  
 Hard-coded locations currently exist as the defaults for -opt, -l, and -p.  Since that is annoying, you 
-might want to run something like `perl -i -pe 's/\/home\/jjdavis\/bin/the path to your bin/g' annotate_by_viral_pssm.pl`, or you could edit lines 70-72 by hand (but note that these are the line numbers at the time I wrote this).<br><br>
+might want to run something like:<br>
+`perl -i -pe 's/\/home\/jjdavis\/bin/the path to your bin/g' annotate_by_viral_pssm.pl`, or you could edit lines 70-72 by hand (but note that these are the line numbers at the time I wrote this).<br><br>
 
 
 
@@ -97,7 +116,7 @@ There is also a set of debugging parameters that I use frequently:
 
 ## How it works
 
-The code is currently designed to work on *Paramyxoviridae* and most *Bunyavirales* viruses, although I plan to add more.  As depicted in the image below, it first performs a BLASTn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
+The code is currently designed to work on the *Paramyxoviridae*, *Bunyavirales*, and Filoviridae, although more families are planned.  As depicted in the image below, it first performs a BLASTn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
 For each genus, there is a directory of PSSMs corresponding to each known protein for that genus. The PSSMs are derived from a set of hand curated alignments. In the next step, it cycles through each directory of PSSMs (there may be more than one PSSM per protein), choosing the best tBLASTn match per pssm. <br>
 
 Note that it assumes your genome will have the same set of proteins as the nearest match. This is why it is not intended to be used as a discovery tool.  In the event that a new protein is found, a new PSSM must be added to the PSSM directory.  <br><br>
@@ -106,204 +125,62 @@ Note that it assumes your genome will have the same set of proteins as the neare
 
 <br><br>Finally it performs any special rules on the proteins/ORFs.  These rules are currently encoded in a JSON file called `Viral_PSSM.json`. The following is a description fo the current JSON strucutre. <br>
 
-The perl code reads the JSON file into a hashref, which has this general structure: `options->{virus}->{protein}->{option} = value`.  So, for the F protein shown below, the options hash will have a bit score cutoff of 100 (fairly relaxed for a pssm), and a coverage cutoff of 65%. Upstream extension is turned on. This functionality extends the ORF upstream to find the closest Met (assuming it doesn't start with an AUG already). Downstream extension is also turned on.  This searches for a stop codon in-frame after the PSSM match. These can be turned off by editing the JSON file and setting their values to zero.<br><br>
-
-```
- "Metaavula": {
-    "F": {
-      "bit_cutoff": 100,
-      "coverage_cutoff": 0.65,
-      "upstream_ext": 1,
-      "downstream_ext": 1
-    },
-```
-
-
-Another simple rule, which is not shown in the example is `start_to_met`: when this is set to 1, the first amino acid matching the PSSM is manually converted to Met.<br>
-
-There are several cases where the rules are more complex.  For example, In the *Paramyxoviridae*, there is a phenomenon called RNA editing, where additional nucleotides can be inserted into transcripts of the phosphoprotein, which cause the RNA-polymerase to jump frames, and translation is continued in a new frame.  This means that two separate blast matches are required to capture the resulting protein. The functionality is encoded using the parameters `paramyxo_join`, `join_partner`, `new_anno`, and optionally `paramyxo_insert`. `paramyxo_join` is set to 1 if it is the first blast match of the pair and 2 if it is the second blast match of the pair. If `paramyxo_join` is set to 1, then the parameter `join_partner` must be used to denote the other pssm match that it is paired with.  In the case below, P is joined with V-ORF2 and W-ORF2 to to merge their ORFs and make a full-length V protein and full-length W protein, respectively.  On the second join partner, there is a parameter called `new_anno`, which carries the annotation for the newly merged protein (the annotations are typically stored in the pssm title field, but this could be changed). `paramyxo_insert` is a parameter that I have been tinkering with to correct the transcirpt, so that we end up with the right amino acid sequence after the merge.  Notice also that the `upstream_ext` parameter is set to zero in the case of V-ORF2.  In this case we do not want it searching up stream for a Met codon.  *Note that this phospho protein region is still a work in progress. Currently, I have tested this extensively and I have the gene boundaries debuged. In all cases that I am aware of it provides the merged amino acid product from the correct frame.  However, I still have several instances where the amino acid at the editing site is incorrect.  I also need to split the Respiroviruses*
-
-Here is a snippet to describe the overall structure:<br>
-```
- "Metaavula": {
-    "F": {
-      "bit_cutoff": 100,
-      "coverage_cutoff": 0.65,
-      "upstream_ext": 1,
-      "downstream_ext": 1
-    },
-    "P": {
-      "bit_cutoff": 100,
-      "coverage_cutoff": 0.65,
-      "upstream_ext": 1,
-      "downstream_ext": 1,
-      "paramyxo_join": 1,
-      "join_partner": ["V-ORF2", "W-ORF2"]
-    },
-    "V-ORF2": {
-      "bit_cutoff": 100,
-      "coverage_cutoff": 0.65,
-      "upstream_ext": 0,
-      "downstream_ext": 1,
-      "paramyxo_join": 2,
-      "new_anno": "V Protein"
-```
-
-The next and final set of rules relate to calling features that are not based on PSSMs.  In this case, if you know the location of a feature, and it can be established in reference to the start or stop position of any of the pssm-based matches, then it can be called in the genome.  Here is an example.  In this case for the *Arenaviridae* there is a feature called the large segement stemloop.  It ocurrs between the stop position of Z protein and the stop position of L protein. First, for L and Z we hadd a new key called `non_pssm_partner` which tells the program that one of the coordinates of that protein are important for calling the "Large Segment Stemloop."  Then in the object for the Large Segment Stemloop there are several new fields.  `anno` provides the annotation for the feature.  `translate` is a Boolean for whether you want the feature translated or not. `min_len` and `max_len` dictate the size cutoffs for calling the feature.  Next, `begin` tells it which pssm is the beginning coordinate with `begin_pssm`, `begin_pssm_loc` in this case is the "STOP" position of "Z".  Finally, `begin_offset` is 1 indicating that you want to start on the nucleotide after the stop.  `End` is essentially the mirror image.  If either of these had started or stoped on the "START"  position then you would simply say "START" for end or begin_pssm_loc.
+The perl code reads the JSON file into a hashref, which has this general structure: <br><br>
 
 ```
   "Arenaviridae": {
-    "L": {
-      "bit_cutoff": 100,
-      "coverage_cutoff": 0.65,
-      "upstream_ext": 1,
-      "downstream_ext": 1,
-      "non_pssm_partner": ["Large Segment Stemloop"]
-    },
-    "Z": {
-      "bit_cutoff": 100,
-      "coverage_cutoff": 0.65,
-      "upstream_ext": 1,
-      "downstream_ext": 1,
-      "non_pssm_partner": ["Large Segment Stemloop"]
-    },
-    "Large Segment Stemloop": {
-      "anno": "Large Segment Intergenic Stem Loop Region",
-      "translate": 0,
-      "min_len": 50,
-      "max_len": 200,
-      "begin": {
-        "begin_pssm": "Z",
-        "begin_pssm_loc": "STOP",
-        "begin_offset": 1
+    "segments": {
+      "Small RNA Segment": {
+        "max_len": 3741,
+        "min_len": 3061,
+        "replicon_geometry": "linear"
       },
-      "end": {
-        "end_pssm": "L",
-        "end_pssm_loc": "STOP",
-        "end_offset": 1
+      "Large RNA Segment": {
+        "max_len": 8014,
+        "min_len": 6556,
+        "replicon_geometry": "linear"
       }
+    "features": {
+      "GPC": {
+        "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
+        "bit_cutoff": 100,
+        "copy_num": 1,
+        "coverage_cutoff": 0.65,
+        "downstream_ext": 1,
+        "feature_type": "CDS",
+        "max_len": 617,
+        "min_len": 455,
+        "non_pssm_partner": ["Small Segment Stemloop"],
+        "segment": "Small RNA Segment",
+        "upstream_ext": 1
+      },
+      ...
 ```
-## Pseudocode for annotate_by_viral_pssm.pl
-The following pseudocode offeres an explanation of how the program works:<br><br>
-```
-BEGIN
-    Import required modules
-    Define usage instructions
-    Define command line options and their default values
-    Parse command line options
 
-    If help option is provided
-        Display usage instructions and exit
+The Viral_PSSM.json file is in a regular state of development, so this may change slightly, but the above shows an example for, *Arenaviridae*, and a single protein, GPC.  The two highest level keys are `segments`, which contains information on segments that are used for genome quality evaluation.  `features` currently contains information on CDS, mat_peptide, and RNA features. <br>
 
-    If input subject file is not provided
-        Display error message and exit
+The following is a non-exhaustive description of fields that are used in the JSON<br>
+`max_len and min_len` maximum or minimum length of a contig or feature that is expected and evaluated by the genome quality checker (not all features or contigs will have this)<br>
+`replicon_geometry` this is not currently used, but carries info on the genometry of the replicon and inserted into the GTO by the quality tool<br>
+`copy_num` expected copy number of a feature<br>
+`coverage_cutoff` blast subject coverage for calling a feature<br>
+`upstream_ext and downstream_ext` tells the program if it can look upstream for a met start or downstream for a stop codon<br>
+`feature_type` currently CDS, mat_peptide, or RNA <br>
+`segment` which segment a feature belongs to (used by quality tool)<br>
+`non_pssm_partner` used for placing a location based feature.<br><br>
 
-    Generate random temp file name if not provided
-    Set default values for optional parameters if not provided
-    Read options from JSON file and store in options variable
+There are other fields that are not depicted in the example, including:<br>
+`PMID` which contains the pubmed ID for one or more DLITS.  These are examples of important papers that either define the function or sequence of a feature. <br>
+`"special": "transcript_edit"`  This field tells the program that an external program is being used to make a call.  In this case, `transcript_edit` is used to denote a feature that undergoes transcript editing and is found by using `get_transcript_edited_features.pl`.<br>
 
-    Open input subject file
-    Read sequences from file using gjoseqlib::read_fasta function
-    Close input file
 
-    Calculate total length of sequences
-    If total length is not within min_len and max_len
-        Display error message and exit
-
-    Create hash of contigs and track order
-    For each sequence in sequences
-        Add sequence to contigH with ID as key and sequence as value
-        Increment length by length of sequence
-        Add ID to contig_order array
-    End loop
-
-    Get current working directory
-    Create temporary directory
-    Copy subject file to temporary directory
-    Change working directory to temporary directory
-    Create blast database using makeblastdb command
-
-    Open directory of representative contigs
-    Get list of representative contigs
-    Close directory
-
-    Initialize variables for best_contig_bit and best_virus_match
-    For each representative contig
-        Perform blastn against subject file
-        Decode blastn output
-        If match bit is greater than or equal to best_contig_bit
-            Update best_contig_bit and best_virus_match
-    End loop
-
-    Print best_contig_bit and best_virus_match to STDERR
-
-    Open directory of PSSM directories
-    Get list of PSSM directories
-    Close directory
-
-    For each PSSM directory
-        Open directory of PSSM files
-        Get list of PSSM files
-        Close directory
-        For each PSSM file
-            Perform tblastn against subject file using PSSM file
-            Decode tblastn output
-            Calculate best matching result based on bit score
-        End loop
-        Print best_pssm and best_bit to STDERR
-
-        For each result in best_results
-            Process matching sequence and coordinates
-            Generate protein sequence
-            If required, set up Paramyxo Join
-            If required, set up calling non-pssm features anchored to PSSM coordinates
-            Add matching sequence as a tuple to all_seqs array
-        End loop
-    End loop
-
-    If join information exists
-        Generate tuples for joining ORFs
-        Add tuples to all_seqs array
-    End loop
-
-    If non-pssm features exist
-        Generate tuples for non-pssm features anchored to PSSM coordinates
-        Add tuples to all_seqs array
-    End loop
-
-    Sort all_seqs array by contig and then start position
-
-    Initialize variables for prot_seqs, gene_seqs, and count
-    For each contig in contig_order
-        Filter features for current contig
-        Sort features by start position
-        For each feature in sorted features
-            Generate unique protein ID
-            Add protein sequence and gene sequence to respective arrays
-            Print feature information to TBL file
-        End loop
-    End loop
-
-    If output files are not suppressed
-        Print gene sequences and protein sequences to respective output files
-    End loop
-
-    If only DNA output is requested
-        Print gene sequences to output
-    End loop
-
-    If only amino acid output is requested
-        Print protein sequences to output
-    End loop
-
-    Change working directory back to base directory
-    If keep_temp option is not specified
-        Remove temporary directory
-```
 ## General notes on the curation and development of PSSMs
 ### Paramyxoviridae
 
-There is tooling to add the correct number of guanines to correct for RDRP stuttering.  In some families there are phosphoproteins that are off by one or two glycines (although the frames of the merged ORFs are correct). It currently works by adding guanines to the template, and I don't like the idea of altering the template, so I consider this an open issue <br>
+I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of ebola, but I need to go back and update the phosphoproteins in the paramyxos.  They are currently called by splicing two ORFS, which turned out to be problematic in a few cases. 
+
+
+<br>
 
 
 ### Tospoviridae:
@@ -312,9 +189,9 @@ I was unable to find any acceptable publications that unambiguously define the c
 ### Fimoviridae:
 I also could not find any publications clearly showing Gc and Gn.<br>
 
-The Fimoviridae are the most poorly characterized family that I have encountered so far.  They are  multi-segmented and variable in their smaller segments. Proteins from these segments including P5, 6, 6a, 6b, 7, and 27 are all essentially uncharacterized.  They are numbered based on appearance in the genome in which they are described, but their ordering may or may not hold up as more are sequenced.  Furthermore, the proteins that have been called P5 and P6 have little to no similarity amongst themselves (usually < 35% identity) and could all have different functions in their own right.  I chose to split these into individual sets of pssms with the annotation "Fimoviridae uncharacterized protein."  We can hang an annotation on each when we know what it does.  It is worth noting that due to the infrequency of these proteins, there are many low-occurrence uncharacterized proteins that did not get PSSMs and are not getting called.   The "P5" protein of Raspberry leaf blotch emaravirus is a good example here (fig|1980431.35.CDS.1).<br> 
+The Fimoviridae are the most poorly characterized family that I have encountered so far.  They are  multi-segmented and variable in their smaller segments. Proteins from these segments including P5, 6, 6a, 6b, 7, and 27 are all essentially uncharacterized.  They are numbered based on appearance in the genome in which they are described, but their ordering may or may not hold up as more are sequenced.  Furthermore, the proteins that have been called P5 and P6 have little to no similarity amongst themselves (usually < 35% identity) and could all have different functions in their own right.  I chose to split these into individual sets of pssms with the annotation "Fimoviridae uncharacterized protein."  We can hang an annotation on each when we learn what it does.  It is worth noting that due to the infrequency of these proteins, there are many low-occurrence uncharacterized proteins that did not get PSSMs and are not getting called.   The "P5" protein of Raspberry leaf blotch emaravirus is a good example here (fig|1980431.35.CDS.1).<br> 
 
-In this family the quality checker will look for Segments 1-4 only, which correspond to the individual proteins L, GPC, N, and MOV, respectively.  Their segment lenghts are highly variable, so the lenght cutoffs for segments 1-4 are based on the the lower length limit of the corresponding protein, and (the longest allowable gene + 0.5 X longest allowable gene) (this is arbitrary and could  be tuned).<br>
+In this family the quality checker will look for Segments 1-4 only, which correspond to the individual proteins L, GPC, N, and MOV, respectively.  Their segment lengths are highly variable, so the lenght cutoffs for segments 1-4 are based on the the lower length limit of the corresponding protein, and (the longest allowable gene + 0.5 X longest allowable gene) (this is arbitrary and could  be tuned).<br>
 
 ## Phasmaviridae
 These are mostly insect virueses.  The set of genomes is highly diverse,with few representatives in each genus, so the pssms only represent a fraction of the true diversity.  There were a considerable number of proteins that I could not get to cluster at 50% identity. I am currently dissatisfied with this family, so as more exemplars come in, this set should eventually get recomputed. 
