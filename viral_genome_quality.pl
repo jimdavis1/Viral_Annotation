@@ -31,7 +31,7 @@ use File::Slurp;
 #
 
 my($opt, $usage) = describe_options("%c %o",
-				    ["ambiguous|a=f"   => "Fraction of ambiguous bases", { default => 0.01 }],
+				    ["ambiguous|a=f"   => "Fraction of ambiguous bases, (Default = 0.01)", { default => 0.01 }],
 				    ["input|i=s"       => "Input GTO"],
 				    ["output|o=s"      => "Output GTO"],
 				    ["prefix|p=s"      => "Genome Quality File Prefix", { default => "Viral_Anno" }],
@@ -96,7 +96,7 @@ foreach (keys %{$json->{$fam}->{features}})
 {
 	my $prot = $_;
 	my $anno     = $json->{$fam}->{features}->{$prot}->{anno};
-	if (($json->{$fam}->{features}->{$prot}->{copy_num}) && ($json->{$fam}->{features}->{$prot}->{feature_type} =~ /CDS/))
+	if (($json->{$fam}->{features}->{$prot}->{copy_num}) && ($json->{$fam}->{features}->{$prot}->{feature_type} =~ /(CDS|mat_peptide)/)) 
 	{
 		$essential->{$anno}->{copy_num} = $json->{$fam}->{features}->{$prot}->{copy_num};
 		$essential->{$anno}->{segment}  = $json->{$fam}->{features}->{$prot}->{segment};
@@ -105,7 +105,7 @@ foreach (keys %{$json->{$fam}->{features}})
 		$anno_count{$anno} = 0;
 	}
 	#also grab nonessential proteins with a known segment.
-	elsif (($json->{$fam}->{features}->{$prot}->{feature_type} =~ /CDS/i) && ($json->{$fam}->{features}->{$prot}->{segment}) && ($json->{$fam}->{features}->{$prot}->{anno}))
+	elsif (($json->{$fam}->{features}->{$prot}->{feature_type} =~ /(CDS|mat_peptide)/i) && ($json->{$fam}->{features}->{$prot}->{segment}) && ($json->{$fam}->{features}->{$prot}->{anno}))
 	{
 		$nonessential{$anno} = $json->{$fam}->{features}->{$prot}->{segment};
 	}
