@@ -3,7 +3,6 @@ use strict;
 use Data::Dumper;
 use Time::HiRes 'gettimeofday';
 use GenomeTypeObject;
-use Getopt::Long::Descriptive;
 use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
@@ -11,26 +10,49 @@ use File::Path 'remove_tree';
 use IPC::Run qw(run);
 use Cwd;
 use gjoseqlib;
+use Getopt::Long::Descriptive;
+
+
+my $program_description = <<'END_DESCRIPTION';
+This program performs feature calling for transcript edited proteins.  It reads and writes GTO files.
+It works by using a set of hand-curated transcripts in --dir as the queries.  --id, --gaps, and --cov refer 
+to the strict inclusion criteria for enabling the mapping the nucleotides from the closest hand-curated transcript
+onto the subject sequence.  When we enoucnter a blast match that is good, [defined by --lower_pid, --lower_pcov, and --eval], 
+but not good enough to carry over the transcript-edited seqeunce, we call a partial_cds feature and the anntaotion becomes:
+[Uncorrected . annotation string . encoding region]. It is considered a partial_cds feature because the translation would be 
+be interrupted where the frame jump occurs, or shortly thereafter.
+
+END_DESCRIPTION
+
 
 
 my ($help, $tmp); 
 my($opt, $usage) = describe_options("%c %o",
-				    ["input|i=s"       => "Input GTO"],
-				    ["output|o=s"      => "Output GTO"],
-				    ["cov|c=i"         => "Minimum percent query coverage (D = 95)", { default => 95 }],
-				    ["id|p=i"          => "Minimum percent identity  (D = 95)", { default => 95 }],
-				    ["gaps|g=i"        => "Maximum number of allowable gaps (D = 2)", { default => 2 }],
-		            ["threads|a=i"     => "Threads for the BLASTN (D = 24))", { default => 24 }],
-				    ["json|j=s"        => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
-				    ["dir|d=s"         => "Full path to the directory of aligned transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing"}],
-				    ["tmp|t=s"         => "Declare name for temp dir (D = randomly named in cwd)"], 
-				    ["help|h"          => "Show this help message"]);
+				    ["input|i=s"            => "Input GTO"],
+				    ["output|o=s"           => "Output GTO"],
+				    ["cov|c=i"              => "Minimum BLASTn percent query coverage (D = 95)", { default => 95 }],
+				    ["id|p=i"               => "Minimum BLASTn percent identity  (D = 95)", { default => 95 }],
+				    ["gaps|g=i"             => "Maximum number of allowable gaps (D = 2)", { default => 2 }],
+		            ["e_val|e=f"            => "Maximum BLASTn evalue for considering any HSP (D = 0.5)", { default => 0.5 }],
+		            ["lower_pid|lpi"        => "Lower percent identity threshold for a feature call without transcript editing correction (D = 80)", {default => 80}],
+		            ["lower_pcov|lpi"       => "Lower percent query coverage for for a feature call without transcritp editing correction (D = 80)", {default => 80}],
+		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
+				    ["json|j=s"             => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
+				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing"}],
+				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
+				    ["help|h"               => "Show this help message"],
+				    ["debug|b"              => "Enable debugging"],
+);
 
 
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
+
 if ($opt->tmp){$tmp = $opt->tmp;}
-else{$tmp .= sprintf("%x", rand 16) for 1..20;}
+#else{$tmp .= sprintf("%x", rand 16) for 1..20;}
+else {$tmp = File::Temp->newdir(CLEANUP => ($opt->debug ? 0 : 1))}
+print STDERR "Tempdir=$tmp\n" if $opt->debug;
+
 my $dir = $opt->dir;
 
 my $genome_in = GenomeTypeObject->create_from_file($opt->input);
@@ -49,12 +71,13 @@ for my $i (0 .. $#{$genome_in->{features}})
 		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
 	}
 }
+
 die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
 my $fam = (keys %pssm_fam)[0];
 $fam or die "GTO has no annotations from annotate_by_viral_pssm tool\n"; 
 
 
-# Next we read the JSON to see if there are any transcript edited features
+# Next we read the JSON to see if there are any transcript edited features that we need to find
 my $json      = decode_json(read_file($opt->json));
 $genome_in or die "Error reading json protein feature data";
 
@@ -120,48 +143,53 @@ if (scalar @to_analyze)
 			my @blast_parms = (
 		      "-query",         $query,
 		      "-db",            $contigs, #### fix this in the original program
-		      "-evalue",        0.5,
+		      "-evalue",        $opt->e_val,
 		      "-reward",          2,
 		      "-penalty",        -3,
 		      "-word_size",      28,
 		      "-outfmt",         15,
 		      "-soft_masking",   "false",
 		      "-dust",           "no",
-		      "-perc_identity",  $opt->id,
-              "-qcov_hsp_perc",  $opt->cov,
+		      "-perc_identity",  $opt->lower_pid,   
+              "-qcov_hsp_perc",  $opt->lower_pcov,
 		      "-num_threads",    $opt->threads);
 
-		#print STDERR Dumper(\@blast_parms);
 		my $do_blast = run(["blastn", @blast_parms], ">", "$name.json", "2>", "$name.blastn.stderr.txt");
 		
 		open (IN, "<$name.json"), or warn "Cannot open JSON BLASTn output file $name.json\n";
 		my $results = decode_json(scalar read_file(\*IN));	
 		close IN;
 		
+		
 		#Gather in the best match.
-		my $matches = best_blastn_match_by_loc($results, $opt->id, $opt->cov, $opt->gaps);  
-	
-		# Create the transcript edited protein feature by reading the subject and filling the 
-		# gaps using the hand-curated sequences from the query. 	
+		my $matches = best_blastn_match_by_loc($results);  #removed id, cov, and gap thresholds from here  
+
+
 		foreach (keys %$matches)
 		{
-			my $sid = $_; 
+			my $sid = $_;
 			foreach (keys %{$matches->{$sid}})
 			{
-				my $from = $_;
-				my $to   = $matches->{$sid}->{$from}->{TO};
-				my $sseq = $matches->{$sid}->{$from}->{HSEQ};
-				my $qseq = $matches->{$sid}->{$from}->{QSEQ};
-				my $dashes = ($sseq =~ tr/-//); 
-				my $runs = $sseq =~ /(?=--)/g;
-
-				#There can only be one gap with <= $opt->gaps number of dashes
-				if (($dashes <= $opt->gaps) && ($runs <= 1))
+				my $from    = $_; 
+				my $to      = $matches->{$sid}->{$from}->{TO};
+				my $sseq    = $matches->{$sid}->{$from}->{HSEQ};
+				my $qseq    = $matches->{$sid}->{$from}->{QSEQ};
+				my $iden    = $matches->{$sid}->{$from}->{IDEN};
+				my $ali_len = $matches->{$sid}->{$from}->{ALI_LEN};				
+				my $dashes  = ($sseq =~ tr/-//); 
+				my $runs    = $sseq =~ /(?=--)/g;				
+				my $pid     =  (($iden/$ali_len) * 100);				
+				my $qcov    =  (($ali_len/(length $qseq)) * 100); 				
+				my $gaps    = $matches->{$sid}->{$from}->{GAPS};	
+						
+				
+				#If all inclusion critreria are met (%id, %Qcov, num gaps, runs of gaps)
+				if ( ($pid >= $opt->id) && ($qcov >= $opt->cov) && ($dashes <= $opt->gaps) && ($runs <= 1))
 				{
 					my @snts = split ("", $sseq);
 					my @qnts = split ("", $qseq);
 					my @mod_seq;
-					
+				
 					for my $i (0..$#snts)
 					{
 						if ($snts[$i] =~ /\-/)
@@ -176,10 +204,7 @@ if (scalar @to_analyze)
 
 					my $mod = join ("", @mod_seq);
 					my $mod_aa = &gjoseqlib::translate_seq( $mod );
-
-				
-					#okay, now we need to move the feature into the GTO
-				
+			
 					my ($len, $strand);
 					if ($from < $to)
 					{
@@ -190,8 +215,7 @@ if (scalar @to_analyze)
 						$strand = "-";
 						$len = ($from - $to) + 1;	
 					}
-				
-				
+			
 					my $feature = {
 						type        => $ft,
 						contig      => $sid,
@@ -199,45 +223,95 @@ if (scalar @to_analyze)
 						location    => ([[$sid, $from, $strand, $len]]),
 						product     => $anno,
 						pssm        => ([[$fam, $name, $anno, "get_transcript_edited_features"]]),
-						};
+					};
 					push(@{$features{$ft}}, $feature);
+				}
+			
+			
+				# if the inclusion criteria are NOT met, but there is still a decent HSP
+				# from the blast, we add it as a partial CDS that goes uncorrected.  No
+				# protein translation is given.
+				else
+				{
+					my $feature_type = "partial_cds";
+					my ($len, $strand);
+					if ($from < $to)
+					{
+						$strand = "+";
+						$len = ($to - $from) + 1;
+					}
+					elsif ($from > $to){
+						$strand = "-";
+						$len = ($from - $to) + 1;	
+					}
+
+					my $lc_anno = lcfirst($anno);
+				
+					my $feature = {
+						type        => $feature_type,
+						contig      => $sid,
+						location    => ([[$sid, $from, $strand, $len]]),
+						product     => "Uncorrected "."$lc_anno"." encoding region",
+						pssm        => ([[$fam, $name, $anno, "get_transcript_edited_features"]]),  #I don't actually use this but i left it there.
+					};
+					push(@{$features{$feature_type}}, $feature);
 				}
 			}
 		}
-	}
-
-    for my $type (keys %features)
-    {
-		my $feats = $features{$type};
-		my $n = @$feats;
-		my $id_type = $type;
+	}	
 	
-		for my $feature (@$feats)
+
+	# Push features into the GTO
+	foreach (keys %features)
+	{
+		my $type = $_; 
+		
+		foreach (@{$features{$type}})
 		{
-			my $p = {
-					-id	                 => $genome_in->new_feature_id($id_type),
+			my $data = $_;
+
+			if ($type =~ /CDS\|mat_peptide/)
+			{
+				my $p = {
+					-id	                 => $genome_in->new_feature_id($type),
 					-type 	             => $type,
-					-location 	         => $feature->{location},
+					-location 	         => $data->{location},
 					-analysis_event_id 	 => $event_id,
 					-annotator           => 'get_transcript_edited_features',
-					-protein_translation => $feature->{aa_sequence},
-					-function            => $feature->{product},
-					-family_assignments  => $feature->{pssm},
+					-protein_translation => $data->{aa_sequence},
+					-function            => $data->{product},
+					-family_assignments  => $data->{pssm},
+					};				
+				$genome_in->add_feature($p);
+			}
+ 			
+ 			# Call a partial cds and do not add the AA seq if its a distant match.
+ 			# No family assignment is generated
+ 			elsif ($type = "partial_cds")
+ 			{
+				my $p = {
+					-id	                 => $genome_in->new_feature_id($type),
+					-type 	             => $type,
+					-location 	         => $data->{location},
+					-analysis_event_id 	 => $event_id,
+					-annotator           => 'get_transcript_edited_features',
+					-function            => $data->{product},
 					};
-			$genome_in->add_feature($p);
+				$genome_in->add_feature($p);
+			} 	
 		}
-    }
+ 	}
+ 	chdir ($base);
+ 	$genome_in->destroy_to_file($opt->output);			
+ }
+ 
+ else 
+ {
+ 	print STDERR "No proteins from transcript editing for $fam\n";
+ }
+ 
+ 
 
-	chdir ($base);
-	remove_tree ($tmp);
-	$genome_in->destroy_to_file($opt->output);
-}			
-
-
-else 
-{
-	print STDERR "No proteins from transcript editing for $fam\n";
-}
 
 
 
@@ -253,24 +327,30 @@ else
 #   can't overlap.  The amount of overlap could be turned into a parameter, 
 #   but i just used the ali length, which seemed reasonable. 
 #
-#   This reads the -db formatted json output not the -subject [fasta] formatted version
+#   NOTE: this reads the -db formatted json output not the -subject [fasta] formatted version. 
 #   The returned JSONs are slightly different 
 #
+#   Relevant paramaters such as %id %coverage should be set in the blast command line options,
+#   or post-processed.
+#
 #   usage:
-#   $hash = best_blastn_match_by_loc($blastn_json, $Min%ID, $Min%Qcov, $max#gaps);
-#   Note that the input %identity and %qcov are actually percentages and not fractions.
+#   $hash = best_blastn_match_by_loc($blastn_json);
 # 
 #   The returned hash reference is in the following format:
 #     
 #    SubjectID->{HitFrom}->{TO}->{HitTo} 
 #             ->{HitFrom}->{HSEQ}->{SubjectSeq}
 #             ->{HitFrom}->{QSEQ}->{QuerySeq}
-#             ->{HitFrom}->{BIT}->{BitScore}
+#             ->{HitFrom}->{BIT}->{BitScore} 
+#             ->{HitFrom}->{IDEN}->{NumIdentities}         ### need to add this
+#             ->{HitFrom}->{ALI_LEN}->{Alignment_Length}   ### need to add this
+#             ->{HitFrom}->{GAPS}->{gaps}
+#
 # 
 #----------------------------------------------------------
 sub best_blastn_match_by_loc
 {
-	my ($blast, $min_pid, $min_qcov, $max_gaps)  =  @_;
+	my ($blast)  =  @_;
 	my $matches = {};
 	
 	my @output = @{$blast->{BlastOutput2}};
@@ -285,7 +365,7 @@ sub best_blastn_match_by_loc
 				my $ident     = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{identity};
 				my $ali_len   = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{align_len};
 				my $qlen      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{query_len};
-				my $gaps      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{description}->[$k]->{gaps};
+				my $gaps      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{gaps};
 				my $sid       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{description}->[$k]->{title};
 				my $hit_from  = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{hit_from};
 				my $bit       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{bit_score};
@@ -296,38 +376,38 @@ sub best_blastn_match_by_loc
 				my ($pid, $qcov);
 				if ($ident && $ali_len && $qlen) # this ensures that we got search results.
 				{
-					$pid  =  (($ident/$ali_len) * 100);
-					$qcov =  (($ali_len/$qlen)  * 100); 
-					
-					if (($pid >= $min_pid) && ($qcov >= $min_qcov) && ($gaps <= $max_gaps))
-					{
-						# if we have already seen a match in this contig:
-						if (exists $matches->{$sid}) 
-						{							
-							foreach (keys %{$matches->{$sid}})
+					# if we have already seen a match in this contig:
+					if (exists $matches->{$sid}) 
+					{							
+						foreach (keys %{$matches->{$sid}})
+						{
+							my $loc = $_; #hit_from location that was seen previously
+							
+							#if the match is in roughly in the same location as seen before, and it has a better bitscore, 
+							#then they are considered the same match.  We delete the orignal and keep the one with the better bit score.							
+							if ((abs($hit_from - $loc) < $ali_len) && ($bit > $matches->{$sid}->{$loc}->{BIT}))
 							{
-								my $loc = $_; 
-								
-								#if the match is in roughly in the same location as seen before, and it has a better bitscore, 
-								#then they are considered the same match.  We delete the orignal and keep the one with the better bit score.							
-								if ((abs($hit_from - $loc) < $ali_len) && ($bit > $matches->{$sid}->{$loc}->{BIT}))
-								{
-									delete $matches->{$sid}->{$loc};
-									$matches->{$sid}->{$hit_from}->{BIT}   = $bit;
-									$matches->{$sid}->{$hit_from}->{TO}    = $hit_to;
-									$matches->{$sid}->{$hit_from}->{QSEQ}  = $qseq;
-									$matches->{$sid}->{$hit_from}->{HSEQ}  = $hseq;
-								}
+								delete $matches->{$sid}->{$loc};
+								$matches->{$sid}->{$hit_from}->{BIT}      = $bit;
+								$matches->{$sid}->{$hit_from}->{TO}       = $hit_to;
+								$matches->{$sid}->{$hit_from}->{QSEQ}     = $qseq;
+								$matches->{$sid}->{$hit_from}->{HSEQ}     = $hseq;
+								$matches->{$sid}->{$hit_from}->{IDEN}     = $ident;
+								$matches->{$sid}->{$hit_from}->{ALI_LEN}  = $ali_len;
+								$matches->{$sid}->{$hit_from}->{GAPS}     = $gaps;
 							}
 						}
-						# if we havent seen a match in this location before add it:
-						else  
-						{
-							$matches->{$sid}->{$hit_from}->{BIT}   = $bit;
-							$matches->{$sid}->{$hit_from}->{TO}    = $hit_to;
-							$matches->{$sid}->{$hit_from}->{QSEQ}  = $qseq;
-							$matches->{$sid}->{$hit_from}->{HSEQ}  = $hseq;
-						}
+					}
+					#if we have not seen a match in this location before add it:
+					else  
+					{
+						$matches->{$sid}->{$hit_from}->{BIT}      = $bit;
+						$matches->{$sid}->{$hit_from}->{TO}       = $hit_to;
+						$matches->{$sid}->{$hit_from}->{QSEQ}     = $qseq;
+						$matches->{$sid}->{$hit_from}->{HSEQ}     = $hseq;
+						$matches->{$sid}->{$hit_from}->{IDEN}     = $ident;
+						$matches->{$sid}->{$hit_from}->{ALI_LEN}  = $ali_len;
+						$matches->{$sid}->{$hit_from}->{GAPS}     = $gaps;
 					}				
 				}
 			}
@@ -337,18 +417,6 @@ sub best_blastn_match_by_loc
 }
 
 ###########################################################
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
