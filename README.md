@@ -6,7 +6,7 @@ This program is not intended to be used as a *de novo* protein or ORF discovery 
 
 ## Covered viral taxa
 
-###Bunyavirales:
+### Bunyavirales:
 Arenaviridae<br>
 Hantaviridae<br>
 Nairoviridae<br>
@@ -15,11 +15,11 @@ Phasmaviridae<br>
 Phenuiviridae<br>
 Tospoviridae<br>
 
-###Filoviridae:
+### Filoviridae:
 Orthoebolavirus<br>
 Orthomarburgvirus<br>
 
-###Paramyxoviridae:
+### Paramyxoviridae:
 Aquaparamyxovirus<br>
 Ferlavirus<br>
 Fimoviridae<br>
