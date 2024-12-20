@@ -38,16 +38,16 @@ Respirovirus<br>
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
 
 The script(s) have the following dependencies:<br>
+
 External CPAN perl modules:<br>
 
 Data::Dumper<br>
 File::(including Copy, Path, SearchPath, Temp, Slurp)<br>
-Getopt(Long and Descriptive)
+Getopt(Long and Descriptive)<br>
 IPC::Run<br>
 JSON::XS<br>
 Time::HiRes<br>
 Cwd<br>
-<br>
 
 It also uses `gjoseqlib.pm` which is perl module that was written by Gary Olsen at the University of Illinois.  This is used for basic sequence manipulation.  You can get the latest version of this module by downloading it from Gary's repo here: https://github.com/TheSEED/seed_gjo/  <br>
 
@@ -74,9 +74,9 @@ It is run in the following way: `annotate_by_viral_pssm-GTO.pl  -x [file_prefix]
 
 `get_transcript_edited_features.pl` This script reads a GTO (that has already been processed by annotate_by_viral_pssm-GTO.pl) and finds sequences that have undergone transcript editing, updating the resulting CDS or mat_peptide to ensure we get the correct protein sequence.<br><br>
 
-`viral_genome_quality.pl`  This script reads the GTO and evaluates the genome quality based on CDSs and mat_peptide features present, and their copy number.  It also evaluates the contigs based on copy number and the proteins they encode.  It is intended to be run downstream of annotate_by_viral_pssm-GTO.pl and get_transcript_edited_features.pl<br><br>
+`viral_genome_quality.pl`  This script reads the GTO and evaluates the genome quality based on CDSs and mat_peptide features present, and their copy number.  It also evaluates the contigs based on copy number and the proteins they encode.  It is intended to be run downstream of annotate_by_viral_pssm-GTO.pl and get_transcript_edited_features.pl.<br><br>
 
-`Viral_PSSM.json`  This file contains BLAST and ORF parameters per feature.<br><br>
+`Viral_PSSM.json`  This file contains BLAST and ORF calling parameters per feature.<br><br>
 
 `Viral-Rep-Contigs` This is the directory of representative contigs that guides the program to the closest set of PSSMs.<br><br>
 
@@ -139,9 +139,7 @@ Note that it assumes your genome will have the same set of proteins as the neare
 
 ![Anno-Strategy](https://github.com/jimdavis1/Viral_Annotation/assets/7661533/0d6a3a44-47af-40bf-852d-5ddda250ad94)
 
-<br><br>Finally it performs any special rules on the proteins/ORFs.  These rules are currently encoded in a JSON file called `Viral_PSSM.json`. The following is a description fo the current JSON strucutre. <br>
-
-The perl code reads the JSON file into a hashref, which has this general structure: <br><br>
+<br><br>Finally it performs any special rules on the proteins/ORFs.  These rules are currently encoded in a JSON file called `Viral_PSSM.json`. The following is a description of the current JSON strucutre.<br><br>
 
 ```
   "Arenaviridae": {
@@ -173,7 +171,7 @@ The perl code reads the JSON file into a hashref, which has this general structu
       ...
 ```
 
-The Viral_PSSM.json file is in a regular state of development, so this may change slightly, but the above shows an example for, *Arenaviridae*, and a single protein, GPC.  The two highest level keys are `segments`, which contains information on segments that are used for genome quality evaluation.  `features` currently contains information on CDS, mat_peptide, and RNA features. <br>
+The Viral_PSSM.json file is in a regular state of development, so this may change slightly, but the above shows an example for, *Arenaviridae*, and a single protein, GPC.  The two highest level keys are `segments`, which contains information on segments that are used for genome quality evaluation ad `features`, which currently contains information on CDS, mat_peptide, and RNA features. <br>
 
 The following is a non-exhaustive description of fields that are used in the JSON<br><br>
 
@@ -189,26 +187,28 @@ The following is a non-exhaustive description of fields that are used in the JSO
 
 `feature_type` currently CDS, mat_peptide, or RNA <br><br>
 
-`segment` which segment a feature belongs to (used by quality tool)<br><br>
+`segment` which segment a feature belongs to (used by the quality tool)<br><br>
 
-`non_pssm_partner` used for placing a location based feature.<br><br>
+`non_pssm_partner` used for placing a location based feature<br><br>
 
 There are other fields that are not depicted in the example, including:<br>
-`PMID` which contains the pubmed ID for one or more DLITS.  These are examples of important papers that either define the function or sequence of a feature. <br><br>
+`PMID` which contains the PubMed ID for one or more DLITS.  A DLIT is an examples of important paper that either defines the function or sequence of a feature. <br><br>
 
 `"special": "transcript_edit"`  This field tells the program that an external program is being used to make a call.  In this case, `transcript_edit` is used to denote a feature that undergoes transcript editing and is found by using `get_transcript_edited_features.pl`.<br><br>
 
 
 ## Get Transcript Edited Features
-Transcript editing is a phenomenon that occurs in the phosphoproteins of the Paramyxoviridae and the glycoproteins of the Filoviridae.  It occurs when the RNA-Dependent RNA polymerase encounters a region of low complexity and pauses.  The pause allows for the insertion of one or more new nucleotides into the transcript, which causes a frame shift. Thus, the amino acid sequence is not a direct translation of what is encoded in the genome.  We solve this problem by hand-curating a set of transcripts in their post-editing state.  We then BLAST these against the the contig, and for BLASTn matches with high enough scores, the alignment gap is filled in using the nucleotide sequence of closest curated transcript.  Currently in order to do this, the following strict BLASTn criteria must be met: <br><br>
-1.  The match must be >= 95% nucleotide identity
+Transcript editing is a phenomenon that occurs in the phosphoproteins of the Paramyxoviridae and the glycoproteins of the Filoviridae.  It occurs when the RNA-Dependent RNA polymerase encounters a region of low complexity and pauses.  The pause allows for the insertion of one or more new nucleotides into the transcript, which causes a frame shift. Thus, the amino acid sequence is not a direct translation of what is encoded in the genome.  We solve this problem by hand-curating a set of transcripts in their post-editing state.  We then BLAST these against the the contig, and for BLASTn matches with high enough scores, the alignment gap is filled in using the nucleotide sequence of closest curated transcript.  Currently in order to do this, the following strict BLASTn criteria must be met: <br>
+
+1.  The match must have >= 95% nucleotide identity
 2.  The match must have >= 95% query coverage
 3.  The match must have <= 2 gap characters in the subject
-4.  The gap characters must occur consecutively in a run <br>
+4.  The gap characters must occur consecutively in a run <br><br>
+
 These parameters are controlled using `--id`, `--cov`, and `--gaps` options, respectively.  The requirement for consecutive gap characters is hard-coded.
 <br><br>
 
-Because we may encounter a decent BLASTn match, but not have sufficient %identity, %query coverage, or there may be additional naturally-occurring gaps in the subject, this program will call a feature covering the BLASTn match, when the above criteria are not met.  However, it will not attempt to correct the sequence.  Instead it will calls a `partial_cds` feature and will not attempt a translation.  Parameters setting the minimum BLAST requirements for this type of feature call are `--eval`, `--lower_pid`, and `--lower_pcov`, which set the maximum BLAST e-value, and the minimum percent identity and query coverage for consideration for this type of feature. <br><br>
+Because we may encounter a decent BLASTn match, but not have sufficient %identity, %query coverage, or there may be additional naturally-occurring gaps in the subject, this program will call a feature covering the BLASTn match when the above inclusion criteria are not met.  However, it will not attempt to correct the subject sequence.  Instead it will calls a `partial_cds` feature and will not attempt a translation.  Parameters setting the minimum BLAST requirements for this type of feature call are `--eval`, `--lower_pid`, and `--lower_pcov`, which set the maximum BLAST e-value, and the minimum percent identity and query coverage for consideration. <br><br>
 
 Full usage for this program is as follows:
 
@@ -242,12 +242,12 @@ Full usage for this program is as follows:
 As described above, the JSON file that contains information about the features also contains information about copy number of features and contigs.  The quality tool assess the the following things:<br>
 
 1.  The number of ambigous bases per contig
-2.  The number of expected segments (based on non-variable features)
+2.  The number of expected segments 
 3.  The length of each segment relative to what is expected
 3.  The number of expected occurrences of each non-variable feature
 4.  The legnth of each non-variable feature<br><br>
 
-Currently, the tool mostly looks for CDS features, but it does also look for mat_peptides in the Filoviridae. 
+Currently, the tool mostly looks for CDS features, but it looks for some mat_peptides in the Filoviridae. 
 
 The output is two tables: one is a contig report and the other is a feature report.  If any given contig or feature causes the genome quality to be "poor" the reason for the call is provided.  
 
@@ -266,17 +266,13 @@ Usage statement for the tool:
 
 I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, but I need to go back and update the phosphoproteins in the paramyxos.  They are currently called by splicing two ORFS, which turned out to be problematic in a few cases. <br>
 
-I may also go back and add the phospo protein to the quality checker.
-
-
-<br>
-
+I may also go back and add the phospoprotein to the quality checker.<br>
 
 ### Tospoviridae:
 I was unable to find any acceptable publications that unambiguously define the coordinates of Gn and Gc.<br>
 
 ### Fimoviridae:
-I also could not find any publications clearly showing Gc and Gn.<br>
+I also could not find any publications clearly showing Gn and Gc.<br>
 
 The Fimoviridae are the most poorly characterized family that I have encountered so far.  They are  multi-segmented and variable in their smaller segments. Proteins from these segments including P5, 6, 6a, 6b, 7, and 27 are all essentially uncharacterized.  They are numbered based on appearance in the genome in which they are described, but their ordering may or may not hold up as more are sequenced.  Furthermore, the proteins that have been called P5 and P6 have little to no similarity amongst themselves (usually < 35% identity) and could all have different functions in their own right.  I chose to split these into individual sets of pssms with the annotation "Fimoviridae uncharacterized protein."  We can hang an annotation on each when we learn what it does.  It is worth noting that due to the infrequency of these proteins, there are many low-occurrence uncharacterized proteins that did not get PSSMs and are not getting called.   The "P5" protein of Raspberry leaf blotch emaravirus is a good example here (fig|1980431.35.CDS.1).<br> 
 
