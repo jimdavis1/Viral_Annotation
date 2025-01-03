@@ -13,8 +13,8 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		-h   help
 		-i   Input subject contigs in fasta format
 		-t   Declare a temp file (d = random)
-		-tax Declare a taxonomy id (D = 11158 )
-		-g   Genome name (D = Paramyxoviridae);
+		-tax Declare a taxonomy id (D = 10239)
+		-g   Genome name (D = Viruses);
 		-p   Prefix for the output files (.ffn, .faa, and .tbl files)
 		-s   Append sequences to the feature table (default is that they are left off)
 		-ks  If a pssm match extends beyond a stop codon it will keep the entire region of the match including the stop. 
@@ -70,8 +70,8 @@ unless ($contig_file ){die "must declare an input subject file with -i \n\n$usag
 unless ($tmp){$tmp .= sprintf("%x", rand 16) for 1..20;}
 unless ($min_len){$min_len = 1000; }
 unless ($max_len){$max_len = 30000; }
-unless ($tax){$tax = "00000"; }
-unless ($genome_name){$genome_name = "Undeclared_Genome_Name"; }
+unless ($tax){$tax = "10239"; }
+unless ($genome_name){$genome_name = "Viruses"; }
 unless ($prefix){$prefix = "Viral_Annotation";}
 unless ($cdir){$cdir = "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"; }
 unless ($pdir){$pdir = "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"; }

@@ -35,7 +35,7 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["gaps|g=i"             => "Maximum number of allowable gaps (D = 2)", { default => 2 }],
 		            ["e_val|e=f"            => "Maximum BLASTn evalue for considering any HSP (D = 0.5)", { default => 0.5 }],
 		            ["lower_pid|lpi"        => "Lower percent identity threshold for a feature call without transcript editing correction (D = 80)", {default => 80}],
-		            ["lower_pcov|lpi"       => "Lower percent query coverage for for a feature call without transcritp editing correction (D = 80)", {default => 80}],
+		            ["lower_pcov|lpc"       => "Lower percent query coverage for for a feature call without transcritp editing correction (D = 80)", {default => 80}],
 		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
 				    ["json|j=s"             => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
 				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing"}],
@@ -164,7 +164,6 @@ if (scalar @to_analyze)
 		#Gather in the best match.
 		my $matches = best_blastn_match_by_loc($results);  #removed id, cov, and gap thresholds from here  
 
-
 		foreach (keys %$matches)
 		{
 			my $sid = $_;
@@ -177,13 +176,14 @@ if (scalar @to_analyze)
 				my $iden    = $matches->{$sid}->{$from}->{IDEN};
 				my $ali_len = $matches->{$sid}->{$from}->{ALI_LEN};				
 				my $dashes  = ($sseq =~ tr/-//); 
-				my $runs    = $sseq =~ /(?=--)/g;				
+				my $runs    = (() = $sseq =~ /-+/g) || 0;
 				my $pid     =  (($iden/$ali_len) * 100);				
 				my $qcov    =  (($ali_len/(length $qseq)) * 100); 				
 				my $gaps    = $matches->{$sid}->{$from}->{GAPS};	
 						
 				
 				#If all inclusion critreria are met (%id, %Qcov, num gaps, runs of gaps)
+
 				if ( ($pid >= $opt->id) && ($qcov >= $opt->cov) && ($dashes <= $opt->gaps) && ($runs <= 1))
 				{
 					my @snts = split ("", $sseq);
@@ -260,17 +260,16 @@ if (scalar @to_analyze)
 		}
 	}	
 	
-
 	# Push features into the GTO
 	foreach (keys %features)
 	{
 		my $type = $_; 
-		
+				
 		foreach (@{$features{$type}})
 		{
 			my $data = $_;
 
-			if ($type =~ /CDS\|mat_peptide/)
+			if ($type eq 'CDS' || $type eq 'mat_peptide')
 			{
 				my $p = {
 					-id	                 => $genome_in->new_feature_id($type),
@@ -287,7 +286,7 @@ if (scalar @to_analyze)
  			
  			# Call a partial cds and do not add the AA seq if its a distant match.
  			# No family assignment is generated
- 			elsif ($type = "partial_cds")
+ 			elsif ($type eq 'partial_cds')
  			{
 				my $p = {
 					-id	                 => $genome_in->new_feature_id($type),

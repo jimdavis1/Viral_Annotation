@@ -1068,19 +1068,17 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1,
-        "join_partner": ["V-ORF2"],
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
-      "V-ORF2": {
-        "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "new_anno": "Paramyxoviridae V protein",
+      "V": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae V protein",        
+        "PMID": ["2924348"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 333,
+        "min_len": 265,
         "segment": "Single RNA Segment"
       }
     }
