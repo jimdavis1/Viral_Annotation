@@ -1635,17 +1635,6 @@
         "segment": "Single RNA Segment",
         "anno": "Receptor binding protein (RBP)"
       },
-      "I-ORF2": {
-        "bit_cutoff": 20,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "paramyxo_insert": "GGG",
-        "new_anno": "Paramyxoviridae I protein",
-        "segment": "Single RNA Segment"
-      },
       "L": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
@@ -1682,17 +1671,6 @@
         "min_len": 490,
         "segment": "Single RNA Segment"
       },
-      "P-ORF2": {
-        "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein (P protein)",
-        "segment": "Single RNA Segment"
-      },
       "SH": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
@@ -1702,14 +1680,32 @@
         "segment": "Single RNA Segment",
         "anno": "Paramyxoviridae small hydorophobic protein (SH protein)"
       },
+      "I": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae I protein",        
+        "PMID": ["22090137", "2165137"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 189,
+        "min_len": 140,
+        "segment": "Single RNA Segment"
+      },
+      "P": {
+        "feature_type": "CDS",
+        "anno": "Phosphoprotein (P protein)",        
+        "PMID": ["22090137", "2165137"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 440,
+        "min_len": 353,
+        "segment": "Single RNA Segment"
+      },
       "V": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1,
-        "join_partner": ["I-ORF2", "P-ORF2"],
         "segment": "Single RNA Segment",
         "anno": "Paramyxoviridae V protein"
       }
