@@ -724,29 +724,30 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1,
-        "join_partner": ["V-ORF2", "W-ORF2"],
+        "copy_num": 1,
+        "max_len": 781,
+        "min_len": 528,
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
-      "V-ORF2": {
-        "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "new_anno": "Paramyxoviridae V protein",
+      "V": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae V protein",        
+        "PMID": ["23094089", "35632848"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 506,
+        "min_len": 411,
         "segment": "Single RNA Segment"
       },
-      "W-ORF2": {
-        "bit_cutoff": 50,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "new_anno": "Paramyxoviridae W protein",
+      "W": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae W protein",        
+        "PMID": ["15857993"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 496,
+        "min_len": 404,
         "segment": "Single RNA Segment"
       }
     }
@@ -1341,7 +1342,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Filoviridae matrix protein protein (VP40)",
+        "anno": "Filoviridae matrix protein (VP40)",
         "copy_num": 1,
         "max_len": 374,
         "min_len": 273,
