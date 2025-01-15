@@ -8,6 +8,7 @@ This program is not intended to be used as a *de novo* protein or ORF discovery 
 
 ### Bunyavirales:
 Arenaviridae<br>
+Fimoviridae<br>
 Hantaviridae<br>
 Nairoviridae<br>
 Peribunyaviridae<br>
@@ -22,7 +23,6 @@ Orthomarburgvirus<br>
 ### Paramyxoviridae:
 Aquaparamyxovirus<br>
 Ferlavirus<br>
-Fimoviridae<br>
 Henipavirus<br>
 Jeilongvirus<br>
 Metaavulavirus<br>
