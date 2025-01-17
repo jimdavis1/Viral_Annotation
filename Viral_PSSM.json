@@ -528,7 +528,7 @@
       },
       "P-ORF2": {
         "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
@@ -548,7 +548,7 @@
       },
       "V-ORF2": {
         "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
@@ -858,7 +858,7 @@
       },
       "V-ORF2": {
         "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
@@ -868,7 +868,7 @@
       },
       "W-ORF2": {
         "bit_cutoff": 50,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
@@ -1881,7 +1881,7 @@
       },
       "P-ORF2": {
         "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
@@ -1903,7 +1903,7 @@
       },
       "W-ORF2": {
         "bit_cutoff": 50,
-        "feature_type": "mat_peptide",
+        "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 0,
         "downstream_ext": 1,
@@ -2225,17 +2225,6 @@
         "segment": "Single RNA Segment",
         "anno": "Paramyxoviridae C-prime protein"
       },
-      "D-ORF2": {
-        "bit_cutoff": 50,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "paramyxo_insert": "G",
-        "new_anno": "Paramyxoviridae D protein",
-        "segment": "Single RNA Segment"
-      },
       "F": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
@@ -2299,28 +2288,8 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1,
-        "join_partner": ["D-ORF2"],
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
-      },
-      "V": {
-        "bit_cutoff": 175,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "segment": "Single RNA Segment",
-        "anno": "Paramyxoviridae V protein"
-      },
-      "W-ORF1": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 0,
-        "segment": "Single RNA Segment",
-        "anno": "Paramyxoviridae W protein ## likely truncation, ORF precedes the polymerase stuttering site"
       },
       "Y1": {
         "bit_cutoff": 225,
@@ -2340,6 +2309,26 @@
         "start_to_met": 1,
         "segment": "Single RNA Segment",
         "anno": "Paramyxoviridae Y2 protein"
+      },
+      "V": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae V protein",        
+        "PMID": ["2167560", "2924348", "27567257", "9514977", "37243262"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 474,
+        "min_len": 141,
+        "segment": "Single RNA Segment"
+      },
+      "W": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae W protein",        
+        "PMID": ["2167560", "2924348", "27567257", "9514977", "37243262"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 440,
+        "min_len": 245,
+        "segment": "Single RNA Segment"
       }
     }
   },
