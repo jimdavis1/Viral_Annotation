@@ -264,9 +264,10 @@ Usage statement for the tool:
 ## General notes on the curation and development of PSSMs
 ### Paramyxoviridae
 
-I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, but I need to go back and update the phosphoproteins in the paramyxos.  They are currently called by splicing two ORFS, which turned out to be problematic in a few cases. <br>
+I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, and most of the phosphoproteins in the paramyxos.  They were currently called by splicing two BLAST HSPs, which turned out to be problematic in a few cases. <br>
 
-I may also go back and add the phospoprotein to the quality checker.<br>
+### Respirovirus
+Note that in the respiroviruses, there is a nomenclature discrepancy regarding whether the third phosphoprotein (+2 G) is called W or D.  Currently these are all called W by the system and I have not enountered a compelling reason (other than the historical naming) to maintain the distinction between W and D.
 
 ### Tospoviridae:
 I was unable to find any acceptable publications that unambiguously define the coordinates of Gn and Gc.<br>

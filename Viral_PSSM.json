@@ -80,19 +80,30 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1,
-        "join_partner": ["V-ORF2"],
+        "copy_num": 1,
+        "max_len": 640,
+        "min_len": 519,
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"  
       },
-      "V-ORF2": {
-        "bit_cutoff": 100,
-        "feature_type": "mat_peptide",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "new_anno": "Paramyxoviridae V protein",
+      "V": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae V protein",        
+        "PMID": ["34141448"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 336,
+        "min_len": 329,
+        "segment": "Single RNA Segment"
+      },
+      "W": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae W protein",        
+        "PMID": ["34141448"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 370,
+        "min_len": 296,
         "segment": "Single RNA Segment"
       }
     }
@@ -2288,6 +2299,9 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 691,
+        "min_len": 512,
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
@@ -2315,7 +2329,6 @@
         "anno": "Paramyxoviridae V protein",        
         "PMID": ["2167560", "2924348", "27567257", "9514977", "37243262"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 474,
         "min_len": 141,
         "segment": "Single RNA Segment"
@@ -2325,7 +2338,6 @@
         "anno": "Paramyxoviridae W protein",        
         "PMID": ["2167560", "2924348", "27567257", "9514977", "37243262"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 440,
         "min_len": 245,
         "segment": "Single RNA Segment"
