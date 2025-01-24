@@ -495,7 +495,6 @@
         "upstream_ext": 0,
         "downstream_ext": 1,
         "paramyxo_join": 1,
-        "join_partner": ["P-ORF2", "V-ORF2"],
         "segment": "Single RNA Segment",
         "anno": "Paramyxoviridae I protein"
       },
@@ -752,7 +751,6 @@
         "anno": "Paramyxoviridae V protein",        
         "PMID": ["23094089", "35632848"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 506,
         "min_len": 411,
         "segment": "Single RNA Segment"
@@ -762,7 +760,6 @@
         "anno": "Paramyxoviridae W protein",        
         "PMID": ["15857993"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 496,
         "min_len": 404,
         "segment": "Single RNA Segment"
@@ -986,7 +983,6 @@
         "anno": "Paramyxoviridae V protein",        
         "PMID": ["32533018"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 306,
         "min_len": 222,
         "segment": "Single RNA Segment"
@@ -996,7 +992,6 @@
         "anno": "Paramyxoviridae W protein",        
         "PMID": ["32533018"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 170,
         "min_len": 156,
         "segment": "Single RNA Segment"
@@ -1084,6 +1079,9 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 561,
+        "min_len": 456,
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
@@ -1092,7 +1090,6 @@
         "anno": "Paramyxoviridae V protein",        
         "PMID": ["2924348"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 333,
         "min_len": 265,
         "segment": "Single RNA Segment"
@@ -1302,7 +1299,6 @@
         "anno": "Paramyxoviridae V protein",        
         "PMID": ["32533018"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 365,
         "min_len": 156,
         "segment": "Single RNA Segment"
@@ -1312,7 +1308,6 @@
         "anno": "Paramyxoviridae W protein",        
         "PMID": ["32533018"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 364,
         "min_len": 123,
         "segment": "Single RNA Segment"
@@ -1702,7 +1697,6 @@
         "anno": "Paramyxoviridae I protein",        
         "PMID": ["22090137", "2165137"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 189,
         "min_len": 140,
         "segment": "Single RNA Segment"
@@ -1811,7 +1805,6 @@
         "anno": "Paramyxoviridae V protein",        
         "PMID": ["32533018"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 278,
         "min_len": 202,
         "segment": "Single RNA Segment"
@@ -1821,7 +1814,6 @@
         "anno": "Paramyxoviridae W protein",        
         "PMID": ["32533018"],
         "special": "transcript_edit",
-        "copy_num": 1,
         "max_len": 333,
         "min_len": 113,
         "segment": "Single RNA Segment"
@@ -1894,38 +1886,36 @@
         "min_len": 496,
         "segment": "Single RNA Segment"
       },
-      "P-ORF2": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "paramyxo_insert": "G",
-        "new_anno": "Phosphoprotein (P protein)",
-        "segment": "Single RNA Segment"
-      },
       "V": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "paramyxo_join": 1,
-        "join_partner": ["P-ORF2", "W-ORF2"],
+        "max_len": 277,
+        "min_len": 203,
         "segment": "Single RNA Segment",
         "anno": "Paramyxoviridae V protein"
       },
-      "W-ORF2": {
-        "bit_cutoff": 50,
+      "P": {
         "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 0,
-        "downstream_ext": 1,
-        "paramyxo_join": 2,
-        "new_anno": "Paramyxoviridae W protein",
+        "anno": "Phosphoprotein (P protein)",        
+        "PMID": ["34141448"],
+        "special": "transcript_edit",
+        "copy_num": 1,
+        "max_len": 451,
+        "min_len": 347,
         "segment": "Single RNA Segment"
-        }
+      },
+      "W": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae W protein",        
+        "PMID": ["34141448"],
+        "special": "transcript_edit",
+        "max_len": 233,
+        "min_len": 140,
+        "segment": "Single RNA Segment"
+      }
     }
   },
   "Peribunyaviridae": {
