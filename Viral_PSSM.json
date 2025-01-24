@@ -1216,6 +1216,118 @@
       }
     }
   },
+  "Narmovirus": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 19694,
+        "min_len": 13748,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "F": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fusion glycoprotein (F protein)",
+        "copy_num": 1,
+        "max_len": 623,
+        "min_len": 497,
+        "segment": "Single RNA Segment"
+      },
+      "RBP": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "copy_num": 1,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "max_len": 732,
+        "min_len": 562,
+        "segment": "Single RNA Segment",
+        "anno": "Receptor binding protein (RBP)"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2497,
+        "min_len": 1981,
+        "segment": "Single RNA Segment"
+      },
+      "M": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Matrix protein (M protein)",
+        "copy_num": 1,
+        "max_len": 387,
+        "min_len": 306,
+        "segment": "Single RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 607,
+        "min_len": 467,
+        "segment": "Single RNA Segment"
+      },
+      "P": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 612,
+        "min_len": 464,
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein (P protein)"
+      },
+      "C": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "max_len": 168,
+        "min_len": 134,
+        "segment": "Single RNA Segment",
+        "anno": "Paramyxoviridae C protein"
+      },
+      "V": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae V protein",        
+        "PMID": ["32533018"],
+        "special": "transcript_edit",
+        "max_len": 352,
+        "min_len": 251,
+        "segment": "Single RNA Segment"
+      },
+      "W": {
+        "feature_type": "CDS",
+        "anno": "Paramyxoviridae W protein",        
+        "PMID": ["32533018"],
+        "special": "transcript_edit",
+        "max_len": 285,
+        "min_len": 198,
+        "segment": "Single RNA Segment"
+      }
+    }
+  },
   "Orthoavulavirus": {
     "segments": {
       "Single RNA Segment": {
