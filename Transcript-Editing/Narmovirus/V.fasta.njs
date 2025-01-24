@@ -6,7 +6,7 @@
   "description": "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing/Narmovirus/V.fasta",
   "number-of-letters": 3534,
   "number-of-sequences": 4,
-  "last-updated": "2025-01-24T10:00:00",
+  "last-updated": "2025-01-24T11:11:00",
   "number-of-volumes": 1,
   "bytes-total": 38546,
   "bytes-to-cache": 1100,

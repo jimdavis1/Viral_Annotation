@@ -185,7 +185,6 @@ my @all_seqs;
 my %positions;
 #my ($upstream_ext, $downstream_ext, $keep_stop, $bit_cutoff, $cov_cutoff);
 
-my $join = {};
 my $non_pssm_feat = {};
 foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homolog
 {
@@ -322,20 +321,6 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my $protein = &gjoseqlib::translate_seq( $gene );
 
 		if ($start_to_met){$protein =~ s/^[A-Z]/m/i;}
-		
-		# Set up the Paramyxo Join (if necessary)
-		if (exists $options->{$virus}->{features}->{$pssmdir}->{paramyxo_join})
-		{			
-			$join->{$contig}->{$pssmdir}->{START}    = $gene_begin;
-			$join->{$contig}->{$pssmdir}->{STOP}     = $gene_end;
-			$join->{$contig}->{$pssmdir}->{PARTNER}  = $options->{$virus}->{features}->{$pssmdir}->{join_partner};
-			$join->{$contig}->{$pssmdir}->{ORDER}    = $options->{$virus}->{features}->{$pssmdir}->{paramyxo_join};
-			$join->{$contig}->{$pssmdir}->{ANNO}     = $options->{$virus}->{features}->{$pssmdir}->{new_anno};	
-			$join->{$contig}->{$pssmdir}->{INSERT}   = $options->{$virus}->{features}->{$pssmdir}->{paramyxo_insert};	
-			$join->{$contig}->{$pssmdir}->{PSSM}     = $best_pssm;
-			$join->{$contig}->{$pssmdir}->{TYPE}     = $feature_type;
-		}
-
 	
 		# Set up calling non-pssm features that are anchored to pssm coordinates
 		if (exists $options->{$virus}->{features}->{$pssmdir}->{non_pssm_partner})
@@ -379,23 +364,9 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 				$non_pssm_feat->{$feat}->{TYPE}   = $options->{$virus}->{features}->{$feat}->{feature_type};
 			}
 		}
-		
-		#return matching sequence as a tuple.
-		unless ($options->{$virus}->{features}->{$pssmdir}->{paramyxo_join} == 2)# the ORF2 sequence isn't complete and has to be merged after all of the other proteins have been found.
-		{
 			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $anno, $strand, $best_pssm, $gene, $protein, $feature_type]); 
-		}	
 	}
 	print STDERR "-----------------------\n"; 
-}
-
-
-#create any joins if they exist:
-if ($join)
-{
-	#this is kind of ugly because its taking a hash_ref for join and a hash for the contigs 
-	my @tuples = join_orfs ($join, %contigH);
-	push @all_seqs, @tuples;
 }
 
 
@@ -595,7 +566,6 @@ sub call_non_pssm_features
 	}
 	return @seq_data;
 }
-############################################################
 
 
 
@@ -604,129 +574,6 @@ sub call_non_pssm_features
 
 
 
-
-
-##########################sub join_orfs######################
-# Takes the join hashref from the main loop, and the contigs Hash and joins the orfs
-#    (usually orfs within the phosphoprotien)
-# 
-#     my @seq_data = join_orfs($join, %contigsH);
-# 
-# Returns an array of arrays that can be pushed into @all_seqs:
-# [contig, start, end, anno, strand, matching_pssms, gene, protein]
-# 
-# The join will look like this:  [PotA start] |------>    [ProtA end]
-#              		             [ORF-2 start]    |-----> [ORF-2 End]			
-# 
-# Where we need the first part of Protein A, spliced with ORF-2, to make full-length protein B.
-# The PSSM for protein B is not a full-length protein because there is a frame jump.
-# The part after the frame jump is what I am calling ORF-2 and it has a separate PSSM. 
-#
-#  NOTE that the returned "gene" is the unaltered DNA strand 
-#  from the start of protA to the end of ORF-2.  Because Protein B is the result of 
-#  "RNA editing" the inserted Gs from the stuttering RdRp will not appear in the sequence.
-#
-#  The protein, however, if spliced correctly will be the correct AA seq.
-#-----------------------------------------------------------
-sub join_orfs
-{
-	my ($join, $contigH) = @_;
-	my @seq_data;
-		
-	foreach (keys %$join)
-	{
-		my $contig = $_;
-		foreach (keys %{$join->{$contig}})
-		{
-			my $name = $_;
-			if ($join->{$contig}->{$name}->{ORDER} == 1)	
-			{
-				my @partners = @{$join->{$contig}->{$name}->{PARTNER}};
-				for my $i (0..$#partners)
-				{
-					my $orf2         = $join->{$contig}->{$name}->{PARTNER}->[$i];
-					my $orf2_start   = $join->{$contig}->{$orf2}->{START}; 
-					my $orf2_end     = $join->{$contig}->{$orf2}->{STOP}; 
-					my $orf1_start   = $join->{$contig}->{$name}->{START}; 
-					my $orf1_end     = $join->{$contig}->{$name}->{STOP}; 
-					my $insert       = $join->{$contig}->{$orf2}->{INSERT}; 
-					my $feature_type = $join->{$contig}->{$orf2}->{TYPE}; 
-					my $pssms        = "$join->{$contig}->{$name}->{PSSM}"."_JOIN_"."$join->{$contig}->{$orf2}->{PSSM}";
-					
-					if (($orf1_start) && ($orf2_start) && ($orf1_end) && ($orf2_end))
-					{	
-						#Forward Strand:
-						if ($orf1_end > $orf1_start)
-						{
-							#make sure the second orf start is within the first orf. 
-							if (( $orf2_start > $orf1_start) && ($orf2_start <= $orf1_end))
-							{
-								my $gene = &gjoseqlib::DNA_subseq($contigH{$contig}, $orf1_start, $orf2_end);			
-								# make the spliced protein.
-								
-								my $ntA = &gjoseqlib::DNA_subseq($contigH{$contig}, $orf1_start, $orf2_start); 
-								my $ntB = &gjoseqlib::DNA_subseq($contigH{$contig}, $orf2_start, $orf2_end);
-							
-								my $transcript = $ntA.$ntB; 
-							
-								#print STDERR "$ntA\n$insert\n$ntB\n"; 
-								if ($insert)
-								{
-									print STDERR "ADDING INSERT\t$insert\n";
-									$transcript = $ntA.$insert.$ntB;
-								}
-							
-								my $protein = &gjoseqlib::translate_seq( $transcript );
-								#print STDERR "####PROT: $protein\n"; 
-								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "+", $pssms, $gene, $protein, $feature_type]);
-							}
-							else
-							{
-								print STDERR "$name\t$orf2\tstart and stop do not overlap in the join\n"; 
-							}
-						}		
-						#Reverse Strand:
-						elsif ($orf1_end < $orf1_start)
-						{
-							#make sure the second orf start is within the first orf. 
-							if (( $orf2_start < $orf1_start) && ($orf2_start >= $orf1_end))
-							{
-								my $gene = &gjoseqlib::DNA_subseq($contigH{$contig}, $orf1_start, $orf2_end);					
-								# make the spliced protein.
-								my $ntA = &gjoseqlib::DNA_subseq($contigH{$contig}, $orf1_start, $orf2_start);##<-- this splice
-								my $ntB = &gjoseqlib::DNA_subseq($contigH{$contig}, $orf2_start, $orf2_end);
-														
-								my $transcript = $ntA.$ntB; 
-							
-								#print STDERR "$ntA\n$insert\n$ntB\n"; 
-								if ($insert)
-								{
-									print STDERR "ADDING INSERT\t$insert\n";
-									$transcript = $ntA.$insert.$ntB;
-								}
-							
-								my $protein = &gjoseqlib::translate_seq( $transcript );
-
-								my $protA = &gjoseqlib::translate_seq( $ntA );
-								my $protB = &gjoseqlib::translate_seq( $ntB );
-								my $protein = "$protA.$protB";
-				
-								push @seq_data, ([$contig, $orf1_start, $orf2_end, $join->{$contig}->{$orf2}->{ANNO}, "-", $pssms, $gene, $protein, $feature_type]);
-
-							}
-							else
-							{
-								print STDERR "$name\t$orf2\tstart and stop do not overlap in the join\n"; 
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return @seq_data;
-}
-############################################################
 
 
 
