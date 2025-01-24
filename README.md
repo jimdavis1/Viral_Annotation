@@ -27,6 +27,7 @@ Henipavirus<br>
 Jeilongvirus<br>
 Metaavulavirus<br>
 Morbillivirus<br>
+Narmovirus<br>
 Orthoavulavirus<br>
 Orthorubulavirus<br>
 Paraavulavirus<br>
