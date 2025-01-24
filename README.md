@@ -199,7 +199,7 @@ There are other fields that are not depicted in the example, including:<br>
 
 
 ## Get Transcript Edited Features
-Transcript editing is a phenomenon that occurs in the phosphoproteins of the Paramyxoviridae and the glycoproteins of the Filoviridae.  It occurs when the RNA-Dependent RNA polymerase encounters a region of low complexity and pauses.  The pause allows for the insertion of one or more new nucleotides into the transcript, which causes a frame shift. Thus, the amino acid sequence is not a direct translation of what is encoded in the genome.  We solve this problem by hand-curating a set of transcripts in their post-editing state.  We then BLAST these against the the contig, and for BLASTn matches with high enough scores, the alignment gap is filled in using the nucleotide sequence of closest curated transcript.  Currently in order to do this, the following strict BLASTn criteria must be met: <br>
+Transcript editing is a phenomenon that occurs in the phosphoproteins of the Paramyxoviridae and the glycoproteins of the Filoviridae.  It occurs when the RNA-Dependent RNA polymerase encounters a region of low complexity and pauses.  The pause allows for the insertion of one or more new nucleotides into the transcript, which causes a frame shift. Thus, the amino acid sequence is not a direct translation of what is encoded in the genome.  We solve this problem by hand-curating a set of transcripts in their post-editing state. These are found in the `Transcript-Editing` directory.  We then BLAST these against the the contig, and for BLASTn matches with high enough scores, the alignment gap is filled in using the nucleotide sequence of closest curated transcript.  Currently in order to do this, the following strict BLASTn criteria must be met: <br>
 
 1.  The match must have >= 95% nucleotide identity
 2.  The match must have >= 95% query coverage
@@ -209,7 +209,7 @@ Transcript editing is a phenomenon that occurs in the phosphoproteins of the Par
 These parameters are controlled using `--id`, `--cov`, and `--gaps` options, respectively.  The requirement for consecutive gap characters is hard-coded.
 <br><br>
 
-Because we may encounter a decent BLASTn match, but not have sufficient %identity, %query coverage, or there may be additional naturally-occurring gaps in the subject, this program will call a feature covering the BLASTn match when the above inclusion criteria are not met.  However, it will not attempt to correct the subject sequence.  Instead it will calls a `partial_cds` feature and will not attempt a translation.  Parameters setting the minimum BLAST requirements for this type of feature call are `--eval`, `--lower_pid`, and `--lower_pcov`, which set the maximum BLAST e-value, and the minimum percent identity and query coverage for consideration. <br><br>
+Because we may encounter a decent BLASTn match, but not have sufficient %identity, %query coverage, or there may be additional naturally-occurring gaps in the subject, this program will call a feature covering the BLASTn match when the above inclusion criteria are not met.  However, it will not attempt to correct the subject sequence.  Instead it will call a `partial_cds` feature and will not attempt a translation.  Parameters setting the minimum BLAST requirements for this type of feature call are `--eval`, `--lower_pid`, and `--lower_pcov`, which set the maximum BLAST e-value, and the minimum percent identity, and query coverage for consideration. <br><br>
 
 Full usage for this program is as follows:
 
@@ -265,7 +265,7 @@ Usage statement for the tool:
 ## General notes on the curation and development of PSSMs
 ### Paramyxoviridae
 
-I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, and most of the phosphoproteins in the paramyxos.  They were currently called by splicing two BLAST HSPs, which turned out to be problematic in a few cases. <br>
+I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, and the phosphoproteins in the Paramyxos.  They were originally called by splicing two BLAST HSPs, which turned out to be problematic in a few cases. DLITs that either describe the editing site, or the subsequent amino acid sequence for the transcript-edited proteins have been added to the json.  There are a handful, like Narmovirus, where I do not think protein work has been done to prove V and W, but the predicted editing site is supported by literature. At this point, all editing sites are backstopped by literature references. <br>
 
 ### Respirovirus
 Note that in the respiroviruses, there is a nomenclature discrepancy regarding whether the third phosphoprotein (+2 G) is called W or D.  Currently these are all called W by the system and I have not enountered a compelling reason (other than the historical naming) to maintain the distinction between W and D.
