@@ -2314,6 +2314,147 @@
       }
     }
   },
+  "Pneumoviridae": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 1880,
+        "min_len": 11777,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "F": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fusion glycoprotein (F protein)",
+        "copy_num": 1,
+        "max_len": 631,
+        "min_len": 445,
+        "segment": "Single RNA Segment"
+      },
+      "G": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "copy_num": 1,
+        "max_len": 455,
+        "min_len": 195,
+        "anno": "Attachment glycoprotein (G protein)"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2383,
+        "min_len": 1801,
+        "segment": "Single RNA Segment"
+      },
+      "M": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Matrix protein (M protein)",
+        "copy_num": 1,
+        "max_len": 283,
+        "min_len": 204,
+        "segment": "Single RNA Segment"
+      },
+      "M2-1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription elongation factor M2-1",
+        "copy_num": 1,
+        "max_len": 215,
+        "min_len": 158,
+        "segment": "Single RNA Segment"
+      },
+      "M2-2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription-replication factor M2-2",
+        "copy_num": 1,
+        "max_len": 102,
+        "min_len": 64,
+        "segment": "Single RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 436,
+        "min_len": 331,
+        "segment": "Single RNA Segment"
+      },
+      "NS1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pneumoviridae nonstructural protein NS1",
+        "max_len": 153,
+        "min_len": 119,
+        "segment": "Single RNA Segment"
+      },
+      "NS2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pneumoviridae nonstructural protein NS2",
+        "max_len": 136,
+        "min_len": 101,
+        "segment": "Single RNA Segment"
+      },
+      "P": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein (P protein)"
+      },
+      "SH": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
+      }
+    }
+  },
   "Respirovirus": {
     "segments": {
       "Single RNA Segment": {
