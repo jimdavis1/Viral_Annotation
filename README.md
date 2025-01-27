@@ -34,9 +34,9 @@ Paraavulavirus<br>
 Pararubulavirus<br>
 Respirovirus<br>
 
-## Pneumoviridae:
-Module currently covers HMPV, RSV and relatives
-Needs to be updated for Fusion protein clevage
+### Pneumoviridae:
+Module currently covers HMPV, RSV, and relatives but 
+Needs to be updated for Fusion protein clevage.
 
 
 ## Dependencies
