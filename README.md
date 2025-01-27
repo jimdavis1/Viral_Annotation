@@ -34,6 +34,11 @@ Paraavulavirus<br>
 Pararubulavirus<br>
 Respirovirus<br>
 
+## Pneumoviridae:
+Module currently covers HMPV, RSV and relatives
+Needs to be updated for Fusion protein clevage
+
+
 ## Dependencies
 
 Unless otherwise stated, the programs described in this repo are written and tested in in perl (v5.38.0).
