@@ -1122,7 +1122,6 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 0,
-        "copy_num": 1,
         "max_len": 20,
         "min_len": 16,
         "PMID": ["29142300"],
@@ -2210,6 +2209,17 @@
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
+      "P2": {
+        "bit_cutoff": 50,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "max_len": 151,
+        "min_len": 123,
+        "segment": "Single RNA Segment",
+        "anno": "Hypothetical P2 protein"
+      },
       "SH": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
@@ -2228,7 +2238,6 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 0,
-        "copy_num": 1,
         "max_len": 23,
         "min_len": 19,
         "PMID": ["1629698"],
