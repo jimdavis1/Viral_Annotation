@@ -35,8 +35,9 @@ Pararubulavirus<br>
 Respirovirus<br>
 
 ### Pneumoviridae:
-Module currently covers HMPV, RSV, and relatives but 
-Needs to be updated for Fusion protein clevage.
+Orthopneumovirus<br>
+Metapneumovirus<br>
+Orthopneumovirus muris<br>
 
 
 ## Dependencies
@@ -288,7 +289,8 @@ In this family the quality checker will look for Segments 1-4 only, which corres
 ## Phasmaviridae
 These are mostly insect virueses.  The set of genomes is highly diverse,with few representatives in each genus, so the pssms only represent a fraction of the true diversity.  There were a considerable number of proteins that I could not get to cluster at 50% identity. I am currently dissatisfied with this family, so as more exemplars come in, this set should eventually get recomputed. 
 
-
+## Pneumoviridae
+The cleaved forms of the fusion glycoprotein differ between ortho- and metapneumoviride.  All of the orthos, except murine and close relatives, have a p27 peptide that is a real protein. This necessitated the insertion of three taxon-level directories (ortho, meta, and murine orthos).  I kept the orginal all-pneumo alignment directory which has everything and has seprate subdirectories for the mature F proteins.   The pssm directories for the three taxa contain the pssms that I had originally built for all pneumos. This means that there are a few extra pssms that won't match and can be cleaned up later.    
 
 
 

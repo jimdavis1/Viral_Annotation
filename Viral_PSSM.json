@@ -998,6 +998,165 @@
       }
     }
   },
+  "Metapneumovirus": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 1880,
+        "min_len": 11777,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "F": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fusion glycoprotein precursor (F0 protein)",
+        "copy_num": 1,
+        "max_len": 631,
+        "min_len": 445,
+        "segment": "Single RNA Segment"
+      },
+      "G": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "copy_num": 1,
+        "max_len": 455,
+        "min_len": 195,
+        "PMID": ["26658574"],
+        "anno": "Receptor binding protein (G protein)"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2383,
+        "min_len": 1801,
+        "segment": "Single RNA Segment"
+      },
+      "M": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Matrix protein (M protein)",
+        "copy_num": 1,
+        "max_len": 283,
+        "min_len": 204,
+        "segment": "Single RNA Segment"
+      },
+      "M2-1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription elongation factor M2-1",
+        "copy_num": 1,
+        "max_len": 215,
+        "min_len": 158,
+        "segment": "Single RNA Segment"
+      },
+      "M2-2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription-replication factor M2-2",
+        "copy_num": 1,
+        "max_len": 102,
+        "min_len": 64,
+        "segment": "Single RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 436,
+        "min_len": 331,
+        "segment": "Single RNA Segment"
+      },
+      "P": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein (P protein)"
+      },
+      "SH": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
+      },
+       "SP": {
+        "bit_cutoff": 30,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 20,
+        "min_len": 16,
+        "PMID": ["29142300"],
+        "segment": "Single RNA Segment",
+        "anno": "Signal peptide"
+      },
+       "F2": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 92,
+        "min_len": 76,
+        "PMID": ["29142300", "16971452"],
+        "segment": "Single RNA Segment",
+        "anno": "Mature N-terminal fusion protein subunit (F2)"
+      },
+       "F1": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 501,
+        "min_len": 353,
+        "PMID": ["29142300", "16971452"],
+        "segment": "Single RNA Segment",
+        "anno": "Mature C-terminal fusion protein subunit (F1)"
+      }
+    }
+  },
   "Morbillivirus": {
     "segments": {
       "Single RNA Segment": {
@@ -1729,6 +1888,381 @@
       }
     }
   },
+  "Orthopneumovirus": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 1880,
+        "min_len": 11777,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "F": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fusion glycoprotein precursor (F0 protein)",
+        "copy_num": 1,
+        "max_len": 631,
+        "min_len": 445,
+        "segment": "Single RNA Segment"
+      },
+      "G": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "copy_num": 1,
+        "max_len": 455,
+        "min_len": 195,
+        "PMID": ["26658574"],
+        "anno": "Receptor binding protein (G protein)"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2383,
+        "min_len": 1801,
+        "segment": "Single RNA Segment"
+      },
+      "M": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Matrix protein (M protein)",
+        "copy_num": 1,
+        "max_len": 283,
+        "min_len": 204,
+        "segment": "Single RNA Segment"
+      },
+      "M2-1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription elongation factor M2-1",
+        "copy_num": 1,
+        "max_len": 215,
+        "min_len": 158,
+        "segment": "Single RNA Segment"
+      },
+      "M2-2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription-replication factor M2-2",
+        "copy_num": 1,
+        "max_len": 102,
+        "min_len": 64,
+        "segment": "Single RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 436,
+        "min_len": 331,
+        "segment": "Single RNA Segment"
+      },
+        "NS1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pneumoviridae nonstructural protein NS1",
+        "max_len": 153,
+        "min_len": 119,
+        "segment": "Single RNA Segment"
+      },
+      "NS2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pneumoviridae nonstructural protein NS2",
+        "max_len": 136,
+        "min_len": 101,
+        "segment": "Single RNA Segment"
+      },
+      "P": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein (P protein)"
+      },
+      "SH": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
+      },
+       "SP": {
+        "bit_cutoff": 40,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 27,
+        "min_len": 20,
+        "PMID": ["25078705", "37415824"],
+        "segment": "Single RNA Segment",
+        "anno": "Signal peptide"
+      },
+       "F2": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 92,
+        "min_len": 76,
+        "PMID": ["11493675", "34903371", "37415824"],
+        "segment": "Single RNA Segment",
+        "anno": "Mature N-terminal fusion protein subunit (F2)"
+      },
+       "F1": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 482,
+        "min_len": 369,
+        "PMID": ["11493675", "34903371", "37415824"],
+        "segment": "Single RNA Segment",
+        "anno": "Mature C-terminal fusion protein subunit (F1)"
+      },
+       "P27": {
+        "bit_cutoff": 40,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 29,
+        "min_len": 24,
+        "segment": "Single RNA Segment",
+        "PMID": ["11493675", "34903371", "37415824"],
+        "anno": "Mature p27 protein"
+      }
+    }
+  },
+  "Orthopneumovirus_muris": {
+    "segments": {
+      "Single RNA Segment": {
+        "max_len": 1880,
+        "min_len": 11777,
+        "replicon_geometry": "linear"
+      }
+    },
+    "features": {
+      "F": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Fusion glycoprotein precursor (F0 protein)",
+        "copy_num": 1,
+        "max_len": 631,
+        "min_len": 445,
+        "segment": "Single RNA Segment"
+      },
+      "G": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "segment": "Single RNA Segment",
+        "copy_num": 1,
+        "max_len": 455,
+        "min_len": 195,
+        "PMID": ["26658574"],
+        "anno": "Receptor binding protein (G protein)"
+      },
+      "L": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "RNA-dependent RNA polymerase (L protein)",
+        "copy_num": 1,
+        "max_len": 2383,
+        "min_len": 1801,
+        "segment": "Single RNA Segment"
+      },
+      "M": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Matrix protein (M protein)",
+        "copy_num": 1,
+        "max_len": 283,
+        "min_len": 204,
+        "segment": "Single RNA Segment"
+      },
+      "M2-1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription elongation factor M2-1",
+        "copy_num": 1,
+        "max_len": 215,
+        "min_len": 158,
+        "segment": "Single RNA Segment"
+      },
+      "M2-2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Transcription-replication factor M2-2",
+        "copy_num": 1,
+        "max_len": 102,
+        "min_len": 64,
+        "segment": "Single RNA Segment"
+      },
+      "N": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Nucleocapsid protein (N protein)",
+        "copy_num": 1,
+        "max_len": 436,
+        "min_len": 331,
+        "segment": "Single RNA Segment"
+      },
+        "NS1": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pneumoviridae nonstructural protein NS1",
+        "max_len": 153,
+        "min_len": 119,
+        "segment": "Single RNA Segment"
+      },
+      "NS2": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "anno": "Pneumoviridae nonstructural protein NS2",
+        "max_len": 136,
+        "min_len": 101,
+        "segment": "Single RNA Segment"
+      },
+      "P": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Phosphoprotein (P protein)"
+      },
+      "SH": {
+        "bit_cutoff": 100,
+        "feature_type": "CDS",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 325,
+        "min_len": 200,
+        "segment": "Single RNA Segment",
+        "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
+      },
+       "SP": {
+        "bit_cutoff": 40,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 1,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 23,
+        "min_len": 19,
+        "PMID": ["1629698"],
+        "segment": "Single RNA Segment",
+        "anno": "Signal peptide"
+      },
+       "F2": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 0,
+        "copy_num": 1,
+        "max_len": 88,
+        "min_len": 72,
+        "PMID": ["1629698"],
+        "segment": "Single RNA Segment",
+        "anno": "Mature N-terminal fusion protein subunit (F2)"
+      },
+       "F1": {
+        "bit_cutoff": 100,
+        "feature_type": "mat_peptide",
+        "coverage_cutoff": 0.65,
+        "upstream_ext": 0,
+        "downstream_ext": 1,
+        "copy_num": 1,
+        "max_len": 472,
+        "min_len": 376,
+        "PMID": ["1629698"],
+        "segment": "Single RNA Segment",
+        "anno": "Mature C-terminal fusion protein subunit (F1)"
+      }
+    }
+  },
   "Orthorubulavirus": {
     "segments": {
       "Single RNA Segment": {
@@ -2311,147 +2845,6 @@
         "downstream_ext": 0,
         "segment": "Medium RNA Segment",
         "anno": "Phenuiviridae mature nonstructural 78-kD protein"
-      }
-    }
-  },
-  "Pneumoviridae": {
-    "segments": {
-      "Single RNA Segment": {
-        "max_len": 1880,
-        "min_len": 11777,
-        "replicon_geometry": "linear"
-      }
-    },
-    "features": {
-      "F": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Fusion glycoprotein (F protein)",
-        "copy_num": 1,
-        "max_len": 631,
-        "min_len": 445,
-        "segment": "Single RNA Segment"
-      },
-      "G": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "segment": "Single RNA Segment",
-        "copy_num": 1,
-        "max_len": 455,
-        "min_len": 195,
-        "anno": "Attachment glycoprotein (G protein)"
-      },
-      "L": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "RNA-dependent RNA polymerase (L protein)",
-        "copy_num": 1,
-        "max_len": 2383,
-        "min_len": 1801,
-        "segment": "Single RNA Segment"
-      },
-      "M": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Matrix protein (M protein)",
-        "copy_num": 1,
-        "max_len": 283,
-        "min_len": 204,
-        "segment": "Single RNA Segment"
-      },
-      "M2-1": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Transcription elongation factor M2-1",
-        "copy_num": 1,
-        "max_len": 215,
-        "min_len": 158,
-        "segment": "Single RNA Segment"
-      },
-      "M2-2": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Transcription-replication factor M2-2",
-        "copy_num": 1,
-        "max_len": 102,
-        "min_len": 64,
-        "segment": "Single RNA Segment"
-      },
-      "N": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Nucleocapsid protein (N protein)",
-        "copy_num": 1,
-        "max_len": 436,
-        "min_len": 331,
-        "segment": "Single RNA Segment"
-      },
-      "NS1": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Pneumoviridae nonstructural protein NS1",
-        "max_len": 153,
-        "min_len": 119,
-        "segment": "Single RNA Segment"
-      },
-      "NS2": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "anno": "Pneumoviridae nonstructural protein NS2",
-        "max_len": 136,
-        "min_len": 101,
-        "segment": "Single RNA Segment"
-      },
-      "P": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "copy_num": 1,
-        "max_len": 325,
-        "min_len": 200,
-        "segment": "Single RNA Segment",
-        "anno": "Phosphoprotein (P protein)"
-      },
-      "SH": {
-        "bit_cutoff": 100,
-        "feature_type": "CDS",
-        "coverage_cutoff": 0.65,
-        "upstream_ext": 1,
-        "downstream_ext": 1,
-        "copy_num": 1,
-        "max_len": 325,
-        "min_len": 200,
-        "segment": "Single RNA Segment",
-        "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
       }
     }
   },
