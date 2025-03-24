@@ -1,91 +1,98 @@
 # Current Protein Trees
-The following trees were generated **without curation** from reasonably high quality genomes in BVBRC. The intention is to work toward having a system that can self-generate and edit the alignments and trees.<br> 
+The March 2025 alignments and trees have been computed for the *Bunyavirales*, *Filoviridae*, *Paramyxoviridae*, and *Pneumoviridae* using the annotation system.  *No* post-annotation curation has been performed on the alignments or trees. For each taxon, there are two sub directories: "Good_Only" and "With_Poor".  The former includes only proteins from "Good" quality genomes, as determined by the annotation tool.  The latter, considers proteins from both "Good" and "Poor" quality genomes as long as there is no exception associated with a given feature in a poor quality genome (*e.g*, wrong length, ambiguous bases, or incorrect copy number).  For the *Bunyavirales*, there are two top-level directories.  One is the set of merged segments from BV-BRC, and the other is the set of segments unified by a single assembly accession downloaded from NCBI using their datasets tool. For BV-BRC, the segments of the *Bunyavirales* were linked using their full genome name string, which includes strain names and numbers.  All directories contain an html visualization of the tree, the Newick, aligned proteins in fasta format, and unaligned proteins.  Files are named based on annotation.<br> 
 
 **Rules for making the trees** <br>
-1.  An attempt was made to merge segments for the Bunyavirales based on genome name. In order to be annotated, a genome had to have at least 2 segments >= 1KB. For the Paramyxos, the contig length had to be >= 800nts.<br>
-2.  No protein with an ambiguous X residue is allowed in the tree.<br>
-3.  Alignments were automatically curated to cull sequences that were A) too short or B) had extremely aberant occupancy patterns. For (B) occupancy is computed by first determining the fraction occupancy for each column in the alignment.  These occupancy fractions are summed for each occupied column, for each sequence.  Any sequence >4 standard deviations away from the occupancy of all sequences or with an average within-sequence occupancy >4 standard deviations from the mean were eliminated.  These are listed in the .culled.fa files in this repo.  It turns out to be a fairly low bar.  
-4.  Finally branch lengths in the tree exceeding 1.25x the standard deviation of the average branch lengths for the entire tree were pruned. <br>
+1.  Only segments >1Kb and <30Kb were considered.<br>
+2.  No protein with an ambiguous X residue is allowed.<br>
+3.  Alignments were computed with mafft.
+4.  Trees were computed with FastTree.
+5.  HTML trees were generated using FangFang's tool, svr_html (part of the SEED svr_script distrbution.
+6.  HTML trees are colored by the family chosen for their annotation.
 
-All alginments, trees, and HTML files are available in subsequent directories. HTML files are colored by the family that they have been assigned based on the NCBI taxonomy from GenBank.
+It is worth noting that occasionally very distant tips will be a higher BLAST match a taxon that isn't expected. This is more rare in the good quality genomes because they are full-length. I currently think the behavior is acceptable.
+
 
 
 ## Current Bunyavirales Protein Trees
+### From BV-BRC, Only Proteins from Good Quality Genomes
+[Bunyavirales_mature_nonstructural_membrane_protein_NSm_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Bunyavirales_mature_nonstructural_membrane_protein_NSm_protein.html)<br>
 
-[Bunya.78-kD_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.78-kD_Protein.html)<br>
+[Bunyavirales_small_nonstructural_protein_NSs_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Bunyavirales_small_nonstructural_protein_NSs_protein.html)<br>
 
-[Bunya.Gc_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.Gc_Protein.html)<br>
+[Fimoviridae_uncharacterized_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Fimoviridae_uncharacterized_protein.html)<br>
 
-[Bunya.Gn_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.Gn_Protein.html)<br>
+[Mature_envelope_glycoprotein_Gc_Gc_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Mature_envelope_glycoprotein_Gc_Gc_protein.html)<br>
 
-[Bunya.GP38_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.GP38_Protein.html)<br>
+[Mature_envelope_glycoprotein_Gn_Gn_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Mature_envelope_glycoprotein_Gn_Gn_protein.html)<br>
 
-[Bunya.GPC_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.GPC_Protein.html)<br>
+[Mature_secreted_nonstructural_mucin-like_protein_MLD_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Mature_secreted_nonstructural_mucin-like_protein_MLD_protein.html)<br>
 
-[Bunya.L_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.L_Protein.html)<br>
+[Movement_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Movement_protein.html)<br>
 
-[Bunya.MLD_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.MLD_Protein.html)<br>
+[Nairoviridae_mature_secreted_nonstructural_38-kD_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Nairoviridae_mature_secreted_nonstructural_38-kD_protein.html)<br>
 
-[Bunya.Movement_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.Movement_Protein.html)<br>
+[Nucleocapsid_protein_N_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Nucleocapsid_protein_N_protein.html)<br>
 
-[Bunya.N_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.N_Protein.html)<br>
+[Phenuiviridae_mature_nonstructural_78-kD_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Phenuiviridae_mature_nonstructural_78-kD_protein.html)<br>
 
-[Bunya.NSm_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.NSm_Protein.html)<br>
+[Phenuiviridae_nonstructural_protein_5_NS5_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Phenuiviridae_nonstructural_protein_5_NS5_protein.html)<br>
 
-[Bunya.NSs_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.NSs_Protein.html)<br>
+[Phenuiviridae_Pc3_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Phenuiviridae_Pc3_protein.html)<br>
 
-[Bunya.SSP.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.SSP.html)<br>
+[Pre-glycoprotein_polyprotein_GP_complex_GPC_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Pre-glycoprotein_polyprotein_GP_complex_GPC_protein.html)<br>
 
-[Bunya.Z_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Bunyavirales/Bunya.Z_Protein.html)<br>
+[RNA-dependent_RNA_polymerase_L_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/RNA-dependent_RNA_polymerase_L_protein.html)<br>
+
+[RNA_silencing_suppressor_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/RNA_silencing_suppressor_protein.html)<br>
+
+[Signal_peptide.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Signal_peptide.html)<br>
+
+[Small_Nonstructural_Protein_NSs_NSs_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/Good_Only/Small_Nonstructural_Protein_NSs_NSs_Protein.html)<br>
 
 
 
-## Current Paramyxoviridae Protein Trees
 
-[Paramyxo.C-prime_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.C-prime_Protein.html)<br>
 
-[Paramyxo.C_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.C_Protein.html)<br>
+### From BV-BRC, Including Proteins from Poor Quality Genomes
 
-[Paramyxo.D_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.D_Protein.html)<br>
+[Arenaviridae_RING_finger_protein_Z_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Arenaviridae_RING_finger_protein_Z_protein.html)<br>
 
-[Paramyxo.F_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.F_Protein.html)<br>
+[Bunyavirales_mature_nonstructural_membrane_protein_NSm_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Bunyavirales_mature_nonstructural_membrane_protein_NSm_protein.html)<br>
 
-[Paramyxo.G_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.G_Protein.html)<br>
+[Bunyavirales_small_nonstructural_protein_NSs_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Bunyavirales_small_nonstructural_protein_NSs_protein.html)<br>
 
-[Paramyxo.HN_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.HN_Protein.html)<br>
+[Fimoviridae_RNA_silencing_suppressor_protein_P7.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Fimoviridae_RNA_silencing_suppressor_protein_P7.html)<br>
 
-[Paramyxo.H_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.H_Protein.html)<br>
+[Fimoviridae_RNA_silencing_suppressor_protein_P8.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Fimoviridae_RNA_silencing_suppressor_protein_P8.html)<br>
 
-[Paramyxo.I_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.I_Protein.html)<br>
+[Fimoviridae_uncharacterized_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Fimoviridae_uncharacterized_protein.html)<br>
 
-[Paramyxo.L_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.L_Protein.html)<br>
+[Mature_envelope_glycoprotein_Gc_Gc_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Mature_envelope_glycoprotein_Gc_Gc_protein.html)<br>
 
-[Paramyxo.M_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.M_Protein.html)<br>
+[Mature_envelope_glycoprotein_Gn_Gn_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Mature_envelope_glycoprotein_Gn_Gn_protein.html)<br>
 
-[Paramyxo.N_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.N_Protein.html)<br>
+[Mature_secreted_nonstructural_mucin-like_protein_MLD_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Mature_secreted_nonstructural_mucin-like_protein_MLD_protein.html)<br>
 
-[Paramyxo.ORF1.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.ORF1.html)<br>
+[Movement_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Movement_protein.html)<br>
 
-[Paramyxo.P_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.P_Protein.html)<br>
+[Nairoviridae_mature_secreted_nonstructural_38-kD_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Nairoviridae_mature_secreted_nonstructural_38-kD_protein.html)<br>
 
-[Paramyxo.SH_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.SH_Protein.html)<br>
+[Nucleocapsid_protein_N_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Nucleocapsid_protein_N_protein.html)<br>
 
-[Paramyxo.TM_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.TM_Protein.html)<br>
+[Phenuiviridae_mature_nonstructural_78-kD_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Phenuiviridae_mature_nonstructural_78-kD_protein.html)<br>
 
-[Paramyxo.U_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.U_Protein.html)<br>
+[Phenuiviridae_nonstructural_protein_5_NS5_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Phenuiviridae_nonstructural_protein_5_NS5_protein.html)<br>
 
-[Paramyxo.V_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.V_Protein.html)<br>
+[Phenuiviridae_Pc3_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Phenuiviridae_Pc3_protein.html)<br>
 
-[Paramyxo.W_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.W_Protein.html)<br>
+[Pre-glycoprotein_polyprotein_GP_complex_GPC_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Pre-glycoprotein_polyprotein_GP_complex_GPC_protein.html)<br>
 
-[Paramyxo.Y1_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.Y1_Protein.html)<br>
+[RNA-dependent_RNA_polymerase_L_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/RNA-dependent_RNA_polymerase_L_protein.html)<br>
 
-[Paramyxo.Y2_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/Paramyxoviridae/Paramyxo.Y2_Protein.html)<br>
+[RNA_silencing_suppressor_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/RNA_silencing_suppressor_protein.html)<br>
 
-## Current Whole Genome Sequence Trees
-The Paramyxos are whole genome DNA trees, the Bunyavirales are a concatenation of gene trees for L, N, and GPC.  Note that the alignments are not hosted here since they are too big.
+[Signal_peptide.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Signal_peptide.html)<br>
 
-[Paramyxo.clean.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/WGS-Trees/Paramyxo.clean.html)<br>
-[Bunya.L-N-GPC.clean.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/June_2024/WGS-Trees/Bunya.L-N-GPC.clean.html)<br>
+[Small_Nonstructural_Protein_NSs_NSs_Protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Bunyavirales_BVBRC/With_Poor/Small_Nonstructural_Protein_NSs_NSs_Protein.html)<br>
 
 
