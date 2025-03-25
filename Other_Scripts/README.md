@@ -17,13 +17,13 @@ This perl script will create automatic clusters, alignments, and pssms for a set
  It also uses BlastInterface. Here is an example usage:<br>
 `fasta-cluster-pssm.pl -a "Pre-glycoprotein polyprotein GP complex, GPC" -p "Peribunyaviridae.GPC" -tmp "Peribunyaviridae-GPC"  <Peribunyaviridae.GPC.unique.len.aa`<br>
 
-###annotate_viral_taxon_ContigDir
+### annotate_viral_taxon_ContigDir
 This program will run the annotation pipleline over a directory of contigs.  It requires a metadata file that is formatted as [file_name \t genome_name \t taxon_id].<br>
 
-###process_quality_dir.pl
+### process_quality_dir.pl
 This program provides some rough stats on a set of genomes in a Quality_GTO directory.<br>
 
-###gto-dir-to-alis-and-trees.pl
+### gto-dir-to-alis-and-trees.pl
 This program will grind out the alignments and trees for a directory of GTOs.<br>
 
 
