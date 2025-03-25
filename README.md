@@ -93,7 +93,7 @@ It is run in the following way: `annotate_by_viral_pssm-GTO.pl  -x [file_prefix]
 
 `Viral-Alignments`  This directory is not used by any program, but it contains the alignments that correspond to each PSSM.<br><br>
 
-`Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of these tools.  It currently contains a program called, `list_annos_from_pssms.pl` which will dump the annotation for each featur.<br><br>
+`Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of these tools.  It currently contains a program called, `list_annos_from_pssms.pl` which will dump the annotation for each feature.<br><br>
 
 ## How to run annotate_by_viral_pssm.pl
 `annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta`<br><br>
@@ -138,7 +138,7 @@ There is also a set of debugging parameters that I use frequently:
 
 ## Step 1.  Calling features based on PSSMs
 
-The code is currently designed to work on the *Paramyxoviridae*, *Bunyavirales*, and *Filoviridae*, although more taxa are planned.  As depicted in the image below, it first performs a BLASTn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br><br>
+The code is currently designed to work on the *Paramyxoviridae*, *Bunyavirales*, *Filoviridae*, and *Pneumoviridae*, although more taxa are planned.  As depicted in the image below, it first performs a BLASTn against a small set of representative genomes for each genus.  Then it sorts the results by bit score and chooses the best match.<br>
 
 For each genus, there is a directory of PSSMs corresponding to each known protein for that genus. The PSSMs are derived from a set of hand curated alignments. In the next step, it cycles through each directory of PSSMs (there may be more than one PSSM per protein), choosing the best tBLASTn match per pssm. <br>
 
@@ -178,11 +178,11 @@ Note that it assumes your genome will have the same set of proteins as the neare
       ...
 ```
 
-The Viral_PSSM.json file is in a regular state of development, so this may change slightly, but the above shows an example for, *Arenaviridae*, and a single protein, GPC.  The two highest level keys are `segments`, which contains information on segments that are used for genome quality evaluation ad `features`, which currently contains information on CDS, mat_peptide, and RNA features. <br>
+The Viral_PSSM.json file is in a regular state of development, so this may change slightly, but the above shows an example for, *Arenaviridae*, and a single protein, GPC.  The two highest level keys are `segments`, which contains information on segments that are used for genome quality evaluation and `features`, which currently contains information on CDS, mat_peptide, and RNA features. <br>
 
 The following is a non-exhaustive description of fields that are used in the JSON<br><br>
 
-`max_len and min_len` maximum or minimum length of a contig or feature that is expected and evaluated by the genome quality checker (not all features or contigs will have this).  The boundaries are currently very crude but effective<br><br>
+`max_len and min_len` maximum or minimum length of a contig or feature that is expected and evaluated by the genome quality checker (not all features or contigs will have this).  The boundaries are currently very crude, and not bound by any sort of statistics, but effective<br><br>
 
 `replicon_geometry` this is not currently used, but carries info on the genometry of the replicon and inserted into the GTO by the quality tool<br><br>
 
@@ -190,7 +190,7 @@ The following is a non-exhaustive description of fields that are used in the JSO
 
 `coverage_cutoff` blast subject coverage for calling a feature<br><br>
 
-`upstream_ext and downstream_ext` tells the program if it can look upstream for a met start or downstream for a stop codon<br><br>
+`upstream_ext and downstream_ext` tells the program if it can look upstream for a Met start or downstream for a stop codon<br><br>
 
 `feature_type` currently CDS, mat_peptide, or RNA <br><br>
 
@@ -199,13 +199,13 @@ The following is a non-exhaustive description of fields that are used in the JSO
 `non_pssm_partner` used for placing a location based feature<br><br>
 
 There are other fields that are not depicted in the example, including:<br>
-`PMID` which contains the PubMed ID for one or more DLITS.  A DLIT is an examples of important paper that either defines the function or sequence of a feature. <br><br>
+`PMID` which contains the PubMed ID for one or more DLITS.  A DLIT is an example of an important paper that either defines the function or sequence of a feature. <br><br>
 
 `"special": "transcript_edit"`  This field tells the program that an external program is being used to make a call.  In this case, `transcript_edit` is used to denote a feature that undergoes transcript editing and is found by using `get_transcript_edited_features.pl`.<br><br>
 
 
 ## Get Transcript Edited Features
-Transcript editing is a phenomenon that occurs in the phosphoproteins of the Paramyxoviridae and the glycoproteins of the Filoviridae.  It occurs when the RNA-Dependent RNA polymerase encounters a region of low complexity and pauses.  The pause allows for the insertion of one or more new nucleotides into the transcript, which causes a frame shift. Thus, the amino acid sequence is not a direct translation of what is encoded in the genome.  We solve this problem by hand-curating a set of transcripts in their post-editing state. These are found in the `Transcript-Editing` directory.  We then BLAST these against the the contig, and for BLASTn matches with high enough scores, the alignment gap is filled in using the nucleotide sequence of closest curated transcript.  Currently in order to do this, the following strict BLASTn criteria must be met: <br>
+Transcript editing is a phenomenon that occurs in the phosphoproteins of the *Paramyxoviridae* and the glycoproteins of the *Filoviridae*.  It occurs when the RNA-Dependent RNA polymerase encounters a region of low complexity and pauses.  The pause allows for the insertion of one or more new nucleotides into the transcript, which causes a frame shift. Thus, the amino acid sequence is not a direct translation of what is encoded in the genome.  We solve this problem by hand-curating a set of transcripts in their post-editing state. These are found in the `Transcript-Editing` directory.  We then BLAST these against the the contig, and for BLASTn matches with high enough scores, the alignment gap is filled in using the nucleotide sequence of closest curated transcript.  Currently in order to do this, the following strict BLASTn criteria must be met: <br>
 
 1.  The match must have >= 95% nucleotide identity
 2.  The match must have >= 95% query coverage
@@ -268,7 +268,7 @@ Usage statement for the tool:
 	--help (or -h)           Show this help message
 ```
 
-## General notes on the curation and development of PSSMs
+## General remarks on the curation and development of PSSMs and the current state of the thee annotations
 ### Paramyxoviridae
 
 I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, and the phosphoproteins in the Paramyxos.  They were originally called by splicing two BLAST HSPs, which turned out to be problematic in a few cases. DLITs that either describe the editing site, or the subsequent amino acid sequence for the transcript-edited proteins have been added to the json.  There are a handful, like Narmovirus, where I do not think protein work has been done to prove V and W, but the predicted editing site is supported by literature. At this point, all editing sites are backstopped by literature references. <br>
@@ -287,10 +287,10 @@ The Fimoviridae are the most poorly characterized family that I have encountered
 In this family the quality checker will look for Segments 1-4 only, which correspond to the individual proteins L, GPC, N, and MOV, respectively.  Their segment lengths are highly variable, so the lenght cutoffs for segments 1-4 are based on the the lower length limit of the corresponding protein, and (the longest allowable gene + 0.5 X longest allowable gene) (this is arbitrary and could  be tuned).<br>
 
 ## Phasmaviridae
-These are mostly insect virueses.  The set of genomes is highly diverse,with few representatives in each genus, so the pssms only represent a fraction of the true diversity.  There were a considerable number of proteins that I could not get to cluster at 50% identity. I am currently dissatisfied with this family, so as more exemplars come in, this set should eventually get recomputed. 
+These are mostly insect virueses.  The set of genomes is highly diverse with few representatives in each genus, so the pssms only represent a fraction of the true diversity.  There were a considerable number of proteins that I could not get to cluster at 50% identity. I am currently dissatisfied with this family, so as more exemplars come in, this set should eventually get recomputed. 
 
 ## Pneumoviridae
-The cleaved forms of the fusion glycoprotein differ between ortho- and metapneumoviride.  All of the orthos, except murine and close relatives, have a p27 peptide that is a real protein. This necessitated the insertion of three taxon-level directories (ortho, meta, and murine orthos).  I kept the orginal all-pneumo alignment directory which has everything and has seprate subdirectories for the mature F proteins.   The pssm directories for the three taxa contain the pssms that I had originally built for all pneumos. This means that there are a few extra pssms that won't match and can be cleaned up later.    
+The cleaved forms of the fusion glycoprotein differ between ortho- and metapneumoviride.  All of the orthos, except murine and close relatives, have a p27 peptide that is a real protein. This necessitated the insertion of three taxon-level directories (ortho, meta, and murine orthos).  I kept the orginal all-pneumo alignment directory which has everything and has seprate subdirectories for the mature F proteins.   The pssm directories for the three taxa contain the pssms that I had originally built for all pneumos. This means that there are a few extra pssms that won't match and can be cleaned up on a rainy day.    
 
 
 
