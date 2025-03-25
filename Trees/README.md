@@ -1,16 +1,18 @@
 # Current Protein Trees
-The March 2025 alignments and trees have been computed for the *Bunyavirales*, *Filoviridae*, *Paramyxoviridae*, and *Pneumoviridae* using the annotation system.  *No* post-annotation curation has been performed on the alignments or trees. For each taxon, there are two subdirectories: "Good_Only" and "With_Poor".  The former includes only proteins from "Good" quality genomes, as determined by the annotation tool.  The latter, considers proteins from both "Good" and "Poor" quality genomes as long as there is no exception associated with a given feature in a poor quality genome (*e.g*, wrong length, ambiguous bases, or incorrect copy number).  For the *Bunyavirales*, there are two top-level directories.  One is the set of merged segments from BV-BRC, and the other is the set of segments unified by a single assembly accession downloaded from NCBI using their datasets tool. For BV-BRC, the segments of the *Bunyavirales* were linked using their full genome name string, which includes strain names and numbers.  All directories contain an html visualization of the tree, the Newick, aligned proteins in fasta format, and unaligned proteins.  Files are named based on annotation.<br> 
+The March 2025 alignments and trees have been computed for the *Bunyavirales*, *Filoviridae*, *Paramyxoviridae*, and *Pneumoviridae* using the annotation system.  Each directory contains an html visualization of the tree, the Newick file, aligned proteins in fasta format, and unaligned proteins in fasta format.  Files are named based on annotation.  *No* post-annotation curation has been performed on the alignments or trees. For each taxon, there are two subdirectories: "Good_Only" and "With_Poor".  The former includes only proteins from "Good" quality genomes, as determined by the annotation tool.  The latter considers proteins from both "Good" and "Poor" quality genomes as long as there is no exception associated with a given protein in a poor quality genome (*e.g*, wrong length, ambiguous bases, or incorrect copy number).<br>  
+
+The *Bunyavirales* are multi-segmented, and the viral community has a bad habit of submitting each segment separately to GenBank as if it were its own genome. In order to assess genome quality, a whole genome must be considered. We attempted to merge Bunyavirales segments to creat *potentially* complete genomes in two ways.  First, the segments in BV-BRC, were linked using the full genome name string, which includes the strain names and numbers.  We also downloaded every Bunyavirales genome NCBI where the segments were unified under a single assembly accession, using their datasets tool.  These genome sets were analyzed separately, although most of the NCBI genomes exist in the BV-BRC set.<br> 
+
 
 **Rules for making the trees** <br>
 1.  Only segments >1Kb and <30Kb were considered.<br>
 2.  No protein with an ambiguous X residue is allowed.<br>
 3.  Alignments were computed with mafft.
 4.  Trees were computed with FastTree.
-5.  HTML trees were generated using FangFang's tool, svr_html (part of the SEED svr_script distrbution.
+5.  HTML trees were generated using FangFang's tool, svr_html (part of the SEED svr_script distribution).
 6.  HTML trees are colored by the family chosen for their annotation.
 
-It is worth noting that occasionally very distant tips will be a higher BLAST match a taxon that isn't expected. This is more rare in the good quality genomes because they are full-length. I currently think the behavior is acceptable.
-
+It is worth noting that occasionally very distant tips will be a higher BLAST match to a taxon that isn't expected, resulting in its misidentification by the annotation tool. This is more common in the poor quality genomes due to their poorer sequence quality and shorter lengths. The current BLAST-based taxon identification represents a trade-off between being able to accurately identify and analyze well-characterized genomes, versus being permissive enough to provide some annotations to more distant relatives.  Presently, I think the balance is acceptable.  Overall, this happens most frequently in the tips of the paramyxos and pneumos, which used to be classified together in the same family.
 
 
 ## Current Bunyavirales Protein Trees

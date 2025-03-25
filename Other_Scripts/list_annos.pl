@@ -11,7 +11,8 @@ my $usage = 'list_annos_from_pssms.pl -b base_directory
 		             (D = /home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json)
 				-h help';
 
-my ($help, $json_file); 		
+my $help;
+my $json_file = "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"; 		
 my $opts = GetOptions( 'h'         => \$help,
                        'j=s'       => \$json_file);
 
@@ -20,6 +21,8 @@ if ($help){die "$usage\n";}
 open (IN, "<$json_file"), or die "Cant find JSON options file\n"; 
 my $json = decode_json(scalar read_file(\*IN));
 close IN;
+
+print "Taxon\tPSSM_Name\tFeat_Type\tAnno\n";
 
 foreach (sort keys %$json)
 {
