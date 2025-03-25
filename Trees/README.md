@@ -293,20 +293,10 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 
 
 
-
 ### Including Proteins from Poor Quality Genomes
-
 [Fusion_glycoprotein_F_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Fusion_glycoprotein_F_protein.html)<br>
 
-[Fusion_glycoprotein_precursor_F0_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Fusion_glycoprotein_precursor_F0_protein.html)<br>
-
 [Matrix_protein_M_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Matrix_protein_M_protein.html)<br>
-
-[Mature_C-terminal_fusion_protein_subunit_F1.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Mature_C-terminal_fusion_protein_subunit_F1.html)<br>
-
-[Mature_N-terminal_fusion_protein_subunit_F2.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Mature_N-terminal_fusion_protein_subunit_F2.html)<br>
-
-[Mature_p27_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Mature_p27_protein.html)<br>
 
 [Nucleocapsid_protein_N_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Nucleocapsid_protein_N_protein.html)<br>
 
@@ -336,17 +326,10 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 
 [RNA-dependent_RNA_polymerase_L_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/RNA-dependent_RNA_polymerase_L_protein.html)<br>
 
-[Signal_peptide.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Paramyxoviridae/With_Poor/Signal_peptide.html)<br><br>
-
-
-
 
 
 
 ## Current Pneumoviridae Protein Trees
-
-### Only Proteins from Good Quality Genomes
-[Fusion_glycoprotein_F_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Fusion_glycoprotein_F_protein.html)<br>
 
 [Fusion_glycoprotein_precursor_F0_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Fusion_glycoprotein_precursor_F0_protein.html)<br>
 
@@ -360,10 +343,6 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 
 [Nucleocapsid_protein_N_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Nucleocapsid_protein_N_protein.html)<br>
 
-[Paramyxoviridae_V_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Paramyxoviridae_V_protein.html)<br>
-
-[Paramyxoviridae_W_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Paramyxoviridae_W_protein.html)<br>
-
 [Phosphoprotein_P_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Phosphoprotein_P_protein.html)<br>
 
 [Pneumoviridae_nonstructural_protein_NS1.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Pneumoviridae_nonstructural_protein_NS1.html)<br>
@@ -373,8 +352,6 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 [Pneumoviridae_small_hydorophobic_protein_SH_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Pneumoviridae_small_hydorophobic_protein_SH_protein.html)<br>
 
 [Receptor_binding_protein_G_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Receptor_binding_protein_G_protein.html)<br>
-
-[Receptor_binding_protein_RBP.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/Receptor_binding_protein_RBP.html)<br>
 
 [RNA-dependent_RNA_polymerase_L_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/Good_Only/RNA-dependent_RNA_polymerase_L_protein.html)<br>
 
@@ -387,8 +364,6 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 
 
 ### Including Proteins from Poor Quality Genomes
-[Fusion_glycoprotein_F_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Fusion_glycoprotein_F_protein.html)<br>
-
 [Fusion_glycoprotein_precursor_F0_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Fusion_glycoprotein_precursor_F0_protein.html)<br>
 
 [Hypothetical_P2_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Hypothetical_P2_protein.html)<br>
@@ -403,10 +378,6 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 
 [Nucleocapsid_protein_N_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Nucleocapsid_protein_N_protein.html)<br>
 
-[Paramyxoviridae_V_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Paramyxoviridae_V_protein.html)<br>
-
-[Paramyxoviridae_W_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Paramyxoviridae_W_protein.html)<br>
-
 [Phosphoprotein_P_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Phosphoprotein_P_protein.html)<br>
 
 [Pneumoviridae_nonstructural_protein_NS1.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Pneumoviridae_nonstructural_protein_NS1.html)<br>
@@ -417,8 +388,6 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 
 [Receptor_binding_protein_G_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Receptor_binding_protein_G_protein.html)<br>
 
-[Receptor_binding_protein_RBP.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Receptor_binding_protein_RBP.html)<br>
-
 [RNA-dependent_RNA_polymerase_L_protein.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/RNA-dependent_RNA_polymerase_L_protein.html)<br>
 
 [Signal_peptide.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Signal_peptide.html)<br>
@@ -426,4 +395,3 @@ It is worth noting that occasionally very distant tips will be a higher BLAST ma
 [Transcription_elongation_factor_M2-1.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Transcription_elongation_factor_M2-1.html)<br>
 
 [Transcription-replication_factor_M2-2.html](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/Pneumoviridae/With_Poor/Transcription-replication_factor_M2-2.html)<br><br>
-
