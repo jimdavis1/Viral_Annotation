@@ -1,5 +1,18 @@
 # Current Protein Trees
-The March 2025 alignments and trees have been computed for the *Bunyavirales*, *Filoviridae*, *Paramyxoviridae*, and *Pneumoviridae* using the annotation system.  Each directory contains an html visualization of the tree, the Newick file, aligned proteins in fasta format, and unaligned proteins in fasta format.  Files are named based on annotation.  *No* post-annotation curation has been performed on the alignments or trees. For each taxon, there are two subdirectories: "Good_Only" and "With_Poor".  The former includes only proteins from "Good" quality genomes, as determined by the annotation tool.  The latter considers proteins from both "Good" and "Poor" quality genomes as long as there is no exception associated with a given protein in a poor quality genome (*e.g*, wrong length, ambiguous bases, or incorrect copy number).<br>  
+The March 2025 alignments and trees have been computed for the *Bunyavirales*, *Filoviridae*, *Paramyxoviridae*, and *Pneumoviridae* using the annotation system.<br>
+
+### Whole Genome Trees
+WGS trees have been computed for the high quality single-segmented viruses: <br>
+
+[Filoviridae](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/WGS_Trees/Filo_WGS.html)<br>
+
+[Pneumoviridae](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/WGS_Trees/Pneumo_WGS.html)<br>
+
+[paramyxoviridae](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/WGS_Trees/Paramyxo_WGS.html)<br>
+<br>
+
+### Protein Trees
+Each directory contains an html visualization of the tree, the Newick file, aligned proteins in fasta format, and unaligned proteins in fasta format.  Files are named based on annotation.  *No* post-annotation curation has been performed on the alignments or trees. For each taxon, there are two subdirectories: "Good_Only" and "With_Poor".  The former includes only proteins from "Good" quality genomes, as determined by the annotation tool.  The latter considers proteins from both "Good" and "Poor" quality genomes as long as there is no exception associated with a given protein in a poor quality genome (*e.g*, wrong length, ambiguous bases, or incorrect copy number).<br>  
 
 The *Bunyavirales* are multi-segmented, and the viral community has a bad habit of submitting each segment separately to GenBank as if it were its own genome. In order to assess genome quality, a whole genome must be considered. We attempted to merge Bunyavirales segments to creat *potentially* complete genomes in two ways.  First, the segments in BV-BRC, were linked using the full genome name string, which includes the strain names and numbers.  We also downloaded every Bunyavirales genome NCBI where the segments were unified under a single assembly accession, using their datasets tool.  These genome sets were analyzed separately, although most of the NCBI genomes exist in the BV-BRC set.<br> 
 

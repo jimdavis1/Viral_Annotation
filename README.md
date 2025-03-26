@@ -91,7 +91,7 @@ It is run in the following way: `annotate_by_viral_pssm-GTO.pl  -x [file_prefix]
 
 `Transcript-Editing` This directory contains fasta files of hand-curated transcripts (post editing).<br><br>
 
-`Viral-Alignments`  This directory is not used by any program, but it contains the alignments that correspond to each PSSM.<br><br>
+`PSSM-Alignments`  This directory is not used by any program, but it contains the alignments that correspond to each PSSM.<br><br>
 
 `Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of these tools.  It currently contains a program called, `list_annos_from_pssms.pl` which will dump the annotation for each feature.<br><br>
 
@@ -268,7 +268,7 @@ Usage statement for the tool:
 	--help (or -h)           Show this help message
 ```
 
-## General remarks on the curation and development of PSSMs and the current state of the thee annotations
+## General remarks on the curation and development of PSSMs and the current state of the annotations
 ### Paramyxoviridae
 
 I have recently updated the way transcript-edited features are called by adding `get_transcript_edited_features.pl`.  This is up-to-date and evaluated for the glycoproteins of Ebola, and the phosphoproteins in the Paramyxos.  They were originally called by splicing two BLAST HSPs, which turned out to be problematic in a few cases. DLITs that either describe the editing site, or the subsequent amino acid sequence for the transcript-edited proteins have been added to the json.  There are a handful, like Narmovirus, where I do not think protein work has been done to prove V and W, but the predicted editing site is supported by literature. At this point, all editing sites are backstopped by literature references. <br>
