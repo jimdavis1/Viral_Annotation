@@ -8,7 +8,7 @@ WGS trees have been computed for the high quality single-segmented viruses: <br>
 
 [Pneumoviridae](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/WGS_Trees/Pneumo_WGS.html)<br>
 
-[paramyxoviridae](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/WGS_Trees/Paramyxo_WGS.html)<br>
+[Paramyxoviridae](https://htmlpreview.github.io/?https://github.com/jimdavis1/Viral_Annotation/blob/main/Trees/March_2025/WGS_Trees/Paramyxo_WGS.html)<br>
 <br>
 
 ### Protein Trees
