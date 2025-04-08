@@ -92,7 +92,7 @@
         "PMID": ["34141448"],
         "special": "transcript_edit",
         "max_len": 336,
-        "min_len": 329,
+        "min_len": 324,
         "segment": "Single RNA Segment"
       },
       "W": {
@@ -156,7 +156,7 @@
         "downstream_ext": 1,
         "feature_type": "CDS",
         "max_len": 617,
-        "min_len": 455,
+        "min_len": 440,
         "non_pssm_partner": ["Small Segment Stemloop"],
         "segment": "Small RNA Segment",
         "upstream_ext": 1
@@ -187,7 +187,7 @@
         "downstream_ext": 1,
         "feature_type": "CDS",
         "max_len": 2545,
-        "min_len": 2081,
+        "min_len": 2030,
         "non_pssm_partner": ["Large Segment Stemloop"],
         "segment": "Large RNA Segment",
         "upstream_ext": 1
@@ -224,7 +224,7 @@
         "anno": "Small segment stemloop region"
       },
       "SSP": {
-        "anno": "Mature stable signal peptide (SSP)",
+        "anno": "Signal peptide",
         "bit_cutoff": 100,
         "coverage_cutoff": 0.65,
         "downstream_ext": 0,
@@ -261,7 +261,7 @@
         "replicon_geometry": "linear"
       },
       "Segment Three": {
-        "max_len": 1566,
+        "max_len": 1700,
         "min_len": 260,
         "replicon_geometry": "linear"
       },
@@ -280,8 +280,8 @@
         "downstream_ext": 1,
         "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
-        "max_len": 2320,
-        "min_len": 2249,
+        "max_len": 2350,
+        "min_len": 2235,
         "segment": "Segment One"
       },
       "MOV": {
@@ -578,8 +578,8 @@
   "Hantaviridae": {
     "segments": {
       "Small RNA Segment": {
-        "max_len": 2058,
-        "min_len": 1632,
+        "max_len": 2107,
+        "min_len": 1500,
         "replicon_geometry": "linear"
       },
       "Medium RNA Segment": {
@@ -645,7 +645,7 @@
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 480,
-        "min_len": 427,
+        "min_len": 420,
         "segment": "Small RNA Segment"
       },
       "NSs": {
@@ -838,7 +838,7 @@
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 681,
-        "min_len": 480,
+        "min_len": 470,
         "segment": "Single RNA Segment"
       },
       "P": {
@@ -895,7 +895,7 @@
     "segments": {
       "Single RNA Segment": {
         "max_len": 21133,
-        "min_len": 16975,
+        "min_len": 14500,
         "replicon_geometry": "linear"
       }
     },
@@ -909,7 +909,7 @@
         "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 611,
-        "min_len": 485,
+        "min_len": 479,
         "segment": "Single RNA Segment"
       },
       "HN": {
@@ -1001,7 +1001,7 @@
   "Metapneumovirus": {
     "segments": {
       "Single RNA Segment": {
-        "max_len": 1880,
+        "max_len": 18800,
         "min_len": 11777,
         "replicon_geometry": "linear"
       }
@@ -1077,7 +1077,7 @@
         "anno": "Transcription-replication factor M2-2",
         "copy_num": 1,
         "max_len": 102,
-        "min_len": 64,
+        "min_len": 54,
         "segment": "Single RNA Segment"
       },
       "N": {
@@ -1089,7 +1089,7 @@
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 436,
-        "min_len": 331,
+        "min_len": 312,
         "segment": "Single RNA Segment"
       },
       "P": {
@@ -1112,7 +1112,7 @@
         "downstream_ext": 1,
         "copy_num": 1,
         "max_len": 325,
-        "min_len": 200,
+        "min_len": 100,
         "segment": "Single RNA Segment",
         "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
       },
@@ -1136,7 +1136,7 @@
         "downstream_ext": 0,
         "copy_num": 1,
         "max_len": 92,
-        "min_len": 76,
+        "min_len": 66,
         "PMID": ["29142300", "16971452"],
         "segment": "Single RNA Segment",
         "anno": "Mature N-terminal fusion protein subunit (F2)"
@@ -1149,7 +1149,7 @@
         "downstream_ext": 1,
         "copy_num": 1,
         "max_len": 501,
-        "min_len": 353,
+        "min_len": 345,
         "PMID": ["29142300", "16971452"],
         "segment": "Single RNA Segment",
         "anno": "Mature C-terminal fusion protein subunit (F1)"
@@ -1182,7 +1182,7 @@
         "downstream_ext": 1,
         "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
-        "max_len": 728,
+        "max_len": 749,
         "min_len": 489,
         "segment": "Single RNA Segment"
       },
@@ -1216,7 +1216,7 @@
         "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 372,
-        "min_len": 304,
+        "min_len": 299,
         "segment": "Single RNA Segment"
       },
       "N": {
@@ -1228,7 +1228,7 @@
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 605,
-        "min_len": 495,
+        "min_len": 485,
         "segment": "Single RNA Segment"
       },
       "P": {
@@ -1257,12 +1257,12 @@
   "Nairoviridae": {
    "segments": {
       "Small RNA Segment": {
-        "max_len": 1834,
-        "min_len": 1480,
+        "max_len": 2030,
+        "min_len": 1439,
         "replicon_geometry": "linear"
       },
       "Medium RNA Segment": {
-        "max_len": 5903,
+        "max_len": 6003,
         "min_len": 3990,
         "replicon_geometry": "linear"
       },
@@ -1318,7 +1318,7 @@
         "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
         "copy_num": 1,
         "max_len": 1854,
-        "min_len": 1145,
+        "min_len": 1130,
         "segment": "Medium RNA Segment"
       },
       "L": {
@@ -1504,7 +1504,7 @@
         "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 612,
-        "min_len": 500,
+        "min_len": 492,
         "segment": "Single RNA Segment"
       },
       "HN": {
@@ -1537,7 +1537,7 @@
         "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 402,
-        "min_len": 329,
+        "min_len": 320,
         "segment": "Single RNA Segment"
       },
       "N": {
@@ -1549,7 +1549,7 @@
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 560,
-        "min_len": 458,
+        "min_len": 450,
         "segment": "Single RNA Segment"
       },
       "P": {
@@ -1626,7 +1626,7 @@
         "anno": "Filoviridae matrix protein (VP40)",
         "copy_num": 1,
         "max_len": 374,
-        "min_len": 273,
+        "min_len": 263,
         "segment": "Single RNA Segment"
       },
        "SP": {
@@ -1635,12 +1635,12 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 0,
-        "anno": "Mature stable signal peptide (SSP)",
+        "anno": "Signal peptide",
         "segment": "Single RNA Segment",
         "PMID": ["9658086"],
         "copy_num": 1,
         "max_len": 35,
-        "min_len": 29
+        "min_len": 28
       },     
        "Delta": {
         "bit_cutoff": 25,
@@ -1652,8 +1652,8 @@
         "segment": "Single RNA Segment",
         "PMID": ["10603327", "28539454", "34986351"],
         "copy_num": 1,
-        "max_len": 46,
-        "min_len": 36
+        "max_len": 56,
+        "min_len": 30
       },
        "sGP": {
         "bit_cutoff": 100,
@@ -1665,8 +1665,8 @@
         "segment": "Single RNA Segment",
         "PMID": ["10603327", "28539454"],
         "copy_num": 1,
-        "max_len": 321,
-        "min_len": 263
+        "max_len": 327,
+        "min_len": 257
       },
       "sGP_Precursor": {
         "bit_cutoff": 100,
@@ -1676,8 +1676,8 @@
         "downstream_ext": 1,
         "anno": "Soluble secreted glycoprotein (sGP) precursor",
         "copy_num": 1,
-        "max_len": 404,
-        "min_len": 328,
+        "max_len": 430,
+        "min_len": 318,
         "segment": "Single RNA Segment",
         "PMID": ["10603327", "28539454"]
       },
@@ -1692,7 +1692,7 @@
         "segment": "Single RNA Segment",
         "copy_num": 1,
         "max_len": 193,
-        "min_len": 157
+        "min_len": 147
       },
       "VP30": {
         "bit_cutoff": 100,
@@ -1702,8 +1702,8 @@
         "downstream_ext": 1,
         "anno": "Filoviridae transcription activator protein (VP30)",
         "copy_num": 1,
-        "max_len": 317,
-        "min_len": 253,
+        "max_len": 330,
+        "min_len": 240,
         "segment": "Single RNA Segment"
       },
       "VP24": {
@@ -1715,7 +1715,7 @@
         "anno": "Filoviridae nucleocapsid maturation factor (VP24)",
         "copy_num": 1,
         "max_len": 278,
-        "min_len": 226,
+        "min_len": 215,
         "segment": "Single RNA Segment"
       },
       "L": {
@@ -1737,7 +1737,7 @@
         "special": "transcript_edit",
         "copy_num": 1,
         "max_len": 516,
-        "min_len": 422,
+        "min_len": 412,
         "segment": "Single RNA Segment"
       },
         "ssGP": {
@@ -1747,7 +1747,7 @@
         "special": "transcript_edit",
         "copy_num": 1,
         "max_len": 330,
-        "min_len": 240,
+        "min_len": 231,
         "segment": "Single RNA Segment"
       },
         "GPC": {
@@ -1757,7 +1757,7 @@
         "special": "transcript_edit",
         "copy_num": 1,
         "max_len": 746,
-        "min_len": 609,
+        "min_len": 599,
         "segment": "Single RNA Segment"
       }
     }
@@ -1766,7 +1766,7 @@
     "segments": {
       "Single RNA Segment": {
         "max_len": 20074,
-        "min_len": 18505,
+        "min_len": 18000,
         "replicon_geometry": "linear"
       }
     },
@@ -1801,7 +1801,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Filoviridae matrix protein protein (VP40)",
+        "anno": "Filoviridae matrix protein (VP40)",
         "copy_num": 1,
         "max_len": 374,
         "min_len": 273,
@@ -1845,7 +1845,7 @@
         "coverage_cutoff": 0.65,
         "upstream_ext": 1,
         "downstream_ext": 0,
-        "anno": "Mature stable signal peptide (SSP)",
+        "anno": "Signal peptide",
         "segment": "Single RNA Segment",
         "PMID": ["8437211"]
       },
@@ -1890,7 +1890,7 @@
   "Orthopneumovirus": {
     "segments": {
       "Single RNA Segment": {
-        "max_len": 1880,
+        "max_len": 18800,
         "min_len": 11777,
         "replicon_geometry": "linear"
       }
@@ -1905,7 +1905,7 @@
         "anno": "Fusion glycoprotein precursor (F0 protein)",
         "copy_num": 1,
         "max_len": 631,
-        "min_len": 445,
+        "min_len": 440,
         "segment": "Single RNA Segment"
       },
       "G": {
@@ -1917,7 +1917,7 @@
         "segment": "Single RNA Segment",
         "copy_num": 1,
         "max_len": 455,
-        "min_len": 195,
+        "min_len": 185,
         "PMID": ["26658574"],
         "anno": "Receptor binding protein (G protein)"
       },
@@ -1942,7 +1942,7 @@
         "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 283,
-        "min_len": 204,
+        "min_len": 199,
         "segment": "Single RNA Segment"
       },
       "M2-1": {
@@ -1978,10 +1978,10 @@
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
         "max_len": 436,
-        "min_len": 331,
+        "min_len": 312,
         "segment": "Single RNA Segment"
       },
-        "NS1": {
+      "NS1": {
         "bit_cutoff": 100,
         "feature_type": "CDS",
         "coverage_cutoff": 0.65,
@@ -2011,7 +2011,7 @@
         "downstream_ext": 1,
         "copy_num": 1,
         "max_len": 325,
-        "min_len": 200,
+        "min_len": 179,
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
@@ -2023,7 +2023,7 @@
         "downstream_ext": 1,
         "copy_num": 1,
         "max_len": 325,
-        "min_len": 200,
+        "min_len": 48,
         "segment": "Single RNA Segment",
         "anno": "Pneumoviridae small hydorophobic protein (SH protein)"
       },
@@ -2035,7 +2035,7 @@
         "downstream_ext": 0,
         "copy_num": 1,
         "max_len": 27,
-        "min_len": 20,
+        "min_len": 19,
         "PMID": ["25078705", "37415824"],
         "segment": "Single RNA Segment",
         "anno": "Signal peptide"
@@ -2048,7 +2048,7 @@
         "downstream_ext": 0,
         "copy_num": 1,
         "max_len": 92,
-        "min_len": 76,
+        "min_len": 66,
         "PMID": ["11493675", "34903371", "37415824"],
         "segment": "Single RNA Segment",
         "anno": "Mature N-terminal fusion protein subunit (F2)"
@@ -2074,7 +2074,7 @@
         "downstream_ext": 0,
         "copy_num": 1,
         "max_len": 29,
-        "min_len": 24,
+        "min_len": 20,
         "segment": "Single RNA Segment",
         "PMID": ["11493675", "34903371", "37415824"],
         "anno": "Mature p27 protein"
@@ -2205,7 +2205,7 @@
         "downstream_ext": 1,
         "copy_num": 1,
         "max_len": 325,
-        "min_len": 200,
+        "min_len": 179,
         "segment": "Single RNA Segment",
         "anno": "Phosphoprotein (P protein)"
       },
@@ -2290,7 +2290,7 @@
         "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 622,
-        "min_len": 509,
+        "min_len": 502,
         "segment": "Single RNA Segment"
       },
       "HN": {
@@ -2323,7 +2323,7 @@
         "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 420,
-        "min_len": 338,
+        "min_len": 335,
         "segment": "Single RNA Segment"
       },
       "N": {
@@ -2363,7 +2363,7 @@
         "special": "transcript_edit",
         "copy_num": 1,
         "max_len": 440,
-        "min_len": 353,
+        "min_len": 345,
         "segment": "Single RNA Segment"
       },
       "V": {
@@ -2576,12 +2576,12 @@
   "Peribunyaviridae": {
     "segments": {
       "Small RNA Segment": {
-        "max_len": 1124,
-        "min_len": 868,
+        "max_len": 1330,
+        "min_len": 750,
         "replicon_geometry": "linear"
       },
       "Medium RNA Segment": {
-        "max_len": 4982,
+        "max_len": 5100,
         "min_len": 4062,
         "replicon_geometry": "linear"
       },
@@ -2669,13 +2669,13 @@
   "Phasmaviridae": {
     "segments": {
       "Small RNA Segment": {
-        "max_len": 2021,
+        "max_len": 2121,
         "min_len": 855,
         "replicon_geometry": "linear"
       },
       "Medium RNA Segment": {
         "max_len": 8550,
-        "min_len": 1737,
+        "min_len": 1700,
         "replicon_geometry": "linear"
       },
       "Large RNA Segment": {
@@ -2694,7 +2694,7 @@
         "anno": "Pre-glycoprotein polyprotein GP complex (GPC protein)",
         "copy_num": 1,
         "max_len": 1900,
-        "min_len": 579,
+        "min_len": 545,
         "segment": "Medium RNA Segment"
       },
       "L": {
@@ -2744,7 +2744,7 @@
     "segments": {
       "Small RNA Segment": {
         "max_len": 3435,
-        "min_len": 1521,
+        "min_len": 1350,
         "replicon_geometry": "linear"
       },
       "Large RNA Segment": {
@@ -2801,8 +2801,8 @@
         "downstream_ext": 1,
         "anno": "Nucleocapsid protein (N protein)",
         "copy_num": 1,
-        "max_len": 525,
-        "min_len": 219,
+        "max_len": 540,
+        "min_len": 205,
         "segment": "Small RNA Segment"
       },
       "Mov": {
@@ -2827,7 +2827,7 @@
         "coverage_cutoff": 0.8,
         "upstream_ext": 1,
         "downstream_ext": 1,
-        "anno": "Nucleocapsid protein (N protein)"
+        "anno": "Bunyavirales small nonstructural protein (NSs protein)"
       },
        "NS5": {
         "bit_cutoff": 150,
@@ -2894,7 +2894,7 @@
         "anno": "Fusion glycoprotein (F protein)",
         "copy_num": 1,
         "max_len": 638,
-        "min_len": 485,
+        "min_len": 479,
         "segment": "Single RNA Segment"
       },
       "HN": {
@@ -2915,7 +2915,7 @@
         "anno": "RNA-dependent RNA polymerase (L protein)",
         "copy_num": 1,
         "max_len": 2464,
-        "min_len": 2016,
+        "min_len": 1991,
         "segment": "Single RNA Segment"
       },
       "M": {
@@ -2927,7 +2927,7 @@
         "anno": "Matrix protein (M protein)",
         "copy_num": 1,
         "max_len": 389,
-        "min_len": 313,
+        "min_len": 310,
         "segment": "Single RNA Segment"
       },
       "N": {
@@ -2996,8 +2996,8 @@
   "Tospoviridae": {
     "segments": {
       "Small RNA Segment": {
-        "max_len": 3300,
-        "min_len": 2600,
+        "max_len": 3550,
+        "min_len": 2470,
         "replicon_geometry": "linear"
       },
       "Medium RNA Segment": {
@@ -3006,7 +3006,7 @@
         "replicon_geometry": "linear"
       },
       "Large RNA Segment": {
-        "max_len": 9000,
+        "max_len": 9100,
         "min_len": 8500,
         "replicon_geometry": "linear"
       }
@@ -3033,7 +3033,7 @@
         "segment": "Medium RNA Segment",
         "copy_num": 1,
         "max_len": 342,
-        "min_len": 272,
+        "min_len": 260,
         "anno": "Movement protein"
       },
       "GPC": {
