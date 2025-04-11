@@ -20,7 +20,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		-ks  If a pssm match extends beyond a stop codon it will keep the entire region of the match including the stop. 
 		-threads number of blast threads in the blastn and tblastn
 
-		-min Minimum contig	length (d = 1000) # otherwise the genome is rejected
+		-min Minimum contig	length (d = 1000)  # otherwise the genome is rejected
 		-max Maximum contig length (d = 30000) # for reference Measles is 15,894 and Beilong is 19,212
 
         -j   Full path to the options file in JSON format which carries data for a match (D = /home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json)
@@ -410,7 +410,7 @@ foreach (@contig_order)
 		$count ++; 
 		# this is just a silly place holder unitl bob can help me get set up with official
 		# ID generation
-		my $prot_id = "jim\|$tax\.$version\.$_->[8]\.$count"; 
+		my $prot_id = "lv\|$tax\.$version\.$_->[8]\.$count"; 
 		
 		#Trimming the star from the end of the protein sequence. 
 		#This could be removed if its unwanted.
@@ -430,34 +430,34 @@ foreach (@contig_order)
 		{
 			if ($append_seqs)
 			{
-				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 			}
 			else
 			{
-				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
 			}
 		}
 		if($tbl_only)
 		{
 			if ($append_seqs)
 			{
-				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 			}
 			else
 			{
-				print "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
+				print "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
 			}		
 		}
 		if($ctbl)
 		{
 			if ($append_seqs)
 			{
-				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 
 			}
 			else
 			{
-				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tJIM\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
 
 			}
 		}

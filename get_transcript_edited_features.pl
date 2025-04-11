@@ -18,7 +18,7 @@ This program performs feature calling for transcript edited proteins.  It reads 
 It works by using a set of hand-curated transcripts in --dir as the queries.  --id, --gaps, and --cov refer 
 to the strict inclusion criteria for enabling the mapping the nucleotides from the closest hand-curated transcript
 onto the subject sequence.  When we enoucnter a blast match that is good, [defined by --lower_pid, --lower_pcov, and --eval], 
-but not good enough to carry over the transcript-edited seqeunce, we call a partial_cds feature and the anntaotion becomes:
+but not good enough to carry over the transcript-edited seqeunce, we call a partial_cds feature and the annotation becomes:
 [Uncorrected . annotation string . encoding region]. It is considered a partial_cds feature because the translation would be 
 be interrupted where the frame jump occurs, or shortly thereafter.
 
@@ -27,7 +27,8 @@ END_DESCRIPTION
 
 
 my ($help, $tmp); 
-my($opt, $usage) = describe_options("%c %o",
+my($opt, $usage) = describe_options(
+    "\n$program_description\nUsage: %c %o",  
 				    ["input|i=s"            => "Input GTO"],
 				    ["output|o=s"           => "Output GTO"],
 				    ["cov|c=i"              => "Minimum BLASTn percent query coverage (D = 95)", { default => 95 }],
@@ -40,12 +41,12 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["json|j=s"             => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
 				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
-				    ["help|h"               => "Show this help message"],
+				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
 );
 
 
-print($usage->text), exit 0 if $opt->help;
+print $usage->text and exit if $opt->help;
 die($usage->text) if @ARGV != 0;
 
 if ($opt->tmp){$tmp = $opt->tmp;}
@@ -111,7 +112,7 @@ if (scalar @to_analyze)
 
 	if (!$make_db)
 	{
-  	 print STDERR "makeblastdb failed with rc=$?. Stdout:\n";
+  	 print STDERR "get_transcript_edited_features:  makeblastdb failed with rc=$?. Stdout:\n";
 	}
 	
 	# create the GTO analysis event.
@@ -131,13 +132,15 @@ if (scalar @to_analyze)
 		
 		print STDERR "\tAnalyzing $name\n\n"; 
 		my $query = "$dir/$fam/$name.fasta"; 
+		run ("cp $query ."); 
 		
+		my $make_db2 = run("makeblastdb -dbtype nucl -in $name.fasta >/dev/null");
 		
-			my $make_db2 = run("makeblastdb -dbtype nucl -in $query >/dev/null");
+		#	my $make_db2 = run("makeblastdb -dbtype nucl -in $query >/dev/null");
 
 			if (!$make_db2)
 			{
-  				 print STDERR "makeblastdb failed with rc=$?. Stdout:\n";
+  				 print STDERR "get_transcript_edited_features:  makeblastdb failed with rc=$?. Stdout:\n";
 			}
 
 			my @blast_parms = (

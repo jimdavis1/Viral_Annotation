@@ -36,7 +36,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -486,7 +487,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "I": {
         "bit_cutoff": 20,
@@ -696,7 +698,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -803,7 +806,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -919,7 +923,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -1193,7 +1198,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -1405,7 +1411,8 @@
         "max_len": 732,
         "min_len": 562,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -1514,7 +1521,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -2300,7 +2308,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -2405,7 +2414,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -2503,7 +2513,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
@@ -2904,7 +2915,8 @@
         "upstream_ext": 1,
         "downstream_ext": 1,
         "segment": "Single RNA Segment",
-        "anno": "Receptor binding protein (RBP)"
+        "anno": "Receptor binding protein (RBP)",
+        "copy_num": 1
       },
       "L": {
         "bit_cutoff": 100,
