@@ -57,7 +57,7 @@ my $name           = $genome_in->{scientific_name};        #I should also be abl
 
 if (! $sequences_file){die "No sequences in the input GTO\n";}
 if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
-if (! $name)          {die "No genome name in the input GTO\n";}
+if (! $name)          {die "No gebine bane in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
 		      "-t",    $tempdir,
@@ -88,7 +88,7 @@ if (!$ok)
 
     
 my $event = {
-    tool_name => "annotate_by_viral_pssm",
+    tool_name => "LowVan Annotate",
     execution_time => scalar gettimeofday,
     parameters => \@params,
 };
@@ -117,7 +117,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 							location    => ([[$contig, $start, $strand, $len]]),
 							product     => $anno,
 							#typedef tuple <string db, string id, string function, string db_version> protein_family_assignment;
-							pssm        => ([[$virus, $pssm, $anno, "annotate_by_viral_pssm"]]),
+							pssm        => ([[$virus, $pssm, $anno, "LowVan Annotate"]]),
 							};
 			push(@{$features{$type}}, $feature);
 		}
@@ -155,7 +155,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 					-type 	             => $type,
 					-location 	         => $feature->{location},
 					-analysis_event_id 	 => $event_id,
-					-annotator           => 'annotate_by_viral_pssm',
+					-annotator           => 'LowVan Annotate',
 					-protein_translation => $feature->{aa_sequence},
 					-function            => $feature->{product},
 					-family_assignments  => $feature->{pssm},

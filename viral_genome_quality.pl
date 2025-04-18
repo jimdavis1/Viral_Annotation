@@ -55,7 +55,7 @@ $genome_in or die "Error reading json protein feature data";
 # Create the GTO analysis event
 
 my $event = {
-    tool_name => "viral_genome_quality",
+    tool_name => "LowVan Quality",
     execution_time => scalar gettimeofday,
 };
 
@@ -69,14 +69,14 @@ my $event_id = $genome_in->add_analysis_event($event);
 my %pssm_fam;
 for my $i (0 .. $#{$genome_in->{features}}) 
 {
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /annotate_by_viral_pssm/))
+	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan Annotate/))
 	{
 		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
 	}
 }
 die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
 my $fam = (keys %pssm_fam)[0];
-$fam or die "GTO has no annotations from annotate_by_viral_pssm tool\n"; 
+$fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
 
 
 # Next, we read the annotation json file to initiate a hash of which proteins are essential.
@@ -146,11 +146,11 @@ for my $i (0 .. $#{$genome_in->{features}})
 		
 			if ($len > $essential->{$anno}->{max_len}) 
 			{
-				push @{$feature_eval->{$id}->{EXCEPTION}},   "Protein is longer than expected";
+				push @{$feature_eval->{$id}->{EXCEPTION}},   "Feature is too short";
 			}
 			elsif ($len < $essential->{$anno}->{min_len}) 
 			{
-				push @{$feature_eval->{$id}->{EXCEPTION}},   "Protein is shorter than expected";
+				push @{$feature_eval->{$id}->{EXCEPTION}},   "Feature is too long";
 			}
 		
 			#contigs per segment (essential features)
@@ -179,7 +179,7 @@ foreach (sort keys %{$feature_eval})
 	$feature_eval->{$id}->{CN} = $cn;  
 	if (($cn > $exp_cn) && ($feature_eval->{$id}->{EVALUATED}))
 	{
-		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too many copies of protein";
+		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too many HSPs";
 	}
 	elsif (($cn < $exp_cn) && ($feature_eval->{$id}->{EVALUATED}))
 	{
