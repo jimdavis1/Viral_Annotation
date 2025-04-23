@@ -58,14 +58,12 @@ my $event = {
     tool_name => "LowVan Quality",
     execution_time => scalar gettimeofday,
 };
-
 my $event_id = $genome_in->add_analysis_event($event);
-
-
 
 # We read the GTO to get the family pssm that was used to call the proteins so that
 # we can look up which genes are essential.
 # also make sure that the GTO has our annotations.
+
 my %pssm_fam;
 for my $i (0 .. $#{$genome_in->{features}}) 
 {
@@ -78,12 +76,10 @@ die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1
 my $fam = (keys %pssm_fam)[0];
 $fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
 
-
 # Next, we read the annotation json file to initiate a hash of which proteins are essential.
 # In this case, essential really means that it is one of the proteins we are looking for.
 # All of the proteins are probably essential, but the ones that are variable in length or
 # presence/absence in the family are passed over.
-
 
 my $essential = {};
 my %nonessential;  
@@ -115,7 +111,7 @@ unless ($essential){die "No essential data in annotation JSON file\n";}
 my $seg_count = {};
 my $feature_eval = {};
 my $genome_quality = "Good"; 
-
+my $contig_eval = {};
 
 
 #Next we read the gto and look for the essential proteins
@@ -142,17 +138,25 @@ for my $i (0 .. $#{$genome_in->{features}})
 			$feature_eval->{$id}->{MIN_LEN} = $essential->{$anno}->{min_len};
 			$feature_eval->{$id}->{EXP_CN}  = $essential->{$anno}->{copy_num};
 			$feature_eval->{$id}->{EVALUATED}  = 1;
+			$feature_eval->{$id}->{CONTIG} = $genome_in->{features}->[$i]->{location}->[0]->[0];
 			$anno_count{$anno} ++;
 		
 			if ($len > $essential->{$anno}->{max_len}) 
 			{
-				push @{$feature_eval->{$id}->{EXCEPTION}},   "Feature is too short";
+				push @{$feature_eval->{$id}->{EXCEPTION}},   "Feature is too long";
+				$genome_in->{features}->[$i]->{feature_quality} = "Poor";
+				push(@{$genome_in->{features}->[$i]->{feature_quality_flags}}, "Feature is too long");			
 			}
 			elsif ($len < $essential->{$anno}->{min_len}) 
 			{
-				push @{$feature_eval->{$id}->{EXCEPTION}},   "Feature is too long";
+				push @{$feature_eval->{$id}->{EXCEPTION}},   "Feature is too short";
+				$genome_in->{features}->[$i]->{feature_quality} = "Poor";
+				push(@{$genome_in->{features}->[$i]->{feature_quality_flags}}, "Feature is too long");
 			}
-		
+			else
+			{
+				$genome_in->{features}->[$i]->{feature_quality} = "Good";
+			}
 			#contigs per segment (essential features)
 			$seg_count->{$essential->{$anno}->{segment}}->{$genome_in->{features}->[$i]->{location}->[0]->[0]} ++; 
 		}
@@ -175,17 +179,37 @@ foreach (sort keys %{$feature_eval})
 	my $id     = $_;
 	my $anno   = $feature_eval->{$id}->{ANNO};
 	my $exp_cn = $feature_eval->{$id}->{EXP_CN};
-	my $cn = $anno_count{$anno}; 
+	my $contig = $feature_eval->{$id}->{CONTIG};
+	my $cn     = $anno_count{$anno}; 
+
 	$feature_eval->{$id}->{CN} = $cn;  
 	if (($cn > $exp_cn) && ($feature_eval->{$id}->{EVALUATED}))
 	{
 		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too many HSPs";
+		push @{$contig_eval->{$contig}->{EXCEPTION}}, "Too many HSPs";	
+
+		for my $i (0 .. $#{$genome_in->{contigs}})
+		{ 
+			if($genome_in->{contigs}->[$i]->{id} eq $contig) 
+			{
+				$genome_in->{contigs}->[$i]->{contig_quality} = "Poor";
+				push(@{$genome_in->{contigs}->[$i]->{contig_quality_flags}}, "Contig has too many HSPs for: $anno; Count = $cn");
+			}
+		}
 	}
 	elsif (($cn < $exp_cn) && ($feature_eval->{$id}->{EVALUATED}))
 	{
 		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too few copies of protein";
-	}
-	
+		push @{$contig_eval->{$contig}->{EXCEPTION}}, "Too few HSPs";	
+		for my $i (0 .. $#{$genome_in->{contigs}})
+		{ 
+			if($genome_in->{contigs}->[$i]->{id} eq $contig) 
+			{
+				$genome_in->{contigs}->[$i]->{contig_quality} = "Poor";
+				push(@{$genome_in->{contigs}->[$i]->{contig_quality_flags}}, "Contig has too few HSPs for: $anno; Count = $cn");
+			}
+		}
+	}	
 	my $exs;
 	if (exists $feature_eval->{$id}->{EXCEPTION})
 	{
@@ -219,7 +243,6 @@ foreach (keys %{$json->{$fam}->{segments}})
 
 open (OUT2, ">$prefix.contig_quality");
 print OUT2 "Contig\tSegment\tCopy_Num\tLen\tMin_Len\tMax_len\tAMB_Bases\tFrac_AMB\tExceptions\n"; 
-my $contig_eval = {};
 
 
 
@@ -240,6 +263,8 @@ foreach (sort keys %{$seg_count})
 		if ($n_contigs > 1)
 		{
 			push @{$contig_eval->{$contig}->{EXCEPTION}}, "Too many contigs for $seg";
+			push(@{$genome_in->{genome_quality_flags}}, "Contig is too short: $contig");
+			### This is a genome-level exception.
 		}
 	
 		for my $i (0 .. $#{$genome_in->{contigs}})
@@ -269,23 +294,33 @@ foreach (sort keys %{$seg_count})
 				## Look for length and quality exceptions:
 				if (($json->{$fam}->{segments}->{$seg}) && ($len < $json->{$fam}->{segments}->{$seg}->{min_len}))
 				{
-					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig is too short";				
+					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig is too short";							
+					$genome_in->{contigs}->[$i]->{contig_quality} = "Poor";
+					push(@{$genome_in->{contigs}->[$i]->{contig_quality_flags}}, "Contig is too short");
 				}
 				if (($json->{$fam}->{segments}->{$seg}) &&  ($len > $json->{$fam}->{segments}->{$seg}->{max_len}))
 				{
 					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig is too long";				
+					$genome_in->{contigs}->[$i]->{contig_quality} = "Poor";
+					push(@{$genome_in->{contigs}->[$i]->{contig_quality_flags}}, "Contig is too long");
 				}		
-				if ($contig_eval->{$contig}->{FRAC_AMB} > ($opt->ambiguous))
+				my $ambig = $opt->ambiguous;
+				if ($contig_eval->{$contig}->{FRAC_AMB} > ($ambig))
 				{
-					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig has more than 1% ambiguous bases";
+					push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig has too many ambiguous bases, Frac > $ambig";
+					$genome_in->{contigs}->[$i]->{contig_quality} = "Poor";
+					push(@{$genome_in->{contigs}->[$i]->{contig_quality_flags}}, "Contig has too many ambiguous bases, Frac > $ambig");
 				}
 
-		
 			my $exs;
 			if (exists $contig_eval->{$contig}->{EXCEPTION})
 			{
 				$exs = join (";", @{$contig_eval->{$contig}->{EXCEPTION}});
 				$genome_quality = "Poor";
+			}
+			else
+			{
+				$genome_in->{contigs}->[$i]->{contig_quality} = "Good";
 			}
 
 			print OUT2 "$contig\t$seg\t$n_contigs\t$len\t$json->{$fam}->{segments}->{$seg}->{min_len}\t$json->{$fam}->{segments}->{$seg}->{max_len}\t$amb_bases\t$contig_eval->{$contig}->{FRAC_AMB}\t$exs\n";
@@ -302,6 +337,7 @@ foreach (keys %segs_needed)
 	{
 		print OUT2 "\n##\nMissing\t$_\n";
 		$genome_quality = "Poor";
+		push(@{$genome_in->{genome_quality_flags}}, "Contig is missing: $_");
 	}		
 }
 close OUT2;

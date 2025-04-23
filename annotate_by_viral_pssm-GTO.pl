@@ -100,38 +100,45 @@ my $event_id = $genome_in->add_analysis_event($event);
 ## add features so that we can register the counts.
 ##
 
+my ($close_bit, $close_id, $close_name, $close_file);
 if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 {
 	my %features;
 	while (<$tbl>)
 	{
 		chomp;
-		my ($local_genome_id, $name, $contig, $anno_source, $type, $local_peg_id, $start, $stop, $strand, $len, $virus, $pssm, $anno, $dna, $aa) = split /\t/; 
+		my ($local_genome_id, $name, $contig, $anno_source, $type, $local_peg_id, $symbol, $start, $stop, $strand, $len, $virus, $cf, $cb, $ci, $cn, $pssm, $anno, $dna, $aa) = split /\t/; 
+		$close_file = $cf;
+		$close_bit  = $cb;
+		$close_id   = $ci;
+		$close_name = $cn;
 		
+		my $feature;
 		if ($type =~ /(mat_peptide)|(CDS)/)
 		{
-			my $feature = {
-							type        => $type,
-							contig      => $contig,
-							aa_sequence => $aa,
-							location    => ([[$contig, $start, $strand, $len]]),
-							product     => $anno,
-							#typedef tuple <string db, string id, string function, string db_version> protein_family_assignment;
-							pssm        => ([[$virus, $pssm, $anno, "LowVan Annotate"]]),
-							};
-			push(@{$features{$type}}, $feature);
+			$feature = 
+			{
+				type        => $type,
+				contig      => $contig,
+				aa_sequence => $aa,
+				location    => ([[$contig, $start, $strand, $len]]),
+				product     => $anno,
+				pssm        => ([[$virus, $pssm, $anno, "LowVan Annotate"]]),
+				symbol      => $symbol,
+			}
 		}
 		elsif ($type =~ /RNA/)
 		{
-			my $feature = {
-							type        => $type,
-							contig      => $contig,
-							location    => ([[$contig, $start, $strand, $len]]),
-							product     => $anno,
-							};
-			push(@{$features{$type}}, $feature);
-		}
-		
+			$feature =
+			{ 
+				type        => $type,
+				contig      => $contig,
+				location    => ([[$contig, $start, $strand, $len]]),
+				product     => $anno,
+				symbol      => $symbol,
+			}
+		}		
+		push(@{$features{$type}}, $feature);
 	}
 	
     if (%features && $opt->remove_existing)
@@ -156,13 +163,26 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 					-location 	         => $feature->{location},
 					-analysis_event_id 	 => $event_id,
 					-annotator           => 'LowVan Annotate',
+					#-alias_pairs         => [[gene => $feature->{symbol}]],
 					-protein_translation => $feature->{aa_sequence},
 					-function            => $feature->{product},
 					-family_assignments  => $feature->{pssm},
 					};
+			
+			if (defined $feature->{symbol} && $feature->{symbol} ne '') 
+			{
+				$p->{-alias_pairs} = [[gene => $feature->{symbol}]];
+   			}
 			$genome_in->add_feature($p);
 		}
     }
+
+	#add close genome:
+	#$close_genome, $close_bit, $close_id, $close_name,
+	my $close = { genome_id => $close_id, genome_name => $close_name, file_name => $close_file, closeness_measure => "BLASTn bit score", closeness_value => $close_bit, analysis_method => "LowVan Annotate"};
+	push(@{$genome_in->{close_genomes}}, $close);
+
+
 }
 else
 {

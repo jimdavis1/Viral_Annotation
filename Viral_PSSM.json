@@ -1,5 +1,11 @@
 {
    "Aquaparamyxovirus" : {
+      "close_genomes" : {
+         "Aquaparamyxovirus.dna" : {
+            "genome_ids" : "381543.8",
+            "genome_name" : "Salmon aquaparamyxovirus ASPV/Yrkje371/95"
+         }
+      },
       "features" : {
          "C" : {
             "anno" : "Paramyxoviridae C protein",
@@ -121,6 +127,24 @@
       }
    },
    "Arenaviridae" : {
+      "close_genomes" : {
+         "Arenaviridae.1.dna" : {
+            "genome_ids" : "11620.1000,11620.1002",
+            "genome_name" : "Lassa mammarenavirus Josiah"
+         },
+         "Arenaviridae.2.dna" : {
+            "genome_ids" : "NC_018482.1,NC_018483.1",
+            "genome_name" : "Golden Gate virus "
+         },
+         "Arenaviridae.3.dna" : {
+            "genome_ids" : "NC_078283.1,NC_078284.1,NC_078285.1",
+            "genome_name" : "MAG: Salmon pescarenavirus 1 isolate G518 "
+         },
+         "Arenaviridae.4.dna" : {
+            "genome_ids" : "NC_079038.1,NC_079037.1",
+            "genome_name" : "Hartmanivirus BESV-1 isolate CR-Wild5-brain "
+         }
+      },
       "features" : {
          "GP1" : {
             "anno" : "Mature envelope glycoprotein Gn",
@@ -279,6 +303,12 @@
       }
    },
    "Ferlavirus" : {
+      "close_genomes" : {
+         "Ferlavirus.dna" : {
+            "genome_ids" : "122203.18",
+            "genome_name" : "Reptilian ferlavirus ATCC VR-895"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein",
@@ -410,6 +440,16 @@
       }
    },
    "Fimoviridae" : {
+      "close_genomes" : {
+         "Fimoviridae.1.dna" : {
+            "genome_ids" : "1980428.51,1980428.52,1980428.53,1980428.54,1980428.55,1980428.56,1980428.57,1980428.58",
+            "genome_name" : "High Plains wheat mosaic emaravirus Nebraska"
+         },
+         "Fimoviridae.2.dna" : {
+            "genome_ids" : "1776763.37,1776763.38,1776763.39,1776763.40,1776763.41",
+            "genome_name" : "Actinidia chlorotic ringspot-associated virus HN-6"
+         }
+      },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
@@ -626,6 +666,20 @@
       }
    },
    "Hantaviridae" : {
+      "close_genomes" : {
+         "Hantaviridae.1.dna" : {
+            "genome_ids" : "2847081.16,2847081.15,2847081.17",
+            "genome_name" : "Fugong virus FG10"
+         },
+         "Hantaviridae.2.dna" : {
+            "genome_ids" : "NC_038424.1,NC_038423.1",
+            "genome_name" : "El Moro Canyon hantavirus (ELMC) isolate RM-97 nucleocapsid protein gene"
+         },
+         "Hantaviridae.3.dna" : {
+            "genome_ids" : "MG599943.1,MG599944.1,MG599945.1",
+            "genome_name" : "Wenling minipizza batfish hantavirus strain XQTMS16810 nucleoprotein gene"
+         }
+      },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
@@ -714,6 +768,12 @@
       }
    },
    "Henipavirus" : {
+      "close_genomes" : {
+         "Henipavirus.dna" : {
+            "genome_ids" : "63330.49",
+            "genome_name" : "Hendra henipavirus"
+         }
+      },
       "features" : {
          "C" : {
             "anno" : "Paramyxoviridae C protein",
@@ -836,6 +896,12 @@
       }
    },
    "Jeilongvirus" : {
+      "close_genomes" : {
+         "Jeilongvirus.dna" : {
+            "genome_ids" : "341053.212",
+            "genome_name" : "Beilong virus"
+         }
+      },
       "features" : {
          "C" : {
             "anno" : "Paramyxoviridae C protein",
@@ -977,6 +1043,20 @@
       }
    },
    "Metaavulavirus" : {
+      "close_genomes" : {
+         "Metaavulavirus.1.dna" : {
+            "genome_ids" : "2560313.41",
+            "genome_name" : "Avian metaavulavirus 2 APMV-2/Chicken/California/Yucaipa/56"
+         },
+         "Metaavulavirus.2.dna" : {
+            "genome_ids" : "2560318.12",
+            "genome_name" : "Avian metaavulavirus 8 goose/Delaware/1053/76"
+         },
+         "Metaavulavirus.3.dna" : {
+            "genome_ids" : "2560316.83",
+            "genome_name" : "Avian metaavulavirus 6 APMV-6/Goose/FarEast/4440/2003"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein",
@@ -1098,6 +1178,12 @@
       }
    },
    "Metapneumovirus" : {
+      "close_genomes" : {
+         "Metapneumovirus.dna" : {
+            "genome_ids" : "162145.7017",
+            "genome_name" : "Human metapneumovirus 00-1"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein precursor F0",
@@ -1275,6 +1361,12 @@
       }
    },
    "Morbillivirus" : {
+      "close_genomes" : {
+         "Morbillivirus.dna" : {
+            "genome_ids" : "11234.4208",
+            "genome_name" : "Measles morbillivirus Ichinose-B95a"
+         }
+      },
       "features" : {
          "C" : {
             "anno" : "Paramyxoviridae C protein",
@@ -1384,6 +1476,20 @@
       }
    },
    "Nairoviridae" : {
+      "close_genomes" : {
+         "Nairoviridae.1.dna" : {
+            "genome_ids" : "1980519.4147,1980519.4148,1980519.4149",
+            "genome_name" : "Crimean-Congo hemorrhagic fever orthonairovirus 10200"
+         },
+         "Nairoviridae.2.dna" : {
+            "genome_ids" : "1810950.6,1810950.7,1810950.8",
+            "genome_name" : "Avalon virus CanAr173"
+         },
+         "Nairoviridae.3.dna" : {
+            "genome_ids" : "NC_055922.1,NC_078260.1,NC_078259.1",
+            "genome_name" : "Pacific coast tick nairovirus isolate Docc2011cons "
+         }
+      },
       "features" : {
          "GP38" : {
             "anno" : "Nairoviridae mature secreted nonstructural 38-kD protein",
@@ -1508,6 +1614,16 @@
       }
    },
    "Narmovirus" : {
+      "close_genomes" : {
+         "Narmovirus.1.dna" : {
+            "genome_ids" : "241630.6",
+            "genome_name" : "Mossman virus"
+         },
+         "Narmovirus.2.dna" : {
+            "genome_ids" : "92129.5",
+            "genome_name" : "Tupaia paramyxovirus"
+         }
+      },
       "features" : {
          "C" : {
             "anno" : "Paramyxoviridae C protein",
@@ -1633,6 +1749,16 @@
       }
    },
    "Orthoavulavirus" : {
+      "close_genomes" : {
+         "Orthoavulavirus.1.dna" : {
+            "genome_ids" : "2560319.7281",
+            "genome_name" : "Avian orthoavulavirus 1 JSD0812"
+         },
+         "Orthoavulavirus.2.dna" : {
+            "genome_ids" : "2560326.10",
+            "genome_name" : "Avian orthoavulavirus 9 duck/New York/22/1978"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein",
@@ -1744,6 +1870,12 @@
       }
    },
    "Orthoebolavirus" : {
+      "close_genomes" : {
+         "Orthoebolavirus.1.dna" : {
+            "genome_ids" : "186538.404",
+            "genome_name" : "Zaire ebolavirus"
+         }
+      },
       "features" : {
          "Delta" : {
             "PMID" : [
@@ -1953,6 +2085,16 @@
       }
    },
    "Orthomarburgvirus" : {
+      "close_genomes" : {
+         "Orthomarburgvirus.1.dna" : {
+            "genome_ids" : "11269.340",
+            "genome_name" : "Marburg marburgvirus"
+         },
+         "Orthomarburgvirus.2.dna" : {
+            "genome_ids" : "accn|EF446131",
+            "genome_name" : "Ravn virus - Ravn"
+         }
+      },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
@@ -2095,6 +2237,12 @@
       }
    },
    "Orthopneumovirus" : {
+      "close_genomes" : {
+         "Orthopneumovirus.dna" : {
+            "genome_ids" : "12814.2865",
+            "genome_name" : "Respiratory syncytial virus S2 ts1C"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein precursor F0",
@@ -2317,6 +2465,12 @@
       }
    },
    "Orthopneumovirus_muris" : {
+      "close_genomes" : {
+         "Orthopneumovirus_muris.dna" : {
+            "genome_ids" : "270473.14",
+            "genome_name" : "Pneumonia virus of mice J3666"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein precursor F0",
@@ -2528,6 +2682,12 @@
       }
    },
    "Orthorubulavirus" : {
+      "close_genomes" : {
+         "Orthorubulavirus.dna" : {
+            "genome_ids" : "2560580.67",
+            "genome_name" : "Mammalian orthorubulavirus 5 W3A"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein",
@@ -2649,6 +2809,12 @@
       }
    },
    "Paraavulavirus" : {
+      "close_genomes" : {
+         "Paraavulavirus.dna" : {
+            "genome_ids" : "2560327.5",
+            "genome_name" : "Avian paraavulavirus 3 turkey/Wisconsin/68"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein",
@@ -2760,6 +2926,12 @@
       }
    },
    "Pararubulavirus" : {
+      "close_genomes" : {
+         "Pararubulavirus.dna" : {
+            "genome_ids" : "798072.5",
+            "genome_name" : "Tuhoko virus 1"
+         }
+      },
       "features" : {
          "F" : {
             "anno" : "Fusion glycoprotein",
@@ -2871,6 +3043,16 @@
       }
    },
    "Peribunyaviridae" : {
+      "close_genomes" : {
+         "Peribunyaviridae.1.dna" : {
+            "genome_ids" : "35514.48,35514.46,35514.47",
+            "genome_name" : "Keystone virus B64-5587.05"
+         },
+         "Peribunyaviridae.2.dna" : {
+            "genome_ids" : "JN808311.1,JN808310.1,EU879062.3",
+            "genome_name" : "Cholul virus strain CHLV-Mex07 "
+         }
+      },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
@@ -2968,6 +3150,24 @@
       }
    },
    "Phasmaviridae" : {
+      "close_genomes" : {
+         "Phasmaviridae.1.dna" : {
+            "genome_ids" : "1664810.4,1664810.5,1664810.6",
+            "genome_name" : "Ferak virus C51-CI-2004"
+         },
+         "Phasmaviridae.2.dna" : {
+            "genome_ids" : "1664809.4,1664809.5,1664809.6",
+            "genome_name" : "Jonchet virus B81-CI-2004"
+         },
+         "Phasmaviridae.3.dna" : {
+            "genome_ids" : "NC_043038.1,NC_043041.1,NC_043039.1,NC_043040.1",
+            "genome_name" : "Shuangao Insect Virus 2 strain QSA03 glycoprotein precursor (G) gene"
+         },
+         "Phasmaviridae.4.dna" : {
+            "genome_ids" : "MW310369.1,MW310370.1,MW310371.1",
+            "genome_name" : "MAG: Bactrocera latifrons orthophasmavirus isolate Bl-V3 "
+         }
+      },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
@@ -3046,6 +3246,32 @@
       }
    },
    "Phenuiviridae" : {
+      "close_genomes" : {
+         "Phenuiviridae.1.dna" : {
+            "genome_ids" : "11588.625,11588.623,11588.622",
+            "genome_name" : "Rift Valley fever virus ZH-548"
+         },
+         "Phenuiviridae.2.dna" : {
+            "genome_ids" : "1564099.7,1564099.6,1564099.8",
+            "genome_name" : "Silverwater virus Can131"
+         },
+         "Phenuiviridae.3.dna" : {
+            "genome_ids" : "66266.224,66266.225,66266.226,66266.227,66266.228,66266.229",
+            "genome_name" : "Rice grassy stunt tenuivirus"
+         },
+         "Phenuiviridae.4.dna" : {
+            "genome_ids" : "NC_078405.1,NC_078406.1,NC_078404.1",
+            "genome_name" : "Grapevine Garan dmak virus isolate 332 "
+         },
+         "Phenuiviridae.5.dna" : {
+            "genome_ids" : "MN520757.1,MN520758.1,MN520759.1",
+            "genome_name" : "Grapevine associated cogu-like virus 3 isolate DMG 83 "
+         },
+         "Phenuiviridae.6.dna" : {
+            "genome_ids" : "LC636068.1,LC636069.1",
+            "genome_name" : "Watermelon crinkle leaf-associated virus 1 Pi-01 RNA"
+         }
+      },
       "features" : {
          "78-kD" : {
             "anno" : "Phenuiviridae mature nonstructural 78-kD protein",
@@ -3170,6 +3396,12 @@
       }
    },
    "Respirovirus" : {
+      "close_genomes" : {
+         "Respirovirus.dna" : {
+            "genome_ids" : "11216.1426",
+            "genome_name" : "Human respirovirus 3"
+         }
+      },
       "features" : {
          "C" : {
             "anno" : "Paramyxoviridae C protein",
@@ -3331,6 +3563,16 @@
       }
    },
    "Tospoviridae" : {
+      "close_genomes" : {
+         "Tospoviridae.1.dna" : {
+            "genome_ids" : "83871.24,83871.25,83871.26",
+            "genome_name" : "Chrysanthemum stem necrosis virus PD4412741"
+         },
+         "Tospoviridae.2.dna" : {
+            "genome_ids" : "304859.37,304859.38,304859.39",
+            "genome_name" : "Tomato yellow ring virus TYRV-t"
+         }
+      },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
