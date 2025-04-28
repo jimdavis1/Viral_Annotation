@@ -170,14 +170,14 @@ pareach(
 		my %pssm_fam;
 		for my $i (0 .. $#{$genome_in->{features}}) 
 		{
-			if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /annotate_by_viral_pssm/))
+			if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan Annotate/))
 			{
 				$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
 			}
 		}
 		warn "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
 		my $fam = (keys %pssm_fam)[0];
-		$fam or warn "GTO has no annotations from annotate_by_viral_pssm tool\n"; 
+		$fam or warn "GTO has no annotations from LowVan Annotate tool\n"; 
 		
 		my $transcript_edit = 0;
 		#read the json opts file to see if there is transcript editing 
