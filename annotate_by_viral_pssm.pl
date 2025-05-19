@@ -8,6 +8,8 @@ use Getopt::Long;
 use Cwd;
 use gjoseqlib;
 
+my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+
 my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta 
 
 		-h   help
@@ -23,9 +25,9 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		-min Minimum contig	length (d = 1000)  # otherwise the genome is rejected
 		-max Maximum contig length (d = 30000) # for reference Measles is 15,894 and Beilong is 19,212
 
-        -j   Full path to the options file in JSON format which carries data for a match (D = /home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json)
-		-c   Representative contigs directory (D = /home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs)
-		-pssm   Base directory of PSSMs   (D = /home/jjdavis/bin/Viral_Annotation/Viral-PSSMs)
+        -j   Full path to the options file in JSON format which carries data for a match (D = $default_data_dir/Viral_PSSM.json)
+		-c   Representative contigs directory (D = $default_data_dir/Viral-Rep-Contigs)
+		-pssm   Base directory of PSSMs   (D = $default_data_dir/Viral-PSSMs)
 	           Note that this is set up as a directory of pssms
 	           right now this is hardcoded as: "virus".pssms within this directory.
 
@@ -73,9 +75,9 @@ unless ($max_len){$max_len = 30000; }
 unless ($tax){$tax = "10239"; }
 unless ($genome_name){$genome_name = "Viruses"; }
 unless ($prefix){$prefix = "Viral_Annotation";}
-unless ($cdir){$cdir = "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"; }
-unless ($pdir){$pdir = "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"; }
-unless ($opt_file){$opt_file = "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"; }
+unless ($cdir){$cdir = "$default_data_dir/Viral-Rep-Contigs"; }
+unless ($pdir){$pdir = "$default_data_dir/Viral-PSSMs"; }
+unless ($opt_file){$opt_file = "$default_data_dir/Viral_PSSM.json"; }
 unless ($threads){$threads = 8}
 
 
