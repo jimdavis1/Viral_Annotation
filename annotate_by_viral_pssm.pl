@@ -39,6 +39,28 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		    -aa print proteins to STDOUT
 		    -tbl print only feature table to STDOUT
 		    -ctbl [file name] concatenate table results to a file (for use with many genomes)
+
+
+ 	## Output Table columns are the following:
+ 			0	genome_id	
+ 			1	genome_name	
+ 			2	accession (original contig id)
+ 			3	annotation_source (always LV)	
+ 			4	feature_type	
+ 			5	a made up feature id	
+ 			6	gene symbol	
+ 			7	start	
+ 			8	end	
+ 			9	strand	
+ 			10	na_length	
+ 			11	annotation taxon
+ 			12	closest genome
+ 			13	closest genome bit score (BLASTn of contigs)
+ 			14  closest genome id(s)
+ 			15  closest genome name
+ 			16	PSSM
+ 			17	NT sequence (if -s append sequences)	
+ 			18	AA sequence (if -s append sequences)
 ';
 
 my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl, $prefix, $append_seqs, $threads);
@@ -157,6 +179,7 @@ close DIR;
 
 my $best_contig_bit = 0;
 my $best_virus_match;
+my $best_rep;
 foreach (@reps)
 {
 	my $rep = $_;
@@ -173,8 +196,13 @@ foreach (@reps)
 	{
 		$best_contig_bit = $match_bit;
 		$best_virus_match = $virus;
+		$best_rep = $rep;
 	}
 }	
+
+#get closest genome data
+my $best_rep_ids   = $options->{$best_virus_match}->{close_genomes}->{$best_rep}->{genome_ids};
+my $best_rep_name  = $options->{$best_virus_match}->{close_genomes}->{$best_rep}->{genome_name};
 
 
 my $virus = $best_virus_match;	
@@ -208,6 +236,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	my $start_to_met   = $options->{$virus}->{features}->{$pssmdir}->{start_to_met};
 	my $feature_type   = $options->{$virus}->{features}->{$pssmdir}->{feature_type};
 	my $anno           = $options->{$virus}->{features}->{$pssmdir}->{anno};
+	my $symbol         = $options->{$virus}->{features}->{$pssmdir}->{gene_symbol};
 		
 	print STDERR "\t$virus\t$pssmdir\t$anno\tbit\t$bit_cutoff\tcov\t$cov_cutoff\tkeep_stop\t$keep_stop\tupstream_ext\t$upstream_ext\tdownstream_ext\t$downstream_ext\n"; 		
 
@@ -359,14 +388,15 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 						push @{$non_pssm_feat->{$feat}->{COORD}->{$contig}->{STOP}}, $gene_end;
 					}
 				}			
-				$non_pssm_feat->{$feat}->{ANNO}   = $options->{$virus}->{features}->{$feat}->{anno};
-				$non_pssm_feat->{$feat}->{MIN}    = $options->{$virus}->{features}->{$feat}->{min_len};
-				$non_pssm_feat->{$feat}->{MAX}    = $options->{$virus}->{features}->{$feat}->{max_len};			
-				$non_pssm_feat->{$feat}->{AA}     = $options->{$virus}->{features}->{$feat}->{translate};
-				$non_pssm_feat->{$feat}->{TYPE}   = $options->{$virus}->{features}->{$feat}->{feature_type};
+				$non_pssm_feat->{$feat}->{ANNO}     = $options->{$virus}->{features}->{$feat}->{anno};
+				$non_pssm_feat->{$feat}->{MIN}      = $options->{$virus}->{features}->{$feat}->{min_len};
+				$non_pssm_feat->{$feat}->{MAX}      = $options->{$virus}->{features}->{$feat}->{max_len};			
+				$non_pssm_feat->{$feat}->{AA}       = $options->{$virus}->{features}->{$feat}->{translate};
+				$non_pssm_feat->{$feat}->{TYPE}     = $options->{$virus}->{features}->{$feat}->{feature_type};
+				$non_pssm_feat->{$feat}->{SYMBOL}   = $options->{$virus}->{features}->{$feat}->{gene_symbol};
 			}
 		}
-			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $anno, $strand, $best_pssm, $gene, $protein, $feature_type]); 
+			push @all_seqs, ([$best_results->[$i]->{contig}, $gene_begin, $gene_end, $anno, $strand, $best_pssm, $gene, $protein, $feature_type, $symbol]); 
 	}
 	print STDERR "-----------------------\n"; 
 }
@@ -390,7 +420,9 @@ if ($non_pssm_feat)
 # 6 gene
 # 7 protein
 # 8 feature_type	
+# 9 symbol
 
+# $virus is the best virus match
 # Sort the output in order of contig and then start position. 
 
 my (@prot_seqs, @gene_seqs);
@@ -423,43 +455,44 @@ foreach (@contig_order)
 		push @prot_seqs, ([$prot_id, $_->[3], $protein]);
 		
 		# Original Feature Table looks like this:
-		# genome_id	genome_name	accession	annotation	feature_type	patric_id	refseq_locus_tag	start	end	strand	na_length	gene	product	plfam_id	pgfam_id
+		# genome_id	genome_name	accession	annotation_source	feature_type	patric_id	refseq_locus_tag	start	end	strand	na_length	gene	product	plfam_id	pgfam_id
 		# For now, I will keep:
-		# genome_id	genome_name	accession(contig)	annotation	feature_type	patric_id	start	end	strand	na_length	gene	product	plfam_id	pgfam_id
+		# genome_id	genome_name	accession(contig)	annotation_source	feature_type	madeupid	Gene_symbol	start	end	strand	na_length	Fam	Closest_Genome	best_contig_bit pssm	product	NT_Seq	AA_seq
+
 
 		my $na_len = length $_->[6];
 		unless($no_out)
 		{
 			if ($append_seqs)
 			{
-				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[9]\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$best_rep\t$best_contig_bit\t$best_rep_ids\t$best_rep_name\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 			}
 			else
 			{
-				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
+				print TBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[9]\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$best_rep\t$best_contig_bit\t$best_rep_ids\t$best_rep_name\t$_->[5]\t$_->[3]\n";
 			}
 		}
 		if($tbl_only)
 		{
 			if ($append_seqs)
 			{
-				print "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[9]\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$best_rep\t$best_contig_bit\t$best_rep_ids\t$best_rep_name\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 			}
 			else
 			{
-				print "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
+				print "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[9]\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$best_rep\t$best_contig_bit\t$best_rep_ids\t$best_rep_name\t$_->[5]\t$_->[3]\n";
 			}		
 		}
 		if($ctbl)
 		{
 			if ($append_seqs)
 			{
-				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[9]\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$best_rep\t$best_contig_bit\t$best_rep_ids\t$best_rep_name\t$_->[5]\t$_->[3]\t$_->[6]\t$_->[7]\n";
 
 			}
 			else
 			{
-				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$_->[5]\t$_->[3]\n";
+				print CTBL "$tax\.$version\t$genome_name\t$_->[0]\tLV\t$_->[8]\t$prot_id\t$_->[9]\t$_->[1]\t$_->[2]\t$_->[4]\t$na_len\t$virus\t$best_rep\t$best_contig_bit\t$best_rep_ids\t$best_rep_name\t$_->[5]\t$_->[3]\n";
 
 			}
 		}
@@ -512,6 +545,8 @@ sub call_non_pssm_features
 		my $stop_offset   = $featH->{$feat}->{STOP_OFFSET};
 		my $stop_offset   = $featH->{$feat}->{STOP_OFFSET};
 		my $feature_type  = $featH->{$feat}->{TYPE};
+		my $symbol        = $featH->{$feat}->{SYMBOL};
+
 
 		foreach (keys %{$featH->{$feat}->{COORD}})
 		{
@@ -557,7 +592,7 @@ sub call_non_pssm_features
 								}
 								else
 								{
-									push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot, $feature_type]);
+									push @seq_data, ([$contig, $begin, $end, $anno, $strand, $feat, $nt, $prot, $feature_type, $symbol]);
 								}
 							}
 						}

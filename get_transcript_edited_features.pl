@@ -68,7 +68,7 @@ my $base = getcwd;
 my %pssm_fam;
 for my $i (0 .. $#{$genome_in->{features}}) 
 {
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /annotate_by_viral_pssm/))
+	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan Annotate/))
 	{
 		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
 	}
@@ -76,7 +76,7 @@ for my $i (0 .. $#{$genome_in->{features}})
 
 die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
 my $fam = (keys %pssm_fam)[0];
-$fam or die "GTO has no annotations from annotate_by_viral_pssm tool\n"; 
+$fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
 
 
 # Next we read the JSON to see if there are any transcript edited features that we need to find
@@ -118,7 +118,7 @@ if (scalar @to_analyze)
 	
 	# create the GTO analysis event.
 	my $event = {
- 	   tool_name => "get_transcript_edited_features",
+ 	   tool_name => "LowVan Transcript Edited Features",
   	   execution_time => scalar gettimeofday,
 	};
 	my $event_id = $genome_in->add_analysis_event($event);
