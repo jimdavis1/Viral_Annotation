@@ -30,12 +30,14 @@ use File::Slurp;
 #
 #
 
+my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+
 my($opt, $usage) = describe_options("%c %o",
 				    ["ambiguous|a=f"   => "Fraction of ambiguous bases, (Default = 0.01)", { default => 0.01 }],
 				    ["input|i=s"       => "Input GTO"],
 				    ["output|o=s"      => "Output GTO"],
 				    ["prefix|p=s"      => "Genome Quality File Prefix", { default => "Viral_Anno" }],
-				    ["json|j=s"        => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
+				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
 				    ["help|h"          => "Show this help message"]);
 
 
