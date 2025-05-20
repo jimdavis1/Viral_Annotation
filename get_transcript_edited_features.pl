@@ -12,6 +12,7 @@ use Cwd;
 use gjoseqlib;
 use Getopt::Long::Descriptive;
 
+my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my $program_description = <<'END_DESCRIPTION';
 This program performs feature calling for transcript edited proteins.  It reads and writes GTO files.
@@ -38,8 +39,8 @@ my($opt, $usage) = describe_options(
 		            ["lower_pid|lpi"        => "Lower percent identity threshold for a feature call without transcript editing correction (D = 80)", {default => 80}],
 		            ["lower_pcov|lpc"       => "Lower percent query coverage for for a feature call without transcritp editing correction (D = 80)", {default => 80}],
 		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
-				    ["json|j=s"             => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
-				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing"}],
+				    ["json|j=s"             => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
+				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Transcript-Editing"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
