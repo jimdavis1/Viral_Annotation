@@ -434,6 +434,82 @@ foreach (@clusterF)
 	my $end_dash_removed = ( (scalar @ali6) - (scalar @ali7));
 		
 	
+	
+	########### I want to break the alignment apart if the first ten AAS #
+	########### Have low %identity   ####################################
+	
+	my $nseq8 = scalar @ali8;
+	my $nterm_cons = {};
+	for my $i (0..$#ali8)
+	{
+		my $seq = $ali8[$i][2];
+		my @aa = split ("", $seq); 
+
+		for my $j (0..9)
+		{
+			$nterm_cons->{$j}->{$aa[$j]} ++;
+		}
+	}	
+	
+	
+	my $low_count = {};
+	my $min_nterm_cons = 0.65;
+	my $max_low_count = 3;
+	foreach (sort keys %$nterm_cons)
+	{
+		my $pos = $_;
+		my $max = 0; 
+		my $max_aa;	
+		
+		foreach (keys %{$nterm_cons->{$pos}})
+		{
+			my $aa = $_;
+			my $count = $nterm_cons->{$pos}->{$aa};
+			
+			if ($count > $max)
+			{
+				$max_aa = $aa;
+				$max = $count;
+			}
+		}
+		my $cons = ($max/$nseq8);	
+		if ($cons < $min_nterm_cons)
+		{
+			$low_count->{$pos}->{$max_aa} = $cons;
+		}
+	}
+	my $n_poor = keys %{$low_count};
+	if ($n_poor > $max_low_count)
+	{
+		print STDERR "$file\t$ali_file\tlow %identity detected in N-terminus\n"; 
+	
+	}
+	die "here"; 
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 #########
 
 	my $n_seqs_final = scalar @ali8;
