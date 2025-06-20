@@ -36,6 +36,7 @@ sub parse_command_line
 			-tmp name temp fasta file 
 			-p_nterm percent identity minimum for reclustering the columns in the first 25aas (default = 65%)
 			-n_nterm number of bad columns required for the n-terminal reclustering procedure (default = 3)
+			-nterm_eval_length number of N-terminal columns to check for poor conservation (default = 10)
 			-nterm-mmseq-id identity threshold for N-terminal reclustering (default = 0.7)
 			-no_nterm_eval disable N-terminal evaluation and reclustering
 ';
@@ -54,6 +55,7 @@ sub parse_command_line
     my $tmp;
     my $p_nterm = 65; # Percentage for N-terminal conservation
     my $n_nterm = 3;  # Number of columns required
+    my $nterm_eval_length = 10; # Default length for N-terminal evaluation
     my $n_term_cluster_id = 0.7; # Default for N-terminal reclustering
 
     my $opts = GetOptions(
@@ -76,6 +78,7 @@ sub parse_command_line
         'd'     => \$start_dash,
         'p_nterm=i' => \$p_nterm,
         'n_nterm=i' => \$n_nterm,
+        'nterm_eval_length=i' => \$nterm_eval_length,
         'nterm-mmseq-id=f' => \$n_term_cluster_id, # New parameter for N-terminal reclustering identity
         'no_nterm_eval' => \$no_nterm_eval
     );
@@ -96,6 +99,7 @@ sub parse_command_line
     if ($evaluate_nterm)
     {
         print STDERR "  N-terminal evaluation is enabled (p_nterm: $p_nterm%, n_nterm: $n_nterm columns)\n";
+        print STDERR "  N-terminal evaluation length: $nterm_eval_length amino acids\n";
         print STDERR "  N-terminal reclustering identity threshold: $n_term_cluster_id\n";
     }
     else
@@ -122,6 +126,7 @@ sub parse_command_line
         tmp           => $tmp,
         p_nterm       => $p_nterm,
         n_nterm       => $n_nterm,
+        nterm_eval_length => $nterm_eval_length,
         n_term_cluster_id => $n_term_cluster_id,
         evaluate_nterm => $evaluate_nterm
     };
@@ -356,16 +361,26 @@ sub process_mmseqs_clusters
     print STDERR "Created $large_clusters cluster files\n";
     print STDERR "Put $leftover_seqs sequences from $small_clusters small clusters into Leftover_Seqs.aa\n";
     
-    # Align leftover sequences
-    print STDERR "Aligning leftover sequences with MAFFT...\n";
-    my $ret = system "mafft --thread 24 --quiet --reorder Leftover_Seqs.aa > Leftover_Seqs.fa";
-    
-    if ($ret != 0) 
+    # Only align leftover sequences if there are any
+    if ($leftover_seqs > 0 && -s "Leftover_Seqs.aa") 
     {
-        die "MAFFT execution failed with return code $ret: $!\n";
+        print STDERR "Aligning leftover sequences with MAFFT...\n";
+        my $ret = system "mafft --thread 24 --quiet --reorder Leftover_Seqs.aa > Leftover_Seqs.fa";
+        
+        if ($ret != 0) 
+        {
+            die "MAFFT execution failed with return code $ret: $!\n";
+        }
+        
+        print STDERR "MAFFT alignment of leftover sequences completed successfully\n";
     }
-    
-    print STDERR "MAFFT alignment of leftover sequences completed successfully\n";
+    else
+    {
+        print STDERR "No leftover sequences to align, skipping MAFFT step\n";
+        # Create an empty Leftover_Seqs.fa file for consistency
+        open(my $empty_fh, ">Leftover_Seqs.fa") or die "Cannot create empty Leftover_Seqs.fa: $!\n";
+        close($empty_fh);
+    }
     
     # Create necessary directories
     mkdir("alis") unless -d "alis";

@@ -1,4 +1,238 @@
 {
+   "Alphainfluenzavirus" : {
+      "close_genomes" : {
+         "Alphainfluenzavirus.1.dna" : {
+            "genome_ids" : "211044.132,211044.134,211044.135,211044.133,211044.129,211044.130,211044.128,211044.131",
+            "genome_name" : "Influenza A virus (A/Puerto Rico/8/1934(H1N1))"
+         }
+      },
+      "features" : {
+         "PB2" : {
+            "anno" : "RNA-dependent RNA polymerase PB2 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB2",
+            "kmers" : 1,
+            "min_len" : 730,
+            "max_len" : 760,
+            "segment" : "Segment 1",
+            "upstream_ext" : 1
+         },
+         "PB2-S1" : {
+            "anno" : "Splice variant of PB2, RIG-I-dependent interferon signaling pathway inhibitor",
+            "PMID" : ["26491155"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB2-S1",
+            "segment" : "Segment 1",
+            "special" : "splice"
+         },
+         "PB1" : {
+            "anno" : "RNA-dependent RNA polymerase catalytic core PB1 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1",
+            "kmers" : 1,
+            "min_len" : 730,
+            "max_len" : 770,
+            "segment" : "Segment 2",
+            "upstream_ext" : 1
+         },
+         "PB1-F2" : {
+            "anno" : "Virulence factor PB1-F2",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1-F2",
+            "segment" : "Segment 2",
+            "upstream_ext" : 1
+         },
+          "PB1-N40" : {
+            "anno" : "PB1-N40 protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1-N40",
+            "segment" : "Segment 2",
+            "upstream_ext" : 0,
+            "PMID" : ["19494001"]
+         },
+         "PA" : {
+            "anno" : "RNA-dependent RNA polymerase PA subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA",
+            "kmers" : 1,
+            "min_len" : 690,
+            "max_len" : 720,
+            "segment" : "Segment 3",
+            "upstream_ext" : 1
+         },
+         "PA-N155" : {
+            "anno" : "PA-N155 protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA-N155",
+            "segment" : "Segment 3",
+            "upstream_ext" : 0
+         },
+         "PA-N182" : {
+            "anno" : "PA-N182 protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA-N182",
+            "segment" : "Segment 3",
+            "upstream_ext" : 0
+         },
+         "HA" : {
+            "anno" : "Hemagglutinin precursor",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "HA0",
+            "kmers" : 1,
+            "min_len" : 550,
+            "max_len" : 570,
+            "segment" : "Segment 4",
+            "upstream_ext" : 1
+         },
+         "HA1" : {
+            "anno" : "Mature hemagglutinin N-terminal receptor binding subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HA1",
+            "segment" : "Segment 4",
+            "PMID" : ["25391151"],
+            "upstream_ext" : 0
+         },
+         "HA2" : {
+            "anno" : "Mature hemagglutinin C-terminal membrane fusion subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HA2",
+            "segment" : "Segment 4",
+            "upstream_ext" : 0
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NP",
+            "kmers" : 1,
+            "min_len" : 470,
+            "max_len" : 500,
+            "segment" : "Segment 5",
+            "upstream_ext" : 1
+         },
+         "NA" : {
+            "anno" : "Neuraminidase protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NA",
+            "kmers" : 1,
+            "min_len" : 460,
+            "max_len" : 480,
+            "segment" : "Segment 6",
+            "upstream_ext" : 1
+         },
+         "M1" : {
+            "anno" : "Matrix protein 1",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M1",
+            "kmers" : 1,
+            "min_len" : 240,
+            "max_len" : 260,
+            "segment" : "Segment 7",
+            "upstream_ext" : 1
+         },
+          "NS1" : {
+            "anno" : "Non-structural protein 1, interferon antagonist and host mRNA processing inhibitor",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS1",
+            "kmers" : 1,
+            "min_len" : 200,
+            "max_len" : 240,
+            "segment" : "Segment 8",
+            "upstream_ext" : 1
+         }
+      },
+      "segments" : {
+         "Segment 1" : {
+            "min_len" : 2200,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "Segment 2" : {
+            "min_len" : 2200,
+            "max_len" : 2360,
+            "replicon_geometry" : "linear"
+         },
+         "Segment 3" : {
+            "min_len" : 2200,
+            "max_len" : 2250,
+            "replicon_geometry" : "linear"
+         },
+         "Segment 4" : {
+            "min_len" : 1600,
+            "max_len" : 1800,
+            "replicon_geometry" : "linear"
+         },
+         "Segment 5" : {
+            "min_len" : 1460,
+            "max_len" : 1580,
+            "replicon_geometry" : "linear"
+         },
+         "Segment 6" : {
+            "min_len" : 1300,
+            "max_len" : 1480,
+            "replicon_geometry" : "linear"
+         },
+         "Segment 7" : {
+            "min_len" : 900,
+            "max_len" : 1050,
+            "replicon_geometry" : "linear"
+         },    
+         "Segment 8" : {
+            "min_len" : 770,
+            "max_len" : 920,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
    "Aquaparamyxovirus" : {
       "close_genomes" : {
          "Aquaparamyxovirus.dna" : {
@@ -41,6 +275,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -344,6 +580,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "I" : {
@@ -833,6 +1071,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -967,6 +1207,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -1120,6 +1362,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -1456,6 +1700,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -1854,6 +2100,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -2825,6 +3073,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "I" : {
@@ -2959,6 +3209,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -3082,6 +3334,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {
@@ -3592,6 +3846,8 @@
             "gene_symbol" : "RBP",
             "kmers" : 1,
             "segment" : "Single RNA Segment",
+            "min_len" : 513,
+            "max_len" : 671,
             "upstream_ext" : 1
          },
          "L" : {

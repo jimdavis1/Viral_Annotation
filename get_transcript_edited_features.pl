@@ -3,16 +3,15 @@ use strict;
 use Data::Dumper;
 use Time::HiRes 'gettimeofday';
 use GenomeTypeObject;
-use P3DataAPI;
+#use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
-use File::Path 'remove_tree';
+#use File::Path 'remove_tree';
 use IPC::Run qw(run);
 use Cwd;
 use gjoseqlib;
 use Getopt::Long::Descriptive;
 
-my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my $program_description = <<'END_DESCRIPTION';
 This program performs feature calling for transcript edited proteins.  It reads and writes GTO files.
@@ -39,8 +38,8 @@ my($opt, $usage) = describe_options(
 		            ["lower_pid|lpi"        => "Lower percent identity threshold for a feature call without transcript editing correction (D = 80)", {default => 80}],
 		            ["lower_pcov|lpc"       => "Lower percent query coverage for for a feature call without transcritp editing correction (D = 80)", {default => 80}],
 		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
-				    ["json|j=s"             => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
-				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Transcript-Editing"}],
+				    ["json|j=s"             => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
+				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Transcript-Editing"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
@@ -68,7 +67,7 @@ my $base = getcwd;
 my %pssm_fam;
 for my $i (0 .. $#{$genome_in->{features}}) 
 {
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan Annotate/))
+	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan/))
 	{
 		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
 	}
@@ -123,7 +122,8 @@ if (scalar @to_analyze)
 	};
 	my $event_id = $genome_in->add_analysis_event($event);
 
-
+	
+	
 	#cycle through the transcript edited features and search for them one at a time with blastn.
 	for my $i (0..$#to_analyze)
 	{
@@ -137,7 +137,6 @@ if (scalar @to_analyze)
 		
 		my $make_db2 = run("makeblastdb -dbtype nucl -in $name.fasta >/dev/null");
 		
-		#	my $make_db2 = run("makeblastdb -dbtype nucl -in $query >/dev/null");
 
 			if (!$make_db2)
 			{
@@ -163,10 +162,11 @@ if (scalar @to_analyze)
 		open (IN, "<$name.json"), or warn "Cannot open JSON BLASTn output file $name.json\n";
 		my $results = decode_json(scalar read_file(\*IN));	
 		close IN;
-		
-		
+			
+				
 		#Gather in the best match.
 		my $matches = best_blastn_match_by_loc($results);  #removed id, cov, and gap thresholds from here  
+		
 
 		foreach (keys %$matches)
 		{
@@ -187,7 +187,7 @@ if (scalar @to_analyze)
 						
 				
 				#If all inclusion critreria are met (%id, %Qcov, num gaps, runs of gaps)
-
+				
 				if ( ($pid >= $opt->id) && ($qcov >= $opt->cov) && ($dashes <= $opt->gaps) && ($runs <= 1))
 				{
 					my @snts = split ("", $sseq);
@@ -226,8 +226,9 @@ if (scalar @to_analyze)
 						aa_sequence => $mod_aa,
 						location    => ([[$sid, $from, $strand, $len]]),
 						product     => $anno,
-						pssm        => ([[$fam, $name, $anno, "get_transcript_edited_features"]]),
+						pssm        => ([[$fam, $name, $anno, "LowVan Transcript Edited Feature"]]),
 					};
+					
 					push(@{$features{$ft}}, $feature);
 				}
 			
@@ -256,7 +257,7 @@ if (scalar @to_analyze)
 						contig      => $sid,
 						location    => ([[$sid, $from, $strand, $len]]),
 						product     => "Uncorrected "."$lc_anno"." encoding region",
-						pssm        => ([[$fam, $name, $anno, "get_transcript_edited_features"]]),  #I don't actually use this but i left it there.
+						pssm        => ([[$fam, $name, $anno, "LowVan Transcript Edited Feature"]]),  #I don't actually use this but i left it there.
 					};
 					push(@{$features{$feature_type}}, $feature);
 				}
@@ -265,52 +266,65 @@ if (scalar @to_analyze)
 	}	
 	
 	# Push features into the GTO
-	foreach (keys %features)
+	if (%features)
 	{
-		my $type = $_; 
-				
-		foreach (@{$features{$type}})
+		foreach (keys %features)
 		{
-			my $data = $_;
-
-			if ($type eq 'CDS' || $type eq 'mat_peptide')
+			my $type = $_; 
+					
+			foreach (@{$features{$type}})
 			{
-				my $p = {
-					-id	                 => $genome_in->new_feature_id($type),
-					-type 	             => $type,
-					-location 	         => $data->{location},
-					-analysis_event_id 	 => $event_id,
-					-annotator           => 'get_transcript_edited_features',
-					-protein_translation => $data->{aa_sequence},
-					-function            => $data->{product},
-					-family_assignments  => $data->{pssm},
-					};				
-				$genome_in->add_feature($p);
+				my $data = $_;
+	
+				if ($type eq 'CDS' || $type eq 'mat_peptide')
+				{
+					my $p = {
+						-id	                 => $genome_in->new_feature_id($type),
+						-type 	             => $type,
+						-location 	         => $data->{location},
+						-analysis_event_id 	 => $event_id,
+						-annotator           => 'LowVan Transcript Edited Feature',
+						-protein_translation => $data->{aa_sequence},
+						-function            => $data->{product},
+						-family_assignments  => $data->{pssm},
+						};				
+					$genome_in->add_feature($p);
+				}
+				
+				# Call a partial cds and do not add the AA seq if its a distant match.
+				# No family assignment is generated
+				elsif ($type eq 'partial_cds')
+				{
+					my $p = {
+						-id	                 => $genome_in->new_feature_id($type),
+						-type 	             => $type,
+						-location 	         => $data->{location},
+						-analysis_event_id 	 => $event_id,
+						-annotator           => 'LowVan Transcript Edited Feature',
+						-function            => $data->{product},
+						};
+					$genome_in->add_feature($p);
+				} 	
 			}
- 			
- 			# Call a partial cds and do not add the AA seq if its a distant match.
- 			# No family assignment is generated
- 			elsif ($type eq 'partial_cds')
- 			{
-				my $p = {
-					-id	                 => $genome_in->new_feature_id($type),
-					-type 	             => $type,
-					-location 	         => $data->{location},
-					-analysis_event_id 	 => $event_id,
-					-annotator           => 'get_transcript_edited_features',
-					-function            => $data->{product},
-					};
-				$genome_in->add_feature($p);
-			} 	
 		}
+		chdir ($base);
+		$genome_in->destroy_to_file($opt->output);			
+	}
+ 	else
+ 	{
+		#handle condition where there should have been a blast match, but none was found.
+		print STDERR "Transcript edited features curated for: $fam, but none were found.\n";
+		chdir($base);
+		$genome_in->destroy_to_file($opt->output);			
  	}
- 	chdir ($base);
- 	$genome_in->destroy_to_file($opt->output);			
  }
- 
+
+
  else 
  {
- 	print STDERR "No proteins from transcript editing for $fam\n";
+ 	print STDERR "No proteins from transcript editing for: $fam\n";
+	chdir($base);
+	$genome_in->destroy_to_file($opt->output);			
  }
  
  

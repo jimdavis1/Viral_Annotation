@@ -13,7 +13,7 @@ use FCP_PSSM_Utils qw(create_pssm);
 our @EXPORT_OK = qw(evaluate_nterm_conservation recluster_by_nterm);
 
 # Constants
-use constant NTERM_LENGTH => 25; # Number of amino acids to analyze from N-terminus
+use constant NTERM_LENGTH => 25; # Number of amino acids to extract for reclustering
 
 # Evaluate N-terminal conservation in all corrected alignments
 sub evaluate_nterm_conservation 
@@ -21,8 +21,9 @@ sub evaluate_nterm_conservation
     my ($options) = @_;
     my $p_nterm = $options->{p_nterm} / 100.0; # Convert percentage to fraction
     my $n_nterm = $options->{n_nterm};
+    my $nterm_eval_length = $options->{nterm_eval_length} // 10; # Default to 10 if not specified
     
-    print STDERR "Evaluating N-terminal conservation (threshold: $options->{p_nterm}%, min columns: $n_nterm)...\n";
+    print STDERR "Evaluating N-terminal conservation (threshold: $options->{p_nterm}%, min columns: $n_nterm, evaluation length: $nterm_eval_length)...\n";
     
     # Get list of all alignments in corrected_alis directory
     opendir(my $dh, "corrected_alis") or die "Cannot open corrected_alis directory: $!\n";
@@ -36,7 +37,7 @@ sub evaluate_nterm_conservation
     
     # Open log file
     open(my $log_fh, ">nterm_evaluation.log") or die "Cannot open nterm_evaluation.log for writing: $!\n";
-    print $log_fh "Alignment\tTotal_Columns\tNterm_Columns\tPoor_Columns\tStatus\n";
+    print $log_fh "Alignment\tTotal_Columns\tNterm_Columns\tEval_Length\tPoor_Columns\tStatus\n";
     
     my @alignments_to_recluster;
     
@@ -53,13 +54,13 @@ sub evaluate_nterm_conservation
         # Skip if alignment is empty
         if (!@ali) 
         {
-            print $log_fh "$ali_file\t0\t0\t0\tSkipped (empty)\n";
+            print $log_fh "$ali_file\t0\t0\t$nterm_eval_length\t0\tSkipped (empty)\n";
             next;
         }
         
         my $n_seqs = scalar @ali;
         
-        # Extract N-terminal regions (first NTERM_LENGTH amino acids)
+        # Extract N-terminal regions (first NTERM_LENGTH amino acids for potential reclustering)
         my @nterm_ali;
         my $max_nterm_length = 0;
         
@@ -76,7 +77,7 @@ sub evaluate_nterm_conservation
         # Skip if N-terminal region is too short
         if ($max_nterm_length < 5) 
         {
-            print $log_fh "$ali_file\t", length($ali[0][2]), "\t$max_nterm_length\t0\tSkipped (N-terminal too short)\n";
+            print $log_fh "$ali_file\t", length($ali[0][2]), "\t$max_nterm_length\t$nterm_eval_length\t0\tSkipped (N-terminal too short)\n";
             next;
         }
         
@@ -95,12 +96,13 @@ sub evaluate_nterm_conservation
             }
         }
         
-        # Identify poorly conserved columns
+        # Identify poorly conserved columns (but only within the first nterm_eval_length positions)
         my @poor_columns;
         
-        for my $j (0..$max_nterm_length-1) 
+        for my $j (0..($nterm_eval_length-1)) 
         {
             next unless exists $col_stats{$j};
+            next if $j >= $max_nterm_length; # Don't check beyond the end of the alignment
             
             # Count total non-gap residues in this column
             my $total = 0;
@@ -151,11 +153,11 @@ sub evaluate_nterm_conservation
         }
         
         # Log result
-        print $log_fh "$ali_file\t", length($ali[0][2]), "\t$max_nterm_length\t", scalar(@poor_columns), "\t$status\n";
+        print $log_fh "$ali_file\t", length($ali[0][2]), "\t$max_nterm_length\t$nterm_eval_length\t", scalar(@poor_columns), "\t$status\n";
         
         if ($status eq "Needs reclustering") 
         {
-            print STDERR "  $ali_file: Found ", scalar(@poor_columns), " poorly conserved N-terminal columns, marking for reclustering\n";
+            print STDERR "  $ali_file: Found ", scalar(@poor_columns), " poorly conserved N-terminal columns (within first $nterm_eval_length AAs), marking for reclustering\n";
         } 
         else 
         {
@@ -221,7 +223,7 @@ sub recluster_by_nterm
         close($nterm_fh);
         
         # Run MMSeqs on the N-terminal alignment with custom identity threshold
-        print STDERR "  Running MMSeqs on N-terminal region...\n";
+        print STDERR "  Running MMSeqs on N-terminal region (first ", NTERM_LENGTH, " amino acids)...\n";
         my $mmseqs_prefix = "$nterm_dir/nterm";
         
         # Use the n_term_cluster_id parameter with a default of 0.7

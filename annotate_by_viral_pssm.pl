@@ -24,6 +24,8 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 
 		-min Minimum contig	length (d = 1000)  # otherwise the genome is rejected
 		-max Maximum contig length (d = 30000) # for reference Measles is 15,894 and Beilong is 19,212
+	
+		-mcb Minimum contig bitscore to enable annotation (d = 500) #otherwise the genome is rejected.
 
         -j   Full path to the options file in JSON format which carries data for a match (D = $default_data_dir/Viral_PSSM.json)
 		-c   Representative contigs directory (D = $default_data_dir/Viral-Rep-Contigs)
@@ -63,7 +65,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
  			18	AA sequence (if -s append sequences)
 ';
 
-my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl, $prefix, $append_seqs, $threads);
+my ($help, $opt_file, $contig_file, $tmp, $tax, $keep_stop, $genome_name, $cdir, $pdir, $keep_temp, $min_len, $max_len, $aa_only, $dna_only, $tbl_only, $no_out, $ctbl, $prefix, $append_seqs, $threads, $min_contig_bit);
 
 my $opts = GetOptions( 'h'         => \$help,
                        'tmp'       => \$keep_temp,
@@ -81,6 +83,7 @@ my $opts = GetOptions( 'h'         => \$help,
                        'pssm=s'    => \$pdir,
                        'min=s'     => \$min_len,
                        'max=s'     => \$max_len,
+                       'mcb=f'     => \$min_contig_bit,
                        'j=s'       => \$opt_file,
                        'ks'        => \$keep_stop,
                        'p=s'       => \$prefix,
@@ -94,6 +97,7 @@ unless ($contig_file ){die "must declare an input subject file with -i \n\n$usag
 unless ($tmp){$tmp .= sprintf("%x", rand 16) for 1..20;}
 unless ($min_len){$min_len = 1000; }
 unless ($max_len){$max_len = 30000; }
+unless ($min_contig_bit){$min_contig_bit = 500;}
 unless ($tax){$tax = "10239"; }
 unless ($genome_name){$genome_name = "Viruses"; }
 unless ($prefix){$prefix = "Viral_Annotation";}
@@ -200,9 +204,24 @@ foreach (@reps)
 	}
 }	
 
+# here we make it fail gracefully if we don't enounter a reference genome with a high 
+# enough blastn bit score.
+
+if ($best_contig_bit < $min_contig_bit) {
+    print STDERR "No matching reference contigs with bit score greater than $min_contig_bit\n";
+    exit(1);
+}
+
+
+
 #get closest genome data
 my $best_rep_ids   = $options->{$best_virus_match}->{close_genomes}->{$best_rep}->{genome_ids};
 my $best_rep_name  = $options->{$best_virus_match}->{close_genomes}->{$best_rep}->{genome_name};
+
+
+
+
+
 
 
 my $virus = $best_virus_match;	
@@ -881,44 +900,48 @@ sub matching_tblastn_hsps_json
 #
 #  $bit_score = get_blastn_bit($json);
 #----------------------------------------------------------
-sub get_blastn_bit
+sub get_blastn_bit 
 {
-	my $blast = shift @_;
-	my $bit;
-	my $best_bit = 0;
-
-	#my @results = $blast->{BlastOutput2}->[0]->{report}->{results}->{bl2seq};	
-	my @output = $blast->{BlastOutput2};
-	for my $i (0..$#output)
-	{
-		my @results = $blast->{BlastOutput2}->[$i]->{report}->{results}->{bl2seq};
-
-		for my $j (0..$#results)
-		{
-			my @hits = $blast->{BlastOutput2}->[$i]->{report}->{results}->{bl2seq}->[$j]->{hits};
-			for my $k (0..$#hits)
-			{
-				my @hsps = $blast->{BlastOutput2}->[$i]->{report}->{results}->{bl2seq}->[$j]->{hits}->[$k]->{hsps}; 
-				for my $l (0..$#hsps)
-				{
-					$bit = $blast->{BlastOutput2}->[$i]->{report}->{results}->{bl2seq}->[$j]->{hits}->[$k]->{hsps}->[$l]->{bit_score};
-					if ($bit > $best_bit)
-					{
-						$best_bit = $bit;
-					}
-				}
-			}
-		}
-	}
-	return $best_bit;
+    my $blast = shift @_;
+    my $best_bit = 0;
+    
+    # Check if BlastOutput2 exists and is an array reference
+    return 0 unless $blast->{BlastOutput2} && ref($blast->{BlastOutput2}) eq 'ARRAY';
+    
+    # Iterate through each BlastOutput2 element
+    for my $output (@{$blast->{BlastOutput2}}) 
+    {
+        next unless $output->{report} && $output->{report}->{results};
+        
+        my $results = $output->{report}->{results};
+        next unless $results->{bl2seq} && ref($results->{bl2seq}) eq 'ARRAY';
+        
+        # Iterate through bl2seq array
+        for my $bl2seq_item (@{$results->{bl2seq}}) 
+        {
+            next unless $bl2seq_item->{hits} && ref($bl2seq_item->{hits}) eq 'ARRAY';
+            next if @{$bl2seq_item->{hits}} == 0; # Skip empty hits arrays
+            
+            # Iterate through hits
+            for my $hit (@{$bl2seq_item->{hits}}) 
+            {
+                next unless $hit->{hsps} && ref($hit->{hsps}) eq 'ARRAY';
+                
+                # Iterate through hsps
+                for my $hsp (@{$hit->{hsps}}) 
+                {
+                    if ($hsp->{bit_score} && $hsp->{bit_score} > $best_bit) 
+                    {
+                        $best_bit = $hsp->{bit_score};
+                    }
+                }
+            }
+        }
+    }
+    
+    return $best_bit;
 }
 ###########################################################
-
-
-
-
-
-
 
 
 
