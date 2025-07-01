@@ -262,8 +262,9 @@ In order to support splice variant calling we maintain a directory of hand-curat
 
 It is worth noting that:
 1.  Query sequences don't need to be be aligned, but it is easier to deal with them if they are.
-2.  If query sequences are derived from an alignment they should not contain gap characters upstream of the splice junction. 
-3.  All query sequences must be in the forward direction  
+2.  The coordinates are sequence specific.  
+3.  If query sequences are derived from an alignment they should not contain gap characters upstream of the splice junction. Gaps should be removed and coordinates updated accordingly.
+4.  All query sequences must be in the forward direction  
 <br>
 
 Fasta headers are formatted in the following way:<br>
@@ -273,6 +274,10 @@ Fasta headers are formatted in the following way:<br>
 where SD is sequence donor, and SA is sequence acceptor.  Here is what one looks like:
 `>1413195.5 SD:371-381;373 SA:491-504;503`
  <br>
+The fasta header is parsed based on a regex, so colons and semicolons should not exist in the idenifier.<br>
+
+Finally, the code will not call a splice variant unless a valid sequence donor and sequence acceptor site exist somewhere in the set of query sequences.  That is, they do not have to match exactly between the best query-subject match, but they do need to have been seen before. <br>
+
 
 Full usage for this program is as follows:
 
