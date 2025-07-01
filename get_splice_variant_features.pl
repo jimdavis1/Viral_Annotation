@@ -49,6 +49,7 @@ my($opt, $usage) = describe_options(
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
+				    ["seqs|s"             => "Dump sequences to STDERR"]
 );
 
 
@@ -242,8 +243,13 @@ if (scalar @to_analyze)
 					if ((exists $SDs{$sub_SD}) && (exists $SAs{$sub_SA}))
 					#if ((uc($ref_SD) eq uc($sub_SD)) && (uc($ref_SA) eq uc($sub_SA))) 
 					{
-						print "Match found for SD and SA sites\n";
-											
+						#print "Match found for SD and SA sites\n";
+						if ($opt->seqs)
+						{
+							print "SD Match: $sub_SD\n";												
+							print "SA Match: $sub_SA\n\n";
+						}					
+				
 						# Calculate splice coordinates in the subject sequence
 						my $splice_left_end    = $rel_sd_start + ($sd_last - $sd_start);
 						my $splice_right_start = $rel_sa_start + ($sa_first - $sa_start);
@@ -280,9 +286,11 @@ if (scalar @to_analyze)
 						# Remove stop codons and downstream sequence
 						$aa_splice =~ s/(\*)(.+)/$1/g;
 						
-						print "$left_ungapped\n\n$right_ungapped\n\n"; 
-						print "$aa_splice\n"; 
-						
+						if ($opt->seqs)
+						{	
+							print "LEFT:\n$left_ungapped\n\nRIGHT:\n$right_ungapped\n\n"; 
+							print "$aa_splice\n\n"; 
+						}
 						my $total_len = ((length ($aa_splice)) * 3);
 						my $len_left  = length($left_ungapped); 
 						my $len_right = length($right_ungapped); 
@@ -316,13 +324,6 @@ if (scalar @to_analyze)
 						#I have double checked this in the fwd, rev strands
 						#Also double checked and is compatible with rast-export-genome.
 						
-						#print "LEFT:\n";
-						#print Dumper @left_tuple;
-						#print "\n"; 
-	
-						#print "RIGHT:\n";
-						#print Dumper @right_tuple;
-						#print "\n"; 
 						
 						my $feature = {
 							type        => $ft,
@@ -464,8 +465,6 @@ sub best_blastn_match_by_loc
 				my $qfrom     = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{query_from};
 				my $qto       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{query_to};
 
-
-				print "$qtitle\n"; 
 								
 				my ($pid, $qcov);
 				if ($ident && $ali_len && $qlen) # this ensures that we got search results.
