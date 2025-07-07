@@ -49,6 +49,7 @@ my($opt, $usage) = describe_options(
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
+				    ["seqs|s"             => "Dump sequences to STDERR"]
 );
 
 
@@ -100,11 +101,12 @@ foreach (keys %{$json->{$fam}->{features}})
 }
 
 # If there are spliced features then we set up the blast
+print STDERR "\n\nSearching for spliced features\n------------------------------------\n"; 
+print STDERR "\n$fam detected from GTO\n\n"; 
+
 if (scalar @to_analyze)
 {
 	my %features;
-	print STDERR "\n\nSearching for spliced features\n------------------------------------\n"; 
-	print STDERR "\n$fam detected from GTO\n\n"; 
 
 	mkdir ($tmp); 
 	chdir ($tmp);
@@ -135,10 +137,10 @@ if (scalar @to_analyze)
 		my $anno = $to_analyze[$i][1]; 
 		my $ft   = $to_analyze[$i][2];
 		
-		print STDERR "Analyzing $name\n\n"; 
+		print STDERR "Analyzing $name\n"; 
 		my $query = "$dir/$fam/$name.fasta"; 
 		run ("cp $query ."); 
-		
+
 		my $make_db2 = run("makeblastdb -dbtype nucl -in $name.fasta >/dev/null");
 
 			if (!$make_db2)
@@ -167,10 +169,22 @@ if (scalar @to_analyze)
 		close IN;
 
 		
-		
 		#Gather in the best match.
 		my $matches = best_blastn_match_by_loc($results);  #removed id, cov, and gap thresholds from here  
-		#print Dumper $matches;
+		
+		#Create a hash of valid Sequence Donor and Sequence Acceptor sites. 
+		open (IN, "<$name.fasta"), or die "cannot open query sequence file to find valid SDs and SAs.\n";
+		my @refs = &gjoseqlib::read_fasta(\*IN);
+		my (%SDs, %SAs);
+		for my $i (0..$#refs)
+		{
+			my ($sd_s, $sd_e, $sd_l, $sa_s, $sa_e, $sa_f) = $refs[$i][1] =~ /SD:(\d+)-(\d+);(\d+) SA:(\d+)-(\d+);(\d+)/;			
+			my $SD = uc(substr($refs[$i][2], ($sd_s - 1), ($sd_e - $sd_s)+1));
+			my $SA = uc(substr($refs[$i][2], ($sa_s - 1), ($sa_e - $sa_s)+1));
+			$SDs{$SD} = 1;
+			$SAs{$SA} = 1;
+		}
+		
 		
 		foreach (keys %$matches)
 		{
@@ -194,14 +208,16 @@ if (scalar @to_analyze)
 				my $qcov    =  (($ali_len/(length $qseq)) * 100); 										
 				my $qtitle  =  $matches->{$sid}->{$from}->{QTITLE};
 				
-				print STDERR "Best Match: $qtitle\n";
-			
+				print STDERR "Best Match: $qtitle\n\n";
+				
 				#If all inclusion critreria are met:
 				if ( ($pid >= $opt->id) && ($qcov >= $opt->cov) )
 				{
 					
 					# Parse splice site coordinates from query title
 					my ($sd_start, $sd_end, $sd_last, $sa_start, $sa_end, $sa_first) = $qtitle =~ /SD:(\d+)-(\d+);(\d+) SA:(\d+)-(\d+);(\d+)/;
+					unless ($sd_start, $sd_end, $sd_last, $sa_start, $sa_end, $sa_first){warn "$name incorrectly formatted fasta header in query\n$qtitle\n"; }
+
 
 					# Compute "relative" dna coordinates from the blastn alignment
 					# These will always be in the (+) direction because the references must be in the plus.			
@@ -209,7 +225,7 @@ if (scalar @to_analyze)
 					my $rel_sd_end   = $sd_end - $qfrom;
 					my $rel_sa_start = $sa_start - $qfrom;
 					my $rel_sa_end   = $sa_end - $qfrom;
-					
+										
 					# Ensure coordinates are within bounds and positive
 					$rel_sd_start = max(0, $rel_sd_start);
 					$rel_sd_end   = min($ali_len - 1, max(0, $rel_sd_end));
@@ -217,16 +233,23 @@ if (scalar @to_analyze)
 					$rel_sa_end   = min($ali_len - 1, max(0, $rel_sa_end));
 					
 					# Extract splice site aa sequences for validation
-					my $ref_SD = substr($qseq, $rel_sd_start, ($rel_sd_end - $rel_sd_start) + 1);
-					my $ref_SA = substr($qseq, $rel_sa_start, ($rel_sa_end - $rel_sa_start) + 1);
+					#my $ref_SD = substr($qseq, $rel_sd_start, ($rel_sd_end - $rel_sd_start) + 1);
+					#my $ref_SA = substr($qseq, $rel_sa_start, ($rel_sa_end - $rel_sa_start) + 1);
 					
 					my $sub_SD = substr($sseq, $rel_sd_start, ($rel_sd_end - $rel_sd_start) + 1);
 					my $sub_SA = substr($sseq, $rel_sa_start, ($rel_sa_end - $rel_sa_start) + 1);
+										
 					
-					if ((uc($ref_SD) eq uc($sub_SD)) && (uc($ref_SA) eq uc($sub_SA))) 
+					if ((exists $SDs{$sub_SD}) && (exists $SAs{$sub_SA}))
+					#if ((uc($ref_SD) eq uc($sub_SD)) && (uc($ref_SA) eq uc($sub_SA))) 
 					{
-						print "SD and SA sites are identical\n";
-											
+						#print "Match found for SD and SA sites\n";
+						if ($opt->seqs)
+						{
+							print "SD Match: $sub_SD\n";												
+							print "SA Match: $sub_SA\n\n";
+						}					
+				
 						# Calculate splice coordinates in the subject sequence
 						my $splice_left_end    = $rel_sd_start + ($sd_last - $sd_start);
 						my $splice_right_start = $rel_sa_start + ($sa_first - $sa_start);
@@ -250,7 +273,8 @@ if (scalar @to_analyze)
 						if ($trans_left =~ /\*/)
 						{
 							warn "Stop codon detected in 5-prime matching end of splice for: $name, skipping.\n";
-							next; 
+							print Dumper "$left_ungapped\n\n$trans_left\n"; 
+							#next; 
 						}						
 						
 						# Create spliced sequence
@@ -262,9 +286,11 @@ if (scalar @to_analyze)
 						# Remove stop codons and downstream sequence
 						$aa_splice =~ s/(\*)(.+)/$1/g;
 						
-						print "$left_ungapped\n\n$right_ungapped\n\n"; 
-						print "$aa_splice\n"; 
-						
+						if ($opt->seqs)
+						{	
+							print "LEFT:\n$left_ungapped\n\nRIGHT:\n$right_ungapped\n\n"; 
+							print "$aa_splice\n\n"; 
+						}
 						my $total_len = ((length ($aa_splice)) * 3);
 						my $len_left  = length($left_ungapped); 
 						my $len_right = length($right_ungapped); 
@@ -298,16 +324,7 @@ if (scalar @to_analyze)
 						#I have double checked this in the fwd, rev strands
 						#Also double checked and is compatible with rast-export-genome.
 						
-						#print "LEFT:\n";
-						#print Dumper $left_tuple;
-						#print "\n"; 
-	
-						#print "RIGHT:\n";
-						#print Dumper $right_tuple;
-						#print "\n"; 
-					
 						
-	
 						my $feature = {
 							type        => $ft,
 							contig      => $sid,
@@ -356,7 +373,7 @@ if (scalar @to_analyze)
  	else
  	{
 		#handle condition where there should have been a blast match, but none was found.
-		print STDERR "Splice variant features curated for: $fam, but none were found.\n";
+		print STDERR "Splice variant features should exist for: $fam, but none were found.\n";
 		chdir($base);
 		$genome_in->destroy_to_file($opt->output);			
 	}
@@ -474,6 +491,7 @@ sub best_blastn_match_by_loc
 								$matches->{$sid}->{$hit_from}->{QTITLE}   = $qtitle;
 								$matches->{$sid}->{$hit_from}->{QTO}      = $qto;
 								$matches->{$sid}->{$hit_from}->{QFROM}    = $qfrom;
+							
 							}
 						}
 					}
@@ -489,6 +507,8 @@ sub best_blastn_match_by_loc
 						$matches->{$sid}->{$hit_from}->{GAPS}     = $gaps;
 						$matches->{$sid}->{$hit_from}->{QTO}      = $qto;
 						$matches->{$sid}->{$hit_from}->{QFROM}    = $qfrom;
+						$matches->{$sid}->{$hit_from}->{QTITLE}   = $qtitle;
+
 					}				
 				}
 			}

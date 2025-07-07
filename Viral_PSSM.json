@@ -98,6 +98,14 @@
             "segment" : "Segment 3",
             "upstream_ext" : 0
          },
+         "PA-X" : {
+            "anno" : "Host mRNA degrading protein PA-X",
+            "PMID" : ["23155484", "36558855", "22745253"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA-X",
+            "segment" : "Segment 3",
+            "special" : "splice"
+         },
          "HA" : {
             "anno" : "Hemagglutinin precursor",
             "bit_cutoff" : 100,
@@ -175,6 +183,22 @@
             "segment" : "Segment 7",
             "upstream_ext" : 1
          },
+         "M2" : {
+            "anno" : "M2 ion channel",
+            "PMID" : ["24825008", "22685560", "23133386"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "M2",
+            "segment" : "Segment 7",
+            "special" : "splice"
+         },
+         "M42" : {
+            "anno" : "M42 alternative ion channel",
+            "PMID" : ["24825008", "22685560", "23133386"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "M42",
+            "segment" : "Segment 7",
+            "special" : "splice"
+         },
           "NS1" : {
             "anno" : "Non-structural protein 1, interferon antagonist and host mRNA processing inhibitor",
             "bit_cutoff" : 100,
@@ -188,6 +212,22 @@
             "max_len" : 240,
             "segment" : "Segment 8",
             "upstream_ext" : 1
+         },
+          "NS2" : {
+            "anno" : "Nuclear export protein",
+            "PMID" : ["24825008", "24675275"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS2",
+            "segment" : "Segment 8",
+            "special" : "splice"
+         },
+          "NS3" : {
+            "anno" : "Hypothetical host adaptation protein NS3 ",
+            "PMID" : ["24825008", "24675275", "26038410"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS2",
+            "segment" : "Segment 8",
+            "special" : "splice"
          }
       },
       "segments" : {

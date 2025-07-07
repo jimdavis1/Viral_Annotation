@@ -20,6 +20,9 @@ Tospoviridae<br>
 Orthoebolavirus<br>
 Orthomarburgvirus<br>
 
+### Orthomyxoviridae:
+Influenza A virus<br>
+
 ### Paramyxoviridae:
 Aquaparamyxovirus<br>
 Ferlavirus<br>
@@ -81,6 +84,8 @@ It is run in the following way: `annotate_by_viral_pssm-GTO.pl  -x [file_prefix]
 
 `get_transcript_edited_features.pl` This script reads a GTO (that has already been processed by annotate_by_viral_pssm-GTO.pl) and finds sequences that have undergone transcript editing, updating the resulting CDS or mat_peptide to ensure we get the correct protein sequence.<br><br>
 
+`get_splice_variant_features.pl` This script reads a GTO (that has already been processed by annotate_by_viral_pssm-GTO.pl) and finds sequences that are the result of splicing, updating the resulting CDS to ensure we get the correct protein sequence.<br><br>
+
 `viral_genome_quality.pl`  This script reads the GTO and evaluates the genome quality based on CDSs and mat_peptide features present, and their copy number.  It also evaluates the contigs based on copy number and the proteins they encode.  It is intended to be run downstream of annotate_by_viral_pssm-GTO.pl and get_transcript_edited_features.pl.<br><br>
 
 `Viral_PSSM.json`  This file contains BLAST and ORF calling parameters per feature.<br><br>
@@ -91,9 +96,11 @@ It is run in the following way: `annotate_by_viral_pssm-GTO.pl  -x [file_prefix]
 
 `Transcript-Editing` This directory contains fasta files of hand-curated transcripts (post editing).<br><br>
 
+`Splice-Variants` This directory contains fasta hand-curated fasta files with splice site locations.<br><br>
+
 `PSSM-Alignments`  This directory is not used by any program, but it contains the alignments that correspond to each PSSM.<br><br>
 
-`Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of these tools.  It currently contains a program called, `list_annos_from_pssms.pl` which will dump the annotation for each feature.<br><br>
+`Other-Scripts` is a directory other non-essential but useful scipts and files related to the development and management of these tools.  It currently contains several readme files s and the tools for building pssms.<br><br>
 
 ## How to run annotate_by_viral_pssm.pl
 `annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta`<br><br>
@@ -201,7 +208,7 @@ The following is a non-exhaustive description of fields that are used in the JSO
 There are other fields that are not depicted in the example, including:<br>
 `PMID` which contains the PubMed ID for one or more DLITS.  A DLIT is an example of an important paper that either defines the function or sequence of a feature. <br><br>
 
-`"special": "transcript_edit"`  This field tells the program that an external program is being used to make a call.  In this case, `transcript_edit` is used to denote a feature that undergoes transcript editing and is found by using `get_transcript_edited_features.pl`.<br><br>
+`"special": "transcript_edit"`  This field tells the program that an external program is being used to make a call.  In this case, `transcript_edit` is used to denote a feature that undergoes transcript editing and is found by using `get_transcript_edited_features.pl`.  `splice` is also a valid field and triggers the search for splice variant features.<br><br>
 
 
 ## Get Transcript Edited Features
@@ -235,6 +242,52 @@ Full usage for this program is as follows:
 	                       call without transcritp editing correction (D
 	                       = 80)
 	                       aka --lpi
+	--threads INT (or -a)  Threads for the BLASTN (D = 24))
+	--json STR (or -j)     Full path to the JSON opts file
+	--dir STR (or -d)      Full path to the directory hand curated
+	                       transcripts
+	--tmp STR (or -t)      Declare name for temp dir (D = randomly named
+	                       in cwd)
+	--help (or -h)         Show this help message
+	--debug (or -b)        Enable debugging
+	
+```
+<br><br>
+
+
+## Get Splice Variant Features
+The use of splicing is fairly common in viruses, and is currently necessary for calling many proteins in *Influenza*.
+
+In order to support splice variant calling we maintain a directory of hand-curated DNA sequences with the coordinates of the splice site carefully delineated.  These are found in the `Splice-Variants` directory.  We find these these by performing a BLASTn search against the contig using our curated sequences as the query.  Then for the BLASTn matches with high enough scores, the splice is made using the curated coordinates in the fasta header.<br> 
+
+It is worth noting that:
+1.  Query sequences don't need to be be aligned, but it is easier to deal with them if they are.
+2.  The coordinates are sequence specific.  
+3.  If query sequences are derived from an alignment they should not contain gap characters upstream of the splice junction. Gaps should be removed and coordinates updated accordingly.
+4.  All query sequences must be in the forward direction  
+<br>
+
+Fasta headers are formatted in the following way:<br>
+
+`>valid_sequence_ID SD:SD_Region_Start-SD_Region_End;Last_nt_of_SD  SA:SA_Region_Start-SA_Region_End;First_nt_of_SA`
+<br>
+where SD is sequence donor, and SA is sequence acceptor.  Here is what one looks like:
+`>1413195.5 SD:371-381;373 SA:491-504;503`
+ <br>
+The fasta header is parsed based on a regex, so colons and semicolons should not exist in the idenifier.<br>
+
+Finally, the code will not call a splice variant unless a valid sequence donor and sequence acceptor site exist somewhere in the set of query sequences.  That is, they do not have to match exactly between the best query-subject match, but they do need to have been seen before. <br>
+
+
+Full usage for this program is as follows:
+
+```
+	--input STR (or -i)    Input GTO
+	--output STR (or -o)   Output GTO
+	--cov INT (or -c)      Overall Minimum BLASTn percent query coverage
+	                       (D = 95)
+	--id INT (or -p)       Overall Minimum BLASTn percent identity  (D =
+	                       95)
 	--threads INT (or -a)  Threads for the BLASTN (D = 24))
 	--json STR (or -j)     Full path to the JSON opts file
 	--dir STR (or -d)      Full path to the directory hand curated
