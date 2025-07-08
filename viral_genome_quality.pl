@@ -335,7 +335,7 @@ foreach (keys %segs_needed)
 close OUT2;
 
 
-print "$genome_in->{id}\t$genome_quality\n";
+print STDERR "$genome_in->{id}\t$genome_quality\n";
 
 #shove quality into the GTO, and write the new GTO.
 $genome_in->{quality}->{genome_quality} = $genome_quality;
