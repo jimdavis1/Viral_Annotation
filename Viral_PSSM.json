@@ -233,42 +233,42 @@
       "segments" : {
          "Segment 1" : {
             "min_len" : 2200,
-            "max_len" : 2400,
+            "max_len" : 2420,
             "replicon_geometry" : "linear"
          },
          "Segment 2" : {
             "min_len" : 2200,
-            "max_len" : 2360,
+            "max_len" : 2380,
             "replicon_geometry" : "linear"
          },
          "Segment 3" : {
             "min_len" : 2200,
-            "max_len" : 2250,
+            "max_len" : 2270,
             "replicon_geometry" : "linear"
          },
          "Segment 4" : {
             "min_len" : 1600,
-            "max_len" : 1800,
+            "max_len" : 1820,
             "replicon_geometry" : "linear"
          },
          "Segment 5" : {
             "min_len" : 1460,
-            "max_len" : 1580,
+            "max_len" : 1600,
             "replicon_geometry" : "linear"
          },
          "Segment 6" : {
             "min_len" : 1300,
-            "max_len" : 1480,
+            "max_len" : 1500,
             "replicon_geometry" : "linear"
          },
          "Segment 7" : {
             "min_len" : 900,
-            "max_len" : 1050,
+            "max_len" : 1070,
             "replicon_geometry" : "linear"
          },    
          "Segment 8" : {
             "min_len" : 770,
-            "max_len" : 920,
+            "max_len" : 940,
             "replicon_geometry" : "linear"
          }
       }
