@@ -87,8 +87,9 @@ my $feature_exceptions = {};
 my %bad_contig_files;
 foreach (@files)
 {
-	if ($_ =~ /\.qual.gto$/)
+	if ($_ =~ /\.gto$/)
 	{
+		print STDERR "$_\n"; 
 		my $file = "$dir/$_";
 		my $genome_in = GenomeTypeObject->create_from_file($file);
 		$genome_in or die "Error reading and parsing input";

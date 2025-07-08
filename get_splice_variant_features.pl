@@ -273,7 +273,7 @@ if (scalar @to_analyze)
 						if ($trans_left =~ /\*/)
 						{
 							warn "Stop codon detected in 5-prime matching end of splice for: $name, skipping.\n";
-							print Dumper "$left_ungapped\n\n$trans_left\n"; 
+							print STDERR "$left_ungapped\n$trans_left\n\n"; 
 							#next; 
 						}						
 						
