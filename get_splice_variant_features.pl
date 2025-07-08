@@ -246,8 +246,8 @@ if (scalar @to_analyze)
 						#print "Match found for SD and SA sites\n";
 						if ($opt->seqs)
 						{
-							print "SD Match: $sub_SD\n";												
-							print "SA Match: $sub_SA\n\n";
+							print STDERR "SD Match: $sub_SD\n";												
+							print STDERR "SA Match: $sub_SA\n\n";
 						}					
 				
 						# Calculate splice coordinates in the subject sequence
@@ -288,8 +288,8 @@ if (scalar @to_analyze)
 						
 						if ($opt->seqs)
 						{	
-							print "LEFT:\n$left_ungapped\n\nRIGHT:\n$right_ungapped\n\n"; 
-							print "$aa_splice\n\n"; 
+							print STDERR "LEFT:\n$left_ungapped\n\nRIGHT:\n$right_ungapped\n\n"; 
+							print STDERR "$aa_splice\n\n"; 
 						}
 						my $total_len = ((length ($aa_splice)) * 3);
 						my $len_left  = length($left_ungapped); 
