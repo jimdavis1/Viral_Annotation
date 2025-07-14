@@ -34,7 +34,7 @@ SA:SA_Region_Start-SA_Region_End;First_nt_of_SA
 
 END_DESCRIPTION
 
-
+my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my ($help, $tmp); 
 my($opt, $usage) = describe_options(
@@ -44,8 +44,8 @@ my($opt, $usage) = describe_options(
 				    ["cov|c=i"              => "Overall Minimum BLASTn percent query coverage (D = 95)", { default => 95 }],
 				    ["id|p=i"               => "Overall Minimum BLASTn percent identity  (D = 95)", { default => 95 }],
 		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
-				    ["json|j=s"             => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
-				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "/home/jjdavis/bin/Viral_Annotation/Splice-Variants"}],
+				    ["json|j=s"             => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
+				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Splice-Variants"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
