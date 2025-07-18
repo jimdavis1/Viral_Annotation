@@ -35,10 +35,10 @@ my($opt, $usage) = describe_options(
 				    ["cov|c=i"              => "Minimum BLASTn percent query coverage (D = 95)", { default => 95 }],
 				    ["id|p=i"               => "Minimum BLASTn percent identity  (D = 95)", { default => 95 }],
 				    ["gaps|g=i"             => "Maximum number of allowable gaps (D = 2)", { default => 2 }],
-		            ["e_val|e=f"            => "Maximum BLASTn evalue for considering any HSP (D = 0.5)", { default => 0.5 }],
-		            ["lower_pid|lpi=i"        => "Lower percent identity threshold for a feature call without transcript editing correction (D = 80)", {default => 80}],
-		            ["lower_pcov|lpc=i"       => "Lower percent query coverage for for a feature call without transcript editing correction (D = 80)", {default => 80}],
-		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
+				    ["e_val|e=f"            => "Maximum BLASTn evalue for considering any HSP (D = 0.5)", { default => 0.5 }],
+				    ["lower_pid|lpi=i"      => "Lower percent identity threshold for a feature call without transcript editing correction (D = 80)", {default => 80}],
+				    ["lower_pcov|lpc=i"     => "Lower percent query coverage for for a feature call without transcript editing correction (D = 80)", {default => 80}],
+				    ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
 				    ["json|j=s"             => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
 				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Transcript-Editing"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
@@ -90,8 +90,9 @@ foreach (keys %{$json->{$fam}->{features}})
 	if ($json->{$fam}->{features}->{$prot}->{special} eq "transcript_edit")
 	{
 		my $anno = $json->{$fam}->{features}->{$prot}->{anno};
+		my $symbol = $json->{$fam}->{features}->{$prot}->{gene_symbol};
 		my $feature_type = $json->{$fam}->{features}->{$prot}->{feature_type};
-		push @to_analyze, ([$prot, $anno, $feature_type]);
+		push @to_analyze, ([$prot, $anno, $feature_type, $symbol]);
 	}
 }
 
@@ -128,9 +129,11 @@ if (scalar @to_analyze)
 	#cycle through the transcript edited features and search for them one at a time with blastn.
 	for my $i (0..$#to_analyze)
 	{
-		my $name = $to_analyze[$i][0];
-		my $anno = $to_analyze[$i][1]; 
-		my $ft   = $to_analyze[$i][2];
+		my $name   = $to_analyze[$i][0];
+		my $anno   = $to_analyze[$i][1]; 
+		my $ft     = $to_analyze[$i][2];
+		my $symbol = $to_analyze[$i][3];
+
 		
 		print STDERR "\tAnalyzing $name\n\n"; 
 		my $query = "$dir/$fam/$name.fasta"; 
@@ -227,6 +230,7 @@ if (scalar @to_analyze)
 						aa_sequence => $mod_aa,
 						location    => ([[$sid, $from, $strand, $len]]),
 						product     => $anno,
+						symbol      => $symbol,
 						pssm        => ([[$fam, $name, $anno, "LowVan Transcript Edited Feature"]]),
 					};
 					
@@ -289,6 +293,10 @@ if (scalar @to_analyze)
 						-function            => $data->{product},
 						-family_assignments  => $data->{pssm},
 						};				
+					if (defined $data->{symbol} && $data->{symbol} ne '') 
+					{
+						$p->{-alias_pairs} = [[gene => $data->{symbol}]];
+					}
 					$genome_in->add_feature($p);
 				}
 				

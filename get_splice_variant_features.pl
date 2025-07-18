@@ -43,7 +43,7 @@ my($opt, $usage) = describe_options(
 				    ["output|o=s"           => "Output GTO"],
 				    ["cov|c=i"              => "Overall Minimum BLASTn percent query coverage (D = 95)", { default => 95 }],
 				    ["id|p=i"               => "Overall Minimum BLASTn percent identity  (D = 95)", { default => 95 }],
-		            ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
+				    ["threads|a=i"          => "Threads for the BLASTN (D = 24))", { default => 24 }],
 				    ["json|j=s"             => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
 				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Splice-Variants"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
@@ -85,7 +85,7 @@ $fam or die "GTO has no annotations from LowVan Annotation tool\n";
 
 
 # Next we read the JSON opts file to see if there are any spliced features that we need to find
-my $json      = decode_json(read_file($opt->json));
+my $json  = decode_json(read_file($opt->json));
 $genome_in or die "Error reading json protein feature data";
 
 my @to_analyze;
@@ -95,8 +95,9 @@ foreach (keys %{$json->{$fam}->{features}})
 	if ($json->{$fam}->{features}->{$prot}->{special} eq "splice")
 	{
 		my $anno = $json->{$fam}->{features}->{$prot}->{anno};
+		my $symbol = $json->{$fam}->{features}->{$prot}->{gene_symbol};
 		my $feature_type = $json->{$fam}->{features}->{$prot}->{feature_type};
-		push @to_analyze, ([$prot, $anno, $feature_type]);
+		push @to_analyze, ([$prot, $anno, $feature_type, $symbol]);
 	}
 }
 
@@ -119,7 +120,7 @@ if (scalar @to_analyze)
 
 	if (!$make_db)
 	{
-  	 print STDERR "get_splice_variant_features:  makeblastdb failed with rc=$?. Stdout:\n";
+		print STDERR "get_splice_variant_features:  makeblastdb failed with rc=$?. Stdout:\n";
 	}
 	
 	# create the GTO analysis event.
@@ -133,9 +134,10 @@ if (scalar @to_analyze)
 	#cycle through the splice variant features and search for them one at a time with blastn.
 	for my $i (0..$#to_analyze)
 	{
-		my $name = $to_analyze[$i][0];
-		my $anno = $to_analyze[$i][1]; 
-		my $ft   = $to_analyze[$i][2];
+		my $name   = $to_analyze[$i][0];
+		my $anno   = $to_analyze[$i][1]; 
+		my $ft     = $to_analyze[$i][2];
+		my $symbol = $to_analyze[$i][3];
 		
 		print STDERR "Analyzing $name\n"; 
 		my $query = "$dir/$fam/$name.fasta"; 
@@ -145,7 +147,7 @@ if (scalar @to_analyze)
 
 			if (!$make_db2)
 			{
-  				 print STDERR "get_transcript_edited_features:  makeblastdb failed with rc=$?. Stdout:\n";
+				print STDERR "get_transcript_edited_features:  makeblastdb failed with rc=$?. Stdout:\n";
 			}
 
 			my @blast_parms = (
@@ -220,7 +222,7 @@ if (scalar @to_analyze)
 
 
 					# Compute "relative" dna coordinates from the blastn alignment
-					# These will always be in the (+) direction because the references must be in the plus.			
+					# These will always be in the (+) direction because the references must be in the plus.
 					my $rel_sd_start = $sd_start - $qfrom;
 					my $rel_sd_end   = $sd_end - $qfrom;
 					my $rel_sa_start = $sa_start - $qfrom;
@@ -274,7 +276,7 @@ if (scalar @to_analyze)
 						{
 							warn "Stop codon detected in 5-prime matching end of splice for: $name, skipping.\n";
 							print STDERR "$left_ungapped\n$trans_left\n\n"; 
-							#next; 
+							next; 
 						}						
 						
 						# Create spliced sequence
@@ -319,11 +321,7 @@ if (scalar @to_analyze)
 							@right_tuple = ([$sid, (($to - $len_right) + 1), $strand, $cropped_len_right]);
 							@loc = ([@left_tuple, @right_tuple]);
 						}
-	
-						#Debug locs.  Keeping this here for now.  
-						#I have double checked this in the fwd, rev strands
-						#Also double checked and is compatible with rast-export-genome.
-						
+							
 						
 						my $feature = {
 							type        => $ft,
@@ -331,6 +329,7 @@ if (scalar @to_analyze)
 							aa_sequence => $aa_splice,
 							location    => @loc,
 							product     => $anno,
+							symbol      => $symbol,
 							pssm        => ([[$fam, $name, $anno, "LowVan Splice Variant Feature"]]),
 						};
 						push(@{$features{$ft}}, $feature)
@@ -363,14 +362,21 @@ if (scalar @to_analyze)
 						-function            => $data->{product},
 						-family_assignments  => $data->{pssm},
 						};				
+				
+					if (defined $data->{symbol} && $data->{symbol} ne '') 
+					{
+						$p->{-alias_pairs} = [[gene => $data->{symbol}]];
+					}	
+					
 					$genome_in->add_feature($p);
 				}
 			}
-		}			
+		}				
 		chdir ($base);
 		$genome_in->destroy_to_file($opt->output);			
- 	}
- 	else
+	}
+
+	else
  	{
 		#handle condition where there should have been a blast match, but none was found.
 		print STDERR "Splice variant features should exist for: $fam, but none were found.\n";

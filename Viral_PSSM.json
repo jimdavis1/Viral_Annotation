@@ -164,7 +164,7 @@
             "feature_type" : "CDS",
             "gene_symbol" : "NA",
             "kmers" : 1,
-            "min_len" : 460,
+            "min_len" : 446,
             "max_len" : 480,
             "segment" : "Segment 6",
             "upstream_ext" : 1
@@ -242,7 +242,7 @@
             "replicon_geometry" : "linear"
          },
          "Segment 3" : {
-            "min_len" : 2200,
+            "min_len" : 2100,
             "max_len" : 2270,
             "replicon_geometry" : "linear"
          },
