@@ -92,10 +92,10 @@ foreach (@files)
 		print STDERR "$_\n"; 
 		my $file = "$dir/$_";
 		my $genome_in = GenomeTypeObject->create_from_file($file);
-		$genome_in or die "Error reading and parsing input";
+		$genome_in or warn "$file:  Error reading and parsing input\n";
 		my $qual = $genome_in->{quality}->{genome_quality};
 		my $orig_id = $_;
-		$orig_id =~ s/\.qual.gto//g; 
+		$orig_id =~ s/\.gto//g; 
 		my $new_id = $genome_in->{id};
 		if ($qual =~ /Good/)
 		{
