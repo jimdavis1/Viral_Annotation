@@ -30,7 +30,7 @@ use File::Slurp;
 #
 #
 
-my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my($opt, $usage) = describe_options("%c %o",
 				    ["ambiguous|a=f"   => "Fraction of ambiguous bases, (Default = 0.01)", { default => 0.01 }],

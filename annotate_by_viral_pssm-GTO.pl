@@ -10,7 +10,7 @@ use File::SearchPath qw(searchpath);
 use P3DataAPI;
 use Cwd;
 
-my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my($opt, $usage) = describe_options("%c %o",
 				    ["input|i=s"       => "Input file"],
