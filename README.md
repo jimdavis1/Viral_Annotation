@@ -22,6 +22,9 @@ Orthomarburgvirus<br>
 
 ### Orthomyxoviridae:
 Influenza A virus<br>
+Influenza B virus<br>
+Influenza C virus<br>
+Influenza D virus<br>
 
 ### Paramyxoviridae:
 Aquaparamyxovirus<br>
@@ -345,7 +348,10 @@ These are mostly insect virueses.  The set of genomes is highly diverse with few
 ## Pneumoviridae
 The cleaved forms of the fusion glycoprotein differ between ortho- and metapneumoviride.  All of the orthos, except murine and close relatives, have a p27 peptide that is a real protein. This necessitated the insertion of three taxon-level directories (ortho, meta, and murine orthos).  I kept the orginal all-pneumo alignment directory which has everything and has seprate subdirectories for the mature F proteins.   The pssm directories for the three taxa contain the pssms that I had originally built for all pneumos. This means that there are a few extra pssms that won't match and can be cleaned up on a rainy day.    
 
+## Influenza
+For spliced proteins, whenever possible, the exact regions of the Splice donor and Splice acceptor sites are used as they have been described in the literature.  In many cases these correspond to specific hairpins in the RNA.  However, in C and D, the splicing is proven, but an exact splice donor site is not described in the literature, so 10nts upstream and downstream is used.  This may result in overly conservative calling, but the splices are correct and backed by literature.
 
+In FluC the CM2 protein is a mat peptide that is cleaved from a pre-peptide.  This has not been studied in FluD, so that one is currently called from a met start [PMID: 31261944].
 
 
 
