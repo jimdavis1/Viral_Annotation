@@ -147,7 +147,7 @@ if (scalar @to_analyze)
 
 			if (!$make_db2)
 			{
-				print STDERR "get_transcript_edited_features:  makeblastdb failed with rc=$?. Stdout:\n";
+				print STDERR "get_splice_variant_features:  makeblastdb failed with rc=$?. Stdout:\n";
 			}
 
 			my @blast_parms = (
@@ -169,11 +169,12 @@ if (scalar @to_analyze)
 		open (IN, "<$name.json"), or warn "Cannot open JSON BLASTn output file $name.json\n";
 		my $results = decode_json(scalar read_file(\*IN));	
 		close IN;
-
+		
 		
 		#Gather in the best match.
 		my $matches = best_blastn_match_by_loc($results);  #removed id, cov, and gap thresholds from here  
 		
+
 		#Create a hash of valid Sequence Donor and Sequence Acceptor sites. 
 		open (IN, "<$name.fasta"), or die "cannot open query sequence file to find valid SDs and SAs.\n";
 		my @refs = &gjoseqlib::read_fasta(\*IN);
@@ -186,7 +187,6 @@ if (scalar @to_analyze)
 			$SDs{$SD} = 1;
 			$SAs{$SA} = 1;
 		}
-		
 		
 		foreach (keys %$matches)
 		{
@@ -210,12 +210,16 @@ if (scalar @to_analyze)
 				my $qcov    =  (($ali_len/(length $qseq)) * 100); 										
 				my $qtitle  =  $matches->{$sid}->{$from}->{QTITLE};
 				
-				print STDERR "Best Match: $qtitle\n\n";
-				
+				print STDERR "Best Match: $qtitle\n";
+				print STDERR "Percent Identity = $pid\n";
+				print STDERR "Query (reference) Coverage = $qcov\n";
+
 				#If all inclusion critreria are met:
+				
+				
 				if ( ($pid >= $opt->id) && ($qcov >= $opt->cov) )
 				{
-					
+				
 					# Parse splice site coordinates from query title
 					my ($sd_start, $sd_end, $sd_last, $sa_start, $sa_end, $sa_first) = $qtitle =~ /SD:(\d+)-(\d+);(\d+) SA:(\d+)-(\d+);(\d+)/;
 					unless ($sd_start, $sd_end, $sd_last, $sa_start, $sa_end, $sa_first){warn "$name incorrectly formatted fasta header in query\n$qtitle\n"; }
@@ -240,18 +244,18 @@ if (scalar @to_analyze)
 					
 					my $sub_SD = substr($sseq, $rel_sd_start, ($rel_sd_end - $rel_sd_start) + 1);
 					my $sub_SA = substr($sseq, $rel_sa_start, ($rel_sa_end - $rel_sa_start) + 1);
-										
 					
 					if ((exists $SDs{$sub_SD}) && (exists $SAs{$sub_SA}))
 					#if ((uc($ref_SD) eq uc($sub_SD)) && (uc($ref_SA) eq uc($sub_SA))) 
 					{
-						#print "Match found for SD and SA sites\n";
+
+						print STDERR  "Match found for SD and SA sites\n";
 						if ($opt->seqs)
 						{
 							print STDERR "SD Match: $sub_SD\n";												
 							print STDERR "SA Match: $sub_SA\n\n";
 						}					
-				
+							
 						# Calculate splice coordinates in the subject sequence
 						my $splice_left_end    = $rel_sd_start + ($sd_last - $sd_start);
 						my $splice_right_start = $rel_sa_start + ($sa_first - $sa_start);

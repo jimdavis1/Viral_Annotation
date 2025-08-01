@@ -10,7 +10,6 @@ use File::SearchPath qw(searchpath);
 use P3DataAPI;
 use Cwd;
 
-my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my($opt, $usage) = describe_options("%c %o",
 				    ["input|i=s"       => "Input file"],
@@ -19,9 +18,9 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["remove-existing" => "Remove existing CDS, mat_peptide, and RNA features if run is successful"],	
 				    ["threads|t=i"     => "Limit to this many threads", { default => 8 }],
 				    ["debug|d"         => "Enable debugging"],
-				    ["cdir|c=s"        => "Full path to reference contigs directory", {default => "$default_data_dir/Viral-Rep-Contigs"}],
-				    ["pdir|p=s"        => "Full path to the PSSM directory", {default => "$default_data_dir/Viral-PSSMs"}],
-				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
+				    ["cdir|c=s"        => "Full path to reference contigs directory", {default => "/home/jjdavis/bin/Viral_Annotation/Viral-Rep-Contigs"}],
+				    ["pdir|p=s"        => "Full path to the PSSM directory", {default => "/home/jjdavis/bin/Viral_Annotation/Viral-PSSMs"}],
+				    ["json|j=s"        => "Full path to the JSON opts file", {default => "/home/jjdavis/bin/Viral_Annotation/Viral_PSSM.json"}],
 				    ["max|a=i"         => "Max contig length, default is 30000", { default => 30000 }],
 				    ["min|z=i"         => "Min contig length, default is 1000", { default => 1000 }],
 				    ["help|h"          => "Show this help message"]);
@@ -58,7 +57,7 @@ my $name           = $genome_in->{scientific_name};        #I should also be abl
 
 if (! $sequences_file){die "No sequences in the input GTO\n";}
 if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
-if (! $name)          {die "No gebine bane in the input GTO\n";}
+if (! $name)          {die "No genome name in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
 		      "-t",    $tempdir,
@@ -85,6 +84,7 @@ if (!$ok)
     print STDERR "Viral Annotation run failed with rc=$?. Stdout:\n";
     copy("$here/Viral_Anno.stderr.txt", \*STDERR);
 }
+
 
     
 my $event = {
