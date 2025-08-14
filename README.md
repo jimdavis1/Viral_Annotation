@@ -359,7 +359,7 @@ I have built a module for Isavirus, but i stopped at Thogotovirus and Quaranjavi
 There is a lack of bench data supporting the clevage sites of ORF1ab in the alphacoronaviruses.  The Mpro clevage sites are well conserved, and less troublesome, but the PLpro cleaved siteds proved difficult.  The two residues upstream of the Mpro clevage sites for NSP4-NSP16 are well conserved and are usually L,I,M,or V followed by Q, but it's usually L.  However, there is considerable variation in the PLpro clevage sites and protein lengths for NSPs 1-4.  Becuase this was so difficult, I am providing the following table of references from which I based my PSSMs.  There were a few other papers that made predictions for FCoV and SADS-Cov, which I also used as guides [PMIDs: 38624231, PMID: 33913206].  However, I should note that struggled with the predicted coordinates published for swine strain, PCV777 [PMID: 33913206], and the HKU10 and related bat strains [PMID: 22933277], as well as the Lucheng rat alphas, for which I currently lack a reference with clevage sites.  In summary, the C-terminus of NSP4 is clean, and the C- and N- termini of NSP5-16 are also clean (excluding the ribosomal slippage site). 
 
 
-| Cleavage site | Enzyme | P2 residue | | | Reference |
+| Cleavage site | Enzyme | P2 residue | P2 residue | P2 residue | Reference |
 |---------------|--------|----|----|----|-----------|
 | | | HCoV-NL63 | HCoV-229E | TGEV | |
 | nsp1-nsp2 | Plpro |  | G |  | PMID: 11431476 |
