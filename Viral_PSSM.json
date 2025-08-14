@@ -18,7 +18,7 @@
             "kmers" : 1,
             "min_len" : 730,
             "max_len" : 760,
-            "segment" : "Segment 1",
+            "segment" : "PB2 Segment",
             "upstream_ext" : 1
          },
          "PB2-S1" : {
@@ -26,7 +26,7 @@
             "PMID" : ["26491155"],
             "feature_type" : "CDS",
             "gene_symbol" : "PB2-S1",
-            "segment" : "Segment 1",
+            "segment" : "PB2 Segment",
             "special" : "splice"
          },
          "PB1" : {
@@ -40,7 +40,7 @@
             "kmers" : 1,
             "min_len" : 730,
             "max_len" : 770,
-            "segment" : "Segment 2",
+            "segment" : "PB1 Segment",
             "upstream_ext" : 1
          },
          "PB1-F2" : {
@@ -50,7 +50,7 @@
             "downstream_ext" : 1,
             "feature_type" : "CDS",
             "gene_symbol" : "PB1-F2",
-            "segment" : "Segment 2",
+            "segment" : "PB1 Segment",
             "upstream_ext" : 1
          },
           "PB1-N40" : {
@@ -60,7 +60,7 @@
             "downstream_ext" : 1,
             "feature_type" : "CDS",
             "gene_symbol" : "PB1-N40",
-            "segment" : "Segment 2",
+            "segment" : "PB1 Segment",
             "upstream_ext" : 0,
             "PMID" : ["19494001"]
          },
@@ -75,7 +75,7 @@
             "kmers" : 1,
             "min_len" : 690,
             "max_len" : 720,
-            "segment" : "Segment 3",
+            "segment" : "PA Segment",
             "upstream_ext" : 1
          },
          "PA-N155" : {
@@ -85,7 +85,7 @@
             "downstream_ext" : 1,
             "feature_type" : "CDS",
             "gene_symbol" : "PA-N155",
-            "segment" : "Segment 3",
+            "segment" : "PA Segment",
             "upstream_ext" : 0
          },
          "PA-N182" : {
@@ -95,7 +95,7 @@
             "downstream_ext" : 1,
             "feature_type" : "CDS",
             "gene_symbol" : "PA-N182",
-            "segment" : "Segment 3",
+            "segment" : "PA Segment",
             "upstream_ext" : 0
          },
          "PA-X" : {
@@ -103,7 +103,7 @@
             "PMID" : ["23155484", "36558855", "22745253"],
             "feature_type" : "CDS",
             "gene_symbol" : "PA-X",
-            "segment" : "Segment 3",
+            "segment" : "PA Segment",
             "special" : "splice"
          },
          "HA" : {
@@ -117,7 +117,7 @@
             "kmers" : 1,
             "min_len" : 550,
             "max_len" : 570,
-            "segment" : "Segment 4",
+            "segment" : "HA Segment",
             "upstream_ext" : 1
          },
          "HA1" : {
@@ -127,7 +127,7 @@
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "gene_symbol" : "HA1",
-            "segment" : "Segment 4",
+            "segment" : "HA Segment",
             "PMID" : ["25391151"],
             "upstream_ext" : 0
          },
@@ -138,7 +138,7 @@
             "downstream_ext" : 1,
             "feature_type" : "mat_peptide",
             "gene_symbol" : "HA2",
-            "segment" : "Segment 4",
+            "segment" : "HA Segment",
             "upstream_ext" : 0
          },
          "N" : {
@@ -152,7 +152,7 @@
             "kmers" : 1,
             "min_len" : 470,
             "max_len" : 500,
-            "segment" : "Segment 5",
+            "segment" : "NP Segment",
             "upstream_ext" : 1
          },
          "NA" : {
@@ -166,7 +166,7 @@
             "kmers" : 1,
             "min_len" : 446,
             "max_len" : 480,
-            "segment" : "Segment 6",
+            "segment" : "NA Segment",
             "upstream_ext" : 1
          },
          "M1" : {
@@ -180,7 +180,7 @@
             "kmers" : 1,
             "min_len" : 240,
             "max_len" : 260,
-            "segment" : "Segment 7",
+            "segment" : "M Segment",
             "upstream_ext" : 1
          },
          "M2" : {
@@ -188,7 +188,7 @@
             "PMID" : ["24825008", "22685560", "23133386"],
             "feature_type" : "CDS",
             "gene_symbol" : "M2",
-            "segment" : "Segment 7",
+            "segment" : "M Segment",
             "special" : "splice"
          },
          "M42" : {
@@ -196,7 +196,7 @@
             "PMID" : ["24825008", "22685560", "23133386"],
             "feature_type" : "CDS",
             "gene_symbol" : "M42",
-            "segment" : "Segment 7",
+            "segment" : "M Segment",
             "special" : "splice"
          },
           "NS1" : {
@@ -210,65 +210,914 @@
             "kmers" : 1,
             "min_len" : 200,
             "max_len" : 240,
-            "segment" : "Segment 8",
+            "segment" : "NS1 Segment",
             "upstream_ext" : 1
          },
           "NS2" : {
             "anno" : "Nuclear export protein",
             "PMID" : ["24825008", "24675275"],
             "feature_type" : "CDS",
-            "gene_symbol" : "NS2",
-            "segment" : "Segment 8",
+            "gene_symbol" : "NEP",
+            "segment" : "NS1 Segment",
             "special" : "splice"
          },
           "NS3" : {
-            "anno" : "Hypothetical host adaptation protein NS3 ",
+            "anno" : "Hypothetical host adaptation protein NS3",
             "PMID" : ["24825008", "24675275", "26038410"],
             "feature_type" : "CDS",
-            "gene_symbol" : "NS2",
-            "segment" : "Segment 8",
+            "gene_symbol" : "NS3",
+            "segment" : "NS1 Segment",
             "special" : "splice"
          }
       },
       "segments" : {
-         "Segment 1" : {
+         "PB2 Segment" : {
             "min_len" : 2200,
             "max_len" : 2420,
             "replicon_geometry" : "linear"
          },
-         "Segment 2" : {
+         "PB1 Segment" : {
             "min_len" : 2200,
             "max_len" : 2380,
             "replicon_geometry" : "linear"
          },
-         "Segment 3" : {
+         "PA Segment" : {
             "min_len" : 2100,
             "max_len" : 2270,
             "replicon_geometry" : "linear"
          },
-         "Segment 4" : {
+         "HA Segment" : {
             "min_len" : 1600,
             "max_len" : 1820,
             "replicon_geometry" : "linear"
          },
-         "Segment 5" : {
+         "NP Segment" : {
             "min_len" : 1460,
             "max_len" : 1600,
             "replicon_geometry" : "linear"
          },
-         "Segment 6" : {
+         "NA Segment" : {
             "min_len" : 1300,
             "max_len" : 1500,
             "replicon_geometry" : "linear"
          },
-         "Segment 7" : {
+         "M Segment" : {
             "min_len" : 900,
             "max_len" : 1070,
             "replicon_geometry" : "linear"
          },    
-         "Segment 8" : {
+         "NS1 Segment" : {
             "min_len" : 770,
             "max_len" : 940,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
+   "Betainfluenzavirus" : {
+      "close_genomes" : {
+         "Betainfluenzavirus.1.dna" : {
+            "genome_ids" : "518987.36,518987.37,518987.38,518987.39,518987.40,518987.41,518987.42,518987.43",
+            "genome_name" : "Influenza B virus (B/Lee/1940)"
+         }
+      },
+      "features" : {
+         "PB2" : {
+            "anno" : "RNA-dependent RNA polymerase PB2 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB2",
+            "kmers" : 1,
+            "min_len" : 750,
+            "max_len" : 790,
+            "segment" : "PB2 Segment",
+            "upstream_ext" : 1
+         },
+         "PB1" : {
+            "anno" : "RNA-dependent RNA polymerase catalytic core PB1 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1",
+            "kmers" : 1,
+            "min_len" : 730,
+            "max_len" : 770,
+            "segment" : "PB1 Segment",
+            "upstream_ext" : 1
+         },
+         "PA" : {
+            "anno" : "RNA-dependent RNA polymerase PA subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA",
+            "kmers" : 1,
+            "min_len" : 700,
+            "max_len" : 740,
+            "segment" : "PA Segment",
+            "upstream_ext" : 1
+         },
+         "HA" : {
+            "anno" : "Hemagglutinin precursor",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "HA0",
+            "kmers" : 1,
+            "min_len" : 560,
+            "max_len" : 600,
+            "segment" : "HA Segment",
+            "upstream_ext" : 1
+         },
+         "HA1" : {
+            "anno" : "Mature hemagglutinin N-terminal receptor binding subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HA1",
+            "segment" : "HA Segment",
+            "PMID" : ["9325231"],
+            "upstream_ext" : 0
+         },
+         "HA2" : {
+            "anno" : "Mature hemagglutinin C-terminal membrane fusion subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HA2",
+            "PMID" : ["9325231"],
+            "segment" : "HA Segment",
+            "upstream_ext" : 0
+         },
+         "HA-SP" : {
+            "anno" : "Signal peptide of HA",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HA-SP",
+            "segment" : "HA Segment",
+            "upstream_ext" : 1
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NP",
+            "kmers" : 1,
+            "min_len" : 540,
+            "max_len" : 580,
+            "segment" : "NP Segment",
+            "upstream_ext" : 1
+         },
+         "NA" : {
+            "anno" : "Neuraminidase protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NA",
+            "kmers" : 1,
+            "min_len" : 440,
+            "max_len" : 480,
+            "segment" : "NA Segment",
+            "upstream_ext" : 1
+         },
+         "NB" : {
+            "anno" : "NB protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NB",
+            "min_len" : 80,
+            "max_len" : 120,
+            "segment" : "NA Segment",
+            "upstream_ext" : 1
+         },
+         "M1" : {
+            "anno" : "Matrix protein 1",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M1",
+            "kmers" : 1,
+            "min_len" : 220,
+            "max_len" : 260,
+            "segment" : "M Segment",
+            "upstream_ext" : 1
+         },
+         "BM2" : {
+            "anno" : "Proton channel protein BM2",
+            "feature_type" : "CDS",
+            "gene_symbol" : "BM2",
+            "segment" : "M Segment",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 1,
+            "min_len" : 80,
+            "max_len" : 120,
+            "upstream_ext" : 1
+         },
+          "NS1" : {
+            "anno" : "Non-structural protein 1, interferon antagonist",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS1",
+            "kmers" : 1,
+            "min_len" : 260,
+            "max_len" : 300,
+            "segment" : "NS1 Segment",
+            "PMID" : ["16571812"],
+            "upstream_ext" : 1
+         },
+          "NS2" : {
+            "anno" : "Nuclear export protein",
+            "PMID" : ["24405943"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "NEP",
+            "segment" : "NS1 Segment",
+            "special" : "splice"
+         }
+      },
+      "segments" : {
+         "PB2 Segment" : {
+            "min_len" : 2310,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "PB1 Segment" : {
+            "min_len" : 2250,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "PA Segment" : {
+            "min_len" : 2170,
+            "max_len" : 2320,
+            "replicon_geometry" : "linear"
+         },
+         "HA Segment" : {
+            "min_len" : 1740,
+            "max_len" : 1910,
+            "replicon_geometry" : "linear"
+         },
+         "NP Segment" : {
+            "min_len" : 1680,
+            "max_len" : 1860,
+            "replicon_geometry" : "linear"
+         },
+         "NA Segment" : {
+            "min_len" : 1380,
+            "max_len" : 1580,
+            "replicon_geometry" : "linear"
+         },
+         "M Segment" : {
+            "min_len" : 1020,
+            "max_len" : 1200,
+            "replicon_geometry" : "linear"
+         },    
+         "NS1 Segment" : {
+            "min_len" : 1000,
+            "max_len" : 1120,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
+   "Gammainfluenzavirus" : {
+      "close_genomes" : {
+         "Gammainfluenzavirus.1.dna" : {
+            "genome_ids" : "11553.15, 11553.16, 11553.17, 11553.18, 11553.19, 11553.20, 11553.21",
+            "genome_name" : "Influenza C virus (C/Ann Arbor/1/50)"
+         }
+      },
+      "features" : {
+         "PB2" : {
+            "anno" : "RNA-dependent RNA polymerase PB2 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB2",
+            "kmers" : 1,
+            "min_len" : 750,
+            "max_len" : 790,
+            "segment" : "PB2 Segment",
+            "upstream_ext" : 1
+         },
+         "PB1" : {
+            "anno" : "RNA-dependent RNA polymerase catalytic core PB1 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1",
+            "kmers" : 1,
+            "min_len" : 750,
+            "max_len" : 790,
+            "segment" : "PB1 Segment",
+            "upstream_ext" : 1
+         },
+         "PA" : {
+            "anno" : "RNA-dependent RNA polymerase PA subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA",
+            "kmers" : 1,
+            "min_len" : 680,
+            "max_len" : 720,
+            "segment" : "PA Segment",
+            "upstream_ext" : 1
+         },
+         "HEF" : {
+            "anno" : "Hemagglutinin esterase fusion pre-protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "HEF",
+            "kmers" : 1,
+            "min_len" : 630,
+            "max_len" : 670,
+            "segment" : "HEF Segment",
+            "upstream_ext" : 1
+         },
+         "HEF-SP" : {
+            "anno" : "Signal peptide of HEF",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HEF-SP",
+            "segment" : "HEF Segment",
+            "PMID" : ["26215728", "1957719"],
+            "upstream_ext" : 1
+         },
+         "HEF1" : {
+            "anno" : "Mature N-terminal receptor binding and esterease HEF subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HEF1",
+            "segment" : "HEF Segment",
+            "PMID" : ["26215728", "1957719"],
+            "upstream_ext" : 0
+         },
+         "HEF2" : {
+            "anno" : "Mature C-terminal membrane fusion HEF subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HEF2",
+            "segment" : "HEF Segment",
+            "PMID" : ["26215728", "1957719"],
+            "upstream_ext" : 0
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NP",
+            "kmers" : 1,
+            "min_len" : 540,
+            "max_len" : 580,
+            "segment" : "NP Segment",
+            "upstream_ext" : 1
+         },
+         "CM1" : {
+            "anno" : "Matrix protein 1",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "CM1",
+            "min_len" : 222,
+            "max_len" : 262,
+            "PMID" : ["9789071", "11044092"],
+            "segment" : "M Segment",
+            "upstream_ext" : 1
+         },
+         "CM2" : {
+            "anno" : "Integral membrane protein CM2",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "CM2",
+            "min_len" : 95,
+            "max_len" : 135,
+            "PMID" : ["9789071", "11044092"],
+            "segment" : "M Segment",
+            "upstream_ext" : 0
+         },
+         "CM2-SP" : {
+            "anno" : "Signal peptide of CM2",
+            "bit_cutoff" : 40,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "CM2-SP",
+            "segment" : "M Segment",
+            "PMID" : ["9789071", "11044092"],
+            "upstream_ext" : 0
+         },
+         "P42" : {
+            "anno" : "p42 pre-protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "P42",
+            "kmers" : 1,
+            "min_len" : 354,
+            "max_len" : 394,
+            "segment" : "M Segment",
+            "PMID" : ["9789071", "11044092"],
+            "upstream_ext" : 1
+         },
+         "P31" : {
+            "anno" : "p31 clevage product",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "P31",
+            "segment" : "M Segment",
+            "PMID" : ["9789071", "11044092"],
+            "upstream_ext" : 1
+         },
+          "NS1" : {
+            "anno" : "Non-structural protein 1, nuclear-localized viral mRNA splicing enhancer",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS1",
+            "kmers" : 1,
+            "min_len" : 226,
+            "max_len" : 266,
+            "segment" : "NS1 Segment",
+            "PMID" : ["20007279"],
+            "upstream_ext" : 1
+         },
+          "NS2" : {
+            "anno" : "Nuclear export protein",
+            "PMID" : ["24405943"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "NEP",
+            "segment" : "NS1 Segment",
+            "special" : "splice"
+         }
+      },
+      "segments" : {
+         "PB2 Segment" : {
+            "min_len" : 2300,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "PB1 Segment" : {
+            "min_len" : 2250,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "PA Segment" : {
+            "min_len" : 2100,
+            "max_len" : 2200,
+            "replicon_geometry" : "linear"
+         },
+         "HEF Segment" : {
+            "min_len" : 1920,
+            "max_len" : 2100,
+            "replicon_geometry" : "linear"
+         },
+         "NP Segment" : {
+            "min_len" : 1680,
+            "max_len" : 1830,
+            "replicon_geometry" : "linear"
+         },
+          "M Segment" : {
+            "min_len" : 1020,
+            "max_len" : 1200,
+            "replicon_geometry" : "linear"
+         },    
+         "NS1 Segment" : {
+            "min_len" : 820,
+            "max_len" : 940,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
+   "Deltainfluenzavirus" : {
+      "close_genomes" : {
+         "Deltainfluenzavirus.1.dna" : {
+            "genome_ids" : "1173138.12, 1173138.13, 1173138.14, 1173138.15, 1173138.16, 1173138.17, 1173138.18",
+            "genome_name" : "Influenza D virus D/swine/Oklahoma/1334/2011"
+         }
+      },
+      "features" : {
+         "PB2" : {
+            "anno" : "RNA-dependent RNA polymerase PB2 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB2",
+            "kmers" : 1,
+            "min_len" : 752,
+            "max_len" : 792,
+            "segment" : "PB2 Segment",
+            "upstream_ext" : 1
+         },
+         "PB1" : {
+            "anno" : "RNA-dependent RNA polymerase catalytic core PB1 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1",
+            "kmers" : 1,
+            "min_len" : 733,
+            "max_len" : 783,
+            "segment" : "PB1 Segment",
+            "upstream_ext" : 1
+         },
+         "PA" : {
+            "anno" : "RNA-dependent RNA polymerase PA subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA",
+            "kmers" : 1,
+            "min_len" : 690,
+            "max_len" : 730,
+            "segment" : "PA Segment",
+            "upstream_ext" : 1
+         },
+         "HEF" : {
+            "anno" : "Hemagglutinin esterase fusion pre-protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "HEF",
+            "kmers" : 1,
+            "min_len" : 644,
+            "max_len" : 684,
+            "segment" : "HEF Segment",
+            "upstream_ext" : 1
+         },
+         "HEF-SP" : {
+            "anno" : "Signal peptide of HEF",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HEF-SP",
+            "segment" : "HEF Segment",
+            "upstream_ext" : 1
+         },
+         "HEF1" : {
+            "anno" : "Mature N-terminal receptor binding and esterease HEF subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HEF1",
+            "segment" : "HEF Segment",
+            "PMID" : ["26816272", "28812422"],
+            "upstream_ext" : 0
+         },
+         "HEF2" : {
+            "anno" : "Mature C-terminal fusion peptide-containing HEF subunit",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "HEF2",
+            "segment" : "HEF Segment",
+            "PMID" : ["26816272", "28812422"],
+            "upstream_ext" : 0
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NP",
+            "kmers" : 1,
+            "min_len" : 532,
+            "max_len" : 582,
+            "segment" : "NP Segment",
+            "upstream_ext" : 1
+         },
+         "DM1" : {
+            "anno" : "Matrix protein 1",
+            "feature_type" : "CDS",
+            "gene_symbol" : "DM1",
+            "PMID" : ["24595369"],
+            "segment" : "M Segment",
+            "special" : "splice"
+         },
+         "DM2" : {
+            "anno" : "Integral membrane protein DM2",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "DM2",
+            "min_len" : 141,
+            "max_len" : 181,
+            "PMID" : ["31261944"],
+            "segment" : "M Segment",
+            "upstream_ext" : 0
+         },
+          "NS1" : {
+            "anno" : "Non-structural protein 1",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS1",
+            "kmers" : 1,
+            "min_len" : 222,
+            "max_len" : 263,
+            "segment" : "NS1 Segment",
+            "upstream_ext" : 1
+         },
+          "NS2" : {
+            "anno" : "Nuclear export protein",
+            "PMID" : ["24595369"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "NEP",
+            "segment" : "NS1 Segment",
+            "special" : "splice"
+         }
+      },
+      "segments" : {
+         "PB2 Segment" : {
+            "min_len" : 2300,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "PB1 Segment" : {
+            "min_len" : 2200,
+            "max_len" : 2400,
+            "replicon_geometry" : "linear"
+         },
+         "PA Segment" : {
+            "min_len" : 2100,
+            "max_len" : 2250,
+            "replicon_geometry" : "linear"
+         },
+         "HEF Segment" : {
+            "min_len" : 1900,
+            "max_len" : 2100,
+            "replicon_geometry" : "linear"
+         },
+         "NP Segment" : {
+            "min_len" : 1630,
+            "max_len" : 1780,
+            "replicon_geometry" : "linear"
+         },
+          "M Segment" : {
+            "min_len" : 1050,
+            "max_len" : 1250,
+            "replicon_geometry" : "linear"
+         },    
+         "NS1 Segment" : {
+            "min_len" : 700,
+            "max_len" : 900,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
+   "Isavirus" : {
+      "close_genomes" : {
+         "Isavirus.1.dna" : {
+            "genome_ids" : "55987.1873,55987.1874,55987.1875,55987.1876,55987.1877,55987.1878,55987.1879,55987.1880",
+            "genome_name" : "Salmon isavirus CCBB"
+         }
+      },
+      "features" : {
+         "PB2" : {
+            "anno" : "RNA-dependent RNA polymerase PB2 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB2",
+            "kmers" : 1,
+            "min_len" : 702,
+            "max_len" : 742,
+            "segment" : "PB2 Segment",
+            "upstream_ext" : 1
+         },
+         "PB1" : {
+            "anno" : "RNA-dependent RNA polymerase PB1 subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PB1",
+            "kmers" : 1,
+            "min_len" : 688,
+            "max_len" : 728,
+            "segment" : "PB1 Segment",
+            "upstream_ext" : 1
+         },
+         "PA" : {
+            "anno" : "RNA-dependent RNA polymerase PA subunit",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "PA",
+            "kmers" : 1,
+            "min_len" : 558,
+            "max_len" : 598,
+            "segment" : "PA Segment",
+            "upstream_ext" : 1
+         },
+         "HE" : {
+            "anno" : "Hemagglutinin-esterase glycoprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "HE",
+            "kmers" : 1,
+            "min_len" : 381,
+            "max_len" : 431,
+            "segment" : "HE Segment",
+            "upstream_ext" : 1
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NP",
+            "kmers" : 1,
+            "min_len" : 596,
+            "max_len" : 636,
+            "segment" : "NP Segment",
+            "upstream_ext" : 1
+         },
+         "F" : {
+            "anno" : "Fusion glycoprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "F",
+            "kmers" : 1,
+            "min_len" : 444,
+            "max_len" : 484,
+            "segment" : "F Segment",
+            "upstream_ext" : 1
+         },
+         "M1" : {
+            "anno" : "Matrix protein 1",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M1",
+            "kmers" : 1,
+            "min_len" : 176,
+            "max_len" : 216,
+            "segment" : "M Segment",
+            "upstream_ext" : 1
+         },
+         "M2" : {
+            "anno" : "Matrix protein 2",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M2",
+            "kmers" : 1,
+            "min_len" : 221,
+            "max_len" : 261,
+            "segment" : "M Segment",
+            "upstream_ext" : 1
+         },
+         "NS1" : {
+            "anno" : "Non-structural protein 1",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS1",
+            "kmers" : 1,
+            "min_len" : 280,
+            "max_len" : 320,
+            "segment" : "NS1 Segment",
+            "upstream_ext" : 1
+         },
+          "NS2" : {
+            "anno" : "Nuclear export protein",
+            "PMID" : ["11900848", "12078979"],
+            "feature_type" : "CDS",
+            "gene_symbol" : "NEP",
+            "segment" : "NS1 Segment",
+            "special" : "splice"
+         }
+      },
+      "segments" : {
+         "PB2 Segment" : {
+            "min_len" : 2106,
+            "max_len" : 2406,
+            "replicon_geometry" : "linear"
+         },
+         "PB1 Segment" : {
+            "min_len" : 2064,
+            "max_len" : 2364,
+            "replicon_geometry" : "linear"
+         },
+         "PA Segment" : {
+            "min_len" : 1674,
+            "max_len" : 1974,
+            "replicon_geometry" : "linear"
+         },
+         "HE Segment" : {
+            "min_len" : 1143,
+            "max_len" : 1443,
+            "replicon_geometry" : "linear"
+         },
+         "NP Segment" : {
+            "min_len" : 1788,
+            "max_len" : 2088,
+            "replicon_geometry" : "linear"
+         },
+         "F Segment" : {
+            "min_len" : 1332,
+            "max_len" : 1632,
+            "replicon_geometry" : "linear"
+         },
+         "M Segment" : {
+            "min_len" : 663,
+            "max_len" : 963,
+            "replicon_geometry" : "linear"
+         },    
+         "NS1 Segment" : {
+            "min_len" : 900,
+            "max_len" : 1200,
             "replicon_geometry" : "linear"
          }
       }

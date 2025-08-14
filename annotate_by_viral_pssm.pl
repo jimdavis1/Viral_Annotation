@@ -22,8 +22,8 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		-ks  If a pssm match extends beyond a stop codon it will keep the entire region of the match including the stop. 
 		-threads number of blast threads in the blastn and tblastn
 
-		-min Minimum contig	length (d = 1000)  # otherwise the genome is rejected
-		-max Maximum contig length (d = 30000) # for reference Measles is 15,894 and Beilong is 19,212
+		-min Minimum contig	length (d = 300)  # otherwise the genome is rejected
+		-max Maximum contig length (d = 35000) # for reference Measles is 15,894 and Beilong is 19,212
 	
 		-mcb Minimum contig bitscore to enable annotation (d = 500) #otherwise the genome is rejected.
 
@@ -95,8 +95,8 @@ unless ($contig_file ){die "must declare an input subject file with -i \n\n$usag
 # Name the Temp file:
 # generates a random 20 digit string of 0-9a-f
 unless ($tmp){$tmp .= sprintf("%x", rand 16) for 1..20;}
-unless ($min_len){$min_len = 1000; }
-unless ($max_len){$max_len = 30000; }
+unless ($min_len){$min_len = 300; }
+unless ($max_len){$max_len = 35000; }
 unless ($min_contig_bit){$min_contig_bit = 500;}
 unless ($tax){$tax = "10239"; }
 unless ($genome_name){$genome_name = "Viruses"; }

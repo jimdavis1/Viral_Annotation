@@ -22,8 +22,8 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["cdir|c=s"        => "Full path to reference contigs directory", {default => "$default_data_dir/Viral-Rep-Contigs"}],
 				    ["pdir|p=s"        => "Full path to the PSSM directory", {default => "$default_data_dir/Viral-PSSMs"}],
 				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
-				    ["max|a=i"         => "Max contig length, default is 30000", { default => 30000 }],
-				    ["min|z=i"         => "Min contig length, default is 1000", { default => 1000 }],
+				    ["max|a=i"         => "Max contig length, default is 30000", { default => 35000 }],
+				    ["min|z=i"         => "Min contig length, default is 1000", { default => 300 }],
 				    ["help|h"          => "Show this help message"]);
 
 
@@ -58,7 +58,7 @@ my $name           = $genome_in->{scientific_name};        #I should also be abl
 
 if (! $sequences_file){die "No sequences in the input GTO\n";}
 if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
-if (! $name)          {die "No gebine bane in the input GTO\n";}
+if (! $name)          {die "No genome name in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
 		      "-t",    $tempdir,
@@ -85,6 +85,7 @@ if (!$ok)
     print STDERR "Viral Annotation run failed with rc=$?. Stdout:\n";
     copy("$here/Viral_Anno.stderr.txt", \*STDERR);
 }
+
 
     
 my $event = {
