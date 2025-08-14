@@ -360,7 +360,7 @@
             "upstream_ext" : 0
          },
          "HA-SP" : {
-            "anno" : "Signal peptide",
+            "anno" : "Signal peptide of HA",
             "bit_cutoff" : 25,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
