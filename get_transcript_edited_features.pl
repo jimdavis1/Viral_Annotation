@@ -23,7 +23,7 @@ be interrupted where the frame jump occurs, or shortly thereafter.
 END_DESCRIPTION
 
 
-my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my ($help, $tmp); 
 my($opt, $usage) = describe_options(

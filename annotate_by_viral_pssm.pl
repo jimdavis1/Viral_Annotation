@@ -8,7 +8,7 @@ use Getopt::Long;
 use Cwd;
 use gjoseqlib;
 
-my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta 
 
