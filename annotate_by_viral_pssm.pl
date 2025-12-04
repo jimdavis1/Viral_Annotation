@@ -8,7 +8,7 @@ use Getopt::Long;
 use Cwd;
 use gjoseqlib;
 
-my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta 
 
@@ -271,7 +271,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 	{		
 		my $pssm_file = "$pdir/$virus.pssms/$pssmdir/$_";
 		my $name = $_;
-		open (IN, "tblastn -outfmt 15 -db $s_file -in_pssm $pssm_file -num_threads $threads |") or die "Could not run tblastn: $!";
+		open (IN, "tblastn -outfmt 15 -db $s_file -in_pssm $pssm_file -seg no -num_threads $threads |") or die "Could not run tblastn: $!";
 		my $pssm_blast = decode_json(scalar read_file(\*IN));		
 		close IN; 	
 		

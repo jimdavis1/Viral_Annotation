@@ -1,4 +1,1093 @@
 {
+   "Alphacoronavirus" : {
+      "close_genomes" : {
+         "Alphacoronavirus.dna" : {
+            "genome_ids" : "11137.1277",
+            "genome_name" : "Human coronavirus 229E"
+         }
+      },
+      "features" : {
+         "ORF1a" : {
+            "anno" : "ORF1a polyprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF1a",
+            "kmers" : 1,
+            "min_len" : 3774,
+            "max_len" : 4307,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF1ab" : {
+            "anno" : "ORF1ab polyprotein",
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF1ab",
+            "min_len" : 5933,
+            "max_len" : 7688,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["1404364"],
+            "special" : "transcript_edit"
+         },
+         "NSP1" : {
+            "anno" : "Nonstructural protein involved in suppressing host gene expression NSP1",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP1",
+            "kmers" : 0,
+            "min_len" : 100,
+            "max_len" : 120,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["11431476", "16306572", "25432065", "16911043"],
+            "upstream_ext" : 1
+         },
+         "NSP2" : {
+            "anno" : "Nonstructural protein involved in interferon suppression NSP2",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP2",
+            "kmers" : 0,
+            "min_len" : 670,
+            "max_len" : 830,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["16476987", "38597182", "16911043"],
+            "upstream_ext" : 0
+         },
+         "PLPRO" : {
+            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "PLpro",
+            "kmers" : 0,
+            "min_len" : 1500,
+            "max_len" : 2000,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["16476987", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP4" : {
+            "anno" : "Transmembrane replication complex protein NSP4",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP4",
+            "kmers" : 0,
+            "min_len" : 400,
+            "max_len" : 550,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["16476987", "26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "MPRO" : {
+            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "Mpro",
+            "kmers" : 0,
+            "min_len" : 273,
+            "max_len" : 333,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP6" : {
+            "anno" : "Transmembrane replication complex protein NSP6",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP6",
+            "kmers" : 0,
+            "min_len" : 252,
+            "max_len" : 341,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP7" : {
+            "anno" : "RNA-dependent RNA polymerase cofactor NSP7",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP7",
+            "kmers" : 0,
+            "min_len" : 75,
+            "max_len" : 90,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP8" : {
+            "anno" : "RNA-dependent RNA polymerase cofactor NSP8",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP8",
+            "kmers" : 0,
+            "min_len" : 175,
+            "max_len" : 215,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP9" : {
+            "anno" : "RNA binding protein NSP9",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP9",
+            "kmers" : 0,
+            "min_len" : 105,
+            "max_len" : 129,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP10" : {
+            "anno" : "RNA synthesis cofactor NSP10",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+           "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP10",
+            "kmers" : 0,
+            "min_len" : 121, 
+            "max_len" : 149,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP11" : {
+            "anno" : "NSP11 protein",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.5,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP11",
+            "kmers" : 0,
+            "min_len" : 5,
+            "max_len" : 150,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040"],
+            "upstream_ext" : 0
+         },
+         "NSP12" : {
+            "anno" : "RNA-dependent RNA polymerase",
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP12",
+            "min_len" : 833,
+            "max_len" : 1022,
+            "segment" : "Single RNA Segment",
+            "special" : "transcript_edit",
+            "PMID" : ["1404364", "16911043"]
+         },
+         "NSP13" : {
+            "anno" : "Helicase protein NSP13",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP13",
+            "kmers" : 0,
+            "min_len" : 550, 
+            "max_len" : 650,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP14" : {
+            "anno" : "3'-to-5' exoribonuclease and guanine-N7-methyltransferase NSP14",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP14",
+            "kmers" : 0,
+            "min_len" : 466, 
+            "max_len" : 577,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP15" : {
+            "anno" : "Uridylate-specific endoribonuclease NSP15",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP15",
+            "kmers" : 0,
+            "min_len" : 305, 
+            "max_len" : 383,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+         "NSP16" : {
+            "anno" : "2'-O-methyltransferase and mRNA cap-1 formation protein NSP16",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP16",
+            "kmers" : 0,
+            "min_len" : 180, 
+            "max_len" : 330,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26948040", "16911043"],
+            "upstream_ext" : 0
+         },
+        "S" : {
+            "anno" : "Spike protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "S",
+            "kmers" : 1,
+            "min_len" : 1056, 
+            "max_len" : 1620,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF4" : {
+            "anno" : "Likely interferon antagonist ORF4",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF4",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["40638224", "17194306"],
+            "upstream_ext" : 1
+         },
+         "E" : {
+            "anno" : "Envelope protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "E",
+            "kmers" : 1,
+            "min_len" : 67, 
+            "max_len" : 90,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "M" : {
+            "anno" : "Matrix protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M",
+            "kmers" : 1,
+            "min_len" : 200, 
+            "max_len" : 279,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "N",
+            "kmers" : 1,
+            "min_len" : 330, 
+            "max_len" : 485,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "SP" : {
+            "anno" : "Signal peptide of spike protein",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "kmers" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "SP",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "S1" : {
+            "anno" : "Mature N-terminal spike protein receptor binding domain S1",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "kmers" : 0,
+            "gene_symbol" : "S1",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["29786498", "35976165", "27317167", "18400867"],
+            "upstream_ext" : 0
+         },
+         "S2" : {
+            "anno" : "Mature C-terminal spike protein membrane fusion domain S2",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "S2",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["29786498", "35976165", "27317167", "18400867"],
+            "upstream_ext" : 0
+         }
+      },
+      "segments" : {
+         "Single RNA Segment" : {
+            "max_len" : 31000,
+            "min_len" : 26000,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
+   "Betacoronavirus" : {
+      "close_genomes" : {
+         "Betacoronavirus.1.dna" : {
+            "genome_ids" : "NC_045512.2",
+            "genome_name" : "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1"
+         },
+         "Betacoronavirus.2.dna" : {
+            "genome_ids" : "NC_006577",
+            "genome_name" : "Human coronavirus HKU1"
+         }
+      },
+      "features" : {
+         "ORF1a" : {
+            "anno" : "ORF1a polyprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF1a",
+            "kmers" : 1,
+            "min_len" : 3915,
+            "max_len" : 4928,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF1ab" : {
+            "anno" : "ORF1ab polyprotein",
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF1ab",
+            "min_len" : 6168,
+            "max_len" : 7911,
+            "segment" : "Single RNA Segment",
+            "special" : "transcript_edit"
+         },
+         "NSP1" : {
+            "anno" : "Nonstructural protein involved in suppressing host gene expression NSP1",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP1",
+            "kmers" : 0,
+            "min_len" : 153,
+            "max_len" : 264,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "NSP2" : {
+            "anno" : "Nonstructural protein involved in interferon suppression NSP2",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP2",
+            "kmers" : 0,
+            "copy_num" : 1,
+            "min_len" : 522,
+            "max_len" : 726,
+             "PMID" : ["35878012"],
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "PLPRO" : {
+            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "PLpro",
+            "kmers" : 0,
+            "min_len" : 1664,
+            "max_len" : 2266,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP4" : {
+            "anno" : "Transmembrane replication complex protein NSP4",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP4",
+            "kmers" : 0,
+            "min_len" : 441,
+            "max_len" : 550,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "MPRO" : {
+            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "Mpro",
+            "kmers" : 0,
+            "min_len" : 270,
+            "max_len" : 330,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP6" : {
+            "anno" : "Transmembrane replication complex protein NSP6",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP6",
+            "kmers" : 0,
+            "min_len" : 252,
+            "max_len" : 319,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP7" : {
+            "anno" : "RNA-dependent RNA polymerase cofactor NSP7",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP7",
+            "kmers" : 0,
+            "min_len" : 72,
+            "max_len" : 95,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP8" : {
+            "anno" : "RNA-dependent RNA polymerase cofactor NSP8",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP8",
+            "kmers" : 0,
+            "min_len" : 171,
+            "max_len" : 209,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP9" : {
+            "anno" : "RNA binding protein NSP9",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP9",
+            "kmers" : 0,
+            "min_len" : 90,
+            "max_len" : 121,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP10" : {
+            "anno" : "RNA synthesis cofactor NSP10",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP10",
+            "kmers" : 0,
+            "min_len" : 117, 
+            "max_len" : 154,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP11" : {
+            "anno" : "NSP11 protein",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.5,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP11",
+            "kmers" : 0,
+            "min_len" : 5,
+            "max_len" : 50,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP12" : {
+            "anno" : "RNA-dependent RNA polymerase",
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP12",
+            "min_len" : 834,
+            "max_len" : 1030,
+            "segment" : "Single RNA Segment",
+            "special" : "transcript_edit"
+         },
+         "NSP13" : {
+            "anno" : "Helicase protein NSP13",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP13",
+            "kmers" : 0,
+            "min_len" : 531, 
+            "max_len" : 660,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP14" : {
+            "anno" : "3'-to-5' exoribonuclease and guanine-N7-methyltransferase NSP14",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP14",
+            "kmers" : 0,
+            "min_len" : 468, 
+            "max_len" : 572,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP15" : {
+            "anno" : "Uridylate-specific endoribonuclease NSP15",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP15",
+            "kmers" : 0,
+            "min_len" : 306, 
+            "max_len" : 403,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP16" : {
+            "anno" : "2'-O-methyltransferase and mRNA cap-1 formation protein NSP16",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP16",
+            "kmers" : 0,
+            "min_len" : 261, 
+            "max_len" : 341,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "S" : {
+            "anno" : "Spike protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "S",
+            "kmers" : 1,
+            "min_len" : 1098, 
+            "max_len" : 1496,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "SP" : {
+            "anno" : "Signal peptide of spike protein",
+            "bit_cutoff" : 20,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "SP",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+        "S1" : {
+            "anno" : "Mature N-terminal spike protein receptor binding domain S1",
+            "bit_cutoff" : 1200,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "kmers" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "S1",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["34534731", "34690939"],
+            "upstream_ext" : 0
+         },
+         "S2" : {
+            "anno" : "Mature C-terminal spike protein membrane fusion domain S2",
+            "bit_cutoff" : 1175,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "S2",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["34534731", "34690939"],
+            "upstream_ext" : 0
+         },
+         "ORF3a" : {
+            "anno" : "Sarbecovirus membrane-associated ion channel and immunomodulating protein ORF3a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3a",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF3b" : {
+            "anno" : "Sarbecovirus interferon antagonist ORF3b",
+            "bit_cutoff" : 50,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3b",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["32941788"],
+            "upstream_ext" : 1
+         },
+         "ORF3c" : {
+            "anno" : "Sarbecovirus MAVS-targeting interferon antagonist ORF3c",
+            "bit_cutoff" : 50,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3c",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["37870297"],
+            "upstream_ext" : 1
+         },
+         "ORF3d" : {
+            "anno" : "Uncharacterized SARS-CoV-2 ORF3d protein",
+            "bit_cutoff" : 75,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3d",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["34305949"],
+            "upstream_ext" : 1
+         },
+         "ORF3d-2" : {
+            "anno" : "Uncharacterized SARS-CoV-2 ORF3d-2 protein",
+            "bit_cutoff" : 50,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3d-2",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "E" : {
+            "anno" : "Envelope protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "E",
+            "kmers" : 1,
+            "min_len" : 63, 
+            "max_len" : 88,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "M" : {
+            "anno" : "Membrane glycoprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M",
+            "kmers" : 1,
+            "min_len" : 189,
+            "max_len" : 253,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF6" : {
+            "anno" : "Sarbecovirus cytotoxic interferon antagonist ORF6",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF6",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["37511350", "33766124"],
+            "upstream_ext" : 1
+         },
+         "ORF7a" : {
+            "anno" : "Sarbecovirus transmembrane immunomodulating protein ORF7a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF7a",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["33615195"],
+            "upstream_ext" : 1
+         },
+         "ORF7b" : {
+            "anno" : "Sarbecovirus transmembrane protein modulating cytokine and interferon signaling ORF7b",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF7b",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["39508769","34484133"],
+            "upstream_ext" : 1
+         },
+         "ORF8" : {
+            "anno" : "Sarbecovirus secreted immune evasion and immunomodulating protein ORF8",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF8",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["38275971","36353628"],
+            "upstream_ext" : 1
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "N",
+            "kmers" : 1,
+            "min_len" : 360, 
+            "max_len" : 495,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF9b" : {
+            "anno" : "Sarbecovirus mitochondria-associated immunomodulating protein ORF9b",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF9b",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["33990585"],
+            "upstream_ext" : 1
+         },
+         "ORF9c" : {
+            "anno" : "Sarbecovirus membrane-associated immunomodulating protein ORF9c",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF9c",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["34305949", "32839770"],
+            "upstream_ext" : 1
+         },
+         "ORF10" : {
+            "anno" : "Sarbecovirus interferon antagonist ORF10",
+            "bit_cutoff" : 50,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF10",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["34845370"],
+            "upstream_ext" : 1
+         },
+         "HE" : {
+            "anno" : "Hemagglutinin-esterase glycoprotein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "HE",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "I" : {
+            "anno" : "Embecovirus internal membrane protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "I",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC_ORF6" : {
+            "anno" : "Uncharacterized protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "MERS_ORF8b" : {
+            "anno" : "MERS-CoV interferon antagonist ORF8b",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "MERS_ORF8b",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["31452044"],
+            "upstream_ext" : 1
+         },
+         "SARS_ORF8a" : {
+            "anno" : "SARS-CoV ORF8a protein",
+            "bit_cutoff" : 50,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "SARS_ORF8a",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "SARS_ORF8b" : {
+            "anno" : "SARS-CoV ORF8b protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "SARS_ORF8b",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "NS2a" : {
+            "anno" : "Embecovirus interferon antagonist NS2a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS2a",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["30041172"],
+            "upstream_ext" : 1
+         },
+         "NS5a" : {
+            "anno" : "Embecovirus interferon antagonist NS5a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "NS5a",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["30041172"],
+            "upstream_ext" : 1
+         },
+         "MERS_ORF3" : {
+            "anno" : "Merbecovirus proapoptotic protein ORF3",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "MERS_ORF3",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["35032548"],
+            "upstream_ext" : 1
+         },
+         "Hibeco_ORF3" : {
+            "anno" : "Hibecovirus ORF3 protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "MERS_ORF4a" : {
+            "anno" : "Merbecovirus interferon antagonist and PKR inhibitor ORF4a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "MERS_ORF4a",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["27783669", "24318862"],
+            "upstream_ext" : 1
+         },
+         "MERS_ORF4b" : {
+            "anno" : "Merbecovirus interferon antagonist ORF4b",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "gene_symbol" : "MERS_ORF4b",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["24318862"],
+            "upstream_ext" : 1
+         },
+         "MERS_ORF5" : {
+            "anno" : "Merbecovirus NF-kB-targeting interferon and inflammation antagonist ORF5",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "MERS_ORF5",
+            "segment" : "Single RNA Segment",
+            "PMID" : ["24318862"],
+            "upstream_ext" : 1
+         },
+         "Nobeco_ORF3" : {
+            "anno" : "Nobecovirus ORF3 protein",
+            "bit_cutoff" : 100,
+            "kmers" : 0,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "Nobeco_NS7a" : {
+            "anno" : "Nobecovirus NS7a protein",
+            "bit_cutoff" : 100,
+            "kmers" : 0,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "Nobeco_NS7a",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "Nobeco_NS7b" : {
+            "anno" : "Nobecovirus NS7b protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "Nobeco_NS7b",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "Nobeco_NS7c" : {
+            "anno" : "Nobecovirus NS7c protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "Nobeco_NS7c",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "Hibeco_ORF7" : {
+            "anno" : "Hibecovirus ORF7 protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "Hibeco_ORF7",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "Hibeco_ORF8" : {
+            "anno" : "Hibecovirus ORF8 protein",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "kmers" : 0,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "Hibeco_ORF8",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         }
+      },
+      "segments" : {
+         "Single RNA Segment" : {
+            "max_len" : 32000,
+            "min_len" : 27000,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
    "Alphainfluenzavirus" : {
       "close_genomes" : {
          "Alphainfluenzavirus.1.dna" : {
@@ -210,7 +1299,7 @@
             "kmers" : 1,
             "min_len" : 200,
             "max_len" : 240,
-            "segment" : "NS1 Segment",
+            "segment" : "NS Segment",
             "upstream_ext" : 1
          },
           "NS2" : {
@@ -581,7 +1670,7 @@
             "upstream_ext" : 1
          },
          "HEF1" : {
-            "anno" : "Mature N-terminal receptor binding and esterease HEF subunit",
+            "anno" : "Mature N-terminal receptor binding and esterase HEF subunit",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -671,7 +1760,7 @@
             "upstream_ext" : 1
          },
          "P31" : {
-            "anno" : "p31 clevage product",
+            "anno" : "p31 cleavage product",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -818,7 +1907,7 @@
             "upstream_ext" : 1
          },
          "HEF1" : {
-            "anno" : "Mature N-terminal receptor binding and esterease HEF subunit",
+            "anno" : "Mature N-terminal receptor binding and esterase HEF subunit",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -959,7 +2048,7 @@
             "upstream_ext" : 1
          },
          "PB1" : {
-            "anno" : "RNA-dependent RNA polymerase PB1 subunit",
+            "anno" : "RNA-dependent RNA polymerase catalytic core PB1 subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -1293,6 +2382,7 @@
             "max_len" : 900,
             "min_len" : 450,
             "segment" : "Small RNA Segment",
+            "gene_symbol" : "Gn",
             "translate" : 1
          },
          "GP2" : {
@@ -1300,6 +2390,7 @@
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
+           "gene_symbol" : "Gc",
             "feature_type" : "mat_peptide",
             "non_pssm_partner" : [
                "GP1"
@@ -1381,6 +2472,7 @@
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "SP",
             "feature_type" : "mat_peptide",
             "non_pssm_partner" : [
                "GP1"
@@ -1541,7 +2633,7 @@
             "special" : "transcript_edit"
          },
          "U" : {
-            "anno" : "Paramyxoviridae uncharacterized protein (U protein)",
+            "anno" : "Paramyxoviridae uncharacterized protein",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -1847,6 +2939,7 @@
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "Gc",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -1855,6 +2948,7 @@
             "anno" : "Mature envelope glycoprotein Gn",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
+            "gene_symbol" : "Gn",
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
@@ -2157,7 +3251,7 @@
             "upstream_ext" : 1
          },
          "SH" : {
-            "anno" : "Paramyxoviridae small hydorophobic protein",
+            "anno" : "Paramyxoviridae small hydrophobic protein",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -2312,7 +3406,7 @@
             "upstream_ext" : 1
          },
          "SH" : {
-            "anno" : "Paramyxoviridae small hydorophobic protein",
+            "anno" : "Paramyxoviridae small hydrophobic protein",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -2382,11 +3476,12 @@
                "29142300",
                "16971452"
             ],
-            "anno" : "Mature C-terminal fusion protein subunit (F1)",
+            "anno" : "Mature C-terminal fusion protein subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
+            "gene_symbol" : "F1",
             "feature_type" : "mat_peptide",
             "max_len" : 501,
             "min_len" : 345,
@@ -2398,11 +3493,12 @@
                "29142300",
                "16971452"
             ],
-            "anno" : "Mature N-terminal fusion protein subunit (F2)",
+            "anno" : "Mature N-terminal fusion protein subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "F2",
             "feature_type" : "mat_peptide",
             "max_len" : 92,
             "min_len" : 66,
@@ -2511,7 +3607,7 @@
             "upstream_ext" : 1
          },
          "SH" : {
-            "anno" : "Pneumoviridae small hydorophobic protein",
+            "anno" : "Pneumoviridae small hydrophobic protein",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -2533,6 +3629,7 @@
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
+            "gene_symbol" : "SP",
             "max_len" : 20,
             "min_len" : 16,
             "segment" : "Single RNA Segment",
@@ -2690,6 +3787,7 @@
             "anno" : "Nairoviridae mature secreted nonstructural 38-kD protein",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
+            "gene_symbol" : "GP38",
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
@@ -2700,6 +3798,7 @@
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
             "downstream_ext" : 0,
+            "gene_symbol" : "GP85-160",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -2723,6 +3822,7 @@
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
             "downstream_ext" : 1,
+            "gene_symbol" : "Gc",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -2731,6 +3831,7 @@
             "anno" : "Mature envelope glycoprotein Gn",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
+            "gene_symbol" : "Gn",
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
@@ -2751,12 +3852,13 @@
             "upstream_ext" : 1
          },
          "MLD" : {
-            "anno" : "Mature secreted nonstructural mucin-like protein (MLD)",
+            "anno" : "Mature secreted nonstructural mucin-like protein",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
+            "gene_symbol" : "MLD",
             "upstream_ext" : 0
          },
          "N" : {
@@ -2774,10 +3876,11 @@
             "upstream_ext" : 1
          },
          "NSm" : {
-            "anno" : "Bunyavirales mature nonstructural membrane protein (NSm)",
+            "anno" : "Bunyavirales mature nonstructural membrane protein",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
             "downstream_ext" : 0,
+            "gene_symbol" : "Nsm",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -3101,6 +4204,7 @@
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
+            "gene_symbol" : "Delta",
             "feature_type" : "mat_peptide",
             "max_len" : 56,
             "min_len" : 30,
@@ -3131,6 +4235,7 @@
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
+            "gene_symbol" : "Gc",
             "feature_type" : "mat_peptide",
             "max_len" : 193,
             "min_len" : 147,
@@ -3145,6 +4250,7 @@
             "anno" : "Mature envelope glycoprotein Gn",
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
+            "gene_symbol" : "Gn",
             "max_len" : 516,
             "min_len" : 412,
             "segment" : "Single RNA Segment",
@@ -3188,6 +4294,7 @@
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
+            "gene_symbol" : "SP",
             "max_len" : 35,
             "min_len" : 28,
             "segment" : "Single RNA Segment",
@@ -3250,11 +4357,7 @@
             "upstream_ext" : 1
          },
          "sGP" : {
-            "PMID" : [
-               "10603327",
-               "28539454"
-            ],
-            "anno" : "Mature soluble secreted glycoprotein (sGP)",
+            "anno" : "Mature soluble secreted glycoprotein sGP",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -3263,35 +4366,31 @@
             "max_len" : 327,
             "min_len" : 257,
             "segment" : "Single RNA Segment",
+            "PMID" : ["10603327","28539454"],
+            "gene_symbol" : "sGP",
             "upstream_ext" : 0
          },
          "sGP_Precursor" : {
-            "PMID" : [
-               "10603327",
-               "28539454"
-            ],
-            "anno" : "Soluble secreted glycoprotein (sGP) precursor",
+            "anno" : "Soluble secreted glycoprotein sGP precursor",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
             "feature_type" : "CDS",
             "gene_symbol" : "sGP_precursor",
+            "PMID" : ["10603327","28539454"],
             "max_len" : 430,
             "min_len" : 318,
             "segment" : "Single RNA Segment",
             "upstream_ext" : 1
          },
          "ssGP" : {
-            "PMID" : [
-               "21411529",
-               "26051281"
-            ],
-            "anno" : "Small soluble glycoprotein (ssGP protein)",
+            "anno" : "Small soluble glycoprotein ssGP",
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
             "max_len" : 330,
             "min_len" : 231,
+            "PMID" : ["21411529","26051281"],
             "segment" : "Single RNA Segment",
             "special" : "transcript_edit"
          }
@@ -3314,7 +4413,7 @@
             "genome_ids" : "accn|EF446131",
             "genome_name" : "Ravn virus - Ravn"
          }
-      },
+     },
       "features" : {
          "GPC" : {
             "anno" : "Pre-glycoprotein polyprotein GP complex",
@@ -3491,10 +4590,11 @@
                "34903371",
                "37415824"
             ],
-            "anno" : "Mature C-terminal fusion protein subunit (F1)",
+            "anno" : "Mature C-terminal fusion protein subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
+            "gene_symbol" : "F1",
             "downstream_ext" : 1,
             "feature_type" : "mat_peptide",
             "max_len" : 482,
@@ -3508,10 +4608,11 @@
                "34903371",
                "37415824"
             ],
-            "anno" : "Mature N-terminal fusion protein subunit (F2)",
+            "anno" : "Mature N-terminal fusion protein subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
+            "gene_symbol" : "F2",
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "max_len" : 92,
@@ -3664,7 +4765,7 @@
             "upstream_ext" : 0
          },
          "SH" : {
-            "anno" : "Pneumoviridae small hydorophobic protein",
+            "anno" : "Pneumoviridae small hydrophobic protein",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -3728,12 +4829,13 @@
             "PMID" : [
                "1629698"
             ],
-            "anno" : "Mature C-terminal fusion protein subunit (F1)",
+            "anno" : "Mature C-terminal fusion protein subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
             "feature_type" : "mat_peptide",
+            "gene_symbol" : "F1",
             "max_len" : 472,
             "min_len" : 376,
             "segment" : "Single RNA Segment",
@@ -3743,11 +4845,12 @@
             "PMID" : [
                "1629698"
             ],
-            "anno" : "Mature N-terminal fusion protein subunit (F2)",
+            "anno" : "Mature N-terminal fusion protein subunit",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "F2",
             "feature_type" : "mat_peptide",
             "max_len" : 88,
             "min_len" : 72,
@@ -3894,7 +4997,7 @@
             "upstream_ext" : 1
          },
          "SH" : {
-            "anno" : "Pneumoviridae small hydorophobic protein",
+            "anno" : "Pneumoviridae small hydrophobic protein",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -4037,7 +5140,7 @@
             "special" : "transcript_edit"
          },
          "SH" : {
-            "anno" : "Paramyxoviridae small hydorophobic protein",
+            "anno" : "Paramyxoviridae small hydrophobic protein",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -4347,6 +5450,7 @@
             "bit_cutoff" : 200,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "Gc",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -4355,6 +5459,7 @@
             "anno" : "Mature envelope glycoprotein Gn",
             "bit_cutoff" : 200,
             "coverage_cutoff" : 0.65,
+            "gene_symbol" : "Gn",
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
@@ -4389,10 +5494,11 @@
             "upstream_ext" : 1
          },
          "NSm" : {
-            "anno" : "Bunyavirales mature nonstructural membrane protein (NSm)",
+            "anno" : "Bunyavirales mature nonstructural membrane protein",
             "bit_cutoff" : 200,
             "coverage_cutoff" : 0.65,
-            "downstream_ext" : 0,
+            "gene_symbol" : "Nsm",
+           "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -4580,6 +5686,7 @@
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "Gc",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -4589,6 +5696,7 @@
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
+            "gene_symbol" : "Gn",
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
             "upstream_ext" : 0
@@ -4641,9 +5749,10 @@
             "upstream_ext" : 1
          },
          "NSm" : {
-            "anno" : "Bunyavirales mature nonstructural membrane protein (NSm)",
+            "anno" : "Bunyavirales mature nonstructural membrane protein",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
+            "gene_symbol" : "Nsm",
             "downstream_ext" : 0,
             "feature_type" : "mat_peptide",
             "segment" : "Medium RNA Segment",
@@ -4720,8 +5829,8 @@
             "feature_type" : "CDS",
             "gene_symbol" : "F",
             "kmers" : 1,
-            "max_len" : 638,
             "min_len" : 479,
+            "max_len" : 638,
             "segment" : "Single RNA Segment",
             "upstream_ext" : 1
          },

@@ -22,8 +22,8 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["cdir|c=s"        => "Full path to reference contigs directory", {default => "$default_data_dir/Viral-Rep-Contigs"}],
 				    ["pdir|p=s"        => "Full path to the PSSM directory", {default => "$default_data_dir/Viral-PSSMs"}],
 				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
-				    ["max|a=i"         => "Max contig length, default is 30000", { default => 35000 }],
-				    ["min|z=i"         => "Min contig length, default is 1000", { default => 300 }],
+				    ["max|a=i"         => "Max contig length, default is 40000", { default => 40000 }],
+				    ["min|z=i"         => "Min contig length, default is 300", { default => 300 }],
 				    ["help|h"          => "Show this help message"]);
 
 

@@ -3,10 +3,8 @@ use strict;
 use Data::Dumper;
 use Time::HiRes 'gettimeofday';
 use GenomeTypeObject;
-#use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
-#use File::Path 'remove_tree';
 use IPC::Run qw(run);
 use Cwd;
 use gjoseqlib;
@@ -25,7 +23,7 @@ be interrupted where the frame jump occurs, or shortly thereafter.
 END_DESCRIPTION
 
 
-my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
+my $default_data_dir = $ENV{LOVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my ($help, $tmp); 
 my($opt, $usage) = describe_options(
@@ -137,17 +135,11 @@ if (scalar @to_analyze)
 		
 		print STDERR "\tAnalyzing $name\n\n"; 
 		my $query = "$dir/$fam/$name.fasta"; 
+
 		run ("cp $query ."); 
 		
-		my $make_db2 = run("makeblastdb -dbtype nucl -in $name.fasta >/dev/null");
-		
 
-			if (!$make_db2)
-			{
-  				 print STDERR "get_transcript_edited_features:  makeblastdb failed with rc=$?. Stdout:\n";
-			}
-
-			my @blast_parms = (
+		my @blast_parms = (
 		      "-query",         $query,
 		      "-db",            $contigs, #### fix this in the original program
 		      "-evalue",        $opt->e_val,
@@ -158,20 +150,46 @@ if (scalar @to_analyze)
 		      "-soft_masking",   "false",
 		      "-dust",           "no",
 		      "-perc_identity",  $opt->lower_pid,   
-              "-qcov_hsp_perc",  $opt->lower_pcov,
+		      "-qcov_hsp_perc",  $opt->lower_pcov,
 		      "-num_threads",    $opt->threads);
 
 		my $do_blast = run(["blastn", @blast_parms], ">", "$name.json", "2>", "$name.blastn.stderr.txt");
-		
-		open (IN, "<$name.json"), or warn "Cannot open JSON BLASTn output file $name.json\n";
-		my $results = decode_json(scalar read_file(\*IN));	
+
+
+		# got stuck on blast chunking queries >10MB.
+		# Had to merge the json blocks manually.
+		open (IN, "<$name.json") or die "Cannot open JSON BLASTn output file $name.json\n";
+		my $json_content = read_file(\*IN);
 		close IN;
-			
+		
+		# Split on "}{\n" pattern that separates root JSON objects
+		my @json_strings = split(/\}\s*\{/, $json_content);
+		
+		# Re-add braces and parse each object
+		my @results;
+		for my $i (0..$#json_strings) 
+		{
+			my $json_str = $json_strings[$i];
+			# Add opening brace if not first
+			$json_str = '{' . $json_str unless $i == 0;
+			# Add closing brace if not last
+			$json_str = $json_str . '}' unless $i == $#json_strings;
+			push @results, decode_json($json_str);
+		}
+		
+		# Merge all BlastOutput2 arrays into one result structure
+		my $merged = { BlastOutput2 => [] };
+		foreach my $result (@results) 
+		{
+			push @{$merged->{BlastOutput2}}, @{$result->{BlastOutput2}};
+		}
+		
+		my $results = $merged;
+					
 				
 		#Gather in the best match.
 		my $matches = best_blastn_match_by_loc($results);  #removed id, cov, and gap thresholds from here  
 		
-
 		foreach (keys %$matches)
 		{
 			my $sid = $_;
@@ -377,6 +395,7 @@ if (scalar @to_analyze)
 sub best_blastn_match_by_loc
 {
 	my ($blast)  =  @_;
+	
 	my $matches = {};
 	
 	my @output = @{$blast->{BlastOutput2}};

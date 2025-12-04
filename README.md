@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the  *Paramyxoviridae*, *Bunyavirales*, and *Filoviridae*. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the  *Bunyavirales*, *Filoviridae*, *Orthomyxoviridae*, *Paramyxoviridae*, and *Pneumoviridae*. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  
 
@@ -356,28 +356,36 @@ In FluC the CM2 protein is a mat peptide that is cleaved from a pre-peptide.  Th
 I have built a module for Isavirus, but i stopped at Thogotovirus and Quaranjavirus, becuase they lack sequenced examples. 
 
 ## Alphacoronavirus
-There is a lack of bench data supporting the clevage sites of ORF1ab in the alphacoronaviruses.  The Mpro clevage sites are well conserved, and less troublesome, but the PLpro cleavage sites proved difficult.  The two residues upstream of the Mpro clevage sites for NSP4-NSP16 are well conserved and are usually L,I,M,or V followed by Q, but it's usually L.  However, there is considerable variation in the PLpro clevage sites and protein lengths for NSPs 1-4.  Becuase this was so difficult, I am providing the following table of references from which I based my PSSMs.  There were a few other papers that made predictions for FCoV and SADS-Cov, which I also used as guides [PMIDs: 38624231, PMID: 33913206].  However, I should note that I struggled with the predicted coordinates published for swine strain, PCV777 [PMID: 33913206], and the HKU10 and related bat strains [PMID: 22933277], as well as the Lucheng rat alphas, for which I currently lack a reference with clevage sites.  In summary, the C-terminus of NSP4 is clean, and the N- and C- termini of NSP5-16 are also clean (excluding the ribosomal slippage site). 
+There is a lack of bench data supporting the clevage sites of ORF1ab in the alphacoronaviruses.  The Mpro clevage sites are well conserved, and less troublesome, but the PLpro cleavage sites proved difficult.  The two residues upstream of the Mpro clevage sites for NSP4-NSP16 are well conserved and are usually L,I,M,or V followed by Q, but it's usually L.  However, there is considerable variation in the PLpro clevage sites and protein lengths for NSPs 1-4.  Becuase this was so difficult, I am providing the following table of references from which I based my PSSMs.  There were a few other papers that made predictions for FCoV and SADS-Cov, which I also used as guides [PMIDs: 38624231, PMID: 33913206].  However, I should note that I struggled with the predicted coordinates published for swine strain, PCV777 [PMID: 33913206], and the HKU10 and related bat strains [PMID: 22933277], as well as the Lucheng rat alphas, for which I currently lack a reference with clevage sites.  In summary, the C-terminus of NSP4 is clean, and the N- and C- termini of NSP5-16 are also clean (excluding the ribosomal slippage site).
+
 
 
 | Cleavage site | Enzyme | P2 residue | P2 residue | P2 residue | Reference |
 |---------------|--------|----|----|----|-----------|
 | | | HCoV-NL63 | HCoV-229E | TGEV | |
-| nsp1-nsp2 | Plpro |  | G |  | PMID: 11431476 |
-| nsp2-nsp3 | Plpro |  |  | G | PMID: 16476987 |
+| nsp1-nsp2 | Plpro | A | G | R | PMID: 11431476,16911043, 16306572 |
+| nsp2-nsp3 | Plpro | A |  | G | PMID: 16476987,16911043 |
 | nsp3-nsp4 | Plpro |  | A* | S* | PMID: 16476987 |
-| nsp4-nsp5 | Mpro | L | L |  | PMID: 26948040 |
-| nsp5-nsp6 | Mpro | L | L |  | PMID: 26948040 |
-| nsp6-nsp7 | Mpro | V | V |  | PMID: 26948040 |
-| nsp7-nsp8 | Mpro | L | L |  | PMID: 26948040 |
-| nsp8-nsp9 | Mpro | L | L |  | PMID: 26948040 |
-| nsp9-nsp10 | Mpro | L | L |  | PMID: 26948040 |
-| nsp10-nsp11 | Mpro | I | I |  | PMID: 26948040 |
-| nsp12-nsp13 | Mpro | L | L |  | PMID: 26948040 |
-| nsp13-nsp14 | Mpro | L | L |  | PMID: 26948040 |
-| nsp14-nsp15 | Mpro | L | L |  | PMID: 26948040 |
+| nsp4-nsp5 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp5-nsp6 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp6-nsp7 | Mpro | V | V |  | PMID: 26948040,16911043 |
+| nsp7-nsp8 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp8-nsp9 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp9-nsp10 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp10-nsp11 | Mpro | I | I |  | PMID: 26948040,16911043 |
+| nsp12-nsp13 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp13-nsp14 | Mpro | L | L |  | PMID: 26948040,16911043 |
+| nsp14-nsp15 | Mpro | L | L |  | PMID: 26948040,16911043 |
 | nsp15-nsp16 | Mpro | L | L |  | PMID: 26948040 |
 
-*predicted
+*predicted*
+
+There is an open reading frame (usually called ORF4) that occurs between the spike and envelope proteins.  There is a handful of papers suggesting that this ORF accumulates mutations in culture.  In the cultured 229E strains, this has resulted in the apperance of two small separate ORFs called ORF4a and ORF4b.  I was unable to find papers that suggesting that 4a or 4b are functional.  My current system only calls ORF4 starting from the original start position.     
+
+
+
+
+
 
 
 
