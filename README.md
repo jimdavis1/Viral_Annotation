@@ -382,7 +382,7 @@ There is a lack of bench data supporting the clevage sites of ORF1ab in the alph
 | nsp14-nsp15 | Mpro | L | L |  | PMID: 26948040,16911043 |
 | nsp15-nsp16 | Mpro | L | L |  | PMID: 26948040 |
 
-###ORF4
+### ORF4
 
 There is an open reading frame (usually called ORF4) that occurs between the spike and envelope proteins.  There is a handful of papers suggesting that this ORF accumulates mutations in culture.  In the cultured 229E strains, this has resulted in the apperance of two small separate ORFs called ORF4a and ORF4b.  I was unable to find papers that suggesting that 4a or 4b are functional.  My current system only calls ORF4 starting from the original start position.     
 
