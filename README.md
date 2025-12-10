@@ -16,6 +16,10 @@ Phasmaviridae<br>
 Phenuiviridae<br>
 Tospoviridae<br>
 
+### Coronaviridae
+Alphacoronavirus
+Betacornoavirus
+
 ### Filoviridae:
 Orthoebolavirus<br>
 Orthomarburgvirus<br>
@@ -378,10 +382,13 @@ There is a lack of bench data supporting the clevage sites of ORF1ab in the alph
 | nsp14-nsp15 | Mpro | L | L |  | PMID: 26948040,16911043 |
 | nsp15-nsp16 | Mpro | L | L |  | PMID: 26948040 |
 
-*predicted*
+###ORF4
 
 There is an open reading frame (usually called ORF4) that occurs between the spike and envelope proteins.  There is a handful of papers suggesting that this ORF accumulates mutations in culture.  In the cultured 229E strains, this has resulted in the apperance of two small separate ORFs called ORF4a and ORF4b.  I was unable to find papers that suggesting that 4a or 4b are functional.  My current system only calls ORF4 starting from the original start position.     
 
+## Betacoronavirus
+
+There is a tremendous diversity in the coding potential of the Betacornoaviruses, but very little that conflicted across the embecos, hibecos, merbecos, nobecos, and sarbecos.  However there were several issues that should be mentioned.  First, the PSSMs that are specific to these groups co-exist within the same module, which means that, for example, the handful of nobeco-specific PSSMs get blasted aginst your SARS-CoV-2 genome, but will have no match.  Second, in order to differentiate between the MERS and SARS genomes with and without furin cleavage sites in their spike proteins, I have dialed up the bit scores of the blast matches for the S1 and S2 subunits, which is currently doing well.Third, there were only a small number of hibeco genomes, so PSSMs will likely need to be developed if we acquire more genomes.  Finally, it is worth noting that the embecos have a repeat in the NSP3 (PLPro) region of their ORF1a/b polyprotein.  In a test set of approximately 1056 reasonably good quality embeco genomes, there were thirty cases where the modules failed to call a contiguous PLPro because the BLAST result broke over multiple HSPs.  At this time, I am not going to develop a special module to handle a repeat region in 30 genomes, but this is worth noting as a placeholder for future work.  If I begin to encounter many instances of long tandem repeats in the viruses, I may become necessary to develop a repeat region module.
 
 
 
