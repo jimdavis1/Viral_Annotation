@@ -19,8 +19,8 @@ Tospoviridae<br>
 ### Coronaviridae
 Alphacoronavirus<br>
 Betacornoavirus<br>
+Gammacoronavirus<br>
 Deltacoronavirus<br>
-
 
 ### Filoviridae:
 Orthoebolavirus<br>
@@ -393,14 +393,14 @@ There is an open reading frame (usually called ORF4) that occurs between the spi
 There is considerable diversity in the genome structure of the Betacornoaviruses, but very little that conflicted across the embecos, hibecos, merbecos, nobecos, and sarbecos.  Overall, there are a few issues that desrve mentioning.  First, the PSSMs that are specific to these groups co-exist within the same module, which means that, for example, the handful of nobeco-specific PSSMs get blasted aginst your SARS-CoV-2 genome, but will have no match.  Second, in order to differentiate between the MERS and SARS genomes with and without furin cleavage sites in their spike proteins, I dialed up the bit scores of the blast matches for the S1 and S2 subunits, which is currently doing well. Third, there were only a small number of hibeco genomes, so PSSMs will likely need to be developed if we acquire more genomes.  Finally, it is worth noting that the embecos have a repeat in the NSP3 (PLPro) region of their ORF1a/b polyprotein.  In a test set of approximately 1056 reasonably good quality embeco genomes, there were thirty cases where the modules failed to call a contiguous PLPro because the BLAST result broke over multiple HSPs.  At this time, I am not going to develop a special module to handle these edge cases, but this is worth noting as a placeholder for future work.  If I begin to encounter many instances of long tandem repeats in the viruses, it may become necessary to develop a bespoke repeat detection module.
 
 ## Deltacoronavirus
-There is a notable lack of experimental evidence supporting the mature peptide clevage sites in the Deltacoronaviruses.  In order to make a reasonable prediction of the sites, I aligned them against representative alphas and betas and looked for the boundaries.  In the cases of the main protease cleavage sites these were fairly straighforward and correspond to the predicted boundaries published in (PMID: 2227823).  There is a crystal structure for a section of the PLpro (NSP3) (PMID: 33327866), but it notably excludes a well defined sequence for the C- terminus. I used the N-terminal clevage site for PLpro from that paper (and also predicted in PMID: 3327866), and the predicted clevage site of the NSP3/4 boundary from (PMID: 33327866).  Both regions are highly conserved in the alignment, but dont correspond as well with non-delta strains.  There are also some diverse deltas that lack homology in these regions.  I had to make an educated guess for the cleavage sites in those.
+There is a notable lack of experimental evidence supporting the mature peptide clevage sites in the Deltacoronaviruses.  In order to make a reasonable prediction of the sites, I aligned them against representative alphas and betas and looked for the boundaries.  In the cases of the main protease cleavage sites, these were fairly straighforward and correspond to the predicted boundaries published in (PMID: 2227823).  There is a crystal structure for a section of the PLpro (NSP3) (PMID: 33327866), but it notably excludes a well defined sequence for the C- terminus. I used the N-terminal clevage site for PLpro from that paper (and also predicted in PMID: 2227823), and the predicted clevage site of the NSP3/4 boundary from (PMID: 33327866).  Both regions are highly conserved in the alignment, but dont correspond as well with non-delta strains.  There are also some diverse deltas that lack homology in these regions.  I had to make an educated guess for the cleavage sites in those.
+<br><br>
+Secondly, there appears to be only one protien upstream of the PLpro (NSP3) in PDCoV.  A lot of papers call this NSP2.  I am calling this NSP1-2 to avoid the numeric confusion.  
 <br>
-Secondly, there appears to be only one protien upstream of the PLpro (NSP3) in PDCoV.  I am calling this NSP1-2.  
-<br>
-Finally, my representative NSP11s are 7 amino acids in length and are too small to be reliably picked up by BLAST.  Even the longer NSP11s in the alphas and betas are dubious, so I am at peace with not detecting these.  If a paper shows that it actually has a function, I will go back and add a location-based assignment. 
-<br>
+Finally, my representative NSP11s are 7 amino acids in length and are too small to be reliably picked up by BLAST.  Even the longer NSP11s in the alphas and betas are dubious, so I am at peace with not detecting these.  If a paper shows that NSP11 actually has a function, I will go back and add a location-based assignment. 
 
-
+## Gammacoronavirus
+I encountered a lot of small uncharacterized ORFs in the gammas.  I didn't come across any papers showing that they actually encode proteins, but rather than lose them I created PSSMs and  annotated them as, "Gammacoronavirus uncharacterized ORF."   
 
 
 

@@ -306,7 +306,7 @@
             "upstream_ext" : 1
          },
          "M" : {
-            "anno" : "Matrix protein",
+            "anno" : "Membrane glycoprotein",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -1088,6 +1088,602 @@
          }
       }
    },
+   "Gammacoronavirus" : {
+      "close_genomes" : {
+         "Gammacoronavirus.1.dna" : {
+            "genome_ids" : "11120.24983",
+            "genome_name" : "Infectious bronchitis virus Beaudette"
+         },
+         "Gammacoronavirus.2.dna" : {
+            "genome_ids" : "11152.281",
+            "genome_name" : "Turkey coronavirus MG10"
+         }
+      },
+      "features" : {
+         "ORF1a" : {
+            "anno" : "ORF1a polyprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF1a",
+            "kmers" : 1,
+            "min_len" : 3093,
+            "max_len" : 4450,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF1ab" : {
+            "anno" : "ORF1ab polyprotein",
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF1ab",
+            "min_len" : 5942,
+            "max_len" : 7344,
+            "segment" : "Single RNA Segment",
+            "special" : "transcript_edit"
+         },
+         "NSP1-2" : {
+            "anno" : "Leader protein NSP1-2",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "copy_num" : 1,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP1-2",
+            "kmers" : 0,
+            "min_len" : 548,
+            "max_len" : 714,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "PLPRO" : {
+            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "PLpro",
+            "kmers" : 0,
+            "min_len" : 1377,
+            "max_len" : 1845,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP4" : {
+            "anno" : "Transmembrane replication complex protein NSP4",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP4",
+            "kmers" : 0,
+            "min_len" : 459,
+            "max_len" : 568,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "MPRO" : {
+            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "Mpro",
+            "kmers" : 0,
+            "min_len" : 269,
+            "max_len" : 338,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP6" : {
+            "anno" : "Transmembrane replication complex protein NSP6",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP6",
+            "kmers" : 0,
+            "min_len" : 263,
+            "max_len" : 333,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP7" : {
+            "anno" : "RNA-dependent RNA polymerase cofactor NSP7",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP7",
+            "kmers" : 0,
+            "min_len" : 75,
+            "max_len" : 91,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP8" : {
+            "anno" : "RNA-dependent RNA polymerase cofactor NSP8",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP8",
+            "kmers" : 0,
+            "min_len" : 177,
+            "max_len" : 233,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP9" : {
+            "anno" : "RNA binding protein NSP9",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP9",
+            "kmers" : 0,
+            "min_len" : 100,
+            "max_len" : 122,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP10" : {
+            "anno" : "RNA synthesis cofactor NSP10",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+           "copy_num" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP10",
+            "kmers" : 0,
+            "min_len" : 125, 
+            "max_len" : 150,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP11" : {
+            "anno" : "NSP11 protein",
+            "bit_cutoff" : 20,
+            "coverage_cutoff" : 0.5,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP11",
+            "kmers" : 0,
+            "min_len" : 5,
+            "max_len" : 150,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP12" : {
+            "anno" : "RNA-dependent RNA polymerase",
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP12",
+            "min_len" : 839,
+            "max_len" : 1053,
+            "segment" : "Single RNA Segment",
+            "special" : "transcript_edit"
+         },
+         "NSP13" : {
+            "anno" : "Helicase protein NSP13",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP13",
+            "kmers" : 0,
+            "min_len" : 539, 
+            "max_len" : 661,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP14" : {
+            "anno" : "3'-to-5' exoribonuclease and guanine-N7-methyltransferase NSP14",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP14",
+            "kmers" : 0,
+            "min_len" : 467, 
+            "max_len" : 581,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP15" : {
+            "anno" : "Uridylate-specific endoribonuclease NSP15",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP15",
+            "kmers" : 0,
+            "min_len" : 304, 
+            "max_len" : 372,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+         "NSP16" : {
+            "anno" : "2'-O-methyltransferase and mRNA cap-1 formation protein NSP16",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "NSP16",
+            "kmers" : 0,
+            "min_len" : 268, 
+            "max_len" : 332,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 0
+         },
+        "S" : {
+            "anno" : "Spike protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "S",
+            "kmers" : 1,
+            "min_len" : 1039, 
+            "max_len" : 1330,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "SP" : {
+            "anno" : "Signal peptide of spike protein",
+            "bit_cutoff" : 25,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 0,
+            "kmers" : 0,
+            "feature_type" : "mat_peptide",
+            "gene_symbol" : "SP",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "E" : {
+            "anno" : "Envelope protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "E",
+            "kmers" : 1,
+            "min_len" : 84, 
+            "max_len" : 121,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "M" : {
+            "anno" : "Membrane glycoprotein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "M",
+            "kmers" : 1,
+            "min_len" : 201, 
+            "max_len" : 251,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "N" : {
+            "anno" : "Nucleocapsid protein",
+            "bit_cutoff" : 100,
+            "copy_num" : 1,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "N",
+            "kmers" : 1,
+            "min_len" : 341, 
+            "max_len" : 450,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF3a" : {
+            "anno" : "Nonstructural protein involved in interferon suppression ORF3a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3a",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26401035"],
+            "upstream_ext" : 1
+         },
+         "ORF3b" : {
+            "anno" : "Nonstructural protein involved in interferon suppression ORF3b",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF3b",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "PMID" : ["26401035"],
+            "upstream_ext" : 1
+         },
+         "ORF4a" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF (ORF4a)",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF4a",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF4b" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF (ORF4b)",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF4b",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF4c" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF (ORF4c)",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF4c",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF5a" : {
+            "anno" : "Gammacoronavirus uncharacterized protein ORF5a",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF5a",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF5b" : {
+            "anno" : "Gammacoronavirus uncharacterized protein ORF5b",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF5b",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF5c" : {
+            "anno" : "Gammacoronavirus uncharacterized protein ORF5c",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF5c",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "ORF6" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF (ORF6)",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "gene_symbol" : "ORF6",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC1" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC2" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC3" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC4" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 1,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC5" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC6" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC7" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC8" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC9" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC10" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC11" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC12" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC13" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC14" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC15" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC16" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "kmers" : 0,
+            "feature_type" : "CDS",
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC17" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         },
+         "UNC18" : {
+            "anno" : "Gammacoronavirus uncharacterized ORF",
+            "bit_cutoff" : 100,
+            "coverage_cutoff" : 0.65,
+            "downstream_ext" : 1,
+            "feature_type" : "CDS",
+            "kmers" : 0,
+            "segment" : "Single RNA Segment",
+            "upstream_ext" : 1
+         }
+      },
+      "segments" : {
+         "Single RNA Segment" : {
+            "max_len" : 31000,
+            "min_len" : 24000,
+            "replicon_geometry" : "linear"
+         }
+      }
+   },
    "Deltacoronavirus" : {
       "close_genomes" : {
          "Deltacoronavirus.dna" : {
@@ -1146,7 +1742,7 @@
             "min_len" : 1174,
             "max_len" : 1591,
             "segment" : "Single RNA Segment",
-            "PMID" : ["2227823"],
+            "PMID" : ["2227823", "33327866"],
             "upstream_ext" : 0
          },
          "NSP4" : {
@@ -1378,7 +1974,7 @@
             "upstream_ext" : 1
          },
          "M" : {
-            "anno" : "Matrix protein",
+            "anno" : "Membrane glycoprotein",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -1433,7 +2029,7 @@
             "upstream_ext" : 1
          },
          "NS7b" : {
-            "anno" : "Uncharacterized ORF NS7b",
+            "anno" : "Deltacoronavirus uncharacterized ORF NS7b",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -1444,7 +2040,7 @@
             "upstream_ext" : 1
          },
          "NS7c" : {
-            "anno" : "Uncharacterized ORF NS7c",
+            "anno" : "Deltacoronavirus uncharacterized ORF NS7c",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -1455,7 +2051,7 @@
             "upstream_ext" : 1
          },
          "NS7d" : {
-            "anno" : "Uncharacterized ORF NS7d",
+            "anno" : "Deltacoronavirus uncharacterized ORF NS7d",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
