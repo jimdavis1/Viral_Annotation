@@ -1,5 +1,5 @@
 # Viral Annotation
-This repo contains code and data for improving viral annotation.  It currently covers the  *Bunyavirales*, *Filoviridae*, *Orthomyxoviridae*, *Paramyxoviridae*, and *Pneumoviridae*. The overall goal is to create a low-tech solution for calling viral proteins across entire viral families and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
+This repo contains code and data for improving viral annotation.  It currently covers the  *Bunyavirales*, *Coronaviridae*, *Filoviridae*, *Orthomyxoviridae*, *Paramyxoviridae*, and *Pneumoviridae*. The overall goal is to create a low-tech solution for consistently and accurately annotating viral proteins across entire viral families and to cover cases where we do not have bespoke species-specific annotations from VIGOR4.<br>
 
 This program is not intended to be used as a *de novo* protein or ORF discovery tool.  It is designed to find proteins that we already know to exist.  
 
