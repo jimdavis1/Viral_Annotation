@@ -26,12 +26,12 @@ close IN;
 
 if ($markdown)
 {
-	print "| Taxon | PSSM_Name | Feat_Type | Anno |\n";
-	print "|:------|:---------:|:---------:|:---:|\n";	
+	print "| Taxon | PSSM_Name | Anno | Feat_Type | Copy_Number | Segment | Genome_Quality |\n";
+	print "|:------|:---------:|:----:|:---------:|:-----------:|:-------:|:--------------:|\n";	
 }
 else
 {
-	print "Taxon\tPSSM_Name\tFeat_Type\tAnno\n";
+	print "Taxon\tPSSM_Name\tAnno\tFeat_Type\tCopy_Number\tSegment\tGenome_Quality\n";
 }
 
 
@@ -42,25 +42,37 @@ foreach (sort keys %$json)
 	foreach (sort keys %{$json->{$fam}->{features}})
 	{
 		my $pssm = $_;
-		my $type = $json->{$fam}->{features}->{$pssm}->{feature_type};
-		
+		my $feat = $json->{$fam}->{features}->{$pssm};
+
+		my $type = $feat->{feature_type};
+
+		# anno: prefer anno, fall back to new_anno
 		my $anno;
-		if ($json->{$fam}->{features}->{$pssm}->{anno})
+		if ($feat->{anno})
 		{
-			$anno = $json->{$fam}->{features}->{$pssm}->{anno};
+			$anno = $feat->{anno};
 		}
-		elsif ($json->{$fam}->{features}->{$pssm}->{new_anno})
+		elsif ($feat->{new_anno})
 		{
-			$anno = $json->{$fam}->{features}->{$pssm}->{new_anno};
+			$anno = $feat->{new_anno};
 		}
-	
+
+		# copy_num: use value if present, otherwise empty string
+		my $copy_num = defined $feat->{copy_num} ? $feat->{copy_num} : '';
+
+		# segment: use value if present, otherwise empty string
+		my $segment = defined $feat->{segment} ? $feat->{segment} : '';
+
+		# genome_quality: 1 if BOTH min_len and max_len are defined, 0 otherwise
+		my $genome_quality = (defined $feat->{min_len} && defined $feat->{max_len}) ? 1 : 0;
+
 		if ($markdown)
 		{
-			print "| $fam | $pssm | $type | $anno |\n";
+			print "| $fam | $pssm | $anno | $type | $copy_num | $segment | $genome_quality |\n";
 		}
 		else
 		{
-			print "$fam\t$pssm\t$type\t$anno\n";	
+			print "$fam\t$pssm\t$anno\t$type\t$copy_num\t$segment\t$genome_quality\n";	
 		}
 	
 	}

@@ -62,13 +62,13 @@
             "upstream_ext" : 0
          },
          "PLPRO" : {
-            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "anno" : "Papain-like protease involved in polyprotein cleavage NSP3",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "PLpro",
+            "gene_symbol" : "NSP3",
             "kmers" : 0,
             "min_len" : 1500,
             "max_len" : 2000,
@@ -92,13 +92,13 @@
             "upstream_ext" : 0
          },
          "MPRO" : {
-            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "anno" : "Main protease involved in polyprotein cleavage NSP5",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "Mpro",
+            "gene_symbol" : "NSP5",
             "kmers" : 0,
             "min_len" : 273,
             "max_len" : 333,
@@ -442,13 +442,13 @@
             "upstream_ext" : 0
          },
          "PLPRO" : {
-            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "anno" : "Papain-like protease involved in polyprotein cleavage NSP3",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "PLpro",
+            "gene_symbol" : "NSP3",
             "kmers" : 0,
             "min_len" : 1664,
             "max_len" : 2266,
@@ -470,13 +470,13 @@
             "upstream_ext" : 0
          },
          "MPRO" : {
-            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "anno" : "Main protease involved in polyprotein cleavage NSP5",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "Mpro",
+            "gene_symbol" : "NSP5",
             "kmers" : 0,
             "min_len" : 270,
             "max_len" : 330,
@@ -1138,13 +1138,13 @@
             "upstream_ext" : 1
          },
          "PLPRO" : {
-            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "anno" : "Papain-like protease involved in polyprotein cleavage NSP3",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "PLpro",
+            "gene_symbol" : "NSP3",
             "kmers" : 0,
             "min_len" : 1377,
             "max_len" : 1845,
@@ -1166,13 +1166,13 @@
             "upstream_ext" : 0
          },
          "MPRO" : {
-            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "anno" : "Main protease involved in polyprotein cleavage NSP5",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "Mpro",
+            "gene_symbol" : "NSP5",
             "kmers" : 0,
             "min_len" : 269,
             "max_len" : 338,
@@ -1731,13 +1731,13 @@
             "upstream_ext" : 1
          },
          "PLPRO" : {
-            "anno" : "Papain-like protease involved in polyprotein cleavage PLpro",
+            "anno" : "Papain-like protease involved in polyprotein cleavage NSP3",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "PLpro",
+            "gene_symbol" : "NSP3",
             "kmers" : 0,
             "min_len" : 1174,
             "max_len" : 1591,
@@ -1761,13 +1761,13 @@
             "upstream_ext" : 0
          },
          "MPRO" : {
-            "anno" : "Main protease involved in polyprotein cleavage Mpro",
+            "anno" : "Main protease involved in polyprotein cleavage NSP5",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
-            "gene_symbol" : "Mpro",
+            "gene_symbol" : "NSP5",
             "kmers" : 0,
             "min_len" : 278,
             "max_len" : 338,
@@ -2075,6 +2075,10 @@
          "Alphainfluenzavirus.1.dna" : {
             "genome_ids" : "211044.132,211044.134,211044.135,211044.133,211044.129,211044.130,211044.128,211044.131",
             "genome_name" : "Influenza A virus (A/Puerto Rico/8/1934(H1N1))"
+         },
+         "Alphainfluenzavirus.2.dna" : {
+            "genome_ids" : "335341.21,335341.18,335341.22,335341.23,335341.17,335341.19,335341.20,335341.24",
+            "genome_name" : "Influenza A virus (A/New York/392/2004(H3N2))"
          }
       },
       "features" : {
@@ -2304,42 +2308,42 @@
       "segments" : {
          "PB2 Segment" : {
             "min_len" : 2200,
-            "max_len" : 2420,
+            "max_len" : 2520,
             "replicon_geometry" : "linear"
          },
          "PB1 Segment" : {
             "min_len" : 2200,
-            "max_len" : 2380,
+            "max_len" : 2480,
             "replicon_geometry" : "linear"
          },
          "PA Segment" : {
             "min_len" : 2100,
-            "max_len" : 2270,
+            "max_len" : 2370,
             "replicon_geometry" : "linear"
          },
          "HA Segment" : {
             "min_len" : 1600,
-            "max_len" : 1820,
+            "max_len" : 1920,
             "replicon_geometry" : "linear"
          },
          "NP Segment" : {
             "min_len" : 1460,
-            "max_len" : 1600,
+            "max_len" : 1700,
             "replicon_geometry" : "linear"
          },
          "NA Segment" : {
             "min_len" : 1300,
-            "max_len" : 1500,
+            "max_len" : 1600,
             "replicon_geometry" : "linear"
          },
          "M Segment" : {
             "min_len" : 900,
-            "max_len" : 1070,
+            "max_len" : 1170,
             "replicon_geometry" : "linear"
          },    
          "NS1 Segment" : {
             "min_len" : 770,
-            "max_len" : 940,
+            "max_len" : 1040,
             "replicon_geometry" : "linear"
          }
       }
@@ -2536,42 +2540,42 @@
       "segments" : {
          "PB2 Segment" : {
             "min_len" : 2310,
-            "max_len" : 2400,
+            "max_len" : 2500,
             "replicon_geometry" : "linear"
          },
          "PB1 Segment" : {
             "min_len" : 2250,
-            "max_len" : 2400,
+            "max_len" : 2500,
             "replicon_geometry" : "linear"
          },
          "PA Segment" : {
             "min_len" : 2170,
-            "max_len" : 2320,
+            "max_len" : 2420,
             "replicon_geometry" : "linear"
          },
          "HA Segment" : {
             "min_len" : 1740,
-            "max_len" : 1910,
+            "max_len" : 2010,
             "replicon_geometry" : "linear"
          },
          "NP Segment" : {
             "min_len" : 1680,
-            "max_len" : 1860,
+            "max_len" : 1960,
             "replicon_geometry" : "linear"
          },
          "NA Segment" : {
             "min_len" : 1380,
-            "max_len" : 1580,
+            "max_len" : 1680,
             "replicon_geometry" : "linear"
          },
          "M Segment" : {
             "min_len" : 1020,
-            "max_len" : 1200,
+            "max_len" : 1300,
             "replicon_geometry" : "linear"
          },    
          "NS1 Segment" : {
             "min_len" : 1000,
-            "max_len" : 1120,
+            "max_len" : 1220,
             "replicon_geometry" : "linear"
          }
       }
@@ -2779,37 +2783,37 @@
       "segments" : {
          "PB2 Segment" : {
             "min_len" : 2300,
-            "max_len" : 2400,
+            "max_len" : 2500,
             "replicon_geometry" : "linear"
          },
          "PB1 Segment" : {
             "min_len" : 2250,
-            "max_len" : 2400,
+            "max_len" : 2500,
             "replicon_geometry" : "linear"
          },
          "PA Segment" : {
             "min_len" : 2100,
-            "max_len" : 2200,
+            "max_len" : 2300,
             "replicon_geometry" : "linear"
          },
          "HEF Segment" : {
             "min_len" : 1920,
-            "max_len" : 2100,
+            "max_len" : 2200,
             "replicon_geometry" : "linear"
          },
          "NP Segment" : {
             "min_len" : 1680,
-            "max_len" : 1830,
+            "max_len" : 1930,
             "replicon_geometry" : "linear"
          },
           "M Segment" : {
             "min_len" : 1020,
-            "max_len" : 1200,
+            "max_len" : 1300,
             "replicon_geometry" : "linear"
          },    
          "NS1 Segment" : {
             "min_len" : 820,
-            "max_len" : 940,
+            "max_len" : 1040,
             "replicon_geometry" : "linear"
          }
       }
@@ -2972,37 +2976,37 @@
       "segments" : {
          "PB2 Segment" : {
             "min_len" : 2300,
-            "max_len" : 2400,
+            "max_len" : 2500,
             "replicon_geometry" : "linear"
          },
          "PB1 Segment" : {
             "min_len" : 2200,
-            "max_len" : 2400,
+            "max_len" : 2500,
             "replicon_geometry" : "linear"
          },
          "PA Segment" : {
             "min_len" : 2100,
-            "max_len" : 2250,
+            "max_len" : 2350,
             "replicon_geometry" : "linear"
          },
          "HEF Segment" : {
             "min_len" : 1900,
-            "max_len" : 2100,
+            "max_len" : 2200,
             "replicon_geometry" : "linear"
          },
          "NP Segment" : {
             "min_len" : 1630,
-            "max_len" : 1780,
+            "max_len" : 1880,
             "replicon_geometry" : "linear"
          },
           "M Segment" : {
             "min_len" : 1050,
-            "max_len" : 1250,
+            "max_len" : 1350,
             "replicon_geometry" : "linear"
          },    
          "NS1 Segment" : {
             "min_len" : 700,
-            "max_len" : 900,
+            "max_len" : 1000,
             "replicon_geometry" : "linear"
          }
       }
@@ -3349,7 +3353,7 @@
       },
       "features" : {
          "GP1" : {
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "begin" : {
                "begin_offset" : 1,
                "begin_pssm" : "SSP",
@@ -3368,7 +3372,7 @@
             "translate" : 1
          },
          "GP2" : {
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -3915,7 +3919,7 @@
             "upstream_ext" : 1
          },
          "Gc" : {
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -3925,7 +3929,7 @@
             "upstream_ext" : 0
          },
          "Gn" : {
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "gene_symbol" : "Gn",
@@ -4798,7 +4802,7 @@
             "upstream_ext" : 1
          },
          "Gc" : {
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
             "downstream_ext" : 1,
@@ -4808,7 +4812,7 @@
             "upstream_ext" : 0
          },
          "Gn" : {
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "bit_cutoff" : 150,
             "coverage_cutoff" : 0.8,
             "gene_symbol" : "Gn",
@@ -5210,7 +5214,7 @@
             "PMID" : [
                "10683320"
             ],
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 100,
             "copy_num" : 1,
             "coverage_cutoff" : 0.65,
@@ -5227,7 +5231,7 @@
                "21411529",
                "26051281"
             ],
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "copy_num" : 1,
             "feature_type" : "mat_peptide",
             "gene_symbol" : "Gn",
@@ -5415,7 +5419,7 @@
                "25723165",
                "10683320"
             ],
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 1,
@@ -5429,7 +5433,7 @@
                "25723165",
                "10683320"
             ],
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -6426,7 +6430,7 @@
             "upstream_ext" : 1
          },
          "Gc" : {
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 200,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -6436,7 +6440,7 @@
             "upstream_ext" : 0
          },
          "Gn" : {
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "bit_cutoff" : 200,
             "coverage_cutoff" : 0.65,
             "gene_symbol" : "Gn",
@@ -6662,7 +6666,7 @@
             "upstream_ext" : 1
          },
          "Gc" : {
-            "anno" : "Mature envelope glycoprotein Gc",
+            "anno" : "Mature C-terminal envelope glycoprotein Gc",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
@@ -6672,7 +6676,7 @@
             "upstream_ext" : 0
          },
          "Gn" : {
-            "anno" : "Mature envelope glycoprotein Gn",
+            "anno" : "Mature N-terminal envelope glycoprotein Gn",
             "bit_cutoff" : 100,
             "coverage_cutoff" : 0.65,
             "downstream_ext" : 0,
