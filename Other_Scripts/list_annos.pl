@@ -26,12 +26,12 @@ close IN;
 
 if ($markdown)
 {
-	print "| Taxon | PSSM_Name | Anno | Feat_Type | Copy_Number | Segment | Genome_Quality |\n";
-	print "|:------|:---------:|:----:|:---------:|:-----------:|:-------:|:--------------:|\n";	
+	print "| Taxon | PSSM_Name | Anno | Feat_Type | Copy_Number | Segment | Genome_Quality | PMID |\n";
+	print "|:------|:---------:|:----:|:---------:|:-----------:|:-------:|:--------------:|:----:|\n";	
 }
 else
 {
-	print "Taxon\tPSSM_Name\tAnno\tFeat_Type\tCopy_Number\tSegment\tGenome_Quality\n";
+	print "Taxon\tPSSM_Name\tAnno\tFeat_Type\tCopy_Number\tSegment\tGenome_Quality\tPMID\n";
 }
 
 
@@ -66,13 +66,20 @@ foreach (sort keys %$json)
 		# genome_quality: 1 if BOTH min_len and max_len are defined, 0 otherwise
 		my $genome_quality = (defined $feat->{min_len} && defined $feat->{max_len}) ? 1 : 0;
 
+		# pmid: join array with commas if present, otherwise empty string
+		my $pmid = '';
+		if ($feat->{PMID} && ref($feat->{PMID}) eq 'ARRAY') {
+			$pmid = join(',', @{$feat->{PMID}});
+		}
+
 		if ($markdown)
 		{
-			print "| $fam | $pssm | $anno | $type | $copy_num | $segment | $genome_quality |\n";
+			print "| $fam | $pssm | $anno | $type | $copy_num | $segment | $genome_quality | $pmid |\n";
 		}
 		else
 		{
-			print "$fam\t$pssm\t$anno\t$type\t$copy_num\t$segment\t$genome_quality\n";	
+			$pmid =~ s/\,/\;/g; 
+			print "$fam\t$pssm\t$anno\t$type\t$copy_num\t$segment\t$genome_quality\t$pmid\n";	
 		}
 	
 	}
