@@ -6512,7 +6512,7 @@
          },
          "Small RNA Segment" : {
             "max_len" : 1330,
-            "min_len" : 750,
+            "min_len" : 700,
             "replicon_geometry" : "linear"
          }
       }

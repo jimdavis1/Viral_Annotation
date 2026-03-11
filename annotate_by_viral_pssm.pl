@@ -25,7 +25,7 @@ my $usage = 'annotate_by_viral_pssm.pl [options] -i subject_contig(s).fasta
 		-min Minimum contig	length (d = 300)  # otherwise the genome is rejected
 		-max Maximum contig length (d = 35000) # for reference Measles is 15,894 and Beilong is 19,212
 	
-		-mcb Minimum contig bitscore to enable annotation (d = 500) #otherwise the genome is rejected.
+		-mcb Minimum contig bitscore to enable annotation (d = 150) #otherwise the genome is rejected.
 
         -j   Full path to the options file in JSON format which carries data for a match (D = $default_data_dir/Viral_PSSM.json)
 		-c   Representative contigs directory (D = $default_data_dir/Viral-Rep-Contigs)
@@ -97,7 +97,7 @@ unless ($contig_file ){die "must declare an input subject file with -i \n\n$usag
 unless ($tmp){$tmp .= sprintf("%x", rand 16) for 1..20;}
 unless ($min_len){$min_len = 300; }
 unless ($max_len){$max_len = 35000; }
-unless ($min_contig_bit){$min_contig_bit = 500;}
+unless ($min_contig_bit){$min_contig_bit = 150;}
 unless ($tax){$tax = "10239"; }
 unless ($genome_name){$genome_name = "Viruses"; }
 unless ($prefix){$prefix = "Viral_Annotation";}

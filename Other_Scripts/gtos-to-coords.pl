@@ -54,23 +54,57 @@ foreach (@files)
 	
 	unless (exists $exclude{$file})
 	{
-	
-		my $genome_in = GenomeTypeObject->create_from_file("$dir/$file");
-		$genome_in or warn "Error reading and parsing input for $file\n";
-		my $gid =  $genome_in->{"id"}; 
-		my $name = $genome_in->{"scientific_name"};
-		my $qual = $genome_in->{"quality"}->{"genome_quality"}; # i chose to ditch this.
-		next if ($qual =~ /Poor/);	
-		
+		# skip empty files
+		unless (-s "$dir/$file")
+		{
+			warn "Skipping empty file: $file\n";
+			next;
+		}
+
+		my $genome_in = eval { GenomeTypeObject->create_from_file("$dir/$file") };
+		if ($@ || !$genome_in)
+		{
+			warn "Error reading and parsing input for $file: " . ($@ || "unknown error") . "\n";
+			next;
+		}
+
+		my $gid  = eval { $genome_in->{"id"} };
+		my $name = eval { $genome_in->{"scientific_name"} };
+		my $qual = eval { $genome_in->{"quality"}->{"genome_quality"} };
+
+		unless (defined $gid && defined $name)
+		{
+			warn "Skipping $file: missing required fields (id or scientific_name)\n";
+			next;
+		}
+
+		next if (defined $qual && $qual =~ /Poor/);
+
 		#get the annotated family for the color file. 
 		my $fam;
-		my @features = @{$genome_in->{"features"}};
+		my @features = eval { @{$genome_in->{"features"}} };
+		if ($@)
+		{
+			warn "Skipping $file: could not read features: $@\n";
+			next;
+		}
+
 		for my $i (0..$#features)
 		{
-			my $type   = $genome_in->{"features"}->[$i]->{"type"};		
-			my $peg_id = $genome_in->{"features"}->[$i]->{"id"};		
-			my $anno   = $genome_in->{"features"}->[$i]->{"function"};	
-			my @locs   = @{$genome_in->{"features"}->[$i]->{"location"}};	
+			my ($type, $peg_id, $anno, @locs);
+			eval
+			{
+				$type   = $genome_in->{"features"}->[$i]->{"type"};
+				$peg_id = $genome_in->{"features"}->[$i]->{"id"};
+				$anno   = $genome_in->{"features"}->[$i]->{"function"};
+				@locs   = @{$genome_in->{"features"}->[$i]->{"location"}};
+			};
+			if ($@)
+			{
+				warn "Skipping feature $i in $file: $@\n";
+				next;
+			}
+
 			if (scalar @locs > 1)  # no broken features.
 			{
 				warn "$file:  $peg_id:  multi-location feature";
@@ -78,11 +112,21 @@ foreach (@files)
 			}
 			else
 			{
-				my $contig = $genome_in->{"features"}->[$i]->{"location"}->[0]->[0];
-				my $begin  = $genome_in->{"features"}->[$i]->{"location"}->[0]->[1];
-				my $strand = $genome_in->{"features"}->[$i]->{"location"}->[0]->[2];
-				my $len    = $genome_in->{"features"}->[$i]->{"location"}->[0]->[3];
-				my $end; 
+				my ($contig, $begin, $strand, $len);
+				eval
+				{
+					$contig = $genome_in->{"features"}->[$i]->{"location"}->[0]->[0];
+					$begin  = $genome_in->{"features"}->[$i]->{"location"}->[0]->[1];
+					$strand = $genome_in->{"features"}->[$i]->{"location"}->[0]->[2];
+					$len    = $genome_in->{"features"}->[$i]->{"location"}->[0]->[3];
+				};
+				if ($@ || !defined $begin || !defined $strand || !defined $len)
+				{
+					warn "Skipping feature $peg_id in $file: bad location data\n";
+					next;
+				}
+
+				my $end;
 				if ($strand =~ /\+/)
 				{
 					$end = (($begin + $len ) - 1);
@@ -91,44 +135,14 @@ foreach (@files)
 				{
 					$end = (($begin - $len) +1);
 				}
-			
+				else
+				{
+					warn "Skipping feature $peg_id in $file: unrecognised strand '$strand'\n";
+					next;
+				}
+
 				print "$old_id\t$gid\t$peg_id\t$begin\t$end\t$anno\t$name\n";
 			}
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
