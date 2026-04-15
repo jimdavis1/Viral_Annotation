@@ -12,19 +12,21 @@ my $usage = 'gtos-to-coords.pl  [options] -i GTO_DIR
 	-h help
 	-i GTO DIR
 	-e exclude_file list of filenames to exclude
+	-a all genomes (disables poor-quality filtering)
 
 	gtos in the directory must all have the file prefix .gto.
-	This purges all poor-quality genomes.
+	This purges all poor-quality genomes unless -a is set.
 	
 	
 ';
 
-my ($help, $dir, $exclude_file);
+my ($help, $dir, $exclude_file, $all);
 
 
 my $opts = GetOptions( 'h'         => \$help,
                        'i=s'       => \$dir,
                        'e=s'       => \$exclude_file,
+                       'a'         => \$all,
                        ); 
 
 
@@ -78,7 +80,7 @@ foreach (@files)
 			next;
 		}
 
-		next if (defined $qual && $qual =~ /Poor/);
+		next if (!$all && defined $qual && $qual =~ /Poor/);
 
 		#get the annotated family for the color file. 
 		my $fam;

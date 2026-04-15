@@ -3344,11 +3344,15 @@
          },
          "Arenaviridae.3.dna" : {
             "genome_ids" : "NC_078283.1,NC_078284.1,NC_078285.1",
-            "genome_name" : "MAG: Salmon pescarenavirus 1 isolate G518 "
+            "genome_name" : "MAG: Salmon pescarenavirus 1 isolate G518"
          },
          "Arenaviridae.4.dna" : {
             "genome_ids" : "NC_079038.1,NC_079037.1",
-            "genome_name" : "Hartmanivirus BESV-1 isolate CR-Wild5-brain "
+            "genome_name" : "Hartmanivirus BESV-1 isolate CR-Wild5-brain"
+         },
+         "Arenaviridae.5.dna" : {
+            "genome_ids" : "2800209.33,2800209.13",
+            "genome_name" : "BaTang virus strain O.Curzoniae/YS216_2015/F"
          }
       },
       "features" : {
@@ -3667,6 +3671,14 @@
          "Fimoviridae.2.dna" : {
             "genome_ids" : "1776763.37,1776763.38,1776763.39,1776763.40,1776763.41",
             "genome_name" : "Actinidia chlorotic ringspot-associated virus HN-6"
+         },
+         "Fimoviridae.3.dna" : {
+            "genome_ids" : "2483037.7,2483037.8,2483037.9,2483037.10,2483037.11,2483037.12,2483037.13,2483037.14,2483037.15,2483037.16",
+            "genome_name" : "Perilla mosaic virus Kochi_Nankoku_2011"
+         },
+         "Fimoviridae.4.dna" : {
+            "genome_ids" : "2681381.3,2681381.4,2681381.5,2681381.6,2681381.3",
+            "genome_name" : "Aspen mosaic-associated virus"
          }
       },
       "features" : {
@@ -4763,7 +4775,11 @@
          },
          "Nairoviridae.3.dna" : {
             "genome_ids" : "NC_055922.1,NC_078260.1,NC_078259.1",
-            "genome_name" : "Pacific coast tick nairovirus isolate Docc2011cons "
+            "genome_name" : "Pacific coast tick nairovirus isolate Docc2011cons"
+         },
+         "Nairoviridae.4.dna" : {
+            "genome_ids" : "2304647.23,2304647.29",
+            "genome_name" : "Beiji nairovirus strain H160"
          }
       },
       "features" : {
@@ -6011,7 +6027,7 @@
       },
       "segments" : {
          "Single RNA Segment" : {
-            "max_len" : 1880,
+            "max_len" : 18800,
             "min_len" : 11777,
             "replicon_geometry" : "linear"
          }
@@ -6155,9 +6171,13 @@
    },
    "Paraavulavirus" : {
       "close_genomes" : {
-         "Paraavulavirus.dna" : {
+         "Paraavulavirus.1.dna" : {
             "genome_ids" : "2560327.5",
             "genome_name" : "Avian paraavulavirus 3 turkey/Wisconsin/68"
+         },
+         "Paraavulavirus.2.dna" : {
+            "genome_ids" : "28274.79",
+            "genome_name" : "Avian paramyxovirus 4 isolate APMV-4/KR/YJ/06"
          }
       },
       "features" : {
@@ -6411,7 +6431,19 @@
          },
          "Peribunyaviridae.2.dna" : {
             "genome_ids" : "JN808311.1,JN808310.1,EU879062.3",
-            "genome_name" : "Cholul virus strain CHLV-Mex07 "
+            "genome_name" : "Cholul virus strain CHLV-Mex07"
+         },
+         "Peribunyaviridae.3.dna" : {
+            "genome_ids" : "70566.628,70566.629,70566.630",
+            "genome_name" : "Akabane virus"
+         },
+         "Peribunyaviridae.4.dna" : {
+            "genome_ids" : "2748237.12,2748237.13,2748237.14",
+            "genome_name" : "Pahayokee virus"
+         },
+         "Peribunyaviridae.5.dna" : {
+            "genome_ids" : "1133363.415,1133363.416,1133363.417",
+            "genome_name" : "Schmallenberg virus isolate F6"
          }
       },
       "features" : {
@@ -6642,6 +6674,38 @@
          "Phenuiviridae.6.dna" : {
             "genome_ids" : "LC636068.1,LC636069.1",
             "genome_name" : "Watermelon crinkle leaf-associated virus 1 Pi-01 RNA"
+         },
+         "Phenuiviridae.7.dna" : {
+            "genome_ids" : "2874031.6,2874031.7,2874031.8",
+            "genome_name" : "Toyo virus IM-OI100"
+         },
+         "Phenuiviridae.8.dna" : {
+            "genome_ids" : "1003835.1576,1003835.1577,1003835.1578",
+            "genome_name" : "Severe fever with thrombocytopenia syndrome virus strain HNXH"
+         },
+         "Phenuiviridae.9.dna" : {
+            "genome_ids" : "2704636.33,2704636.33",
+            "genome_name" : "Brown dog tick phlebovirus 2 strain GD-JY01"
+         },
+         "Phenuiviridae.10.dna" : {
+            "genome_ids" : "1608046.7,1608046.8",
+            "genome_name" : "Dabieshan Tick Virus strain D3"
+         },
+         "Phenuiviridae.11.dna" : {
+            "genome_ids" : "1980610.154,1980610.155,1980610.156",
+            "genome_name" : "Phasi Charoen-like virus isolate Rio"
+         },
+         "Phenuiviridae.12.dna" : {
+            "genome_ids" : "12331.511,12331.512,12331.513,12331.514",
+            "genome_name" : "Rice stripe virus RNA 4"
+         },
+         "Phenuiviridae.13.dna" : {
+            "genome_ids" : "2789411.52,2789411.59",
+            "genome_name" : "Onega tick phlebovirus isolate HL8"
+         },
+         "Phenuiviridae.14.dna" : {
+            "genome_ids" : "11590.1793,11590.1794,11590.1795",
+            "genome_name" : "Toscana virus strain 1812V"
          }
       },
       "features" : {
@@ -6959,6 +7023,10 @@
          "Tospoviridae.2.dna" : {
             "genome_ids" : "304859.37,304859.38,304859.39",
             "genome_name" : "Tomato yellow ring virus TYRV-t"
+         },
+         "Tospoviridae.3.dna" : {
+            "genome_ids" : "198612.540,198612.541,198612.542",
+            "genome_name" : "Groundnut bud necrosis virus isolate Coimbatore"
          }
       },
       "features" : {
