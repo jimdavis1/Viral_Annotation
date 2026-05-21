@@ -116,6 +116,8 @@ my $event_id = $genome_in->add_analysis_event($event);
 ## add features so that we can register the counts.
 ##
 
+my $viral_family;
+
 my ($close_bit, $close_id, $close_name, $close_file);
 if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 {
@@ -128,6 +130,8 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 		$close_bit  = $cb;
 		$close_id   = $ci;
 		$close_name = $cn;
+
+		$viral_family = $virus;
 		
 		my $feature;
 		if ($type =~ /(mat_peptide)|(CDS)/)
@@ -201,6 +205,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 	push(@{$genome_in->{close_genomes}}, $close);
 
 
+	$genome_in->{viral_family} = $viral_family;
 }
 else
 {

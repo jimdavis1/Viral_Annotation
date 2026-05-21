@@ -76,19 +76,9 @@ $genome_in->{features}->[0] or die "No features in GTO\n";
 my $base = getcwd;
 
 
-# We read the GTO to get the family 
-my %pssm_fam;
-for my $i (0 .. $#{$genome_in->{features}}) 
-{
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan/))
-	{
-		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
-	}
-}
-
-die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
-my $fam = (keys %pssm_fam)[0];
-$fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
+# Get the viral family from the GTO
+my $fam = $genome_in->{viral_family};
+$fam or die "GTO has no viral_family field (not annotated by LowVan?)\n";
 
 
 # Next we read the JSON to see if there are any transcript edited features that we need to find

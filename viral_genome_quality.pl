@@ -76,21 +76,9 @@ my $event = {
 };
 my $event_id = $genome_in->add_analysis_event($event);
 
-# We read the GTO to get the family pssm that was used to call the proteins so that
-# we can look up which genes are essential.
-# also make sure that the GTO has our annotations.
-
-my %pssm_fam;
-for my $i (0 .. $#{$genome_in->{features}}) 
-{
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan Annotate/))
-	{
-		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
-	}
-}
-die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
-my $fam = (keys %pssm_fam)[0];
-$fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
+# Get the viral family from the GTO
+my $fam = $genome_in->{viral_family};
+$fam or die "GTO has no viral_family field (not annotated by LowVan?)\n";
 
 # Next, we read the annotation json file to initiate a hash of which proteins are essential.
 # In this case, essential really means that it is one of the proteins we are looking for.
