@@ -9,6 +9,9 @@ use IPC::Run qw(run);
 use Cwd;
 use gjoseqlib;
 use Getopt::Long::Descriptive;
+use LowVanVersion;
+
+my $tool_version = LowVanVersion::get_version();
 
 
 my $program_description = <<'END_DESCRIPTION';
@@ -118,6 +121,7 @@ if (scalar @to_analyze)
 	# create the GTO analysis event.
 	my $event = {
  	   tool_name => "LowVan Transcript Edited Features",
+ 	   tool_version => $tool_version,
   	   execution_time => scalar gettimeofday,
 	};
 	my $event_id = $genome_in->add_analysis_event($event);

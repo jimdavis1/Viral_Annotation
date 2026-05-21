@@ -10,6 +10,9 @@ use Cwd;
 use gjoseqlib;
 use Getopt::Long::Descriptive;
 use List::Util qw(max min);
+use LowVanVersion;
+
+my $tool_version = LowVanVersion::get_version();
 
 
 
@@ -126,6 +129,7 @@ if (scalar @to_analyze)
 	# create the GTO analysis event.
 	my $event = {
  	   tool_name => "LowVan Splice Variant Features",
+ 	   tool_version => $tool_version,
   	   execution_time => scalar gettimeofday,
 	};
 	my $event_id = $genome_in->add_analysis_event($event);
@@ -334,7 +338,7 @@ if (scalar @to_analyze)
 							location    => @loc,
 							product     => $anno,
 							symbol      => $symbol,
-							pssm        => ([[$fam, $name, $anno, "LowVan Splice Variant Feature"]]),
+							pssm        => ([["LOWVAN", "$fam.$name", $anno, "LowVan Splice Variant Feature $tool_version"]]),
 						};
 						push(@{$features{$ft}}, $feature)
 	

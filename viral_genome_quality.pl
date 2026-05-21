@@ -7,6 +7,9 @@ use Getopt::Long::Descriptive;
 use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
+use LowVanVersion;
+
+my $tool_version = LowVanVersion::get_version();
 
 
 #   Adding in some notes here. The current GTO definition does not allow for an event id
@@ -57,6 +60,7 @@ $genome_in or die "Error reading json protein feature data";
 
 my $event = {
     tool_name => "LowVan Quality",
+    tool_version => $tool_version,
     execution_time => scalar gettimeofday,
 };
 my $event_id = $genome_in->add_analysis_event($event);

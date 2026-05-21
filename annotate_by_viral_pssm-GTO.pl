@@ -9,6 +9,9 @@ use IPC::Run qw(run);
 use File::SearchPath qw(searchpath);
 use P3DataAPI;
 use Cwd;
+use LowVanVersion;
+
+my $tool_version = LowVanVersion::get_version();
 
 my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
@@ -61,7 +64,7 @@ if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
 if (! $name)          {die "No genome name in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
-		      "-t",    $tempdir,
+		      "-t",    "$tempdir",
 		      "-p",    $prefix,
 		      "-tax",  $taxon_id,
 		      "-g",    $name,
@@ -90,6 +93,7 @@ if (!$ok)
     
 my $event = {
     tool_name => "LowVan Annotate",
+    tool_version => $tool_version,
     execution_time => scalar gettimeofday,
     parameters => \@params,
 };
@@ -117,14 +121,16 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 		my $feature;
 		if ($type =~ /(mat_peptide)|(CDS)/)
 		{
-			$feature = 
+			my $pssm_id = $pssm;
+			$pssm_id =~ s/\.pssm$//;  # Remove .pssm suffix for family_assignments
+			$feature =
 			{
 				type        => $type,
 				contig      => $contig,
 				aa_sequence => $aa,
 				location    => ([[$contig, $start, $strand, $len]]),
 				product     => $anno,
-				pssm        => ([[$virus, $pssm, $anno, "LowVan Annotate"]]),
+				pssm        => ([["LOWVAN", $pssm_id, $anno, "LowVan Annotate $tool_version"]]),
 				symbol      => $symbol,
 			}
 		}
