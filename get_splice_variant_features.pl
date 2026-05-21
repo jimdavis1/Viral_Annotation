@@ -51,11 +51,15 @@ my($opt, $usage) = describe_options(
 				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Splice-Variants"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
+				    ["version|v"            => "Show version information", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
 				    ["seqs|s"             => "Dump sequences to STDERR"]
 );
 
-
+if ($opt->version) {
+    print "get_splice_variant_features.pl version $tool_version\n";
+    exit 0;
+}
 print $usage->text and exit if $opt->help;
 die($usage->text) if @ARGV != 0;
 

@@ -27,9 +27,13 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
 				    ["max|a=i"         => "Max contig length, default is 40000", { default => 40000 }],
 				    ["min|z=i"         => "Min contig length, default is 300", { default => 300 }],
+				    ["version|v"       => "Show version information"],
 				    ["help|h"          => "Show this help message"]);
 
-
+if ($opt->version) {
+    print "annotate_by_viral_pssm-GTO.pl version $tool_version\n";
+    exit 0;
+}
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
 

@@ -41,9 +41,13 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["output|o=s"      => "Output GTO"],
 				    ["prefix|p=s"      => "Genome Quality File Prefix", { default => "Viral_Anno" }],
 				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
+				    ["version|v"       => "Show version information"],
 				    ["help|h"          => "Show this help message"]);
 
-
+if ($opt->version) {
+    print "viral_genome_quality.pl version $tool_version\n";
+    exit 0;
+}
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
 my $prefix = $opt->prefix // "Viral_Anno";
