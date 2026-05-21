@@ -7,9 +7,16 @@ use Getopt::Long::Descriptive;
 use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
-use LowVanVersion;
 
-my $tool_version = LowVanVersion::get_version();
+# Try to load version module; fall back to "dev" if not available
+my $tool_version;
+eval {
+    require LowVanVersion;
+    $tool_version = LowVanVersion::get_version();
+};
+if ($@ || !$tool_version) {
+    $tool_version = "dev";
+}
 
 
 #   Adding in some notes here. The current GTO definition does not allow for an event id

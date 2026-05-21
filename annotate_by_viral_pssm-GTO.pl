@@ -9,9 +9,16 @@ use IPC::Run qw(run);
 use File::SearchPath qw(searchpath);
 use P3DataAPI;
 use Cwd;
-use LowVanVersion;
 
-my $tool_version = LowVanVersion::get_version();
+# Try to load version module; fall back to "dev" if not available
+my $tool_version;
+eval {
+    require LowVanVersion;
+    $tool_version = LowVanVersion::get_version();
+};
+if ($@ || !$tool_version) {
+    $tool_version = "dev";
+}
 
 my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 

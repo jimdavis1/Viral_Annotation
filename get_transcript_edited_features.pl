@@ -9,9 +9,16 @@ use IPC::Run qw(run);
 use Cwd;
 use gjoseqlib;
 use Getopt::Long::Descriptive;
-use LowVanVersion;
 
-my $tool_version = LowVanVersion::get_version();
+# Try to load version module; fall back to "dev" if not available
+my $tool_version;
+eval {
+    require LowVanVersion;
+    $tool_version = LowVanVersion::get_version();
+};
+if ($@ || !$tool_version) {
+    $tool_version = "dev";
+}
 
 
 my $program_description = <<'END_DESCRIPTION';
