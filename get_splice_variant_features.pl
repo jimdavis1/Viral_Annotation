@@ -11,6 +11,16 @@ use gjoseqlib;
 use Getopt::Long::Descriptive;
 use List::Util qw(max min);
 
+# Try to load version module; fall back to "dev" if not available
+my $tool_version;
+eval {
+    require LowVanVersion;
+    $tool_version = LowVanVersion::get_version();
+};
+if ($@ || !$tool_version) {
+    $tool_version = "dev";
+}
+
 
 
 my $program_description = <<'END_DESCRIPTION';
@@ -48,11 +58,15 @@ my($opt, $usage) = describe_options(
 				    ["dir|d=s"              => "Full path to the directory hand curated transcripts", {default => "$default_data_dir/Splice-Variants"}],
 				    ["tmp|t=s"              => "Declare name for temp dir (D = randomly named in cwd)"], 
 				    ["help|h"               => "Show this help message", { shortcircuit => 1 } ],
+				    ["version|v"            => "Show version information", { shortcircuit => 1 } ],
 				    ["debug|b"              => "Enable debugging"],
 				    ["seqs|s"             => "Dump sequences to STDERR"]
 );
 
-
+if ($opt->version) {
+    print "get_splice_variant_features.pl version $tool_version\n";
+    exit 0;
+}
 print $usage->text and exit if $opt->help;
 die($usage->text) if @ARGV != 0;
 
@@ -69,19 +83,9 @@ $genome_in->{features}->[0] or die "No features in GTO\n";
 my $base = getcwd;
 
 
-# We read the GTO to get the family name
-my %pssm_fam;
-for my $i (0 .. $#{$genome_in->{features}}) 
-{
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan/))
-	{
-		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
-	}
-}
-
-die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
-my $fam = (keys %pssm_fam)[0];
-$fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
+# Get the viral family from the GTO
+my $fam = $genome_in->{viral_family};
+$fam or die "GTO has no viral_family field (not annotated by LowVan?)\n";
 
 
 # Next we read the JSON opts file to see if there are any spliced features that we need to find
@@ -126,6 +130,7 @@ if (scalar @to_analyze)
 	# create the GTO analysis event.
 	my $event = {
  	   tool_name => "LowVan Splice Variant Features",
+ 	   tool_version => $tool_version,
   	   execution_time => scalar gettimeofday,
 	};
 	my $event_id = $genome_in->add_analysis_event($event);
@@ -334,7 +339,7 @@ if (scalar @to_analyze)
 							location    => @loc,
 							product     => $anno,
 							symbol      => $symbol,
-							pssm        => ([[$fam, $name, $anno, "LowVan Splice Variant Feature"]]),
+							pssm        => ([["LOWVAN", "$fam.$name", $anno, "LowVan Splice Variant Feature $tool_version"]]),
 						};
 						push(@{$features{$ft}}, $feature)
 	

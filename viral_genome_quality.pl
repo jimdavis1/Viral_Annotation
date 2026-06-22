@@ -8,6 +8,16 @@ use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
 
+# Try to load version module; fall back to "dev" if not available
+my $tool_version;
+eval {
+    require LowVanVersion;
+    $tool_version = LowVanVersion::get_version();
+};
+if ($@ || !$tool_version) {
+    $tool_version = "dev";
+}
+
 
 #   Adding in some notes here. The current GTO definition does not allow for an event id
 #   To be tagged to something that isn't a feature.  Since overall genome quality is not a feature
@@ -38,9 +48,13 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["output|o=s"      => "Output GTO"],
 				    ["prefix|p=s"      => "Genome Quality File Prefix", { default => "Viral_Anno" }],
 				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
+				    ["version|v"       => "Show version information"],
 				    ["help|h"          => "Show this help message"]);
 
-
+if ($opt->version) {
+    print "viral_genome_quality.pl version $tool_version\n";
+    exit 0;
+}
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
 my $prefix = $opt->prefix // "Viral_Anno";
@@ -57,25 +71,14 @@ $genome_in or die "Error reading json protein feature data";
 
 my $event = {
     tool_name => "LowVan Quality",
+    tool_version => $tool_version,
     execution_time => scalar gettimeofday,
 };
 my $event_id = $genome_in->add_analysis_event($event);
 
-# We read the GTO to get the family pssm that was used to call the proteins so that
-# we can look up which genes are essential.
-# also make sure that the GTO has our annotations.
-
-my %pssm_fam;
-for my $i (0 .. $#{$genome_in->{features}}) 
-{
-	if (($genome_in->{features}->[$i]->{type} =~ /CDS/) && ($genome_in->{features}->[$i]->{family_assignments}->[0]->[3] =~ /LowVan Annotate/))
-	{
-		$pssm_fam{$genome_in->{features}->[$i]->{family_assignments}->[0]->[0]}++;
-	}
-}
-die "More than one viral family of PSSMs in GTO\n" if scalar(keys %pssm_fam) > 1;
-my $fam = (keys %pssm_fam)[0];
-$fam or die "GTO has no annotations from LowVan Annotation tool\n"; 
+# Get the viral family from the GTO
+my $fam = $genome_in->{viral_family};
+$fam or die "GTO has no viral_family field (not annotated by LowVan?)\n";
 
 # Next, we read the annotation json file to initiate a hash of which proteins are essential.
 # In this case, essential really means that it is one of the proteins we are looking for.

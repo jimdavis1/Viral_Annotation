@@ -10,6 +10,16 @@ use File::SearchPath qw(searchpath);
 use P3DataAPI;
 use Cwd;
 
+# Try to load version module; fall back to "dev" if not available
+my $tool_version;
+eval {
+    require LowVanVersion;
+    $tool_version = LowVanVersion::get_version();
+};
+if ($@ || !$tool_version) {
+    $tool_version = "dev";
+}
+
 my $default_data_dir = $ENV{LOWVAN_DATA_DIR} // "/home/jjdavis/bin/Viral_Annotation";
 
 my($opt, $usage) = describe_options("%c %o",
@@ -24,9 +34,13 @@ my($opt, $usage) = describe_options("%c %o",
 				    ["json|j=s"        => "Full path to the JSON opts file", {default => "$default_data_dir/Viral_PSSM.json"}],
 				    ["max|a=i"         => "Max contig length, default is 40000", { default => 40000 }],
 				    ["min|z=i"         => "Min contig length, default is 300", { default => 300 }],
+				    ["version|v"       => "Show version information"],
 				    ["help|h"          => "Show this help message"]);
 
-
+if ($opt->version) {
+    print "annotate_by_viral_pssm-GTO.pl version $tool_version\n";
+    exit 0;
+}
 print($usage->text), exit 0 if $opt->help;
 die($usage->text) if @ARGV != 0;
 
@@ -61,7 +75,7 @@ if (! $taxon_id)      {die "No NCBI taxonomy ID in the input GTO\n";}
 if (! $name)          {die "No genome name in the input GTO\n";}
 
 my @params = ("-i",    $sequences_file,
-		      "-t",    $tempdir,
+		      "-t",    "$tempdir",
 		      "-p",    $prefix,
 		      "-tax",  $taxon_id,
 		      "-g",    $name,
@@ -90,6 +104,7 @@ if (!$ok)
     
 my $event = {
     tool_name => "LowVan Annotate",
+    tool_version => $tool_version,
     execution_time => scalar gettimeofday,
     parameters => \@params,
 };
@@ -100,6 +115,8 @@ my $event_id = $genome_in->add_analysis_event($event);
 ## Parse the generated peptide file. We collect the CDS, mature_peptides, and RNAs then
 ## add features so that we can register the counts.
 ##
+
+my $viral_family;
 
 my ($close_bit, $close_id, $close_name, $close_file);
 if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
@@ -113,18 +130,22 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 		$close_bit  = $cb;
 		$close_id   = $ci;
 		$close_name = $cn;
+
+		$viral_family = $virus;
 		
 		my $feature;
 		if ($type =~ /(mat_peptide)|(CDS)/)
 		{
-			$feature = 
+			my $pssm_id = $pssm;
+			$pssm_id =~ s/\.pssm$//;  # Remove .pssm suffix for family_assignments
+			$feature =
 			{
 				type        => $type,
 				contig      => $contig,
 				aa_sequence => $aa,
 				location    => ([[$contig, $start, $strand, $len]]),
 				product     => $anno,
-				pssm        => ([[$virus, $pssm, $anno, "LowVan Annotate"]]),
+				pssm        => ([["LOWVAN", $pssm_id, $anno, "LowVan Annotate $tool_version"]]),
 				symbol      => $symbol,
 			}
 		}
@@ -184,6 +205,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
 	push(@{$genome_in->{close_genomes}}, $close);
 
 
+	$genome_in->{viral_family} = $viral_family;
 }
 else
 {
