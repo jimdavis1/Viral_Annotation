@@ -1,8 +1,8 @@
 #! /usr/bin/env perl
 use strict;
-use Data::Dumper;
 use Time::HiRes 'gettimeofday';
 use GenomeTypeObject;
+use File::Temp;
 use JSON::XS;
 use File::Slurp;
 use IPC::Run qw(run);
@@ -171,7 +171,7 @@ if (scalar @to_analyze)
 		      
 
 		my $do_blast = run(["blastn", @blast_parms], ">", "$name.json", "2>", "$name.blastn.stderr.txt");
-		open (IN, "<$name.json"), or warn "Cannot open JSON BLASTn output file $name.json\n";
+		open (IN, "<$name.json") or warn "Cannot open JSON BLASTn output file $name.json\n";
 		my $results = decode_json(scalar read_file(\*IN));	
 		close IN;
 		
@@ -181,7 +181,7 @@ if (scalar @to_analyze)
 		
 
 		#Create a hash of valid Sequence Donor and Sequence Acceptor sites. 
-		open (IN, "<$name.fasta"), or die "cannot open query sequence file to find valid SDs and SAs.\n";
+		open (IN, "<$name.fasta") or die "cannot open query sequence file to find valid SDs and SAs.\n";
 		my @refs = &gjoseqlib::read_fasta(\*IN);
 		my (%SDs, %SAs);
 		for my $i (0..$#refs)
@@ -227,7 +227,12 @@ if (scalar @to_analyze)
 				
 					# Parse splice site coordinates from query title
 					my ($sd_start, $sd_end, $sd_last, $sa_start, $sa_end, $sa_first) = $qtitle =~ /SD:(\d+)-(\d+);(\d+) SA:(\d+)-(\d+);(\d+)/;
-					unless ($sd_start, $sd_end, $sd_last, $sa_start, $sa_end, $sa_first){warn "$name incorrectly formatted fasta header in query\n$qtitle\n"; }
+					unless (defined $sd_start && defined $sd_end && defined $sd_last
+					     && defined $sa_start && defined $sa_end && defined $sa_first)
+					{
+						warn "$name incorrectly formatted fasta header in query\n$qtitle\n";
+						next;   # cannot compute relative coords without a valid header
+					}
 
 
 					# Compute "relative" dna coordinates from the blastn alignment
@@ -336,7 +341,7 @@ if (scalar @to_analyze)
 							type        => $ft,
 							contig      => $sid,
 							aa_sequence => $aa_splice,
-							location    => @loc,
+							location    => $loc[0],
 							product     => $anno,
 							symbol      => $symbol,
 							pssm        => ([["LOWVAN", "$fam.$name", $anno, "LowVan Splice Variant Feature $tool_version"]]),
@@ -471,7 +476,7 @@ sub best_blastn_match_by_loc
 				my $qlen      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{query_len};
 				my $qtitle    = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{query_title};
 				my $gaps      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{gaps};
-				my $sid       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{description}->[$k]->{title};
+				my $sid       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{description}->[0]->{title}; #was [$k]: $k is the HSP index, description is per-hit (see gist #1)
 				my $hit_from  = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{hit_from};
 				my $bit       = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{bit_score};
 				my $hit_to    = $blast->{BlastOutput2}->[$i]->{report}->{results}->{search}->{hits}->[$j]->{hsps}->[$k]->{hit_to};
@@ -484,35 +489,46 @@ sub best_blastn_match_by_loc
 				my ($pid, $qcov);
 				if ($ident && $ali_len && $qlen) # this ensures that we got search results.
 				{
-					# if we have already seen a match in this contig:
-					if (exists $matches->{$sid}) 
-					{							
-						foreach (keys %{$matches->{$sid}})
+					# Look for a match already recorded on this contig close enough
+					# (proximity < this HSP's alignment length) to be the SAME location.
+					# Keyed on proximity, NOT on "is the contig seen", so a genuinely
+					# separate location on an already-seen contig is kept (gist #2).
+					my $near_loc;
+					if (exists $matches->{$sid})
+					{
+						foreach my $loc (keys %{$matches->{$sid}})
 						{
-							my $loc = $_; #hit_from location that was seen previously
-							
-							#if the match is in roughly in the same location as seen before, and it has a better bitscore, 
-							#then they are considered the same match.  We delete the orignal and keep the one with the better bit score.							
-							if ((abs($hit_from - $loc) < $ali_len) && ($bit > $matches->{$sid}->{$loc}->{BIT}))
+							if (abs($hit_from - $loc) < $ali_len)
 							{
-								delete $matches->{$sid}->{$loc};
-								$matches->{$sid}->{$hit_from}->{BIT}      = $bit;
-								$matches->{$sid}->{$hit_from}->{TO}       = $hit_to;
-								$matches->{$sid}->{$hit_from}->{QSEQ}     = $qseq;
-								$matches->{$sid}->{$hit_from}->{HSEQ}     = $hseq;
-								$matches->{$sid}->{$hit_from}->{IDEN}     = $ident;
-								$matches->{$sid}->{$hit_from}->{ALI_LEN}  = $ali_len;
-								$matches->{$sid}->{$hit_from}->{GAPS}     = $gaps;
-								$matches->{$sid}->{$hit_from}->{QTITLE}   = $qtitle;
-								$matches->{$sid}->{$hit_from}->{QTO}      = $qto;
-								$matches->{$sid}->{$hit_from}->{QFROM}    = $qfrom;
-							
+								$near_loc = $loc;
+								last;
 							}
 						}
 					}
-					#if we have not seen a match in this location before add it:
-					else  
+
+					if (defined $near_loc)
 					{
+						# Overlapping location already recorded: keep the better bit score.
+						if ($bit > $matches->{$sid}->{$near_loc}->{BIT})
+						{
+							delete $matches->{$sid}->{$near_loc};
+							$matches->{$sid}->{$hit_from}->{BIT}      = $bit;
+							$matches->{$sid}->{$hit_from}->{TO}       = $hit_to;
+							$matches->{$sid}->{$hit_from}->{QSEQ}     = $qseq;
+							$matches->{$sid}->{$hit_from}->{HSEQ}     = $hseq;
+							$matches->{$sid}->{$hit_from}->{IDEN}     = $ident;
+							$matches->{$sid}->{$hit_from}->{ALI_LEN}  = $ali_len;
+							$matches->{$sid}->{$hit_from}->{GAPS}     = $gaps;
+							$matches->{$sid}->{$hit_from}->{QTITLE}   = $qtitle;
+							$matches->{$sid}->{$hit_from}->{QTO}      = $qto;
+							$matches->{$sid}->{$hit_from}->{QFROM}    = $qfrom;
+						}
+						# else: existing match is better or equal -> discard this HSP
+					}
+					else
+					{
+						# No nearby match on this contig (unseen, or seen at a distinct
+						# location): record it as a NEW entry.
 						$matches->{$sid}->{$hit_from}->{BIT}      = $bit;
 						$matches->{$sid}->{$hit_from}->{TO}       = $hit_to;
 						$matches->{$sid}->{$hit_from}->{QSEQ}     = $qseq;
@@ -523,8 +539,7 @@ sub best_blastn_match_by_loc
 						$matches->{$sid}->{$hit_from}->{QTO}      = $qto;
 						$matches->{$sid}->{$hit_from}->{QFROM}    = $qfrom;
 						$matches->{$sid}->{$hit_from}->{QTITLE}   = $qtitle;
-
-					}				
+					}
 				}
 			}
 		}

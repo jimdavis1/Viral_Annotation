@@ -3,7 +3,6 @@
 use strict;
 use JSON::XS;
 use File::Slurp;
-use Data::Dumper;
 use Getopt::Long;
 use Cwd;
 use gjoseqlib;
@@ -178,8 +177,8 @@ system "makeblastdb -dbtype nucl -in $s_file >/dev/null";
 #   Formatting them as genus.version.dna
 
 opendir (DIR, "$cdir");
-my @reps = grep{$_ !~ /^\./}readdir(DIR); 
-close DIR;
+my @reps = sort grep{$_ !~ /^\./}readdir(DIR);   # sort: reproducible reference pick on ties (gist #19)
+closedir(DIR);
 
 my $best_contig_bit = 0;
 my $best_virus_match;
@@ -227,8 +226,8 @@ my $best_rep_name  = $options->{$best_virus_match}->{close_genomes}->{$best_rep}
 my $virus = $best_virus_match;	
 print STDERR "-----------------------\nMatching $virus\tBit = $best_contig_bit\n-----------------------\n"; 
 opendir (DIR, "$pdir/$virus.pssms");
-my @pssm_dirs = grep{$_ !~ /^\./}readdir(DIR);  # reads the directory of PSSM dirs
-close DIR;
+my @pssm_dirs = sort grep{$_ !~ /^\./}readdir(DIR);  # reads the directory of PSSM dirs (sorted: gist #19)
+closedir(DIR);
 
 my @all_seqs;
 my %positions;
@@ -239,8 +238,8 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 {
 	my $pssmdir = $_; 
 	opendir (DIR, "$pdir/$virus.pssms/$pssmdir");
-	my @pssm_files = grep{$_ !~ /^\./}readdir(DIR); # gets the pssms
-	close DIR;
+	my @pssm_files = sort grep{$_ !~ /^\./}readdir(DIR); # gets the pssms (sorted: gist #19)
+	closedir(DIR);
 
 	# retrieve the protein specific options for the corresponding PSSM.
 	unless ($options->{$virus}->{features}->{$pssmdir})
@@ -342,7 +341,12 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 			$new_end = crop_to_stop_codon($gene_begin, $gene_end, $hseq);
 		
 			#check the coverage.
-			my $cov2 =($len/(abs(($best_results->[$i]->{q_to} - $best_results->[$i]->{q_from})+1))); 
+			# Coverage of the RETAINED (pre-stop) portion of the hit vs the query.
+			# Prior versions divided \$len (whole-genome length) here, so this check
+			# never fired.  Corrected below -- NOTE this can now drop low-coverage
+			# features that previously slipped through (gist #4).
+			(my $hseq_pre_stop = $hseq) =~ s/\*.+//s;
+			my $cov2 = length($hseq_pre_stop) / (abs(($best_results->[$i]->{q_to} - $best_results->[$i]->{q_from})+1));
 
 			if ($cov2 < $cov_cutoff)
 			{
@@ -370,7 +374,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 		my $gene = &gjoseqlib::DNA_subseq($contigH{$contig}, $gene_begin, $gene_end );	
 		my $protein = &gjoseqlib::translate_seq( $gene );
 
-		if ($start_to_met){$protein =~ s/^[A-Z]/m/i;}
+		if ($start_to_met){$protein =~ s/^[A-Z]/M/i;}   # M not m: /i affects the pattern, not the replacement (gist #5)
 	
 		# Set up calling non-pssm features that are anchored to pssm coordinates
 		if (exists $options->{$virus}->{features}->{$pssmdir}->{non_pssm_partner})
@@ -424,7 +428,7 @@ foreach (@pssm_dirs)  #Each PSSM dir contains one or more PSSMs for a given homo
 #add any non-pssm features that are anchored to PSSM coordinates
 if ($non_pssm_feat)
 {
-	my @tuples = call_non_pssm_features($non_pssm_feat, %contigH);
+	my @tuples = call_non_pssm_features($non_pssm_feat, \%contigH);   # pass a ref, not a flattened hash (gist #13)
 	push @all_seqs, @tuples;
 }
 
@@ -562,7 +566,6 @@ sub call_non_pssm_features
 		my $aa            = $featH->{$feat}->{AA};
 		my $start_offset  = $featH->{$feat}->{START_OFFSET};
 		my $stop_offset   = $featH->{$feat}->{STOP_OFFSET};
-		my $stop_offset   = $featH->{$feat}->{STOP_OFFSET};
 		my $feature_type  = $featH->{$feat}->{TYPE};
 		my $symbol        = $featH->{$feat}->{SYMBOL};
 
@@ -584,25 +587,25 @@ sub call_non_pssm_features
 						my $stop = $stops[$j];
 						if ($stop)
 						{
-							my ($strand, $begin, $end) = 0;
+							my ($strand, $begin, $end);
 							if ($start < $stop)
 							{
 								$strand = "+";
-								$begin = ($start += $start_offset);
-								$end   = ($stop  -= $stop_offset);													
+								$begin = $start + $start_offset;   # was += : mutated $start across STOP anchors (gist #7)
+								$end   = $stop  - $stop_offset;													
 							}
 							elsif ($start > $stop)
 							{
 								$strand = "-";
-								$begin = ($start -= $start_offset);
-								$end   = ($stop  += $stop_offset);						
+								$begin = $start - $start_offset;
+								$end   = $stop  + $stop_offset;						
 							}
 					
 					
 							if ((abs($begin - $end) <= $max) && (abs($begin - $end) >= $min))
 							{
 								print STDERR "\tCalling non-PSSM feature\t$anno\tbegin: $begin\tend: $end\n"; 
-								my $nt = &gjoseqlib::DNA_subseq($contigH{$contig}, $begin, $end); 
+								my $nt = &gjoseqlib::DNA_subseq($contigH->{$contig}, $begin, $end); 
 								my $prot;
 								if ($aa){ $prot = &gjoseqlib::translate_seq( $nt );}
 								if ($prot =~ /\*(?!$)/)# It will not record a position-called protein with stops
@@ -827,7 +830,7 @@ sub matching_tblastn_hsps_json
 	my @data;
 	my $best_bit = 0;
 	
-	my @output = $blast->{BlastOutput2};
+	my @output = @{$blast->{BlastOutput2}};   # deref: was a 1-elem list (gist #12)
 	for my $i (0..$#output)
 	{
 		my $iterations = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations};	
@@ -835,7 +838,7 @@ sub matching_tblastn_hsps_json
 
 		for my $j (0..($nitr -1 ))
 		{
-			if ($blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{iter_num} = 1)
+			if ($blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{iter_num} == 1)   # == not = (gist #11)
 			{
 				my $hits = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits};
 				my $nhits = scalar @$hits;
@@ -861,7 +864,7 @@ sub matching_tblastn_hsps_json
 						$results->{frame}     = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{hit_frame};
 						$results->{q_from}    = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{query_from};
 						$results->{q_to}      = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{query_to};
-						$results->{ali_len}   = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{query_to};
+						$results->{ali_len}   = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{align_len};   # was {query_to} (copy-paste); field is currently unused
 						$results->{e_val}     = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{evalue};
 						$results->{hsp_num}   = $blast->{BlastOutput2}->[$i]->{report}->{results}->{iterations}->[$j]->{search}->{hits}->[$k]->{hsps}->[$l]->{num};
 				

@@ -1,10 +1,8 @@
 #! /usr/bin/env perl
 use strict;
-use Data::Dumper;
 use Time::HiRes 'gettimeofday';
 use GenomeTypeObject;
 use Getopt::Long::Descriptive;
-use P3DataAPI;
 use JSON::XS;
 use File::Slurp;
 
@@ -199,9 +197,13 @@ foreach (sort keys %{$feature_eval})
 	}
 	elsif (($cn < $exp_cn) && ($feature_eval->{$id}->{EVALUATED})) # this is for a hypothetical scenario where you are looking for 2 or more of something.
 	{
-		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too few few HSPs for: $anno";
+		push @{$feature_eval->{$id}->{EXCEPTION}}, "Too few HSPs for: $anno";
 		push @{$contig_eval->{$contig}->{EXCEPTION}}, "Too few HSPs for: $anno";	
-		push(@{$genome_in->{genome_quality_flags}},   "Genome has too few HSPs for: $anno; Count = $cn");
+		unless (exists $seen_anno{$anno})   # dedup per annotation, like the "too many" branch (gist #10)
+		{
+			push(@{$genome_in->{genome_quality_flags}},   "Genome has too few HSPs for: $anno; Count = $cn");
+			$seen_anno{$anno} = 1;
+		}
 	}	
 	my $exs;
 	if (exists $feature_eval->{$id}->{EXCEPTION})
@@ -219,6 +221,7 @@ foreach (keys %anno_count)
 	{
 		print OUT1 "\n##\nMissing\t$_\n";
 		$genome_quality = "Poor";
+		push(@{$genome_in->{genome_quality_flags}}, "Genome is missing essential feature: $_");   # was only written to the report, not the GTO (gist #8)
 	}
 }
 close OUT1;
@@ -324,6 +327,49 @@ foreach (sort keys %{$seg_count})
 		}	 
 	}
 }
+
+## Evaluate any contig that carried no recognized feature (gist #9).
+## Such contigs never enter %seg_count, so without this pass they get no
+## ambiguous-base check and no contig_quality field in the GTO at all.
+##
+## Semantics: an unrecognized contig is NOT itself a defect. A genome may carry
+## variable / segment-specific proteins that aren't in the JSON set, so a contig
+## whose status is simply "unknown" must not make the genome Poor. The only check
+## that still applies to these contigs is the sequence-level ambiguous-base
+## fraction -- a contig failing that makes both it and the genome Poor, exactly
+## as in the main loop. We do NOT length-check them (no segment => no min/max).
+for my $i (0 .. $#{$genome_in->{contigs}})
+{
+	my $contig = $genome_in->{contigs}->[$i]->{id};
+	next if (defined $contig_eval->{$contig}->{LEN});   # already handled by the %seg_count loop above
+
+	my $len = length($genome_in->{contigs}->[$i]->{dna});
+	my $amb_bases = () = $genome_in->{contigs}->[$i]->{dna} =~ /[^atgc]/gi;
+	my $frac_amb  = $len ? ($amb_bases / $len) : 0;
+
+	$contig_eval->{$contig}->{LEN}      = $len;
+	$contig_eval->{$contig}->{NUM_AMB}  = $amb_bases;
+	$contig_eval->{$contig}->{FRAC_AMB} = $frac_amb;
+
+	# Only the ambiguous-base fraction is a defect for an unrecognized contig.
+	my $ambig = $opt->ambiguous;
+	if ($frac_amb > $ambig)
+	{
+		push @{$contig_eval->{$contig}->{EXCEPTION}}, "Contig has too many ambiguous bases, Frac > $ambig";
+		$genome_in->{contigs}->[$i]->{contig_quality} = "Poor";
+		push(@{$genome_in->{contigs}->[$i]->{contig_quality_flags}}, "Contig has too many ambiguous bases, Frac > $ambig");
+		$genome_quality = "Poor";
+	}
+	else
+	{
+		# Unknown status alone is not Poor; the sequence passed the one applicable check.
+		$genome_in->{contigs}->[$i]->{contig_quality} = "Good";
+	}
+
+	my $exs = $contig_eval->{$contig}->{EXCEPTION} ? join(";", @{$contig_eval->{$contig}->{EXCEPTION}}) : "";
+	print OUT2 "$contig\tunknown\t0\t$len\t\t\t$amb_bases\t$frac_amb\t$exs\n";
+}
+
 
 # create an exception for missing segment.
 foreach (keys %segs_needed)

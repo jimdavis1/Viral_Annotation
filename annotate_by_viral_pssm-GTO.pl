@@ -3,11 +3,10 @@ use strict;
 use Data::Dumper;
 use Time::HiRes 'gettimeofday';
 use GenomeTypeObject;
+use File::Temp;
 use Getopt::Long::Descriptive;
 use File::Copy;
 use IPC::Run qw(run);
-use File::SearchPath qw(searchpath);
-use P3DataAPI;
 use Cwd;
 
 # Try to load version module; fall back to "dev" if not available
@@ -96,8 +95,11 @@ my $ok = run(["annotate_by_viral_pssm.pl", @params], ">", "$here/$prefix.stdout.
 
 if (!$ok)
 {
-    print STDERR "Viral Annotation run failed with rc=$?. Stdout:\n";
-    copy("$here/Viral_Anno.stderr.txt", \*STDERR);
+    print STDERR "Viral Annotation run failed with rc=$?. Stderr:\n";
+    copy("$here/$prefix.stderr.txt", \*STDERR);   # was hardcoded Viral_Anno.stderr.txt + mislabeled "Stdout" (gist #17)
+    # NOTE: execution continues below and still writes an output GTO. See caveat in the porting notes --
+    # a genuine BLAST crash and the base script's graceful "no reference match" exit(1) are
+    # indistinguishable by return code, so we do not hard-abort here.
 }
 
 
@@ -171,7 +173,7 @@ if (open(my $tbl, "<", "$here/$prefix.stdout.txt"))
     }
 
     
-    for my $type (keys %features)
+    for my $type (sort keys %features)   # sort: deterministic new_feature_id assignment across runs (gist #19)
     {
 		my $feats = $features{$type};
 		my $n = @$feats;
