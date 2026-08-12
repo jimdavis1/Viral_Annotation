@@ -77,8 +77,8 @@ The P3DataAPI "https://www.bv-brc.org/docs/cli\_tutorial/command\_list/P3DataAPI
 
 
 The program(s) run the blast suite of tools from NCBI.  The current version requires:<br>
-`blastn: 2.13.0+`<br>
-`tblastn: 2.13.0+`<br>
+`blastn: 2.16.0+`<br>
+`tblastn: 2.16.0+`<br>
 
 It is not guaranteed to work on other versions of BLAST.  It uses the JSON output of BLAST and other versions have slightly different JSON structures.  <br>
 
